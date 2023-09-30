@@ -12,7 +12,7 @@ Node
 
 **Inherits:** :ref:`Object<class_Object>`
 
-**Inherited By:** :ref:`AnimationPlayer<class_AnimationPlayer>`, :ref:`AnimationTree<class_AnimationTree>`, :ref:`AudioStreamPlayer<class_AudioStreamPlayer>`, :ref:`CanvasItem<class_CanvasItem>`, :ref:`CanvasLayer<class_CanvasLayer>`, :ref:`EditorFileSystem<class_EditorFileSystem>`, :ref:`EditorPlugin<class_EditorPlugin>`, :ref:`EditorResourcePreview<class_EditorResourcePreview>`, :ref:`HTTPRequest<class_HTTPRequest>`, :ref:`InstancePlaceholder<class_InstancePlaceholder>`, :ref:`MissingNode<class_MissingNode>`, :ref:`MultiplayerSpawner<class_MultiplayerSpawner>`, :ref:`MultiplayerSynchronizer<class_MultiplayerSynchronizer>`, :ref:`NavigationAgent2D<class_NavigationAgent2D>`, :ref:`NavigationAgent3D<class_NavigationAgent3D>`, :ref:`Node3D<class_Node3D>`, :ref:`ResourcePreloader<class_ResourcePreloader>`, :ref:`ShaderGlobalsOverride<class_ShaderGlobalsOverride>`, :ref:`SkeletonIK3D<class_SkeletonIK3D>`, :ref:`Timer<class_Timer>`, :ref:`Viewport<class_Viewport>`, :ref:`WorldEnvironment<class_WorldEnvironment>`
+**Inherited By:** :ref:`AnimationMixer<class_AnimationMixer>`, :ref:`AudioStreamPlayer<class_AudioStreamPlayer>`, :ref:`CanvasItem<class_CanvasItem>`, :ref:`CanvasLayer<class_CanvasLayer>`, :ref:`EditorFileSystem<class_EditorFileSystem>`, :ref:`EditorPlugin<class_EditorPlugin>`, :ref:`EditorResourcePreview<class_EditorResourcePreview>`, :ref:`HTTPRequest<class_HTTPRequest>`, :ref:`InstancePlaceholder<class_InstancePlaceholder>`, :ref:`MissingNode<class_MissingNode>`, :ref:`MultiplayerSpawner<class_MultiplayerSpawner>`, :ref:`MultiplayerSynchronizer<class_MultiplayerSynchronizer>`, :ref:`NavigationAgent2D<class_NavigationAgent2D>`, :ref:`NavigationAgent3D<class_NavigationAgent3D>`, :ref:`Node3D<class_Node3D>`, :ref:`ResourcePreloader<class_ResourcePreloader>`, :ref:`ShaderGlobalsOverride<class_ShaderGlobalsOverride>`, :ref:`SkeletonIK3D<class_SkeletonIK3D>`, :ref:`Timer<class_Timer>`, :ref:`Viewport<class_Viewport>`, :ref:`WorldEnvironment<class_WorldEnvironment>`
 
 Base class for all scene objects.
 
@@ -1033,6 +1033,8 @@ Add a custom description to a node. It will be displayed in a tooltip when hover
 
 The :ref:`MultiplayerAPI<class_MultiplayerAPI>` instance associated with this node. See :ref:`SceneTree.get_multiplayer<class_SceneTree_method_get_multiplayer>`.
 
+\ **Note:** Renaming the node, or moving it in the tree, will not move the :ref:`MultiplayerAPI<class_MultiplayerAPI>` to the new path, you will have to update this manually.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -1361,13 +1363,13 @@ Usually used for initialization. For even earlier initialization, :ref:`Object._
 
 void **_shortcut_input** **(** :ref:`InputEvent<class_InputEvent>` event **)** |virtual|
 
-Called when an :ref:`InputEventKey<class_InputEventKey>` or :ref:`InputEventShortcut<class_InputEventShortcut>` hasn't been consumed by :ref:`_input<class_Node_method__input>` or any GUI :ref:`Control<class_Control>` item. The input event propagates up through the node tree until a node consumes it.
+Called when an :ref:`InputEventKey<class_InputEventKey>` or :ref:`InputEventShortcut<class_InputEventShortcut>` hasn't been consumed by :ref:`_input<class_Node_method__input>` or any GUI :ref:`Control<class_Control>` item. It is called before :ref:`_unhandled_key_input<class_Node_method__unhandled_key_input>` and :ref:`_unhandled_input<class_Node_method__unhandled_input>`. The input event propagates up through the node tree until a node consumes it.
 
 It is only called if shortcut processing is enabled, which is done automatically if this method is overridden, and can be toggled with :ref:`set_process_shortcut_input<class_Node_method_set_process_shortcut_input>`.
 
 To consume the input event and stop it propagating further to other nodes, :ref:`Viewport.set_input_as_handled<class_Viewport_method_set_input_as_handled>` can be called.
 
-This method can be used to handle shortcuts.
+This method can be used to handle shortcuts. For generic GUI events, use :ref:`_input<class_Node_method__input>` instead. Gameplay events should usually be handled with either :ref:`_unhandled_input<class_Node_method__unhandled_input>` or :ref:`_unhandled_key_input<class_Node_method__unhandled_key_input>`.
 
 \ **Note:** This method is only called if the node is present in the scene tree (i.e. if it's not orphan).
 
@@ -1381,13 +1383,13 @@ This method can be used to handle shortcuts.
 
 void **_unhandled_input** **(** :ref:`InputEvent<class_InputEvent>` event **)** |virtual|
 
-Called when an :ref:`InputEvent<class_InputEvent>` hasn't been consumed by :ref:`_input<class_Node_method__input>` or any GUI :ref:`Control<class_Control>` item. The input event propagates up through the node tree until a node consumes it.
+Called when an :ref:`InputEvent<class_InputEvent>` hasn't been consumed by :ref:`_input<class_Node_method__input>` or any GUI :ref:`Control<class_Control>` item. It is called after :ref:`_shortcut_input<class_Node_method__shortcut_input>` and after :ref:`_unhandled_key_input<class_Node_method__unhandled_key_input>`. The input event propagates up through the node tree until a node consumes it.
 
 It is only called if unhandled input processing is enabled, which is done automatically if this method is overridden, and can be toggled with :ref:`set_process_unhandled_input<class_Node_method_set_process_unhandled_input>`.
 
 To consume the input event and stop it propagating further to other nodes, :ref:`Viewport.set_input_as_handled<class_Viewport_method_set_input_as_handled>` can be called.
 
-For gameplay input, this and :ref:`_unhandled_key_input<class_Node_method__unhandled_key_input>` are usually a better fit than :ref:`_input<class_Node_method__input>` as they allow the GUI to intercept the events first.
+For gameplay input, this method is usually a better fit than :ref:`_input<class_Node_method__input>`, as GUI events need a higher priority. For keyboard shortcuts, consider using :ref:`_shortcut_input<class_Node_method__shortcut_input>` instead, as it is called before this method. Finally, to handle keyboard events, consider using :ref:`_unhandled_key_input<class_Node_method__unhandled_key_input>` for performance reasons.
 
 \ **Note:** This method is only called if the node is present in the scene tree (i.e. if it's not an orphan).
 
@@ -1401,7 +1403,7 @@ For gameplay input, this and :ref:`_unhandled_key_input<class_Node_method__unhan
 
 void **_unhandled_key_input** **(** :ref:`InputEvent<class_InputEvent>` event **)** |virtual|
 
-Called when an :ref:`InputEventKey<class_InputEventKey>` hasn't been consumed by :ref:`_input<class_Node_method__input>` or any GUI :ref:`Control<class_Control>` item. The input event propagates up through the node tree until a node consumes it.
+Called when an :ref:`InputEventKey<class_InputEventKey>` hasn't been consumed by :ref:`_input<class_Node_method__input>` or any GUI :ref:`Control<class_Control>` item. It is called after :ref:`_shortcut_input<class_Node_method__shortcut_input>` but before :ref:`_unhandled_input<class_Node_method__unhandled_input>`. The input event propagates up through the node tree until a node consumes it.
 
 It is only called if unhandled key input processing is enabled, which is done automatically if this method is overridden, and can be toggled with :ref:`set_process_unhandled_key_input<class_Node_method_set_process_unhandled_key_input>`.
 
@@ -1409,9 +1411,7 @@ To consume the input event and stop it propagating further to other nodes, :ref:
 
 This method can be used to handle Unicode character input with :kbd:`Alt`, :kbd:`Alt + Ctrl`, and :kbd:`Alt + Shift` modifiers, after shortcuts were handled.
 
-For gameplay input, this and :ref:`_unhandled_input<class_Node_method__unhandled_input>` are usually a better fit than :ref:`_input<class_Node_method__input>` as they allow the GUI to intercept the events first.
-
-This method also performs better than :ref:`_unhandled_input<class_Node_method__unhandled_input>`, since unrelated events such as :ref:`InputEventMouseMotion<class_InputEventMouseMotion>` are automatically filtered.
+For gameplay input, this and :ref:`_unhandled_input<class_Node_method__unhandled_input>` are usually a better fit than :ref:`_input<class_Node_method__input>`, as GUI events should be handled first. This method also performs better than :ref:`_unhandled_input<class_Node_method__unhandled_input>`, since unrelated events such as :ref:`InputEventMouseMotion<class_InputEventMouseMotion>` are automatically filtered. For shortcuts, consider using :ref:`_shortcut_input<class_Node_method__shortcut_input>` instead.
 
 \ **Note:** This method is only called if the node is present in the scene tree (i.e. if it's not an orphan).
 
