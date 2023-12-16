@@ -41,6 +41,8 @@ Properties
    +-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                                     | :ref:`clip_text<class_Label_property_clip_text>`                                                         | ``false``                                                                    |
    +-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`                                                 | :ref:`ellipsis_char<class_Label_property_ellipsis_char>`                                                 | ``"…"``                                                                      |
+   +-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
    | :ref:`HorizontalAlignment<enum_@GlobalScope_HorizontalAlignment>`           | :ref:`horizontal_alignment<class_Label_property_horizontal_alignment>`                                   | ``0``                                                                        |
    +-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
    | |bitfield|\<:ref:`JustificationFlag<enum_TextServer_JustificationFlag>`\>   | :ref:`justification_flags<class_Label_property_justification_flags>`                                     | ``163``                                                                      |
@@ -173,6 +175,23 @@ If ``true``, the Label only shows the text that fits inside its bounding rectang
 
 ----
 
+.. _class_Label_property_ellipsis_char:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **ellipsis_char** = ``"…"``
+
+.. rst-class:: classref-property-setget
+
+- void **set_ellipsis_char** **(** :ref:`String<class_String>` value **)**
+- :ref:`String<class_String>` **get_ellipsis_char** **(** **)**
+
+Ellipsis character used for text clipping.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_Label_property_horizontal_alignment:
 
 .. rst-class:: classref-property
@@ -252,7 +271,7 @@ Language code used for line-breaking and text shaping algorithms, if left empty 
 - void **set_lines_skipped** **(** :ref:`int<class_int>` value **)**
 - :ref:`int<class_int>` **get_lines_skipped** **(** **)**
 
-The node ignores the first ``lines_skipped`` lines before it starts to display text.
+The number of the lines ignored and not displayed from the start of the :ref:`text<class_Label_property_text>` value.
 
 .. rst-class:: classref-item-separator
 
