@@ -203,6 +203,8 @@ Methods
    +------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`RID<class_RID>`                                      | :ref:`texture_create<class_RenderingDevice_method_texture_create>` **(** :ref:`RDTextureFormat<class_RDTextureFormat>` format, :ref:`RDTextureView<class_RDTextureView>` view, :ref:`PackedByteArray[]<class_PackedByteArray>` data=[] **)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
    +------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`RID<class_RID>`                                      | :ref:`texture_create_from_extension<class_RenderingDevice_method_texture_create_from_extension>` **(** :ref:`TextureType<enum_RenderingDevice_TextureType>` type, :ref:`DataFormat<enum_RenderingDevice_DataFormat>` format, :ref:`TextureSamples<enum_RenderingDevice_TextureSamples>` samples, |bitfield|\<:ref:`TextureUsageBits<enum_RenderingDevice_TextureUsageBits>`\> usage_flags, :ref:`int<class_int>` image, :ref:`int<class_int>` width, :ref:`int<class_int>` height, :ref:`int<class_int>` depth, :ref:`int<class_int>` layers **)**                                                                                                                                                                                                                                                                                                                                                                             |
+   +------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`RID<class_RID>`                                      | :ref:`texture_create_shared<class_RenderingDevice_method_texture_create_shared>` **(** :ref:`RDTextureView<class_RDTextureView>` view, :ref:`RID<class_RID>` with_texture **)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
    +------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`RID<class_RID>`                                      | :ref:`texture_create_shared_from_slice<class_RenderingDevice_method_texture_create_shared_from_slice>` **(** :ref:`RDTextureView<class_RDTextureView>` view, :ref:`RID<class_RID>` with_texture, :ref:`int<class_int>` layer, :ref:`int<class_int>` mipmap, :ref:`int<class_int>` mipmaps=1, :ref:`TextureSliceType<enum_RenderingDevice_TextureSliceType>` slice_type=0 **)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
@@ -309,13 +311,133 @@ Represents the size of the :ref:`DeviceType<enum_RenderingDevice_DeviceType>` en
 
 enum **DriverResource**:
 
+.. _class_RenderingDevice_constant_DRIVER_RESOURCE_LOGICAL_DEVICE:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_LOGICAL_DEVICE** = ``0``
+
+Specific device object based on a physical device.
+
+- Vulkan: Vulkan device driver resource (``VkDevice``). (``rid`` argument doesn't apply.)
+
+.. _class_RenderingDevice_constant_DRIVER_RESOURCE_PHYSICAL_DEVICE:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_PHYSICAL_DEVICE** = ``1``
+
+Physical device the specific logical device is based on.
+
+- Vulkan: ``VkDevice``. (``rid`` argument doesn't apply.)
+
+.. _class_RenderingDevice_constant_DRIVER_RESOURCE_TOPMOST_OBJECT:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_TOPMOST_OBJECT** = ``2``
+
+Top-most graphics API entry object.
+
+- Vulkan: ``VkInstance``. (``rid`` argument doesn't apply.)
+
+.. _class_RenderingDevice_constant_DRIVER_RESOURCE_COMMAND_QUEUE:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_COMMAND_QUEUE** = ``3``
+
+The main graphics-compute command queue.
+
+- Vulkan: ``VkQueue``. (``rid`` argument doesn't apply.)
+
+.. _class_RenderingDevice_constant_DRIVER_RESOURCE_QUEUE_FAMILY:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_QUEUE_FAMILY** = ``4``
+
+The specific family the main queue belongs to.
+
+- Vulkan: the queue family index, an ``uint32_t``. (``rid`` argument doesn't apply.)
+
+.. _class_RenderingDevice_constant_DRIVER_RESOURCE_TEXTURE:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_TEXTURE** = ``5``
+
+- Vulkan: ``VkImage``.
+
+.. _class_RenderingDevice_constant_DRIVER_RESOURCE_TEXTURE_VIEW:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_TEXTURE_VIEW** = ``6``
+
+The view of an owned or shared texture.
+
+- Vulkan: ``VkImageView``.
+
+.. _class_RenderingDevice_constant_DRIVER_RESOURCE_TEXTURE_DATA_FORMAT:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_TEXTURE_DATA_FORMAT** = ``7``
+
+The native id of the data format of the texture.
+
+- Vulkan: ``VkFormat``.
+
+.. _class_RenderingDevice_constant_DRIVER_RESOURCE_SAMPLER:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_SAMPLER** = ``8``
+
+- Vulkan: ``VkSampler``.
+
+.. _class_RenderingDevice_constant_DRIVER_RESOURCE_UNIFORM_SET:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_UNIFORM_SET** = ``9``
+
+- Vulkan: ``VkDescriptorSet``.
+
+.. _class_RenderingDevice_constant_DRIVER_RESOURCE_BUFFER:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_BUFFER** = ``10``
+
+Buffer of any kind of (storage, vertex, etc.).
+
+- Vulkan: ``VkBuffer``.
+
+.. _class_RenderingDevice_constant_DRIVER_RESOURCE_COMPUTE_PIPELINE:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_COMPUTE_PIPELINE** = ``11``
+
+- Vulkan: ``VkPipeline``.
+
+.. _class_RenderingDevice_constant_DRIVER_RESOURCE_RENDER_PIPELINE:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_RENDER_PIPELINE** = ``12``
+
+- Vulkan: ``VkPipeline``.
+
 .. _class_RenderingDevice_constant_DRIVER_RESOURCE_VULKAN_DEVICE:
 
 .. rst-class:: classref-enumeration-constant
 
 :ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_VULKAN_DEVICE** = ``0``
 
-Vulkan device driver resource. This is a "global" resource and ignores the RID passed in
+*Deprecated.* Use :ref:`DRIVER_RESOURCE_LOGICAL_DEVICE<class_RenderingDevice_constant_DRIVER_RESOURCE_LOGICAL_DEVICE>`.
 
 .. _class_RenderingDevice_constant_DRIVER_RESOURCE_VULKAN_PHYSICAL_DEVICE:
 
@@ -323,7 +445,7 @@ Vulkan device driver resource. This is a "global" resource and ignores the RID p
 
 :ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_VULKAN_PHYSICAL_DEVICE** = ``1``
 
-Physical device (graphics card) driver resource.
+*Deprecated.* Use :ref:`DRIVER_RESOURCE_PHYSICAL_DEVICE<class_RenderingDevice_constant_DRIVER_RESOURCE_PHYSICAL_DEVICE>`.
 
 .. _class_RenderingDevice_constant_DRIVER_RESOURCE_VULKAN_INSTANCE:
 
@@ -331,7 +453,7 @@ Physical device (graphics card) driver resource.
 
 :ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_VULKAN_INSTANCE** = ``2``
 
-Vulkan instance driver resource.
+*Deprecated.* Use :ref:`DRIVER_RESOURCE_TOPMOST_OBJECT<class_RenderingDevice_constant_DRIVER_RESOURCE_TOPMOST_OBJECT>`.
 
 .. _class_RenderingDevice_constant_DRIVER_RESOURCE_VULKAN_QUEUE:
 
@@ -339,7 +461,7 @@ Vulkan instance driver resource.
 
 :ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_VULKAN_QUEUE** = ``3``
 
-Vulkan queue driver resource.
+*Deprecated.* Use :ref:`DRIVER_RESOURCE_COMMAND_QUEUE<class_RenderingDevice_constant_DRIVER_RESOURCE_COMMAND_QUEUE>`.
 
 .. _class_RenderingDevice_constant_DRIVER_RESOURCE_VULKAN_QUEUE_FAMILY_INDEX:
 
@@ -347,7 +469,7 @@ Vulkan queue driver resource.
 
 :ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_VULKAN_QUEUE_FAMILY_INDEX** = ``4``
 
-Vulkan queue family index driver resource.
+*Deprecated.* Use :ref:`DRIVER_RESOURCE_QUEUE_FAMILY<class_RenderingDevice_constant_DRIVER_RESOURCE_QUEUE_FAMILY>`.
 
 .. _class_RenderingDevice_constant_DRIVER_RESOURCE_VULKAN_IMAGE:
 
@@ -355,7 +477,7 @@ Vulkan queue family index driver resource.
 
 :ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_VULKAN_IMAGE** = ``5``
 
-Vulkan image driver resource.
+*Deprecated.* Use :ref:`DRIVER_RESOURCE_TEXTURE<class_RenderingDevice_constant_DRIVER_RESOURCE_TEXTURE>`.
 
 .. _class_RenderingDevice_constant_DRIVER_RESOURCE_VULKAN_IMAGE_VIEW:
 
@@ -363,7 +485,7 @@ Vulkan image driver resource.
 
 :ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_VULKAN_IMAGE_VIEW** = ``6``
 
-Vulkan image view driver resource.
+*Deprecated.* Use :ref:`DRIVER_RESOURCE_TEXTURE_VIEW<class_RenderingDevice_constant_DRIVER_RESOURCE_TEXTURE_VIEW>`.
 
 .. _class_RenderingDevice_constant_DRIVER_RESOURCE_VULKAN_IMAGE_NATIVE_TEXTURE_FORMAT:
 
@@ -371,7 +493,7 @@ Vulkan image view driver resource.
 
 :ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_VULKAN_IMAGE_NATIVE_TEXTURE_FORMAT** = ``7``
 
-Vulkan image native texture format driver resource.
+*Deprecated.* Use :ref:`DRIVER_RESOURCE_TEXTURE_DATA_FORMAT<class_RenderingDevice_constant_DRIVER_RESOURCE_TEXTURE_DATA_FORMAT>`.
 
 .. _class_RenderingDevice_constant_DRIVER_RESOURCE_VULKAN_SAMPLER:
 
@@ -379,7 +501,7 @@ Vulkan image native texture format driver resource.
 
 :ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_VULKAN_SAMPLER** = ``8``
 
-Vulkan sampler driver resource.
+*Deprecated.* Use :ref:`DRIVER_RESOURCE_SAMPLER<class_RenderingDevice_constant_DRIVER_RESOURCE_SAMPLER>`.
 
 .. _class_RenderingDevice_constant_DRIVER_RESOURCE_VULKAN_DESCRIPTOR_SET:
 
@@ -387,7 +509,7 @@ Vulkan sampler driver resource.
 
 :ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_VULKAN_DESCRIPTOR_SET** = ``9``
 
-Vulkan `descriptor set <https://vkguide.dev/docs/chapter-4/descriptors/>`__ driver resource.
+*Deprecated.* Use :ref:`DRIVER_RESOURCE_UNIFORM_SET<class_RenderingDevice_constant_DRIVER_RESOURCE_UNIFORM_SET>`.
 
 .. _class_RenderingDevice_constant_DRIVER_RESOURCE_VULKAN_BUFFER:
 
@@ -395,7 +517,7 @@ Vulkan `descriptor set <https://vkguide.dev/docs/chapter-4/descriptors/>`__ driv
 
 :ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_VULKAN_BUFFER** = ``10``
 
-Vulkan buffer driver resource.
+*Deprecated.* Use :ref:`DRIVER_RESOURCE_BUFFER<class_RenderingDevice_constant_DRIVER_RESOURCE_BUFFER>`.
 
 .. _class_RenderingDevice_constant_DRIVER_RESOURCE_VULKAN_COMPUTE_PIPELINE:
 
@@ -403,7 +525,7 @@ Vulkan buffer driver resource.
 
 :ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_VULKAN_COMPUTE_PIPELINE** = ``11``
 
-Vulkan compute pipeline driver resource.
+*Deprecated.* Use :ref:`DRIVER_RESOURCE_COMPUTE_PIPELINE<class_RenderingDevice_constant_DRIVER_RESOURCE_COMPUTE_PIPELINE>`.
 
 .. _class_RenderingDevice_constant_DRIVER_RESOURCE_VULKAN_RENDER_PIPELINE:
 
@@ -411,7 +533,7 @@ Vulkan compute pipeline driver resource.
 
 :ref:`DriverResource<enum_RenderingDevice_DriverResource>` **DRIVER_RESOURCE_VULKAN_RENDER_PIPELINE** = ``12``
 
-Vulkan render pipeline driver resource.
+*Deprecated.* Use :ref:`DRIVER_RESOURCE_RENDER_PIPELINE<class_RenderingDevice_constant_DRIVER_RESOURCE_RENDER_PIPELINE>`.
 
 .. rst-class:: classref-item-separator
 
@@ -4600,7 +4722,7 @@ A simple drawing operation might look like this (code is not a complete example)
 ::
 
     var rd = RenderingDevice.new()
-    var clear_colors = PackedColorArray([Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 0)]
+    var clear_colors = PackedColorArray([Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 0)])
     var draw_list = rd.draw_list_begin(framebuffers[i], RenderingDevice.INITIAL_ACTION_CLEAR, RenderingDevice.FINAL_ACTION_READ, RenderingDevice.INITIAL_ACTION_CLEAR, RenderingDevice.FINAL_ACTION_DISCARD, clear_colors)
     
     # Draw opaque.
@@ -5360,7 +5482,7 @@ Once finished with your RID, you will want to free the RID using the RenderingDe
 
 :ref:`Error<enum_@GlobalScope_Error>` **texture_clear** **(** :ref:`RID<class_RID>` texture, :ref:`Color<class_Color>` color, :ref:`int<class_int>` base_mipmap, :ref:`int<class_int>` mipmap_count, :ref:`int<class_int>` base_layer, :ref:`int<class_int>` layer_count, |bitfield|\<:ref:`BarrierMask<enum_RenderingDevice_BarrierMask>`\> post_barrier=32767 **)**
 
-Clears the specified ``texture`` by replacing all of its pixels with the specified ``color``. ``base_mipmap`` and ``mipmap_count`` determine which mipmaps of the texture are affected by this clear operation, while ``base_layer`` and ``layer_count`` determine which layers of a 3D texture (or texture array) are affected by this clear operation. For 2D textures (which only have one layer by design), ``base_layer`` and ``layer_count`` must both be ``0``.
+Clears the specified ``texture`` by replacing all of its pixels with the specified ``color``. ``base_mipmap`` and ``mipmap_count`` determine which mipmaps of the texture are affected by this clear operation, while ``base_layer`` and ``layer_count`` determine which layers of a 3D texture (or texture array) are affected by this clear operation. For 2D textures (which only have one layer by design), ``base_layer`` must be ``0`` and ``layer_count`` must be ``1``.
 
 \ **Note:** ``texture`` can't be cleared while a draw list that uses it as part of a framebuffer is being created. Ensure the draw list is finalized (and that the color/depth texture using it is not set to :ref:`FINAL_ACTION_CONTINUE<class_RenderingDevice_constant_FINAL_ACTION_CONTINUE>`) to clear this texture.
 
@@ -5401,6 +5523,18 @@ Creates a new texture. It can be accessed with the RID that is returned.
 Once finished with your RID, you will want to free the RID using the RenderingDevice's :ref:`free_rid<class_RenderingDevice_method_free_rid>` method.
 
 \ **Note:** Not to be confused with :ref:`RenderingServer.texture_2d_create<class_RenderingServer_method_texture_2d_create>`, which creates the Godot-specific :ref:`Texture2D<class_Texture2D>` resource as opposed to the graphics API's own texture type.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_RenderingDevice_method_texture_create_from_extension:
+
+.. rst-class:: classref-method
+
+:ref:`RID<class_RID>` **texture_create_from_extension** **(** :ref:`TextureType<enum_RenderingDevice_TextureType>` type, :ref:`DataFormat<enum_RenderingDevice_DataFormat>` format, :ref:`TextureSamples<enum_RenderingDevice_TextureSamples>` samples, |bitfield|\<:ref:`TextureUsageBits<enum_RenderingDevice_TextureUsageBits>`\> usage_flags, :ref:`int<class_int>` image, :ref:`int<class_int>` width, :ref:`int<class_int>` height, :ref:`int<class_int>` depth, :ref:`int<class_int>` layers **)**
+
+Returns an RID for an existing ``image`` (``VkImage``) with the given ``type``, ``format``, ``samples``, ``usage_flags``, ``width``, ``height``, ``depth``, and ``layers``. This can be used to allow Godot to render onto foreign images.
 
 .. rst-class:: classref-item-separator
 
@@ -5471,6 +5605,8 @@ Returns the data format used to create this texture.
 Returns the internal graphics handle for this texture object. For use when communicating with third-party APIs mostly with GDExtension.
 
 \ **Note:** This function returns a ``uint64_t`` which internally maps to a ``GLuint`` (OpenGL) or ``VkImage`` (Vulkan).
+
+\ *Deprecated.* Use :ref:`get_driver_resource<class_RenderingDevice_method_get_driver_resource>` with :ref:`DRIVER_RESOURCE_TEXTURE<class_RenderingDevice_constant_DRIVER_RESOURCE_TEXTURE>` instead.
 
 .. rst-class:: classref-item-separator
 

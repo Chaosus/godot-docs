@@ -155,7 +155,19 @@ Signals
 
 **bus_layout_changed** **(** **)**
 
-Emitted when the :ref:`AudioBusLayout<class_AudioBusLayout>` changes.
+Emitted when an audio bus is added, deleted, or moved.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_AudioServer_signal_bus_renamed:
+
+.. rst-class:: classref-signal
+
+**bus_renamed** **(** :ref:`int<class_int>` bus_index, :ref:`StringName<class_StringName>` old_name, :ref:`StringName<class_StringName>` new_name **)**
+
+Emitted when the audio bus at ``bus_index`` is renamed from ``old_name`` to ``new_name``.
 
 .. rst-class:: classref-section-separator
 
@@ -277,7 +289,7 @@ Name of the current device for audio output (see :ref:`get_output_device_list<cl
 - void **set_playback_speed_scale** **(** :ref:`float<class_float>` value **)**
 - :ref:`float<class_float>` **get_playback_speed_scale** **(** **)**
 
-Scales the rate at which audio is played (i.e. setting it to ``0.5`` will make the audio be played at half its speed).
+Scales the rate at which audio is played (i.e. setting it to ``0.5`` will make the audio be played at half its speed). See also :ref:`Engine.time_scale<class_Engine_property_time_scale>` to affect the general simulation speed, which is independent from :ref:`playback_speed_scale<class_AudioServer_property_playback_speed_scale>`.
 
 .. rst-class:: classref-section-separator
 
