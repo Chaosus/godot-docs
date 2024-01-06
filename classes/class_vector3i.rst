@@ -81,6 +81,10 @@ Methods
    +---------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Vector3i<class_Vector3i>` | :ref:`clamp<class_Vector3i_method_clamp>` **(** :ref:`Vector3i<class_Vector3i>` min, :ref:`Vector3i<class_Vector3i>` max **)** |const| |
    +---------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`int<class_int>`           | :ref:`distance_squared_to<class_Vector3i_method_distance_squared_to>` **(** :ref:`Vector3i<class_Vector3i>` to **)** |const|           |
+   +---------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`float<class_float>`       | :ref:`distance_to<class_Vector3i_method_distance_to>` **(** :ref:`Vector3i<class_Vector3i>` to **)** |const|                           |
+   +---------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`float<class_float>`       | :ref:`length<class_Vector3i_method_length>` **(** **)** |const|                                                                        |
    +---------------------------------+----------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`           | :ref:`length_squared<class_Vector3i_method_length_squared>` **(** **)** |const|                                                        |
@@ -190,6 +194,22 @@ Zero vector, a vector with all components set to ``0``.
 **ONE** = ``Vector3i(1, 1, 1)``
 
 One vector, a vector with all components set to ``1``.
+
+.. _class_Vector3i_constant_MIN:
+
+.. rst-class:: classref-constant
+
+**MIN** = ``Vector3i(-2147483648, -2147483648, -2147483648)``
+
+Min vector, a vector with all components equal to ``INT32_MIN``. Can be used as a negative integer equivalent of :ref:`Vector3.INF<class_Vector3_constant_INF>`.
+
+.. _class_Vector3i_constant_MAX:
+
+.. rst-class:: classref-constant
+
+**MAX** = ``Vector3i(2147483647, 2147483647, 2147483647)``
+
+Max vector, a vector with all components equal to ``INT32_MAX``. Can be used as an integer equivalent of :ref:`Vector3.INF<class_Vector3_constant_INF>`.
 
 .. _class_Vector3i_constant_LEFT:
 
@@ -355,6 +375,32 @@ Returns a new vector with all components in absolute values (i.e. positive).
 :ref:`Vector3i<class_Vector3i>` **clamp** **(** :ref:`Vector3i<class_Vector3i>` min, :ref:`Vector3i<class_Vector3i>` max **)** |const|
 
 Returns a new vector with all components clamped between the components of ``min`` and ``max``, by running :ref:`@GlobalScope.clamp<class_@GlobalScope_method_clamp>` on each component.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Vector3i_method_distance_squared_to:
+
+.. rst-class:: classref-method
+
+:ref:`int<class_int>` **distance_squared_to** **(** :ref:`Vector3i<class_Vector3i>` to **)** |const|
+
+Returns the squared distance between this vector and ``to``.
+
+This method runs faster than :ref:`distance_to<class_Vector3i_method_distance_to>`, so prefer it if you need to compare vectors or need the squared distance for some formula.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Vector3i_method_distance_to:
+
+.. rst-class:: classref-method
+
+:ref:`float<class_float>` **distance_to** **(** :ref:`Vector3i<class_Vector3i>` to **)** |const|
+
+Returns the distance between this vector and ``to``.
 
 .. rst-class:: classref-item-separator
 

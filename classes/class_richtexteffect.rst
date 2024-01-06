@@ -19,7 +19,7 @@ A custom effect for a :ref:`RichTextLabel<class_RichTextLabel>`.
 Description
 -----------
 
-A custom effect for a :ref:`RichTextLabel<class_RichTextLabel>`.
+A custom effect for a :ref:`RichTextLabel<class_RichTextLabel>`, which can be loaded in the :ref:`RichTextLabel<class_RichTextLabel>` inspector or using :ref:`RichTextLabel.install_effect<class_RichTextLabel_method_install_effect>`.
 
 \ **Note:** For a **RichTextEffect** to be usable, a BBCode tag must be defined as a member variable called ``bbcode`` in the script.
 
@@ -57,9 +57,9 @@ Methods
 .. table::
    :widths: auto
 
-   +-------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>` | :ref:`_process_custom_fx<class_RichTextEffect_method__process_custom_fx>` **(** :ref:`CharFXTransform<class_CharFXTransform>` char_fx **)** |virtual| |const| |
-   +-------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>` | :ref:`_process_custom_fx<class_RichTextEffect_private_method__process_custom_fx>` **(** :ref:`CharFXTransform<class_CharFXTransform>` char_fx **)** |virtual| |const| |
+   +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. rst-class:: classref-section-separator
 
@@ -70,7 +70,7 @@ Methods
 Method Descriptions
 -------------------
 
-.. _class_RichTextEffect_method__process_custom_fx:
+.. _class_RichTextEffect_private_method__process_custom_fx:
 
 .. rst-class:: classref-method
 
