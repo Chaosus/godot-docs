@@ -335,7 +335,7 @@ Removes an element from the array by index.
 
 :ref:`int<class_int>` **resize** **(** :ref:`int<class_int>` new_size **)**
 
-Sets the size of the array. If the array is grown, reserves elements at the end of the array. If the array is shrunk, truncates the array to the new size.
+Sets the size of the array. If the array is grown, reserves elements at the end of the array. If the array is shrunk, truncates the array to the new size. Calling :ref:`resize<class_PackedVector3Array_method_resize>` once and assigning the new values is faster than adding new elements one by one.
 
 .. rst-class:: classref-item-separator
 
@@ -456,7 +456,11 @@ Returns ``true`` if contents of the arrays differ.
 
 :ref:`PackedVector3Array<class_PackedVector3Array>` **operator *** **(** :ref:`Transform3D<class_Transform3D>` right **)**
 
-Transforms (multiplies) all vectors in the array by the :ref:`Transform3D<class_Transform3D>` matrix.
+Returns a new **PackedVector3Array** with all vectors in this array inversely transformed (multiplied) by the given :ref:`Transform3D<class_Transform3D>` transformation matrix, under the assumption that the transformation basis is orthonormal (i.e. rotation/reflection is fine, scaling/skew is not).
+
+\ ``array * transform`` is equivalent to ``transform.inverse() * array``. See :ref:`Transform3D.inverse<class_Transform3D_method_inverse>`.
+
+For transforming by inverse of an affine transformation (e.g. with scaling) ``transform.affine_inverse() * array`` can be used instead. See :ref:`Transform3D.affine_inverse<class_Transform3D_method_affine_inverse>`.
 
 .. rst-class:: classref-item-separator
 

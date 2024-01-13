@@ -19,7 +19,7 @@ Description
 
 A 3×4 matrix (3 rows, 4 columns) used for 3D linear transformations. It can represent transformations such as translation, rotation, and scaling. It consists of a :ref:`basis<class_Transform3D_property_basis>` (first 3 columns) and a :ref:`Vector3<class_Vector3>` for the :ref:`origin<class_Transform3D_property_origin>` (last column).
 
-For more information, read the "Matrices and transforms" documentation article.
+For a general introduction, see the :doc:`Matrices and transforms <../tutorials/math/matrices_and_transforms>` tutorial.
 
 .. note::
 
@@ -136,6 +136,10 @@ Operators
    | :ref:`Transform3D<class_Transform3D>`               | :ref:`operator *<class_Transform3D_operator_mul_float>` **(** :ref:`float<class_float>` right **)**                                        |
    +-----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Transform3D<class_Transform3D>`               | :ref:`operator *<class_Transform3D_operator_mul_int>` **(** :ref:`int<class_int>` right **)**                                              |
+   +-----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`Transform3D<class_Transform3D>`               | :ref:`operator /<class_Transform3D_operator_div_float>` **(** :ref:`float<class_float>` right **)**                                        |
+   +-----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`Transform3D<class_Transform3D>`               | :ref:`operator /<class_Transform3D_operator_div_int>` **(** :ref:`int<class_int>` right **)**                                              |
    +-----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                             | :ref:`operator ==<class_Transform3D_operator_eq_Transform3D>` **(** :ref:`Transform3D<class_Transform3D>` right **)**                      |
    +-----------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
@@ -282,7 +286,7 @@ Method Descriptions
 
 :ref:`Transform3D<class_Transform3D>` **affine_inverse** **(** **)** |const|
 
-Returns the inverse of the transform, under the assumption that the transformation is composed of rotation, scaling and translation.
+Returns the inverse of the transform, under the assumption that the basis is invertible (must have non-zero determinant).
 
 .. rst-class:: classref-item-separator
 
@@ -306,7 +310,7 @@ Returns a transform interpolated between this transform and another by a given `
 
 :ref:`Transform3D<class_Transform3D>` **inverse** **(** **)** |const|
 
-Returns the inverse of the transform, under the assumption that the transformation is composed of rotation and translation (no scaling, use :ref:`affine_inverse<class_Transform3D_method_affine_inverse>` for transforms with scaling).
+Returns the inverse of the transform, under the assumption that the transformation basis is orthonormal (i.e. rotation/reflection is fine, scaling/skew is not). Use :ref:`affine_inverse<class_Transform3D_method_affine_inverse>` for non-orthonormal transforms (e.g. with scaling).
 
 .. rst-class:: classref-item-separator
 
@@ -318,7 +322,7 @@ Returns the inverse of the transform, under the assumption that the transformati
 
 :ref:`bool<class_bool>` **is_equal_approx** **(** :ref:`Transform3D<class_Transform3D>` xform **)** |const|
 
-Returns ``true`` if this transform and ``xform`` are approximately equal, by calling ``is_equal_approx`` on each component.
+Returns ``true`` if this transform and ``xform`` are approximately equal, by running :ref:`@GlobalScope.is_equal_approx<class_@GlobalScope_method_is_equal_approx>` on each component.
 
 .. rst-class:: classref-item-separator
 
@@ -549,7 +553,7 @@ Transforms (multiplies) the :ref:`Vector3<class_Vector3>` by the given **Transfo
 
 :ref:`Transform3D<class_Transform3D>` **operator *** **(** :ref:`float<class_float>` right **)**
 
-This operator multiplies all components of the **Transform3D**, including the origin vector, which scales it uniformly.
+This operator multiplies all components of the **Transform3D**, including the :ref:`origin<class_Transform3D_property_origin>` vector, which scales it uniformly.
 
 .. rst-class:: classref-item-separator
 
@@ -561,7 +565,31 @@ This operator multiplies all components of the **Transform3D**, including the or
 
 :ref:`Transform3D<class_Transform3D>` **operator *** **(** :ref:`int<class_int>` right **)**
 
-This operator multiplies all components of the **Transform3D**, including the origin vector, which scales it uniformly.
+This operator multiplies all components of the **Transform3D**, including the :ref:`origin<class_Transform3D_property_origin>` vector, which scales it uniformly.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Transform3D_operator_div_float:
+
+.. rst-class:: classref-operator
+
+:ref:`Transform3D<class_Transform3D>` **operator /** **(** :ref:`float<class_float>` right **)**
+
+This operator divides all components of the **Transform3D**, including the :ref:`origin<class_Transform3D_property_origin>` vector, which inversely scales it uniformly.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Transform3D_operator_div_int:
+
+.. rst-class:: classref-operator
+
+:ref:`Transform3D<class_Transform3D>` **operator /** **(** :ref:`int<class_int>` right **)**
+
+This operator divides all components of the **Transform3D**, including the :ref:`origin<class_Transform3D_property_origin>` vector, which inversely scales it uniformly.
 
 .. rst-class:: classref-item-separator
 
