@@ -167,7 +167,7 @@ Controls the maximum number of physics steps that can be simulated each rendered
 - void **set_physics_jitter_fix** **(** :ref:`float<class_float>` value **)**
 - :ref:`float<class_float>` **get_physics_jitter_fix** **(** **)**
 
-Controls how much physics ticks are synchronized with real time. For 0 or less, the ticks are synchronized. Such values are recommended for network games, where clock synchronization matters. Higher values cause higher deviation of the in-game clock and real clock but smooth out framerate jitters. The default value of 0.5 should be fine for most; values above 2 could cause the game to react to dropped frames with a noticeable delay and are not recommended.
+Controls how much physics ticks are synchronized with real time. For 0 or less, the ticks are synchronized. Such values are recommended for network games, where clock synchronization matters. Higher values cause higher deviation of the in-game clock and real clock but smooth out framerate jitters. The default value of 0.5 should be good enough for most; values above 2 could cause the game to react to dropped frames with a noticeable delay and are not recommended.
 
 \ **Note:** For best results, when using a custom physics interpolation solution, the physics jitter fix should be disabled by setting :ref:`physics_jitter_fix<class_Engine_property_physics_jitter_fix>` to ``0``.
 
@@ -186,7 +186,7 @@ Controls how much physics ticks are synchronized with real time. For 0 or less, 
 - void **set_physics_ticks_per_second** **(** :ref:`int<class_int>` value **)**
 - :ref:`int<class_int>` **get_physics_ticks_per_second** **(** **)**
 
-The number of fixed iterations per second. This controls how often physics simulation and :ref:`Node._physics_process<class_Node_method__physics_process>` methods are run. This value should generally always be set to ``60`` or above, as Godot doesn't interpolate the physics step. As a result, values lower than ``60`` will look stuttery. This value can be increased to make input more reactive or work around collision tunneling issues, but keep in mind doing so will increase CPU usage. See also :ref:`max_fps<class_Engine_property_max_fps>` and :ref:`ProjectSettings.physics/common/physics_ticks_per_second<class_ProjectSettings_property_physics/common/physics_ticks_per_second>`.
+The number of fixed iterations per second. This controls how often physics simulation and :ref:`Node._physics_process<class_Node_private_method__physics_process>` methods are run. This value should generally always be set to ``60`` or above, as Godot doesn't interpolate the physics step. As a result, values lower than ``60`` will look stuttery. This value can be increased to make input more reactive or work around collision tunneling issues, but keep in mind doing so will increase CPU usage. See also :ref:`max_fps<class_Engine_property_max_fps>` and :ref:`ProjectSettings.physics/common/physics_ticks_per_second<class_ProjectSettings_property_physics/common/physics_ticks_per_second>`.
 
 \ **Note:** Only :ref:`max_physics_steps_per_frame<class_Engine_property_max_physics_steps_per_frame>` physics ticks may be simulated per rendered frame at most. If more physics ticks have to be simulated per rendered frame to keep up with rendering, the project will appear to slow down (even if ``delta`` is used consistently in physics calculations). Therefore, it is recommended to also increase :ref:`max_physics_steps_per_frame<class_Engine_property_max_physics_steps_per_frame>` if increasing :ref:`physics_ticks_per_second<class_Engine_property_physics_ticks_per_second>` significantly above its default value.
 
@@ -227,6 +227,10 @@ If ``false``, stops printing error and warning messages to the console and edito
 - :ref:`float<class_float>` **get_time_scale** **(** **)**
 
 Controls how fast or slow the in-game clock ticks versus the real life one. It defaults to 1.0. A value of 2.0 means the game moves twice as fast as real life, whilst a value of 0.5 means the game moves at half the regular speed. This also affects :ref:`Timer<class_Timer>` and :ref:`SceneTreeTimer<class_SceneTreeTimer>` (see :ref:`SceneTree.create_timer<class_SceneTree_method_create_timer>` for how to control this).
+
+\ **Note:** This does not affect audio playback speed. Use :ref:`AudioServer.playback_speed_scale<class_AudioServer_property_playback_speed_scale>` to adjust audio playback speed independently of :ref:`time_scale<class_Engine_property_time_scale>`.
+
+\ **Note:** This does not automatically adjust :ref:`physics_ticks_per_second<class_Engine_property_physics_ticks_per_second>`, which means that with time scales above 1.0, physics simulation may become less precise (as each physics tick will stretch over a larger period of engine time). If you're using :ref:`time_scale<class_Engine_property_time_scale>` to speed up simulation by a large factor, consider increasing :ref:`physics_ticks_per_second<class_Engine_property_physics_ticks_per_second>` as well to improve physics reliability.
 
 .. rst-class:: classref-section-separator
 
