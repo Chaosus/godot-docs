@@ -464,6 +464,10 @@ The speed with which the rotation across the axis perpendicular to the hinge get
 
 :ref:`HingeJointParam<enum_PhysicsServer3D_HingeJointParam>` **HINGE_JOINT_LIMIT_SOFTNESS** = ``4``
 
+.. container:: contribute
+
+	There is currently no description for this enum. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+
 
 
 .. _class_PhysicsServer3D_constant_HINGE_JOINT_LIMIT_RELAXATION:
@@ -1588,6 +1592,10 @@ enum **BodyAxis**:
 
 :ref:`BodyAxis<enum_PhysicsServer3D_BodyAxis>` **BODY_AXIS_LINEAR_X** = ``1``
 
+.. container:: contribute
+
+	There is currently no description for this enum. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+
 
 
 .. _class_PhysicsServer3D_constant_BODY_AXIS_LINEAR_Y:
@@ -1595,6 +1603,10 @@ enum **BodyAxis**:
 .. rst-class:: classref-enumeration-constant
 
 :ref:`BodyAxis<enum_PhysicsServer3D_BodyAxis>` **BODY_AXIS_LINEAR_Y** = ``2``
+
+.. container:: contribute
+
+	There is currently no description for this enum. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
 
 
 
@@ -1604,6 +1616,10 @@ enum **BodyAxis**:
 
 :ref:`BodyAxis<enum_PhysicsServer3D_BodyAxis>` **BODY_AXIS_LINEAR_Z** = ``4``
 
+.. container:: contribute
+
+	There is currently no description for this enum. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+
 
 
 .. _class_PhysicsServer3D_constant_BODY_AXIS_ANGULAR_X:
@@ -1611,6 +1627,10 @@ enum **BodyAxis**:
 .. rst-class:: classref-enumeration-constant
 
 :ref:`BodyAxis<enum_PhysicsServer3D_BodyAxis>` **BODY_AXIS_ANGULAR_X** = ``8``
+
+.. container:: contribute
+
+	There is currently no description for this enum. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
 
 
 
@@ -1620,6 +1640,10 @@ enum **BodyAxis**:
 
 :ref:`BodyAxis<enum_PhysicsServer3D_BodyAxis>` **BODY_AXIS_ANGULAR_Y** = ``16``
 
+.. container:: contribute
+
+	There is currently no description for this enum. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+
 
 
 .. _class_PhysicsServer3D_constant_BODY_AXIS_ANGULAR_Z:
@@ -1627,6 +1651,10 @@ enum **BodyAxis**:
 .. rst-class:: classref-enumeration-constant
 
 :ref:`BodyAxis<enum_PhysicsServer3D_BodyAxis>` **BODY_AXIS_ANGULAR_Z** = ``32``
+
+.. container:: contribute
+
+	There is currently no description for this enum. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
 
 
 
@@ -2537,13 +2565,11 @@ Continuous collision detection tries to predict where a moving body will collide
 
 void **body_set_force_integration_callback** **(** :ref:`RID<class_RID>` body, :ref:`Callable<class_Callable>` callable, :ref:`Variant<class_Variant>` userdata=null **)**
 
-Sets the function used to calculate physics for an object, if that object allows it (see :ref:`body_set_omit_force_integration<class_PhysicsServer3D_method_body_set_omit_force_integration>`).
+Sets the function used to calculate physics for an object, if that object allows it (see :ref:`body_set_omit_force_integration<class_PhysicsServer3D_method_body_set_omit_force_integration>`). The force integration function takes 2 arguments:
 
-The force integration function takes 2 arguments:
+- ``state`` — :ref:`PhysicsDirectBodyState3D<class_PhysicsDirectBodyState3D>` used to retrieve and modify the body's state.
 
-\ ``state:`` :ref:`PhysicsDirectBodyState3D<class_PhysicsDirectBodyState3D>` used to retrieve and modify the body's state.
-
-\ ``userdata:`` Optional user data, if it was passed when calling ``body_set_force_integration_callback``.
+- ``userdata`` — optional user data passed to :ref:`body_set_force_integration_callback<class_PhysicsServer3D_method_body_set_force_integration_callback>`.
 
 .. rst-class:: classref-item-separator
 
