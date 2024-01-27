@@ -61,6 +61,8 @@ Properties
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`       | :ref:`debugger/auto_switch_to_remote_scene_tree<class_EditorSettings_property_debugger/auto_switch_to_remote_scene_tree>`                                                           |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`       | :ref:`debugger/profile_native_calls<class_EditorSettings_property_debugger/profile_native_calls>`                                                                                   |
+   +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`         | :ref:`debugger/profiler_frame_history_size<class_EditorSettings_property_debugger/profiler_frame_history_size>`                                                                     |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`         | :ref:`debugger/profiler_frame_max_functions<class_EditorSettings_property_debugger/profiler_frame_max_functions>`                                                                   |
@@ -231,6 +233,10 @@ Properties
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`   | :ref:`filesystem/external_programs/raster_image_editor<class_EditorSettings_property_filesystem/external_programs/raster_image_editor>`                                             |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`   | :ref:`filesystem/external_programs/terminal_emulator<class_EditorSettings_property_filesystem/external_programs/terminal_emulator>`                                                 |
+   +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`   | :ref:`filesystem/external_programs/terminal_emulator_flags<class_EditorSettings_property_filesystem/external_programs/terminal_emulator_flags>`                                     |
+   +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`   | :ref:`filesystem/external_programs/vector_image_editor<class_EditorSettings_property_filesystem/external_programs/vector_image_editor>`                                             |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`         | :ref:`filesystem/file_dialog/display_mode<class_EditorSettings_property_filesystem/file_dialog/display_mode>`                                                                       |
@@ -250,6 +256,8 @@ Properties
    | :ref:`bool<class_bool>`       | :ref:`filesystem/on_save/compress_binary_resources<class_EditorSettings_property_filesystem/on_save/compress_binary_resources>`                                                     |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`       | :ref:`filesystem/on_save/safe_save_on_backup_then_rename<class_EditorSettings_property_filesystem/on_save/safe_save_on_backup_then_rename>`                                         |
+   +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`   | :ref:`filesystem/tools/oidn/oidn_denoise_path<class_EditorSettings_property_filesystem/tools/oidn/oidn_denoise_path>`                                                               |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`         | :ref:`interface/editor/accept_dialog_cancel_ok_buttons<class_EditorSettings_property_interface/editor/accept_dialog_cancel_ok_buttons>`                                             |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -303,6 +311,8 @@ Properties
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`       | :ref:`interface/editor/single_window_mode<class_EditorSettings_property_interface/editor/single_window_mode>`                                                                       |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`int<class_int>`         | :ref:`interface/editor/ui_layout_direction<class_EditorSettings_property_interface/editor/ui_layout_direction>`                                                                     |
+   +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`float<class_float>`     | :ref:`interface/editor/unfocused_low_processor_mode_sleep_usec<class_EditorSettings_property_interface/editor/unfocused_low_processor_mode_sleep_usec>`                             |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`       | :ref:`interface/editor/use_embedded_menu<class_EditorSettings_property_interface/editor/use_embedded_menu>`                                                                         |
@@ -329,9 +339,11 @@ Properties
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Color<class_Color>`     | :ref:`interface/theme/accent_color<class_EditorSettings_property_interface/theme/accent_color>`                                                                                     |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`float<class_float>`     | :ref:`interface/theme/additional_spacing<class_EditorSettings_property_interface/theme/additional_spacing>`                                                                         |
+   | :ref:`int<class_int>`         | :ref:`interface/theme/additional_spacing<class_EditorSettings_property_interface/theme/additional_spacing>`                                                                         |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Color<class_Color>`     | :ref:`interface/theme/base_color<class_EditorSettings_property_interface/theme/base_color>`                                                                                         |
+   +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`int<class_int>`         | :ref:`interface/theme/base_spacing<class_EditorSettings_property_interface/theme/base_spacing>`                                                                                     |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`         | :ref:`interface/theme/border_size<class_EditorSettings_property_interface/theme/border_size>`                                                                                       |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -350,6 +362,8 @@ Properties
    | :ref:`String<class_String>`   | :ref:`interface/theme/preset<class_EditorSettings_property_interface/theme/preset>`                                                                                                 |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`float<class_float>`     | :ref:`interface/theme/relationship_line_opacity<class_EditorSettings_property_interface/theme/relationship_line_opacity>`                                                           |
+   +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`   | :ref:`interface/theme/spacing_preset<class_EditorSettings_property_interface/theme/spacing_preset>`                                                                                 |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`       | :ref:`interface/touchscreen/enable_long_press_as_right_click<class_EditorSettings_property_interface/touchscreen/enable_long_press_as_right_click>`                                 |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -527,9 +541,13 @@ Properties
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Color<class_Color>`     | :ref:`text_editor/theme/highlighting/current_line_color<class_EditorSettings_property_text_editor/theme/highlighting/current_line_color>`                                           |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`Color<class_Color>`     | :ref:`text_editor/theme/highlighting/doc_comment_color<class_EditorSettings_property_text_editor/theme/highlighting/doc_comment_color>`                                             |
+   +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Color<class_Color>`     | :ref:`text_editor/theme/highlighting/engine_type_color<class_EditorSettings_property_text_editor/theme/highlighting/engine_type_color>`                                             |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Color<class_Color>`     | :ref:`text_editor/theme/highlighting/executing_line_color<class_EditorSettings_property_text_editor/theme/highlighting/executing_line_color>`                                       |
+   +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`Color<class_Color>`     | :ref:`text_editor/theme/highlighting/folded_code_region_color<class_EditorSettings_property_text_editor/theme/highlighting/folded_code_region_color>`                               |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Color<class_Color>`     | :ref:`text_editor/theme/highlighting/function_color<class_EditorSettings_property_text_editor/theme/highlighting/function_color>`                                                   |
    +-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -658,6 +676,18 @@ Property Descriptions
 :ref:`bool<class_bool>` **debugger/auto_switch_to_remote_scene_tree**
 
 If ``true``, automatically switches to the **Remote** scene tree when running the project from the editor. If ``false``, stays on the **Local** scene tree when running the project from the editor.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorSettings_property_debugger/profile_native_calls:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **debugger/profile_native_calls**
+
+If ``true``, enables collection of profiling data from non-GDScript Godot functions, such as engine class methods. Enabling this slows execution while profiling further.
 
 .. rst-class:: classref-item-separator
 
@@ -1729,6 +1759,48 @@ The program that opens raster image files when clicking "Open in External Progra
 
 ----
 
+.. _class_EditorSettings_property_filesystem/external_programs/terminal_emulator:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **filesystem/external_programs/terminal_emulator**
+
+The terminal emulator program to use when using **Open in Terminal** context menu action in the FileSystem dock. You can enter an absolute path to a program binary, or a path to a program that is present in the ``PATH`` environment variable.
+
+If left empty, Godot will use the default terminal emulator for the system:
+
+- **Windows:** PowerShell
+
+- **macOS:** Terminal.app
+
+- **Linux:** The first terminal found on the system in this order: gnome-terminal, konsole, xfce4-terminal, lxterminal, kitty, alacritty, urxvt, xterm.
+
+To use Command Prompt (cmd) instead of PowerShell on Windows, enter ``cmd`` in this field and the correct flags will automatically be used.
+
+On macOS, make sure to point to the actual program binary located within the ``Programs/MacOS`` folder of the .app bundle, rather than the .app bundle directory.
+
+If specifying a custom terminal emulator, you may need to override :ref:`filesystem/external_programs/terminal_emulator_flags<class_EditorSettings_property_filesystem/external_programs/terminal_emulator_flags>` so it opens in the correct folder.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorSettings_property_filesystem/external_programs/terminal_emulator_flags:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **filesystem/external_programs/terminal_emulator_flags**
+
+The command-line arguments to pass to the terminal emulator that is run when using **Open in Terminal** context menu action in the FileSystem dock. See also :ref:`filesystem/external_programs/terminal_emulator<class_EditorSettings_property_filesystem/external_programs/terminal_emulator>`.
+
+If left empty, the default flags are ``{directory}``, which is replaced by the absolute path to the directory that is being opened in the terminal.
+
+\ **Note:** If the terminal emulator is set to PowerShell, cmd, or Konsole, Godot will automatically prepend arguments to this list, as these terminals require nonstandard arguments to open in the correct folder.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_EditorSettings_property_filesystem/external_programs/vector_image_editor:
 
 .. rst-class:: classref-property
@@ -1858,6 +1930,20 @@ If ``true``, uses lossless compression for binary resources.
 If ``true``, when saving a file, the editor will rename the old file to a different name, save a new file, then only remove the old file once the new file has been saved. This makes loss of data less likely to happen if the editor or operating system exits unexpectedly while saving (e.g. due to a crash or power outage).
 
 \ **Note:** On Windows, this feature can interact negatively with certain antivirus programs. In this case, you may have to set this to ``false`` to prevent file locking issues.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorSettings_property_filesystem/tools/oidn/oidn_denoise_path:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **filesystem/tools/oidn/oidn_denoise_path**
+
+The path to the directory containing the Open Image Denoise (OIDN) executable, used optionally for denoising lightmaps. It can be downloaded from `openimagedenoise.org <https://www.openimagedenoise.org/downloads.html>`__.
+
+To enable this feature for your specific project, use :ref:`ProjectSettings.rendering/lightmapping/denoising/denoiser<class_ProjectSettings_property_rendering/lightmapping/denoising/denoiser>`.
 
 .. rst-class:: classref-item-separator
 
@@ -2209,6 +2295,18 @@ If ``true``, embed modal windows such as docks inside the main editor window. Wh
 
 ----
 
+.. _class_EditorSettings_property_interface/editor/ui_layout_direction:
+
+.. rst-class:: classref-property
+
+:ref:`int<class_int>` **interface/editor/ui_layout_direction**
+
+Editor UI default layout direction.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_EditorSettings_property_interface/editor/unfocused_low_processor_mode_sleep_usec:
 
 .. rst-class:: classref-property
@@ -2375,9 +2473,11 @@ The color to use for "highlighted" user interface elements in the editor (presse
 
 .. rst-class:: classref-property
 
-:ref:`float<class_float>` **interface/theme/additional_spacing**
+:ref:`int<class_int>` **interface/theme/additional_spacing**
 
-The spacing to add for buttons and list items in the editor (in pixels). Increasing this value is useful to improve usability on touch screens, at the cost of reducing the amount of usable screen real estate.
+The extra spacing to add to various GUI elements in the editor (in pixels). Increasing this value is useful to improve usability on touch screens, at the cost of reducing the amount of usable screen real estate.
+
+ See also :ref:`interface/theme/spacing_preset<class_EditorSettings_property_interface/theme/spacing_preset>`.
 
 .. rst-class:: classref-item-separator
 
@@ -2390,6 +2490,18 @@ The spacing to add for buttons and list items in the editor (in pixels). Increas
 :ref:`Color<class_Color>` **interface/theme/base_color**
 
 The base color to use for user interface elements in the editor. Secondary colors (such as darker/lighter variants) are derived from this color.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorSettings_property_interface/theme/base_spacing:
+
+.. rst-class:: classref-property
+
+:ref:`int<class_int>` **interface/theme/base_spacing**
+
+The base spacing used by various GUI elements in the editor (in pixels). See also :ref:`interface/theme/spacing_preset<class_EditorSettings_property_interface/theme/spacing_preset>`.
 
 .. rst-class:: classref-item-separator
 
@@ -2465,9 +2577,9 @@ The icon and font color scheme to use in the editor.
 
 - **Auto** determines the color scheme to use automatically based on :ref:`interface/theme/base_color<class_EditorSettings_property_interface/theme/base_color>`.
 
-- **Dark** makes fonts and icons light (suitable for dark themes).
+- **Dark** makes fonts and icons dark (suitable for light themes). Icon colors are automatically converted by the editor following the set of rules defined in `this file <https://github.com/godotengine/godot/blob/master/editor/editor_themes.cpp>`__.
 
-- **Light** makes fonts and icons dark (suitable for light themes). Icon colors are automatically converted by the editor following `this set of rules <https://github.com/godotengine/godot/blob/master/editor/editor_themes.cpp#L135>`__.
+- **Light** makes fonts and icons light (suitable for dark themes).
 
 .. rst-class:: classref-item-separator
 
@@ -2506,6 +2618,18 @@ The editor theme preset to use.
 :ref:`float<class_float>` **interface/theme/relationship_line_opacity**
 
 The opacity to use when drawing relationship lines in the editor's :ref:`Tree<class_Tree>`-based GUIs (such as the Scene tree dock).
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorSettings_property_interface/theme/spacing_preset:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **interface/theme/spacing_preset**
+
+The editor theme spacing preset to use. See also :ref:`interface/theme/base_spacing<class_EditorSettings_property_interface/theme/base_spacing>` and :ref:`interface/theme/additional_spacing<class_EditorSettings_property_interface/theme/additional_spacing>`.
 
 .. rst-class:: classref-item-separator
 
@@ -3597,6 +3721,18 @@ The script editor's background color for the line the caret is currently on. Thi
 
 ----
 
+.. _class_EditorSettings_property_text_editor/theme/highlighting/doc_comment_color:
+
+.. rst-class:: classref-property
+
+:ref:`Color<class_Color>` **text_editor/theme/highlighting/doc_comment_color**
+
+The script editor's documentation comment color. In GDScript, this is used for comments starting with ``##``. In C#, this is used for comments starting with ``///`` or ``/**``.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_EditorSettings_property_text_editor/theme/highlighting/engine_type_color:
 
 .. rst-class:: classref-property
@@ -3616,6 +3752,18 @@ The script editor's engine type color (:ref:`Vector2<class_Vector2>`, :ref:`Vect
 :ref:`Color<class_Color>` **text_editor/theme/highlighting/executing_line_color**
 
 The script editor's color for the debugger's executing line icon (displayed in the gutter).
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorSettings_property_text_editor/theme/highlighting/folded_code_region_color:
+
+.. rst-class:: classref-property
+
+:ref:`Color<class_Color>` **text_editor/theme/highlighting/folded_code_region_color**
+
+The script editor's background line highlighting color for folded code region.
 
 .. rst-class:: classref-item-separator
 
