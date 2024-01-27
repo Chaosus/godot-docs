@@ -42,11 +42,15 @@ Properties
 .. table::
    :widths: auto
 
-   +----------------------------------------+--------------------------------------------------------------------------+
-   | :ref:`MouseMode<enum_Input_MouseMode>` | :ref:`mouse_mode<class_Input_property_mouse_mode>`                       |
-   +----------------------------------------+--------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                | :ref:`use_accumulated_input<class_Input_property_use_accumulated_input>` |
-   +----------------------------------------+--------------------------------------------------------------------------+
+   +----------------------------------------+--------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                | :ref:`emulate_mouse_from_touch<class_Input_property_emulate_mouse_from_touch>` |
+   +----------------------------------------+--------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                | :ref:`emulate_touch_from_mouse<class_Input_property_emulate_touch_from_mouse>` |
+   +----------------------------------------+--------------------------------------------------------------------------------+
+   | :ref:`MouseMode<enum_Input_MouseMode>` | :ref:`mouse_mode<class_Input_property_mouse_mode>`                             |
+   +----------------------------------------+--------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                | :ref:`use_accumulated_input<class_Input_property_use_accumulated_input>`       |
+   +----------------------------------------+--------------------------------------------------------------------------------+
 
 .. rst-class:: classref-reftable-group
 
@@ -379,6 +383,40 @@ Help cursor. Usually a question mark.
 Property Descriptions
 ---------------------
 
+.. _class_Input_property_emulate_mouse_from_touch:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **emulate_mouse_from_touch**
+
+.. rst-class:: classref-property-setget
+
+- void **set_emulate_mouse_from_touch** **(** :ref:`bool<class_bool>` value **)**
+- :ref:`bool<class_bool>` **is_emulating_mouse_from_touch** **(** **)**
+
+If ``true``, sends mouse input events when tapping or swiping on the touchscreen. See also :ref:`ProjectSettings.input_devices/pointing/emulate_mouse_from_touch<class_ProjectSettings_property_input_devices/pointing/emulate_mouse_from_touch>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Input_property_emulate_touch_from_mouse:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **emulate_touch_from_mouse**
+
+.. rst-class:: classref-property-setget
+
+- void **set_emulate_touch_from_mouse** **(** :ref:`bool<class_bool>` value **)**
+- :ref:`bool<class_bool>` **is_emulating_touch_from_mouse** **(** **)**
+
+If ``true``, sends touch input events when clicking or dragging the mouse. See also :ref:`ProjectSettings.input_devices/pointing/emulate_touch_from_mouse<class_ProjectSettings_property_input_devices/pointing/emulate_touch_from_mouse>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_Input_property_mouse_mode:
 
 .. rst-class:: classref-property
@@ -432,7 +470,7 @@ This will simulate pressing the specified action.
 
 The strength can be used for non-boolean actions, it's ranged between 0 and 1 representing the intensity of the given action.
 
-\ **Note:** This method will not cause any :ref:`Node._input<class_Node_method__input>` calls. It is intended to be used with :ref:`is_action_pressed<class_Input_method_is_action_pressed>` and :ref:`is_action_just_pressed<class_Input_method_is_action_just_pressed>`. If you want to simulate ``_input``, use :ref:`parse_input_event<class_Input_method_parse_input_event>` instead.
+\ **Note:** This method will not cause any :ref:`Node._input<class_Node_private_method__input>` calls. It is intended to be used with :ref:`is_action_pressed<class_Input_method_is_action_pressed>` and :ref:`is_action_just_pressed<class_Input_method_is_action_just_pressed>`. If you want to simulate ``_input``, use :ref:`parse_input_event<class_Input_method_parse_input_event>` instead.
 
 .. rst-class:: classref-item-separator
 
@@ -512,7 +550,7 @@ If ``exact_match`` is ``false``, it ignores additional input modifiers for :ref:
 
 :ref:`float<class_float>` **get_action_strength** **(** :ref:`StringName<class_StringName>` action, :ref:`bool<class_bool>` exact_match=false **)** |const|
 
-Returns a value between 0 and 1 representing the intensity of the given action. In a joypad, for example, the further away the axis (analog sticks or L2, R2 triggers) is from the dead zone, the closer the value will be to 1. If the action is mapped to a control that has no axis as the keyboard, the value returned will be 0 or 1.
+Returns a value between 0 and 1 representing the intensity of the given action. In a joypad, for example, the further away the axis (analog sticks or L2, R2 triggers) is from the dead zone, the closer the value will be to 1. If the action is mapped to a control that has no axis such as the keyboard, the value returned will be 0 or 1.
 
 If ``exact_match`` is ``false``, it ignores additional input modifiers for :ref:`InputEventKey<class_InputEventKey>` and :ref:`InputEventMouseButton<class_InputEventMouseButton>` events, and the direction for :ref:`InputEventJoypadMotion<class_InputEventJoypadMotion>` events.
 
@@ -742,6 +780,8 @@ If ``exact_match`` is ``false``, it ignores additional input modifiers for :ref:
 
 \ **Note:** Due to keyboard ghosting, :ref:`is_action_just_pressed<class_Input_method_is_action_just_pressed>` may return ``false`` even if one of the action's keys is pressed. See `Input examples <../tutorials/inputs/input_examples.html#keyboard-events>`__ in the documentation for more information.
 
+\ **Note:** During input handling (e.g. :ref:`Node._input<class_Node_private_method__input>`), use :ref:`InputEvent.is_action_pressed<class_InputEvent_method_is_action_pressed>` instead to query the action state of the current event.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -757,6 +797,8 @@ Returns ``true`` when the user *stops* pressing the action event in the current 
 \ **Note:** Returning ``true`` does not imply that the action is *still* not pressed. An action can be released and pressed again rapidly, and ``true`` will still be returned so as not to miss input.
 
 If ``exact_match`` is ``false``, it ignores additional input modifiers for :ref:`InputEventKey<class_InputEventKey>` and :ref:`InputEventMouseButton<class_InputEventMouseButton>` events, and the direction for :ref:`InputEventJoypadMotion<class_InputEventJoypadMotion>` events.
+
+\ **Note:** During input handling (e.g. :ref:`Node._input<class_Node_private_method__input>`), use :ref:`InputEvent.is_action_released<class_InputEvent_method_is_action_released>` instead to query the action state of the current event.
 
 .. rst-class:: classref-item-separator
 
@@ -876,7 +918,7 @@ Returns ``true`` if you are pressing the key in the physical location on the 101
 
 void **parse_input_event** **(** :ref:`InputEvent<class_InputEvent>` event **)**
 
-Feeds an :ref:`InputEvent<class_InputEvent>` to the game. Can be used to artificially trigger input events from code. Also generates :ref:`Node._input<class_Node_method__input>` calls.
+Feeds an :ref:`InputEvent<class_InputEvent>` to the game. Can be used to artificially trigger input events from code. Also generates :ref:`Node._input<class_Node_private_method__input>` calls.
 
 \ **Example:**\ 
 
