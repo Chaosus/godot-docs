@@ -237,6 +237,8 @@ Methods
    +-------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Variant<class_Variant>`       | :ref:`get<class_Dictionary_method_get>` **(** :ref:`Variant<class_Variant>` key, :ref:`Variant<class_Variant>` default=null **)** |const|       |
    +-------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`Variant<class_Variant>`       | :ref:`get_or_add<class_Dictionary_method_get_or_add>` **(** :ref:`Variant<class_Variant>` key, :ref:`Variant<class_Variant>` default=null **)** |
+   +-------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`             | :ref:`has<class_Dictionary_method_has>` **(** :ref:`Variant<class_Variant>` key **)** |const|                                                   |
    +-------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`             | :ref:`has_all<class_Dictionary_method_has_all>` **(** :ref:`Array<class_Array>` keys **)** |const|                                              |
@@ -369,6 +371,18 @@ Finds and returns the first key whose associated value is equal to ``value``, or
 :ref:`Variant<class_Variant>` **get** **(** :ref:`Variant<class_Variant>` key, :ref:`Variant<class_Variant>` default=null **)** |const|
 
 Returns the corresponding value for the given ``key`` in the dictionary. If the ``key`` does not exist, returns ``default``, or ``null`` if the parameter is omitted.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Dictionary_method_get_or_add:
+
+.. rst-class:: classref-method
+
+:ref:`Variant<class_Variant>` **get_or_add** **(** :ref:`Variant<class_Variant>` key, :ref:`Variant<class_Variant>` default=null **)**
+
+Gets a value and ensures the key is set. If the ``key`` exists in the dictionary, this behaves like :ref:`get<class_Dictionary_method_get>`. Otherwise, the ``default`` value is inserted into the dictionary and returned.
 
 .. rst-class:: classref-item-separator
 
@@ -531,6 +545,48 @@ Makes the dictionary read-only, i.e. disables modification of the dictionary's c
 void **merge** **(** :ref:`Dictionary<class_Dictionary>` dictionary, :ref:`bool<class_bool>` overwrite=false **)**
 
 Adds entries from ``dictionary`` to this dictionary. By default, duplicate keys are not copied over, unless ``overwrite`` is ``true``.
+
+
+.. tabs::
+
+ .. code-tab:: gdscript
+
+    var dict = { "item": "sword", "quantity": 2 }
+    var other_dict = { "quantity": 15, "color": "silver" }
+    
+    # Overwriting of existing keys is disabled by default.
+    dict.merge(other_dict)
+    print(dict)  # { "item": "sword", "quantity": 2, "color": "silver" }
+    
+    # With overwriting of existing keys enabled.
+    dict.merge(other_dict, true)
+    print(dict)  # { "item": "sword", "quantity": 15, "color": "silver" }
+
+ .. code-tab:: csharp
+
+    var dict = new Godot.Collections.Dictionary
+    {
+        ["item"] = "sword",
+        ["quantity"] = 2,
+    };
+    
+    var otherDict = new Godot.Collections.Dictionary
+    {
+        ["quantity"] = 15,
+        ["color"] = "silver",
+    };
+    
+    // Overwriting of existing keys is disabled by default.
+    dict.Merge(otherDict);
+    GD.Print(dict); // { "item": "sword", "quantity": 2, "color": "silver" }
+    
+    // With overwriting of existing keys enabled.
+    dict.Merge(otherDict, true);
+    GD.Print(dict); // { "item": "sword", "quantity": 15, "color": "silver" }
+
+
+
+\ **Note:** :ref:`merge<class_Dictionary_method_merge>` is *not* recursive. Nested dictionaries are considered as keys that can be overwritten or not depending on the value of ``overwrite``, but they will never be merged together.
 
 .. rst-class:: classref-item-separator
 

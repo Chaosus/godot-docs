@@ -290,6 +290,10 @@ Request successful.
 
 :ref:`Result<enum_HTTPRequest_Result>` **RESULT_CHUNKED_BODY_SIZE_MISMATCH** = ``1``
 
+.. container:: contribute
+
+	There is currently no description for this enum. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+
 
 
 .. _class_HTTPRequest_constant_RESULT_CANT_CONNECT:
@@ -345,6 +349,10 @@ Request exceeded its maximum size limit, see :ref:`body_size_limit<class_HTTPReq
 .. rst-class:: classref-enumeration-constant
 
 :ref:`Result<enum_HTTPRequest_Result>` **RESULT_BODY_DECOMPRESS_FAILED** = ``8``
+
+.. container:: contribute
+
+	There is currently no description for this enum. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
 
 
 
@@ -410,11 +418,11 @@ Property Descriptions
 
 If ``true``, this header will be added to each request: ``Accept-Encoding: gzip, deflate`` telling servers that it's okay to compress response bodies.
 
-Any Response body declaring a ``Content-Encoding`` of either ``gzip`` or ``deflate`` will then be automatically decompressed, and the uncompressed bytes will be delivered via ``request_completed``.
+Any Response body declaring a ``Content-Encoding`` of either ``gzip`` or ``deflate`` will then be automatically decompressed, and the uncompressed bytes will be delivered via :ref:`request_completed<class_HTTPRequest_signal_request_completed>`.
 
-If the user has specified their own ``Accept-Encoding`` header, then no header will be added regardless of ``accept_gzip``.
+If the user has specified their own ``Accept-Encoding`` header, then no header will be added regardless of :ref:`accept_gzip<class_HTTPRequest_property_accept_gzip>`.
 
-If ``false`` no header will be added, and no decompression will be performed on response bodies. The raw bytes of the response body will be returned via ``request_completed``.
+If ``false`` no header will be added, and no decompression will be performed on response bodies. The raw bytes of the response body will be returned via :ref:`request_completed<class_HTTPRequest_signal_request_completed>`.
 
 .. rst-class:: classref-item-separator
 
