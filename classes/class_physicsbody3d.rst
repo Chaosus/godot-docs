@@ -69,6 +69,8 @@ Methods
    +---------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`PhysicsBody3D[]<class_PhysicsBody3D>`             | :ref:`get_collision_exceptions<class_PhysicsBody3D_method_get_collision_exceptions>` **(** **)**                                                                                                                                                                                                                                                                      |
    +---------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`Vector3<class_Vector3>`                           | :ref:`get_gravity<class_PhysicsBody3D_method_get_gravity>` **(** **)** |const|                                                                                                                                                                                                                                                                                        |
+   +---------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`KinematicCollision3D<class_KinematicCollision3D>` | :ref:`move_and_collide<class_PhysicsBody3D_method_move_and_collide>` **(** :ref:`Vector3<class_Vector3>` motion, :ref:`bool<class_bool>` test_only=false, :ref:`float<class_float>` safe_margin=0.001, :ref:`bool<class_bool>` recovery_as_collision=false, :ref:`int<class_int>` max_collisions=1 **)**                                                              |
    +---------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                                    | :ref:`remove_collision_exception_with<class_PhysicsBody3D_method_remove_collision_exception_with>` **(** :ref:`Node<class_Node>` body **)**                                                                                                                                                                                                                           |
@@ -230,13 +232,25 @@ Returns an array of nodes that were added as collision exceptions for this body.
 
 ----
 
+.. _class_PhysicsBody3D_method_get_gravity:
+
+.. rst-class:: classref-method
+
+:ref:`Vector3<class_Vector3>` **get_gravity** **(** **)** |const|
+
+Returns the gravity vector computed from all sources that can affect the body, including all gravity overrides from :ref:`Area3D<class_Area3D>` nodes and the global world gravity.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_PhysicsBody3D_method_move_and_collide:
 
 .. rst-class:: classref-method
 
 :ref:`KinematicCollision3D<class_KinematicCollision3D>` **move_and_collide** **(** :ref:`Vector3<class_Vector3>` motion, :ref:`bool<class_bool>` test_only=false, :ref:`float<class_float>` safe_margin=0.001, :ref:`bool<class_bool>` recovery_as_collision=false, :ref:`int<class_int>` max_collisions=1 **)**
 
-Moves the body along the vector ``motion``. In order to be frame rate independent in :ref:`Node._physics_process<class_Node_method__physics_process>` or :ref:`Node._process<class_Node_method__process>`, ``motion`` should be computed using ``delta``.
+Moves the body along the vector ``motion``. In order to be frame rate independent in :ref:`Node._physics_process<class_Node_private_method__physics_process>` or :ref:`Node._process<class_Node_private_method__process>`, ``motion`` should be computed using ``delta``.
 
 The body will stop if it collides. Returns a :ref:`KinematicCollision3D<class_KinematicCollision3D>`, which contains information about the collision when stopped, or when touching another body along the motion.
 
@@ -282,7 +296,7 @@ Locks or unlocks the specified linear or rotational ``axis`` depending on the va
 
 :ref:`bool<class_bool>` **test_move** **(** :ref:`Transform3D<class_Transform3D>` from, :ref:`Vector3<class_Vector3>` motion, :ref:`KinematicCollision3D<class_KinematicCollision3D>` collision=null, :ref:`float<class_float>` safe_margin=0.001, :ref:`bool<class_bool>` recovery_as_collision=false, :ref:`int<class_int>` max_collisions=1 **)**
 
-Checks for collisions without moving the body. In order to be frame rate independent in :ref:`Node._physics_process<class_Node_method__physics_process>` or :ref:`Node._process<class_Node_method__process>`, ``motion`` should be computed using ``delta``.
+Checks for collisions without moving the body. In order to be frame rate independent in :ref:`Node._physics_process<class_Node_private_method__physics_process>` or :ref:`Node._process<class_Node_private_method__process>`, ``motion`` should be computed using ``delta``.
 
 Virtually sets the node's position, scale and rotation to that of the given :ref:`Transform3D<class_Transform3D>`, then tries to move the body along the vector ``motion``. Returns ``true`` if a collision would stop the body from moving along the whole path.
 

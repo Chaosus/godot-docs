@@ -56,6 +56,13 @@ Supported font formats:
 
 
 
+.. rst-class:: classref-introduction-group
+
+Tutorials
+---------
+
+- :doc:`Runtime file loading and saving <../tutorials/io/runtime_file_loading_and_saving>`
+
 .. rst-class:: classref-reftable-group
 
 Properties
@@ -72,6 +79,8 @@ Properties
    | :ref:`PackedByteArray<class_PackedByteArray>`                   | :ref:`data<class_FontFile_property_data>`                                                             | ``PackedByteArray()`` |
    +-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+-----------------------+
    | :ref:`int<class_int>`                                           | :ref:`fixed_size<class_FontFile_property_fixed_size>`                                                 | ``0``                 |
+   +-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+-----------------------+
+   | :ref:`FixedSizeScaleMode<enum_TextServer_FixedSizeScaleMode>`   | :ref:`fixed_size_scale_mode<class_FontFile_property_fixed_size_scale_mode>`                           | ``0``                 |
    +-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+-----------------------+
    | :ref:`String<class_String>`                                     | :ref:`font_name<class_FontFile_property_font_name>`                                                   | ``""``                |
    +-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+-----------------------+
@@ -136,6 +145,8 @@ Methods
    | :ref:`int<class_int>`                             | :ref:`get_char_from_glyph_index<class_FontFile_method_get_char_from_glyph_index>` **(** :ref:`int<class_int>` size, :ref:`int<class_int>` glyph_index **)** |const|                                                                                    |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`float<class_float>`                         | :ref:`get_embolden<class_FontFile_method_get_embolden>` **(** :ref:`int<class_int>` cache_index **)** |const|                                                                                                                                          |
+   +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`float<class_float>`                         | :ref:`get_extra_baseline_offset<class_FontFile_method_get_extra_baseline_offset>` **(** :ref:`int<class_int>` cache_index **)** |const|                                                                                                                |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`get_extra_spacing<class_FontFile_method_get_extra_spacing>` **(** :ref:`int<class_int>` cache_index, :ref:`SpacingType<enum_TextServer_SpacingType>` spacing **)** |const|                                                                       |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -212,6 +223,8 @@ Methods
    | void                                              | :ref:`set_cache_underline_thickness<class_FontFile_method_set_cache_underline_thickness>` **(** :ref:`int<class_int>` cache_index, :ref:`int<class_int>` size, :ref:`float<class_float>` underline_thickness **)**                                     |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                              | :ref:`set_embolden<class_FontFile_method_set_embolden>` **(** :ref:`int<class_int>` cache_index, :ref:`float<class_float>` strength **)**                                                                                                              |
+   +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | void                                              | :ref:`set_extra_baseline_offset<class_FontFile_method_set_extra_baseline_offset>` **(** :ref:`int<class_int>` cache_index, :ref:`float<class_float>` baseline_offset **)**                                                                             |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                              | :ref:`set_extra_spacing<class_FontFile_method_set_extra_spacing>` **(** :ref:`int<class_int>` cache_index, :ref:`SpacingType<enum_TextServer_SpacingType>` spacing, :ref:`int<class_int>` value **)**                                                  |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -314,6 +327,23 @@ Contents of the dynamic font source file.
 - :ref:`int<class_int>` **get_fixed_size** **(** **)**
 
 Font size, used only for the bitmap fonts.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_FontFile_property_fixed_size_scale_mode:
+
+.. rst-class:: classref-property
+
+:ref:`FixedSizeScaleMode<enum_TextServer_FixedSizeScaleMode>` **fixed_size_scale_mode** = ``0``
+
+.. rst-class:: classref-property-setget
+
+- void **set_fixed_size_scale_mode** **(** :ref:`FixedSizeScaleMode<enum_TextServer_FixedSizeScaleMode>` value **)**
+- :ref:`FixedSizeScaleMode<enum_TextServer_FixedSizeScaleMode>` **get_fixed_size_scale_mode** **(** **)**
+
+Scaling mode, used only for the bitmap fonts with :ref:`fixed_size<class_FontFile_property_fixed_size>` greater than zero.
 
 .. rst-class:: classref-item-separator
 
@@ -726,6 +756,18 @@ Returns embolden strength, if is not equal to zero, emboldens the font outlines.
 
 ----
 
+.. _class_FontFile_method_get_extra_baseline_offset:
+
+.. rst-class:: classref-method
+
+:ref:`float<class_float>` **get_extra_baseline_offset** **(** :ref:`int<class_int>` cache_index **)** |const|
+
+Returns extra baseline offset (as a fraction of font height).
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_FontFile_method_get_extra_spacing:
 
 .. rst-class:: classref-method
@@ -914,7 +956,7 @@ Returns list of script support overrides.
 
 :ref:`Vector2i[]<class_Vector2i>` **get_size_cache_list** **(** :ref:`int<class_int>` cache_index **)** |const|
 
-Returns list of the font sizes in the cache. Each size is ``Vector2i`` with font size and outline size.
+Returns list of the font sizes in the cache. Each size is :ref:`Vector2i<class_Vector2i>` with font size and outline size.
 
 .. rst-class:: classref-item-separator
 
@@ -1187,6 +1229,18 @@ Sets thickness of the underline in pixels.
 void **set_embolden** **(** :ref:`int<class_int>` cache_index, :ref:`float<class_float>` strength **)**
 
 Sets embolden strength, if is not equal to zero, emboldens the font outlines. Negative values reduce the outline thickness.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_FontFile_method_set_extra_baseline_offset:
+
+.. rst-class:: classref-method
+
+void **set_extra_baseline_offset** **(** :ref:`int<class_int>` cache_index, :ref:`float<class_float>` baseline_offset **)**
+
+Sets extra baseline offset (as a fraction of font height).
 
 .. rst-class:: classref-item-separator
 

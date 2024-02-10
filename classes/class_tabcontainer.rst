@@ -38,23 +38,29 @@ Properties
 .. table::
    :widths: auto
 
-   +-------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
-   | :ref:`bool<class_bool>`                         | :ref:`all_tabs_in_front<class_TabContainer_property_all_tabs_in_front>`                       | ``false`` |
-   +-------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
-   | :ref:`bool<class_bool>`                         | :ref:`clip_tabs<class_TabContainer_property_clip_tabs>`                                       | ``true``  |
-   +-------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
-   | :ref:`int<class_int>`                           | :ref:`current_tab<class_TabContainer_property_current_tab>`                                   | ``0``     |
-   +-------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
-   | :ref:`bool<class_bool>`                         | :ref:`drag_to_rearrange_enabled<class_TabContainer_property_drag_to_rearrange_enabled>`       | ``false`` |
-   +-------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
-   | :ref:`AlignmentMode<enum_TabBar_AlignmentMode>` | :ref:`tab_alignment<class_TabContainer_property_tab_alignment>`                               | ``0``     |
-   +-------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
-   | :ref:`int<class_int>`                           | :ref:`tabs_rearrange_group<class_TabContainer_property_tabs_rearrange_group>`                 | ``-1``    |
-   +-------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
-   | :ref:`bool<class_bool>`                         | :ref:`tabs_visible<class_TabContainer_property_tabs_visible>`                                 | ``true``  |
-   +-------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
-   | :ref:`bool<class_bool>`                         | :ref:`use_hidden_tabs_for_min_size<class_TabContainer_property_use_hidden_tabs_for_min_size>` | ``false`` |
-   +-------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
+   +---------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
+   | :ref:`bool<class_bool>`                           | :ref:`all_tabs_in_front<class_TabContainer_property_all_tabs_in_front>`                       | ``false`` |
+   +---------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
+   | :ref:`bool<class_bool>`                           | :ref:`clip_tabs<class_TabContainer_property_clip_tabs>`                                       | ``true``  |
+   +---------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
+   | :ref:`int<class_int>`                             | :ref:`current_tab<class_TabContainer_property_current_tab>`                                   | ``-1``    |
+   +---------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
+   | :ref:`bool<class_bool>`                           | :ref:`deselect_enabled<class_TabContainer_property_deselect_enabled>`                         | ``false`` |
+   +---------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
+   | :ref:`bool<class_bool>`                           | :ref:`drag_to_rearrange_enabled<class_TabContainer_property_drag_to_rearrange_enabled>`       | ``false`` |
+   +---------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
+   | :ref:`AlignmentMode<enum_TabBar_AlignmentMode>`   | :ref:`tab_alignment<class_TabContainer_property_tab_alignment>`                               | ``0``     |
+   +---------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
+   | :ref:`FocusMode<enum_Control_FocusMode>`          | :ref:`tab_focus_mode<class_TabContainer_property_tab_focus_mode>`                             | ``2``     |
+   +---------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
+   | :ref:`TabPosition<enum_TabContainer_TabPosition>` | :ref:`tabs_position<class_TabContainer_property_tabs_position>`                               | ``0``     |
+   +---------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
+   | :ref:`int<class_int>`                             | :ref:`tabs_rearrange_group<class_TabContainer_property_tabs_rearrange_group>`                 | ``-1``    |
+   +---------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
+   | :ref:`bool<class_bool>`                           | :ref:`tabs_visible<class_TabContainer_property_tabs_visible>`                                 | ``true``  |
+   +---------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
+   | :ref:`bool<class_bool>`                           | :ref:`use_hidden_tabs_for_min_size<class_TabContainer_property_use_hidden_tabs_for_min_size>` | ``false`` |
+   +---------------------------------------------------+-----------------------------------------------------------------------------------------------+-----------+
 
 .. rst-class:: classref-reftable-group
 
@@ -70,6 +76,8 @@ Methods
    | :ref:`Popup<class_Popup>`         | :ref:`get_popup<class_TabContainer_method_get_popup>` **(** **)** |const|                                                                                   |
    +-----------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`             | :ref:`get_previous_tab<class_TabContainer_method_get_previous_tab>` **(** **)** |const|                                                                     |
+   +-----------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`TabBar<class_TabBar>`       | :ref:`get_tab_bar<class_TabContainer_method_get_tab_bar>` **(** **)** |const|                                                                               |
    +-----------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Texture2D<class_Texture2D>` | :ref:`get_tab_button_icon<class_TabContainer_method_get_tab_button_icon>` **(** :ref:`int<class_int>` tab_idx **)** |const|                                 |
    +-----------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -90,6 +98,10 @@ Methods
    | :ref:`bool<class_bool>`           | :ref:`is_tab_disabled<class_TabContainer_method_is_tab_disabled>` **(** :ref:`int<class_int>` tab_idx **)** |const|                                         |
    +-----------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`           | :ref:`is_tab_hidden<class_TabContainer_method_is_tab_hidden>` **(** :ref:`int<class_int>` tab_idx **)** |const|                                             |
+   +-----------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`           | :ref:`select_next_available<class_TabContainer_method_select_next_available>` **(** **)**                                                                   |
+   +-----------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`           | :ref:`select_previous_available<class_TabContainer_method_select_previous_available>` **(** **)**                                                           |
    +-----------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                              | :ref:`set_popup<class_TabContainer_method_set_popup>` **(** :ref:`Node<class_Node>` popup **)**                                                             |
    +-----------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -156,6 +168,8 @@ Theme Properties
    | :ref:`StyleBox<class_StyleBox>`   | :ref:`panel<class_TabContainer_theme_style_panel>`                                 |                                     |
    +-----------------------------------+------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`StyleBox<class_StyleBox>`   | :ref:`tab_disabled<class_TabContainer_theme_style_tab_disabled>`                   |                                     |
+   +-----------------------------------+------------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`StyleBox<class_StyleBox>`   | :ref:`tab_focus<class_TabContainer_theme_style_tab_focus>`                         |                                     |
    +-----------------------------------+------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`StyleBox<class_StyleBox>`   | :ref:`tab_hovered<class_TabContainer_theme_style_tab_hovered>`                     |                                     |
    +-----------------------------------+------------------------------------------------------------------------------------+-------------------------------------+
@@ -253,7 +267,46 @@ Emitted when a tab is hovered by the mouse.
 
 **tab_selected** **(** :ref:`int<class_int>` tab **)**
 
-Emitted when a tab is selected, even if it is the current tab.
+Emitted when a tab is selected via click, directional input, or script, even if it is the current tab.
+
+.. rst-class:: classref-section-separator
+
+----
+
+.. rst-class:: classref-descriptions-group
+
+Enumerations
+------------
+
+.. _enum_TabContainer_TabPosition:
+
+.. rst-class:: classref-enumeration
+
+enum **TabPosition**:
+
+.. _class_TabContainer_constant_POSITION_TOP:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`TabPosition<enum_TabContainer_TabPosition>` **POSITION_TOP** = ``0``
+
+Places the tab bar at the top.
+
+.. _class_TabContainer_constant_POSITION_BOTTOM:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`TabPosition<enum_TabContainer_TabPosition>` **POSITION_BOTTOM** = ``1``
+
+Places the tab bar at the bottom. The tab bar's :ref:`StyleBox<class_StyleBox>` will be flipped vertically.
+
+.. _class_TabContainer_constant_POSITION_MAX:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`TabPosition<enum_TabContainer_TabPosition>` **POSITION_MAX** = ``2``
+
+Represents the size of the :ref:`TabPosition<enum_TabContainer_TabPosition>` enum.
 
 .. rst-class:: classref-section-separator
 
@@ -302,7 +355,7 @@ If ``true``, tabs overflowing this node's width will be hidden, displaying two n
 
 .. rst-class:: classref-property
 
-:ref:`int<class_int>` **current_tab** = ``0``
+:ref:`int<class_int>` **current_tab** = ``-1``
 
 .. rst-class:: classref-property-setget
 
@@ -310,6 +363,27 @@ If ``true``, tabs overflowing this node's width will be hidden, displaying two n
 - :ref:`int<class_int>` **get_current_tab** **(** **)**
 
 The current tab index. When set, this index's :ref:`Control<class_Control>` node's ``visible`` property is set to ``true`` and all others are set to ``false``.
+
+A value of ``-1`` means that no tab is selected.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TabContainer_property_deselect_enabled:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **deselect_enabled** = ``false``
+
+.. rst-class:: classref-property-setget
+
+- void **set_deselect_enabled** **(** :ref:`bool<class_bool>` value **)**
+- :ref:`bool<class_bool>` **get_deselect_enabled** **(** **)**
+
+If ``true``, all tabs can be deselected so that no tab is selected. Click on the :ref:`current_tab<class_TabContainer_property_current_tab>` to deselect it.
+
+Only the tab header will be shown if no tabs are selected.
 
 .. rst-class:: classref-item-separator
 
@@ -344,6 +418,40 @@ If ``true``, tabs can be rearranged with mouse drag.
 - :ref:`AlignmentMode<enum_TabBar_AlignmentMode>` **get_tab_alignment** **(** **)**
 
 Sets the position at which tabs will be placed. See :ref:`AlignmentMode<enum_TabBar_AlignmentMode>` for details.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TabContainer_property_tab_focus_mode:
+
+.. rst-class:: classref-property
+
+:ref:`FocusMode<enum_Control_FocusMode>` **tab_focus_mode** = ``2``
+
+.. rst-class:: classref-property-setget
+
+- void **set_tab_focus_mode** **(** :ref:`FocusMode<enum_Control_FocusMode>` value **)**
+- :ref:`FocusMode<enum_Control_FocusMode>` **get_tab_focus_mode** **(** **)**
+
+The focus access mode for the internal :ref:`TabBar<class_TabBar>` node.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TabContainer_property_tabs_position:
+
+.. rst-class:: classref-property
+
+:ref:`TabPosition<enum_TabContainer_TabPosition>` **tabs_position** = ``0``
+
+.. rst-class:: classref-property-setget
+
+- void **set_tabs_position** **(** :ref:`TabPosition<enum_TabContainer_TabPosition>` value **)**
+- :ref:`TabPosition<enum_TabContainer_TabPosition>` **get_tabs_position** **(** **)**
+
+Sets the position of the tab bar. See :ref:`TabPosition<enum_TabContainer_TabPosition>` for details.
 
 .. rst-class:: classref-item-separator
 
@@ -440,6 +548,20 @@ Returns the :ref:`Popup<class_Popup>` node instance if one has been set already 
 :ref:`int<class_int>` **get_previous_tab** **(** **)** |const|
 
 Returns the previously active tab index.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TabContainer_method_get_tab_bar:
+
+.. rst-class:: classref-method
+
+:ref:`TabBar<class_TabBar>` **get_tab_bar** **(** **)** |const|
+
+Returns the :ref:`TabBar<class_TabBar>` contained in this container.
+
+\ **Warning:** This is a required internal node, removing and freeing it or editing its tabs may cause a crash. If you wish to edit the tabs, use the methods provided in **TabContainer**.
 
 .. rst-class:: classref-item-separator
 
@@ -560,6 +682,30 @@ Returns ``true`` if the tab at index ``tab_idx`` is disabled.
 :ref:`bool<class_bool>` **is_tab_hidden** **(** :ref:`int<class_int>` tab_idx **)** |const|
 
 Returns ``true`` if the tab at index ``tab_idx`` is hidden.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TabContainer_method_select_next_available:
+
+.. rst-class:: classref-method
+
+:ref:`bool<class_bool>` **select_next_available** **(** **)**
+
+Selects the first available tab with greater index than the currently selected. Returns ``true`` if tab selection changed.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TabContainer_method_select_previous_available:
+
+.. rst-class:: classref-method
+
+:ref:`bool<class_bool>` **select_previous_available** **(** **)**
+
+Selects the first available tab with lower index than the currently selected. Returns ``true`` if tab selection changed.
 
 .. rst-class:: classref-item-separator
 
@@ -910,6 +1056,18 @@ The style of disabled tabs.
 
 ----
 
+.. _class_TabContainer_theme_style_tab_focus:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`StyleBox<class_StyleBox>` **tab_focus**
+
+:ref:`StyleBox<class_StyleBox>` used when the :ref:`TabBar<class_TabBar>` is focused. The :ref:`tab_focus<class_TabContainer_theme_style_tab_focus>` :ref:`StyleBox<class_StyleBox>` is displayed *over* the base :ref:`StyleBox<class_StyleBox>` of the selected tab, so a partially transparent :ref:`StyleBox<class_StyleBox>` should be used to ensure the base :ref:`StyleBox<class_StyleBox>` remains visible. A :ref:`StyleBox<class_StyleBox>` that represents an outline or an underline works well for this purpose. To disable the focus visual effect, assign a :ref:`StyleBoxEmpty<class_StyleBoxEmpty>` resource. Note that disabling the focus visual effect will harm keyboard/controller navigation usability, so this is not recommended for accessibility reasons.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_TabContainer_theme_style_tab_hovered:
 
 .. rst-class:: classref-themeproperty
@@ -917,6 +1075,8 @@ The style of disabled tabs.
 :ref:`StyleBox<class_StyleBox>` **tab_hovered**
 
 The style of the currently hovered tab.
+
+\ **Note:** This style will be drawn with the same width as :ref:`tab_unselected<class_TabContainer_theme_style_tab_unselected>` at minimum.
 
 .. rst-class:: classref-item-separator
 
