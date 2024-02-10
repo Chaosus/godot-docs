@@ -21,13 +21,13 @@ Description
 
 An advanced :ref:`Variant<class_Variant>` type. All classes in the engine inherit from Object. Each class may define new properties, methods or signals, which are available to all inheriting classes. For example, a :ref:`Sprite2D<class_Sprite2D>` instance is able to call :ref:`Node.add_child<class_Node_method_add_child>` because it inherits from :ref:`Node<class_Node>`.
 
-You can create new instances, using ``Object.new()`` in GDScript, or ``new Object`` in C#.
+You can create new instances, using ``Object.new()`` in GDScript, or ``new GodotObject`` in C#.
 
 To delete an Object instance, call :ref:`free<class_Object_method_free>`. This is necessary for most classes inheriting Object, because they do not manage memory on their own, and will otherwise cause memory leaks when no longer in use. There are a few classes that perform memory management. For example, :ref:`RefCounted<class_RefCounted>` (and by extension :ref:`Resource<class_Resource>`) deletes itself when no longer referenced, and :ref:`Node<class_Node>` deletes its children when freed.
 
 Objects can have a :ref:`Script<class_Script>` attached to them. Once the :ref:`Script<class_Script>` is instantiated, it effectively acts as an extension to the base class, allowing it to define and inherit new properties, methods and signals.
 
-Inside a :ref:`Script<class_Script>`, :ref:`_get_property_list<class_Object_method__get_property_list>` may be overridden to customize properties in several ways. This allows them to be available to the editor, display as lists of options, sub-divide into groups, save on disk, etc. Scripting languages offer easier ways to customize properties, such as with the :ref:`@GDScript.@export<class_@GDScript_annotation_@export>` annotation.
+Inside a :ref:`Script<class_Script>`, :ref:`_get_property_list<class_Object_private_method__get_property_list>` may be overridden to customize properties in several ways. This allows them to be available to the editor, display as lists of options, sub-divide into groups, save on disk, etc. Scripting languages offer easier ways to customize properties, such as with the :ref:`@GDScript.@export<class_@GDScript_annotation_@export>` annotation.
 
 Godot is very dynamic. An object's script, and therefore its properties, methods and signals, can be changed at run-time. Because of this, there can be occasions where, for example, a property required by a method may not exist. To prevent run-time errors, see methods such as :ref:`set<class_Object_method_set>`, :ref:`get<class_Object_method_get>`, :ref:`call<class_Object_method_call>`, :ref:`has_method<class_Object_method_has_method>`, :ref:`has_signal<class_Object_method_has_signal>`, etc. Note that these methods are **much** slower than direct references.
 
@@ -41,7 +41,7 @@ In GDScript, you can also check if a given property, method, or signal name exis
     print("tree_entered" in node) # Prints true
     print("unknown" in node)      # Prints false
 
-Notifications are :ref:`int<class_int>` constants commonly sent and received by objects. For example, on every rendered frame, the :ref:`SceneTree<class_SceneTree>` notifies nodes inside the tree with a :ref:`Node.NOTIFICATION_PROCESS<class_Node_constant_NOTIFICATION_PROCESS>`. The nodes receive it and may call :ref:`Node._process<class_Node_method__process>` to update. To make use of notifications, see :ref:`notification<class_Object_method_notification>` and :ref:`_notification<class_Object_method__notification>`.
+Notifications are :ref:`int<class_int>` constants commonly sent and received by objects. For example, on every rendered frame, the :ref:`SceneTree<class_SceneTree>` notifies nodes inside the tree with a :ref:`Node.NOTIFICATION_PROCESS<class_Node_constant_NOTIFICATION_PROCESS>`. The nodes receive it and may call :ref:`Node._process<class_Node_private_method__process>` to update. To make use of notifications, see :ref:`notification<class_Object_method_notification>` and :ref:`_notification<class_Object_private_method__notification>`.
 
 Lastly, every object can also contain metadata (data about data). :ref:`set_meta<class_Object_method_set_meta>` can be useful to store information that the object itself does not depend on. To keep your code clean, making excessive use of metadata is discouraged.
 
@@ -69,23 +69,23 @@ Methods
    :widths: auto
 
    +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`Variant<class_Variant>`         | :ref:`_get<class_Object_method__get>` **(** :ref:`StringName<class_StringName>` property **)** |virtual|                                                                                                                           |
+   | :ref:`Variant<class_Variant>`         | :ref:`_get<class_Object_private_method__get>` **(** :ref:`StringName<class_StringName>` property **)** |virtual|                                                                                                                   |
    +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`Dictionary[]<class_Dictionary>` | :ref:`_get_property_list<class_Object_method__get_property_list>` **(** **)** |virtual|                                                                                                                                            |
+   | :ref:`Dictionary[]<class_Dictionary>` | :ref:`_get_property_list<class_Object_private_method__get_property_list>` **(** **)** |virtual|                                                                                                                                    |
    +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | void                                  | :ref:`_init<class_Object_method__init>` **(** **)** |virtual|                                                                                                                                                                      |
+   | void                                  | :ref:`_init<class_Object_private_method__init>` **(** **)** |virtual|                                                                                                                                                              |
    +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | void                                  | :ref:`_notification<class_Object_method__notification>` **(** :ref:`int<class_int>` what **)** |virtual|                                                                                                                           |
+   | void                                  | :ref:`_notification<class_Object_private_method__notification>` **(** :ref:`int<class_int>` what **)** |virtual|                                                                                                                   |
    +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`               | :ref:`_property_can_revert<class_Object_method__property_can_revert>` **(** :ref:`StringName<class_StringName>` property **)** |virtual|                                                                                           |
+   | :ref:`bool<class_bool>`               | :ref:`_property_can_revert<class_Object_private_method__property_can_revert>` **(** :ref:`StringName<class_StringName>` property **)** |virtual|                                                                                   |
    +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`Variant<class_Variant>`         | :ref:`_property_get_revert<class_Object_method__property_get_revert>` **(** :ref:`StringName<class_StringName>` property **)** |virtual|                                                                                           |
+   | :ref:`Variant<class_Variant>`         | :ref:`_property_get_revert<class_Object_private_method__property_get_revert>` **(** :ref:`StringName<class_StringName>` property **)** |virtual|                                                                                   |
    +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`               | :ref:`_set<class_Object_method__set>` **(** :ref:`StringName<class_StringName>` property, :ref:`Variant<class_Variant>` value **)** |virtual|                                                                                      |
+   | :ref:`bool<class_bool>`               | :ref:`_set<class_Object_private_method__set>` **(** :ref:`StringName<class_StringName>` property, :ref:`Variant<class_Variant>` value **)** |virtual|                                                                              |
    +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`String<class_String>`           | :ref:`_to_string<class_Object_method__to_string>` **(** **)** |virtual|                                                                                                                                                            |
+   | :ref:`String<class_String>`           | :ref:`_to_string<class_Object_private_method__to_string>` **(** **)** |virtual|                                                                                                                                                    |
    +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | void                                  | :ref:`_validate_property<class_Object_method__validate_property>` **(** :ref:`Dictionary<class_Dictionary>` property **)** |virtual|                                                                                               |
+   | void                                  | :ref:`_validate_property<class_Object_private_method__validate_property>` **(** :ref:`Dictionary<class_Dictionary>` property **)** |virtual|                                                                                       |
    +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                  | :ref:`add_user_signal<class_Object_method_add_user_signal>` **(** :ref:`String<class_String>` signal, :ref:`Array<class_Array>` arguments=[] **)**                                                                                 |
    +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -281,6 +281,14 @@ Notification received when the object is initialized, before its script is attac
 
 Notification received when the object is about to be deleted. Can act as the deconstructor of some programming languages.
 
+.. _class_Object_constant_NOTIFICATION_EXTENSION_RELOADED:
+
+.. rst-class:: classref-constant
+
+**NOTIFICATION_EXTENSION_RELOADED** = ``2``
+
+Notification received when the object finishes hot reloading. This notification is only sent for extensions classes and derived.
+
 .. rst-class:: classref-section-separator
 
 ----
@@ -290,7 +298,7 @@ Notification received when the object is about to be deleted. Can act as the dec
 Method Descriptions
 -------------------
 
-.. _class_Object_method__get:
+.. _class_Object_private_method__get:
 
 .. rst-class:: classref-method
 
@@ -298,7 +306,7 @@ Method Descriptions
 
 Override this method to customize the behavior of :ref:`get<class_Object_method_get>`. Should return the given ``property``'s value, or ``null`` if the ``property`` should be handled normally.
 
-Combined with :ref:`_set<class_Object_method__set>` and :ref:`_get_property_list<class_Object_method__get_property_list>`, this method allows defining custom properties, which is particularly useful for editor plugins. Note that a property must be present in :ref:`get_property_list<class_Object_method_get_property_list>`, otherwise this method will not be called.
+Combined with :ref:`_set<class_Object_private_method__set>` and :ref:`_get_property_list<class_Object_private_method__get_property_list>`, this method allows defining custom properties, which is particularly useful for editor plugins. Note that a property must be present in :ref:`get_property_list<class_Object_method_get_property_list>`, otherwise this method will not be called.
 
 
 .. tabs::
@@ -345,17 +353,19 @@ Combined with :ref:`_set<class_Object_method__set>` and :ref:`_get_property_list
 
 ----
 
-.. _class_Object_method__get_property_list:
+.. _class_Object_private_method__get_property_list:
 
 .. rst-class:: classref-method
 
 :ref:`Dictionary[]<class_Dictionary>` **_get_property_list** **(** **)** |virtual|
 
-Override this method to customize how script properties should be handled by the engine.
+Override this method to provide a custom list of additional properties to handle by the engine.
 
 Should return a property list, as an :ref:`Array<class_Array>` of dictionaries. The result is added to the array of :ref:`get_property_list<class_Object_method_get_property_list>`, and should be formatted in the same way. Each :ref:`Dictionary<class_Dictionary>` must at least contain the ``name`` and ``type`` entries.
 
-The example below displays ``hammer_type`` in the Inspector dock, only if ``holding_hammer`` is ``true``:
+You can use :ref:`_property_can_revert<class_Object_private_method__property_can_revert>` and :ref:`_property_get_revert<class_Object_private_method__property_get_revert>` to customize the default values of the properties added by this method.
+
+The example below displays a list of numbers shown as words going from ``ZERO`` to ``FIVE``, with ``number_count`` controlling the size of the list:
 
 
 .. tabs::
@@ -363,79 +373,107 @@ The example below displays ``hammer_type`` in the Inspector dock, only if ``hold
  .. code-tab:: gdscript
 
     @tool
-    extends Node2D
+    extends Node
     
-    @export var holding_hammer = false:
-        set(value):
-            holding_hammer = value
+    @export var number_count = 3:
+        set(nc):
+            number_count = nc
+            numbers.resize(number_count)
             notify_property_list_changed()
-    var hammer_type = 0
+    
+    var numbers = PackedInt32Array([0, 0, 0])
     
     func _get_property_list():
-        # By default, `hammer_type` is not visible in the editor.
-        var property_usage = PROPERTY_USAGE_NO_EDITOR
-    
-        if holding_hammer:
-            property_usage = PROPERTY_USAGE_DEFAULT
-    
         var properties = []
-        properties.append({
-            "name": "hammer_type",
-            "type": TYPE_INT,
-            "usage": property_usage, # See above assignment.
-            "hint": PROPERTY_HINT_ENUM,
-            "hint_string": "Wooden,Iron,Golden,Enchanted"
-        })
+    
+        for i in range(number_count):
+            properties.append({
+                "name": "number_%d" % i,
+                "type": TYPE_INT,
+                "hint": PROPERTY_HINT_ENUM,
+                "hint_string": "ZERO,ONE,TWO,THREE,FOUR,FIVE",
+            })
     
         return properties
+    
+    func _get(property):
+        if property.begins_with("number_"):
+            var index = property.get_slice("_", 1).to_int()
+            return numbers[index]
+    
+    func _set(property, value):
+        if property.begins_with("number_"):
+            var index = property.get_slice("_", 1).to_int()
+            numbers[index] = value
+            return true
+        return false
 
  .. code-tab:: csharp
 
     [Tool]
-    public partial class MyNode2D : Node2D
+    public partial class MyNode : Node
     {
-        private bool _holdingHammer;
+        private int _numberCount;
     
         [Export]
-        public bool HoldingHammer
+        public int NumberCount
         {
-            get => _holdingHammer;
+            get => _numberCount;
             set
             {
-                _holdingHammer = value;
+                _numberCount = value;
+                _numbers.Resize(_numberCount);
                 NotifyPropertyListChanged();
             }
         }
     
-        public int HammerType { get; set; }
+        private List<int> _numbers = new();
     
         public override Godot.Collections.Array<Godot.Collections.Dictionary> _GetPropertyList()
         {
-            // By default, `HammerType` is not visible in the editor.
-            var propertyUsage = PropertyUsageFlags.NoEditor;
+            var properties = new Godot.Collections.Array<Godot.Collections.Dictionary>();
     
-            if (HoldingHammer)
+            for (int i = 0; i < _numberCount; i++)
             {
-                propertyUsage = PropertyUsageFlags.Default;
+                properties.Add(new Godot.Collections.Dictionary()
+                {
+                    { "name", $"number_{i}" },
+                    { "type", (int)Variant.Type.Int },
+                    { "hint", (int)PropertyHint.Enum },
+                    { "hint_string", "Zero,One,Two,Three,Four,Five" },
+                });
             }
     
-            var properties = new Godot.Collections.Array<Godot.Collections.Dictionary>();
-            properties.Add(new Godot.Collections.Dictionary()
-            {
-                { "name", "HammerType" },
-                { "type", (int)Variant.Type.Int },
-                { "usage", (int)propertyUsage }, // See above assignment.
-                { "hint", (int)PropertyHint.Enum },
-                { "hint_string", "Wooden,Iron,Golden,Enchanted" }
-            });
-    
             return properties;
+        }
+    
+        public override Variant _Get(StringName property)
+        {
+            string propertyName = property.ToString();
+            if (propertyName.StartsWith("number_"))
+            {
+                int index = int.Parse(propertyName.Substring("number_".Length));
+                return _numbers[index];
+            }
+            return default;
+        }
+    
+        public override bool _Set(StringName property, Variant value)
+        {
+            string propertyName = property.ToString();
+            if (propertyName.StartsWith("number_"))
+            {
+                int index = int.Parse(propertyName.Substring("number_".Length));
+                numbers[index] = value.As<int>();
+                return true;
+            }
+            return false;
         }
     }
 
 
 
-\ **Note:** This method is intended for advanced purposes. For most common use cases, the scripting languages offer easier ways to handle properties. See :ref:`@GDScript.@export<class_@GDScript_annotation_@export>`, :ref:`@GDScript.@export_enum<class_@GDScript_annotation_@export_enum>`, :ref:`@GDScript.@export_group<class_@GDScript_annotation_@export_group>`, etc.
+\ **Note:** This method is intended for advanced purposes. For most common use cases, the scripting languages offer easier ways to handle properties. See :ref:`@GDScript.@export<class_@GDScript_annotation_@export>`, :ref:`@GDScript.@export_enum<class_@GDScript_annotation_@export_enum>`, :ref:`@GDScript.@export_group<class_@GDScript_annotation_@export_group>`, etc. If you want to customize exported properties, use :ref:`_validate_property<class_Object_private_method__validate_property>`.
 
 \ **Note:** If the object's script is not :ref:`@GDScript.@tool<class_@GDScript_annotation_@tool>`, this method will not be called in the editor.
 
@@ -443,21 +481,21 @@ The example below displays ``hammer_type`` in the Inspector dock, only if ``hold
 
 ----
 
-.. _class_Object_method__init:
+.. _class_Object_private_method__init:
 
 .. rst-class:: classref-method
 
 void **_init** **(** **)** |virtual|
 
-Called when the object's script is instantiated, oftentimes after the object is initialized in memory (through ``Object.new()`` in GDScript, or ``new Object`` in C#). It can be also defined to take in parameters. This method is similar to a constructor in most programming languages.
+Called when the object's script is instantiated, oftentimes after the object is initialized in memory (through ``Object.new()`` in GDScript, or ``new GodotObject`` in C#). It can be also defined to take in parameters. This method is similar to a constructor in most programming languages.
 
-\ **Note:** If :ref:`_init<class_Object_method__init>` is defined with *required* parameters, the Object with script may only be created directly. If any other means (such as :ref:`PackedScene.instantiate<class_PackedScene_method_instantiate>` or :ref:`Node.duplicate<class_Node_method_duplicate>`) are used, the script's initialization will fail.
+\ **Note:** If :ref:`_init<class_Object_private_method__init>` is defined with *required* parameters, the Object with script may only be created directly. If any other means (such as :ref:`PackedScene.instantiate<class_PackedScene_method_instantiate>` or :ref:`Node.duplicate<class_Node_method_duplicate>`) are used, the script's initialization will fail.
 
 .. rst-class:: classref-item-separator
 
 ----
 
-.. _class_Object_method__notification:
+.. _class_Object_private_method__notification:
 
 .. rst-class:: classref-method
 
@@ -492,13 +530,13 @@ Called when the object receives a notification, which can be identified in ``wha
 
 ----
 
-.. _class_Object_method__property_can_revert:
+.. _class_Object_private_method__property_can_revert:
 
 .. rst-class:: classref-method
 
 :ref:`bool<class_bool>` **_property_can_revert** **(** :ref:`StringName<class_StringName>` property **)** |virtual|
 
-Override this method to customize the given ``property``'s revert behavior. Should return ``true`` if the ``property`` can be reverted in the Inspector dock. Use :ref:`_property_get_revert<class_Object_method__property_get_revert>` to specify the ``property``'s default value.
+Override this method to customize the given ``property``'s revert behavior. Should return ``true`` if the ``property`` can be reverted in the Inspector dock. Use :ref:`_property_get_revert<class_Object_private_method__property_get_revert>` to specify the ``property``'s default value.
 
 \ **Note:** This method must return consistently, regardless of the current value of the ``property``.
 
@@ -506,7 +544,7 @@ Override this method to customize the given ``property``'s revert behavior. Shou
 
 ----
 
-.. _class_Object_method__property_get_revert:
+.. _class_Object_private_method__property_get_revert:
 
 .. rst-class:: classref-method
 
@@ -514,13 +552,13 @@ Override this method to customize the given ``property``'s revert behavior. Shou
 
 Override this method to customize the given ``property``'s revert behavior. Should return the default value for the ``property``. If the default value differs from the ``property``'s current value, a revert icon is displayed in the Inspector dock.
 
-\ **Note:** :ref:`_property_can_revert<class_Object_method__property_can_revert>` must also be overridden for this method to be called.
+\ **Note:** :ref:`_property_can_revert<class_Object_private_method__property_can_revert>` must also be overridden for this method to be called.
 
 .. rst-class:: classref-item-separator
 
 ----
 
-.. _class_Object_method__set:
+.. _class_Object_private_method__set:
 
 .. rst-class:: classref-method
 
@@ -528,7 +566,7 @@ Override this method to customize the given ``property``'s revert behavior. Shou
 
 Override this method to customize the behavior of :ref:`set<class_Object_method_set>`. Should set the ``property`` to ``value`` and return ``true``, or ``false`` if the ``property`` should be handled normally. The *exact* way to set the ``property`` is up to this method's implementation.
 
-Combined with :ref:`_get<class_Object_method__get>` and :ref:`_get_property_list<class_Object_method__get_property_list>`, this method allows defining custom properties, which is particularly useful for editor plugins. Note that a property *must* be present in :ref:`get_property_list<class_Object_method_get_property_list>`, otherwise this method will not be called.
+Combined with :ref:`_get<class_Object_private_method__get>` and :ref:`_get_property_list<class_Object_private_method__get_property_list>`, this method allows defining custom properties, which is particularly useful for editor plugins. Note that a property *must* be present in :ref:`get_property_list<class_Object_method_get_property_list>`, otherwise this method will not be called.
 
 
 .. tabs::
@@ -542,6 +580,7 @@ Combined with :ref:`_get<class_Object_method__get>` and :ref:`_get_property_list
             # Storing the value in the fake property.
             internal_data["fake_property"] = value
             return true
+        return false
     
     func _get_property_list():
         return [
@@ -552,7 +591,7 @@ Combined with :ref:`_get<class_Object_method__get>` and :ref:`_get_property_list
 
     private Godot.Collections.Dictionary _internalData = new Godot.Collections.Dictionary();
     
-    public override void _Set(StringName property, Variant value)
+    public override bool _Set(StringName property, Variant value)
     {
         if (property == "FakeProperty")
         {
@@ -582,7 +621,7 @@ Combined with :ref:`_get<class_Object_method__get>` and :ref:`_get_property_list
 
 ----
 
-.. _class_Object_method__to_string:
+.. _class_Object_private_method__to_string:
 
 .. rst-class:: classref-method
 
@@ -603,13 +642,13 @@ Override this method to customize the return value of :ref:`to_string<class_Obje
 
 ----
 
-.. _class_Object_method__validate_property:
+.. _class_Object_private_method__validate_property:
 
 .. rst-class:: classref-method
 
 void **_validate_property** **(** :ref:`Dictionary<class_Dictionary>` property **)** |virtual|
 
-Override this method to customize existing properties. Every property info goes through this method. The dictionary contents is the same as in :ref:`_get_property_list<class_Object_method__get_property_list>`.
+Override this method to customize existing properties. Every property info goes through this method, except properties added with :ref:`_get_property_list<class_Object_private_method__get_property_list>`. The dictionary contents is the same as in :ref:`_get_property_list<class_Object_private_method__get_property_list>`.
 
 
 .. tabs::
@@ -654,7 +693,7 @@ Override this method to customize existing properties. Every property info goes 
         {
             if (property["name"].AsStringName() == PropertyName.Number && IsNumberEditable)
             {
-                var usage = property["usage"].As>PropertyUsageFlags<() | PropertyUsageFlags.ReadOnly;
+                var usage = property["usage"].As<PropertyUsageFlags>() | PropertyUsageFlags.ReadOnly;
                 property["usage"] = (int)usage;
             }
         }
@@ -1420,7 +1459,7 @@ Returns ``true`` if the :ref:`Node.queue_free<class_Node_method_queue_free>` met
 
 void **notification** **(** :ref:`int<class_int>` what, :ref:`bool<class_bool>` reversed=false **)**
 
-Sends the given ``what`` notification to all classes inherited by the object, triggering calls to :ref:`_notification<class_Object_method__notification>`, starting from the highest ancestor (the **Object** class) and going down to the object's script.
+Sends the given ``what`` notification to all classes inherited by the object, triggering calls to :ref:`_notification<class_Object_private_method__notification>`, starting from the highest ancestor (the **Object** class) and going down to the object's script.
 
 If ``reversed`` is ``true``, the call order is reversed.
 
@@ -1475,7 +1514,7 @@ Emits the :ref:`property_list_changed<class_Object_signal_property_list_changed>
 
 Returns ``true`` if the given ``property`` has a custom default value. Use :ref:`property_get_revert<class_Object_method_property_get_revert>` to get the ``property``'s default value.
 
-\ **Note:** This method is used by the Inspector dock to display a revert icon. The object must implement :ref:`_property_can_revert<class_Object_method__property_can_revert>` to customize the default value. If :ref:`_property_can_revert<class_Object_method__property_can_revert>` is not implemented, this method returns ``false``.
+\ **Note:** This method is used by the Inspector dock to display a revert icon. The object must implement :ref:`_property_can_revert<class_Object_private_method__property_can_revert>` to customize the default value. If :ref:`_property_can_revert<class_Object_private_method__property_can_revert>` is not implemented, this method returns ``false``.
 
 .. rst-class:: classref-item-separator
 
@@ -1489,7 +1528,7 @@ Returns ``true`` if the given ``property`` has a custom default value. Use :ref:
 
 Returns the custom default value of the given ``property``. Use :ref:`property_can_revert<class_Object_method_property_can_revert>` to check if the ``property`` has a custom default value.
 
-\ **Note:** This method is used by the Inspector dock to display a revert icon. The object must implement :ref:`_property_get_revert<class_Object_method__property_get_revert>` to customize the default value. If :ref:`_property_get_revert<class_Object_method__property_get_revert>` is not implemented, this method returns ``null``.
+\ **Note:** This method is used by the Inspector dock to display a revert icon. The object must implement :ref:`_property_get_revert<class_Object_private_method__property_get_revert>` to customize the default value. If :ref:`_property_get_revert<class_Object_private_method__property_get_revert>` is not implemented, this method returns ``null``.
 
 .. rst-class:: classref-item-separator
 
@@ -1664,7 +1703,7 @@ If ``value`` is ``null``, the entry is removed. This is the equivalent of using 
 
 void **set_script** **(** :ref:`Variant<class_Variant>` script **)**
 
-Attaches ``script`` to the object, and instantiates it. As a result, the script's :ref:`_init<class_Object_method__init>` is called. A :ref:`Script<class_Script>` is used to extend the object's functionality.
+Attaches ``script`` to the object, and instantiates it. As a result, the script's :ref:`_init<class_Object_private_method__init>` is called. A :ref:`Script<class_Script>` is used to extend the object's functionality.
 
 If a script already exists, its instance is detached, and its property values and state are lost. Built-in property values are still kept.
 
@@ -1678,7 +1717,7 @@ If a script already exists, its instance is detached, and its property values an
 
 :ref:`String<class_String>` **to_string** **(** **)**
 
-Returns a :ref:`String<class_String>` representing the object. Defaults to ``"<ClassName#RID>"``. Override :ref:`_to_string<class_Object_method__to_string>` to customize the string representation of the object.
+Returns a :ref:`String<class_String>` representing the object. Defaults to ``"<ClassName#RID>"``. Override :ref:`_to_string<class_Object_private_method__to_string>` to customize the string representation of the object.
 
 .. rst-class:: classref-item-separator
 

@@ -25,8 +25,6 @@ The overall transform of a bone with respect to the skeleton is determined by bo
 
 Note that "global pose" below refers to the overall transform of the bone with respect to skeleton, so it is not the actual global/world transform of the bone.
 
-To setup different types of inverse kinematics, consider using :ref:`SkeletonIK3D<class_SkeletonIK3D>`, or add a custom IK implementation in :ref:`Node._process<class_Node_method__process>` as a child node.
-
 .. rst-class:: classref-introduction-group
 
 Tutorials
@@ -157,9 +155,7 @@ Signals
 
 **bone_enabled_changed** **(** :ref:`int<class_int>` bone_idx **)**
 
-.. container:: contribute
-
-	There is currently no description for this signal. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+Emitted when the bone at ``bone_idx`` is toggled with :ref:`set_bone_enabled<class_Skeleton3D_method_set_bone_enabled>`. Use :ref:`is_bone_enabled<class_Skeleton3D_method_is_bone_enabled>` to check the new value.
 
 .. rst-class:: classref-item-separator
 
@@ -183,9 +179,7 @@ This signal is emitted when one of the bones in the Skeleton3D node have changed
 
 **pose_updated** **(** **)**
 
-.. container:: contribute
-
-	There is currently no description for this signal. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+Emitted when the pose is updated, after :ref:`NOTIFICATION_UPDATE_SKELETON<class_Skeleton3D_constant_NOTIFICATION_UPDATE_SKELETON>` is received.
 
 .. rst-class:: classref-item-separator
 
@@ -197,9 +191,7 @@ This signal is emitted when one of the bones in the Skeleton3D node have changed
 
 **show_rest_only_changed** **(** **)**
 
-.. container:: contribute
-
-	There is currently no description for this signal. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+Emitted when the value of :ref:`show_rest_only<class_Skeleton3D_property_show_rest_only>` changes.
 
 .. rst-class:: classref-section-separator
 
@@ -216,7 +208,9 @@ Constants
 
 **NOTIFICATION_UPDATE_SKELETON** = ``50``
 
+Notification received when this skeleton's pose needs to be updated.
 
+This notification is received *before* the related :ref:`pose_updated<class_Skeleton3D_signal_pose_updated>` signal.
 
 .. rst-class:: classref-section-separator
 
@@ -276,9 +270,7 @@ Multiplies the 3D position track animation.
 - void **set_show_rest_only** **(** :ref:`bool<class_bool>` value **)**
 - :ref:`bool<class_bool>` **is_show_rest_only** **(** **)**
 
-.. container:: contribute
-
-	There is currently no description for this property. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+If ``true``, forces the bones in their default rest pose, regardless of their values. In the editor, this also prevents the bones from being edited.
 
 .. rst-class:: classref-section-separator
 
@@ -493,9 +485,7 @@ Returns the pose transform of the specified bone.
 
 :ref:`Vector3<class_Vector3>` **get_bone_pose_position** **(** :ref:`int<class_int>` bone_idx **)** |const|
 
-.. container:: contribute
-
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+Returns the pose position of the bone at ``bone_idx``. The returned :ref:`Vector3<class_Vector3>` is in the local coordinate space of the **Skeleton3D** node.
 
 .. rst-class:: classref-item-separator
 
@@ -507,9 +497,7 @@ Returns the pose transform of the specified bone.
 
 :ref:`Quaternion<class_Quaternion>` **get_bone_pose_rotation** **(** :ref:`int<class_int>` bone_idx **)** |const|
 
-.. container:: contribute
-
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+Returns the pose rotation of the bone at ``bone_idx``. The returned :ref:`Quaternion<class_Quaternion>` is local to the bone with respect to the rotation of any parent bones.
 
 .. rst-class:: classref-item-separator
 
@@ -521,9 +509,7 @@ Returns the pose transform of the specified bone.
 
 :ref:`Vector3<class_Vector3>` **get_bone_pose_scale** **(** :ref:`int<class_int>` bone_idx **)** |const|
 
-.. container:: contribute
-
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+Returns the pose scale of the bone at ``bone_idx``.
 
 .. rst-class:: classref-item-separator
 
@@ -745,9 +731,7 @@ Sets the bone index ``parent_idx`` as the parent of the bone at ``bone_idx``. If
 
 void **set_bone_pose_position** **(** :ref:`int<class_int>` bone_idx, :ref:`Vector3<class_Vector3>` position **)**
 
-.. container:: contribute
-
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+Sets the pose position of the bone at ``bone_idx`` to ``position``. ``position`` is a :ref:`Vector3<class_Vector3>` describing a position local to the **Skeleton3D** node.
 
 .. rst-class:: classref-item-separator
 
@@ -759,9 +743,7 @@ void **set_bone_pose_position** **(** :ref:`int<class_int>` bone_idx, :ref:`Vect
 
 void **set_bone_pose_rotation** **(** :ref:`int<class_int>` bone_idx, :ref:`Quaternion<class_Quaternion>` rotation **)**
 
-.. container:: contribute
-
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+Sets the pose rotation of the bone at ``bone_idx`` to ``rotation``. ``rotation`` is a :ref:`Quaternion<class_Quaternion>` describing a rotation in the bone's local coordinate space with respect to the rotation of any parent bones.
 
 .. rst-class:: classref-item-separator
 
@@ -773,9 +755,7 @@ void **set_bone_pose_rotation** **(** :ref:`int<class_int>` bone_idx, :ref:`Quat
 
 void **set_bone_pose_scale** **(** :ref:`int<class_int>` bone_idx, :ref:`Vector3<class_Vector3>` scale **)**
 
-.. container:: contribute
-
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+Sets the pose scale of the bone at ``bone_idx`` to ``scale``.
 
 .. rst-class:: classref-item-separator
 
