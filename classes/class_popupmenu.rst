@@ -37,19 +37,21 @@ Properties
 .. table::
    :widths: auto
 
-   +---------------------------+----------------------------------------------------------------------------------------------------+-----------+
-   | :ref:`bool<class_bool>`   | :ref:`allow_search<class_PopupMenu_property_allow_search>`                                         | ``true``  |
-   +---------------------------+----------------------------------------------------------------------------------------------------+-----------+
-   | :ref:`bool<class_bool>`   | :ref:`hide_on_checkable_item_selection<class_PopupMenu_property_hide_on_checkable_item_selection>` | ``true``  |
-   +---------------------------+----------------------------------------------------------------------------------------------------+-----------+
-   | :ref:`bool<class_bool>`   | :ref:`hide_on_item_selection<class_PopupMenu_property_hide_on_item_selection>`                     | ``true``  |
-   +---------------------------+----------------------------------------------------------------------------------------------------+-----------+
-   | :ref:`bool<class_bool>`   | :ref:`hide_on_state_item_selection<class_PopupMenu_property_hide_on_state_item_selection>`         | ``false`` |
-   +---------------------------+----------------------------------------------------------------------------------------------------+-----------+
-   | :ref:`int<class_int>`     | :ref:`item_count<class_PopupMenu_property_item_count>`                                             | ``0``     |
-   +---------------------------+----------------------------------------------------------------------------------------------------+-----------+
-   | :ref:`float<class_float>` | :ref:`submenu_popup_delay<class_PopupMenu_property_submenu_popup_delay>`                           | ``0.3``   |
-   +---------------------------+----------------------------------------------------------------------------------------------------+-----------+
+   +-----------------------------+----------------------------------------------------------------------------------------------------+-----------+
+   | :ref:`bool<class_bool>`     | :ref:`allow_search<class_PopupMenu_property_allow_search>`                                         | ``true``  |
+   +-----------------------------+----------------------------------------------------------------------------------------------------+-----------+
+   | :ref:`bool<class_bool>`     | :ref:`hide_on_checkable_item_selection<class_PopupMenu_property_hide_on_checkable_item_selection>` | ``true``  |
+   +-----------------------------+----------------------------------------------------------------------------------------------------+-----------+
+   | :ref:`bool<class_bool>`     | :ref:`hide_on_item_selection<class_PopupMenu_property_hide_on_item_selection>`                     | ``true``  |
+   +-----------------------------+----------------------------------------------------------------------------------------------------+-----------+
+   | :ref:`bool<class_bool>`     | :ref:`hide_on_state_item_selection<class_PopupMenu_property_hide_on_state_item_selection>`         | ``false`` |
+   +-----------------------------+----------------------------------------------------------------------------------------------------+-----------+
+   | :ref:`int<class_int>`       | :ref:`item_count<class_PopupMenu_property_item_count>`                                             | ``0``     |
+   +-----------------------------+----------------------------------------------------------------------------------------------------+-----------+
+   | :ref:`float<class_float>`   | :ref:`submenu_popup_delay<class_PopupMenu_property_submenu_popup_delay>`                           | ``0.3``   |
+   +-----------------------------+----------------------------------------------------------------------------------------------------+-----------+
+   | :ref:`String<class_String>` | :ref:`system_menu_root<class_PopupMenu_property_system_menu_root>`                                 | ``""``    |
+   +-----------------------------+----------------------------------------------------------------------------------------------------+-----------+
 
 .. rst-class:: classref-reftable-group
 
@@ -59,6 +61,8 @@ Methods
 .. table::
    :widths: auto
 
+   +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                          | :ref:`activate_item_by_event<class_PopupMenu_method_activate_item_by_event>` **(** :ref:`InputEvent<class_InputEvent>` event, :ref:`bool<class_bool>` for_global_only=false **)**                                                                                               |
    +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                             | :ref:`add_check_item<class_PopupMenu_method_add_check_item>` **(** :ref:`String<class_String>` label, :ref:`int<class_int>` id=-1, :ref:`Key<enum_@GlobalScope_Key>` accel=0 **)**                                                                                              |
    +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -90,7 +94,7 @@ Methods
    +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                             | :ref:`add_submenu_item<class_PopupMenu_method_add_submenu_item>` **(** :ref:`String<class_String>` label, :ref:`String<class_String>` submenu, :ref:`int<class_int>` id=-1 **)**                                                                                                |
    +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | void                                             | :ref:`clear<class_PopupMenu_method_clear>` **(** **)**                                                                                                                                                                                                                          |
+   | void                                             | :ref:`clear<class_PopupMenu_method_clear>` **(** :ref:`bool<class_bool>` free_submenus=false **)**                                                                                                                                                                              |
    +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                            | :ref:`get_focused_item<class_PopupMenu_method_get_focused_item>` **(** **)** |const|                                                                                                                                                                                            |
    +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -111,6 +115,10 @@ Methods
    | :ref:`String<class_String>`                      | :ref:`get_item_language<class_PopupMenu_method_get_item_language>` **(** :ref:`int<class_int>` index **)** |const|                                                                                                                                                              |
    +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Variant<class_Variant>`                    | :ref:`get_item_metadata<class_PopupMenu_method_get_item_metadata>` **(** :ref:`int<class_int>` index **)** |const|                                                                                                                                                              |
+   +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`int<class_int>`                            | :ref:`get_item_multistate<class_PopupMenu_method_get_item_multistate>` **(** :ref:`int<class_int>` index **)** |const|                                                                                                                                                          |
+   +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`int<class_int>`                            | :ref:`get_item_multistate_max<class_PopupMenu_method_get_item_multistate_max>` **(** :ref:`int<class_int>` index **)** |const|                                                                                                                                                  |
    +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Shortcut<class_Shortcut>`                  | :ref:`get_item_shortcut<class_PopupMenu_method_get_item_shortcut>` **(** :ref:`int<class_int>` index **)** |const|                                                                                                                                                              |
    +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -133,6 +141,8 @@ Methods
    | :ref:`bool<class_bool>`                          | :ref:`is_item_separator<class_PopupMenu_method_is_item_separator>` **(** :ref:`int<class_int>` index **)** |const|                                                                                                                                                              |
    +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                          | :ref:`is_item_shortcut_disabled<class_PopupMenu_method_is_item_shortcut_disabled>` **(** :ref:`int<class_int>` index **)** |const|                                                                                                                                              |
+   +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                          | :ref:`is_system_menu<class_PopupMenu_method_is_system_menu>` **(** **)** |const|                                                                                                                                                                                                |
    +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                             | :ref:`remove_item<class_PopupMenu_method_remove_item>` **(** :ref:`int<class_int>` index **)**                                                                                                                                                                                  |
    +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -167,6 +177,8 @@ Methods
    | void                                             | :ref:`set_item_metadata<class_PopupMenu_method_set_item_metadata>` **(** :ref:`int<class_int>` index, :ref:`Variant<class_Variant>` metadata **)**                                                                                                                              |
    +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                             | :ref:`set_item_multistate<class_PopupMenu_method_set_item_multistate>` **(** :ref:`int<class_int>` index, :ref:`int<class_int>` state **)**                                                                                                                                     |
+   +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | void                                             | :ref:`set_item_multistate_max<class_PopupMenu_method_set_item_multistate_max>` **(** :ref:`int<class_int>` index, :ref:`int<class_int>` max_states **)**                                                                                                                        |
    +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                             | :ref:`set_item_shortcut<class_PopupMenu_method_set_item_shortcut>` **(** :ref:`int<class_int>` index, :ref:`Shortcut<class_Shortcut>` shortcut, :ref:`bool<class_bool>` global=false **)**                                                                                      |
    +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -257,10 +269,6 @@ Theme Properties
    | :ref:`StyleBox<class_StyleBox>`   | :ref:`labeled_separator_left<class_PopupMenu_theme_style_labeled_separator_left>`             |                                   |
    +-----------------------------------+-----------------------------------------------------------------------------------------------+-----------------------------------+
    | :ref:`StyleBox<class_StyleBox>`   | :ref:`labeled_separator_right<class_PopupMenu_theme_style_labeled_separator_right>`           |                                   |
-   +-----------------------------------+-----------------------------------------------------------------------------------------------+-----------------------------------+
-   | :ref:`StyleBox<class_StyleBox>`   | :ref:`panel<class_PopupMenu_theme_style_panel>`                                               |                                   |
-   +-----------------------------------+-----------------------------------------------------------------------------------------------+-----------------------------------+
-   | :ref:`StyleBox<class_StyleBox>`   | :ref:`panel_disabled<class_PopupMenu_theme_style_panel_disabled>`                             |                                   |
    +-----------------------------------+-----------------------------------------------------------------------------------------------+-----------------------------------+
    | :ref:`StyleBox<class_StyleBox>`   | :ref:`separator<class_PopupMenu_theme_style_separator>`                                       |                                   |
    +-----------------------------------+-----------------------------------------------------------------------------------------------+-----------------------------------+
@@ -427,6 +435,23 @@ The number of items currently in the list.
 
 Sets the delay time in seconds for the submenu item to popup on mouse hovering. If the popup menu is added as a child of another (acting as a submenu), it will inherit the delay time of the parent menu item.
 
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_PopupMenu_property_system_menu_root:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **system_menu_root** = ``""``
+
+.. rst-class:: classref-property-setget
+
+- void **set_system_menu_root** **(** :ref:`String<class_String>` value **)**
+- :ref:`String<class_String>` **get_system_menu_root** **(** **)**
+
+If set to one of the values returned by :ref:`DisplayServer.global_menu_get_system_menu_roots<class_DisplayServer_method_global_menu_get_system_menu_roots>`, this **PopupMenu** is bound to the special system menu. Only one **PopupMenu** can be bound to each special menu at a time.
+
 .. rst-class:: classref-section-separator
 
 ----
@@ -435,6 +460,22 @@ Sets the delay time in seconds for the submenu item to popup on mouse hovering. 
 
 Method Descriptions
 -------------------
+
+.. _class_PopupMenu_method_activate_item_by_event:
+
+.. rst-class:: classref-method
+
+:ref:`bool<class_bool>` **activate_item_by_event** **(** :ref:`InputEvent<class_InputEvent>` event, :ref:`bool<class_bool>` for_global_only=false **)**
+
+Checks the provided ``event`` against the **PopupMenu**'s shortcuts and accelerators, and activates the first item with matching events. If ``for_global_only`` is ``true``, only shortcuts and accelerators with ``global`` set to ``true`` will be called.
+
+Returns ``true`` if an item was successfully activated.
+
+\ **Note:** Certain :ref:`Control<class_Control>`\ s, such as :ref:`MenuButton<class_MenuButton>`, will call this method automatically.
+
+.. rst-class:: classref-item-separator
+
+----
 
 .. _class_PopupMenu_method_add_check_item:
 
@@ -578,9 +619,29 @@ void **add_multistate_item** **(** :ref:`String<class_String>` label, :ref:`int<
 
 Adds a new multistate item with text ``label``.
 
-Contrarily to normal binary items, multistate items can have more than two states, as defined by ``max_states``. Each press or activate of the item will increase the state by one. The default value is defined by ``default_state``.
+Contrarily to normal binary items, multistate items can have more than two states, as defined by ``max_states``. The default value is defined by ``default_state``.
 
 An ``id`` can optionally be provided, as well as an accelerator (``accel``). If no ``id`` is provided, one will be created from the index. If no ``accel`` is provided, then the default value of 0 (corresponding to :ref:`@GlobalScope.KEY_NONE<class_@GlobalScope_constant_KEY_NONE>`) will be assigned to the item (which means it won't have any accelerator). See :ref:`get_item_accelerator<class_PopupMenu_method_get_item_accelerator>` for more info on accelerators.
+
+\ **Note:** Multistate items don't update their state automatically and must be done manually. See :ref:`toggle_item_multistate<class_PopupMenu_method_toggle_item_multistate>`, :ref:`set_item_multistate<class_PopupMenu_method_set_item_multistate>` and :ref:`get_item_multistate<class_PopupMenu_method_get_item_multistate>` for more info on how to control it.
+
+Example usage:
+
+::
+
+    func _ready():
+        add_multistate_item("Item", 3, 0)
+    
+        index_pressed.connect(func(index: int):
+                toggle_item_multistate(index)
+                match get_item_multistate(index):
+                    0:
+                        print("First state")
+                    1:
+                        print("Second state")
+                    2:
+                        print("Third state")
+            )
 
 .. rst-class:: classref-item-separator
 
@@ -654,7 +715,7 @@ If ``allow_echo`` is ``true``, the shortcut can be activated with echo events.
 
 void **add_submenu_item** **(** :ref:`String<class_String>` label, :ref:`String<class_String>` submenu, :ref:`int<class_int>` id=-1 **)**
 
-Adds an item that will act as a submenu of the parent **PopupMenu** node when clicked. The ``submenu`` argument is the name of the child **PopupMenu** node that will be shown when the item is clicked.
+Adds an item that will act as a submenu of the parent **PopupMenu** node when clicked. The ``submenu`` argument must be the name of an existing **PopupMenu** that has been added as a child to this node. This submenu will be shown when the item is clicked, hovered for long enough, or activated using the ``ui_select`` or ``ui_right`` input actions.
 
 An ``id`` can optionally be provided. If no ``id`` is provided, one will be created from the index.
 
@@ -666,9 +727,9 @@ An ``id`` can optionally be provided. If no ``id`` is provided, one will be crea
 
 .. rst-class:: classref-method
 
-void **clear** **(** **)**
+void **clear** **(** :ref:`bool<class_bool>` free_submenus=false **)**
 
-Removes all items from the **PopupMenu**.
+Removes all items from the **PopupMenu**. If ``free_submenus`` is ``true``, the submenu nodes are automatically freed.
 
 .. rst-class:: classref-item-separator
 
@@ -789,6 +850,30 @@ Returns item's text language code.
 :ref:`Variant<class_Variant>` **get_item_metadata** **(** :ref:`int<class_int>` index **)** |const|
 
 Returns the metadata of the specified item, which might be of any type. You can set it with :ref:`set_item_metadata<class_PopupMenu_method_set_item_metadata>`, which provides a simple way of assigning context data to items.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_PopupMenu_method_get_item_multistate:
+
+.. rst-class:: classref-method
+
+:ref:`int<class_int>` **get_item_multistate** **(** :ref:`int<class_int>` index **)** |const|
+
+Returns the state of the item at the given ``index``.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_PopupMenu_method_get_item_multistate_max:
+
+.. rst-class:: classref-method
+
+:ref:`int<class_int>` **get_item_multistate_max** **(** :ref:`int<class_int>` index **)** |const|
+
+Returns the max states of the item at the given ``index``.
 
 .. rst-class:: classref-item-separator
 
@@ -927,6 +1012,18 @@ Returns ``true`` if the item is a separator. If it is, it will be displayed as a
 :ref:`bool<class_bool>` **is_item_shortcut_disabled** **(** :ref:`int<class_int>` index **)** |const|
 
 Returns ``true`` if the specified item's shortcut is disabled.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_PopupMenu_method_is_system_menu:
+
+.. rst-class:: classref-method
+
+:ref:`bool<class_bool>` **is_system_menu** **(** **)** |const|
+
+Returns ``true`` if the menu is bound to the special system menu.
 
 .. rst-class:: classref-item-separator
 
@@ -1139,6 +1236,18 @@ Sets the metadata of an item, which may be of any type. You can later get it wit
 void **set_item_multistate** **(** :ref:`int<class_int>` index, :ref:`int<class_int>` state **)**
 
 Sets the state of a multistate item. See :ref:`add_multistate_item<class_PopupMenu_method_add_multistate_item>` for details.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_PopupMenu_method_set_item_multistate_max:
+
+.. rst-class:: classref-method
+
+void **set_item_multistate_max** **(** :ref:`int<class_int>` index, :ref:`int<class_int>` max_states **)**
+
+Sets the max states of a multistate item. See :ref:`add_multistate_item<class_PopupMenu_method_add_multistate_item>` for details.
 
 .. rst-class:: classref-item-separator
 
@@ -1626,30 +1735,6 @@ Font size of the menu items.
 :ref:`StyleBox<class_StyleBox>` **labeled_separator_right**
 
 :ref:`StyleBox<class_StyleBox>` for the right side of labeled separator. See :ref:`add_separator<class_PopupMenu_method_add_separator>`.
-
-.. rst-class:: classref-item-separator
-
-----
-
-.. _class_PopupMenu_theme_style_panel:
-
-.. rst-class:: classref-themeproperty
-
-:ref:`StyleBox<class_StyleBox>` **panel**
-
-Default :ref:`StyleBox<class_StyleBox>` of the **PopupMenu** items.
-
-.. rst-class:: classref-item-separator
-
-----
-
-.. _class_PopupMenu_theme_style_panel_disabled:
-
-.. rst-class:: classref-themeproperty
-
-:ref:`StyleBox<class_StyleBox>` **panel_disabled**
-
-:ref:`StyleBox<class_StyleBox>` used when the **PopupMenu** item is disabled.
 
 .. rst-class:: classref-item-separator
 

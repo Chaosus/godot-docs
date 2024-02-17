@@ -64,6 +64,8 @@ Properties
    +---------------------------------------+--------------------------------------------------------------------------------+-----------------------------------+
    | :ref:`Font<class_Font>`               | :ref:`base_font<class_FontVariation_property_base_font>`                       |                                   |
    +---------------------------------------+--------------------------------------------------------------------------------+-----------------------------------+
+   | :ref:`float<class_float>`             | :ref:`baseline_offset<class_FontVariation_property_baseline_offset>`           | ``0.0``                           |
+   +---------------------------------------+--------------------------------------------------------------------------------+-----------------------------------+
    | :ref:`Dictionary<class_Dictionary>`   | :ref:`opentype_features<class_FontVariation_property_opentype_features>`       | ``{}``                            |
    +---------------------------------------+--------------------------------------------------------------------------------+-----------------------------------+
    | :ref:`int<class_int>`                 | :ref:`spacing_bottom<class_FontVariation_property_spacing_bottom>`             | ``0``                             |
@@ -116,6 +118,23 @@ Property Descriptions
 - :ref:`Font<class_Font>` **get_base_font** **(** **)**
 
 Base font used to create a variation. If not set, default :ref:`Theme<class_Theme>` font is used.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_FontVariation_property_baseline_offset:
+
+.. rst-class:: classref-property
+
+:ref:`float<class_float>` **baseline_offset** = ``0.0``
+
+.. rst-class:: classref-property-setget
+
+- void **set_baseline_offset** **(** :ref:`float<class_float>` value **)**
+- :ref:`float<class_float>` **get_baseline_offset** **(** **)**
+
+Extra baseline offset (as a fraction of font height).
 
 .. rst-class:: classref-item-separator
 
@@ -255,7 +274,7 @@ Active face index in the TrueType / OpenType collection file.
 
 Font OpenType variation coordinates. More info: `OpenType variation tags <https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg>`__.
 
-\ **Note:** This :ref:`Dictionary<class_Dictionary>` uses OpenType tags as keys. Variation axes can be identified both by tags(``int``) and names (``string``). Some axes might be accessible by multiple names. For example, ``wght`` refers to the same axis as ``weight``. Tags on the other hand are unique. To convert between names and tags, use :ref:`TextServer.name_to_tag<class_TextServer_method_name_to_tag>` and :ref:`TextServer.tag_to_name<class_TextServer_method_tag_to_name>`.
+\ **Note:** This :ref:`Dictionary<class_Dictionary>` uses OpenType tags as keys. Variation axes can be identified both by tags (:ref:`int<class_int>`, e.g. ``0x77678674``) and names (:ref:`String<class_String>`, e.g. ``wght``). Some axes might be accessible by multiple names. For example, ``wght`` refers to the same axis as ``weight``. Tags on the other hand are unique. To convert between names and tags, use :ref:`TextServer.name_to_tag<class_TextServer_method_name_to_tag>` and :ref:`TextServer.tag_to_name<class_TextServer_method_tag_to_name>`.
 
 \ **Note:** To get available variation axes of a font, use :ref:`Font.get_supported_variation_list<class_Font_method_get_supported_variation_list>`.
 

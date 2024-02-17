@@ -10,6 +10,8 @@
 NavigationPathQueryParameters2D
 ===============================
 
+**Experimental:** This class may be changed or removed in future versions.
+
 **Inherits:** :ref:`RefCounted<class_RefCounted>` **<** :ref:`Object<class_Object>`
 
 Provides parameters for 2D navigation path queries.
@@ -171,7 +173,7 @@ Property Descriptions
 - void **set_map** **(** :ref:`RID<class_RID>` value **)**
 - :ref:`RID<class_RID>` **get_map** **(** **)**
 
-The navigation ``map`` :ref:`RID<class_RID>` used in the path query.
+The navigation map :ref:`RID<class_RID>` used in the path query.
 
 .. rst-class:: classref-item-separator
 

@@ -29,11 +29,15 @@ Properties
 .. table::
    :widths: auto
 
-   +-------------------------+--------------------------------------------------------------------+----------+
-   | :ref:`int<class_int>`   | :ref:`fill_mode<class_ProgressBar_property_fill_mode>`             | ``0``    |
-   +-------------------------+--------------------------------------------------------------------+----------+
-   | :ref:`bool<class_bool>` | :ref:`show_percentage<class_ProgressBar_property_show_percentage>` | ``true`` |
-   +-------------------------+--------------------------------------------------------------------+----------+
+   +-------------------------+----------------------------------------------------------------------------------------------+-----------+
+   | :ref:`bool<class_bool>` | :ref:`editor_preview_indeterminate<class_ProgressBar_property_editor_preview_indeterminate>` |           |
+   +-------------------------+----------------------------------------------------------------------------------------------+-----------+
+   | :ref:`int<class_int>`   | :ref:`fill_mode<class_ProgressBar_property_fill_mode>`                                       | ``0``     |
+   +-------------------------+----------------------------------------------------------------------------------------------+-----------+
+   | :ref:`bool<class_bool>` | :ref:`indeterminate<class_ProgressBar_property_indeterminate>`                               | ``false`` |
+   +-------------------------+----------------------------------------------------------------------------------------------+-----------+
+   | :ref:`bool<class_bool>` | :ref:`show_percentage<class_ProgressBar_property_show_percentage>`                           | ``true``  |
+   +-------------------------+----------------------------------------------------------------------------------------------+-----------+
 
 .. rst-class:: classref-reftable-group
 
@@ -47,8 +51,6 @@ Theme Properties
    | :ref:`Color<class_Color>`       | :ref:`font_color<class_ProgressBar_theme_color_font_color>`                 | ``Color(0.95, 0.95, 0.95, 1)`` |
    +---------------------------------+-----------------------------------------------------------------------------+--------------------------------+
    | :ref:`Color<class_Color>`       | :ref:`font_outline_color<class_ProgressBar_theme_color_font_outline_color>` | ``Color(1, 1, 1, 1)``          |
-   +---------------------------------+-----------------------------------------------------------------------------+--------------------------------+
-   | :ref:`Color<class_Color>`       | :ref:`font_shadow_color<class_ProgressBar_theme_color_font_shadow_color>`   | ``Color(0, 0, 0, 1)``          |
    +---------------------------------+-----------------------------------------------------------------------------+--------------------------------+
    | :ref:`int<class_int>`           | :ref:`outline_size<class_ProgressBar_theme_constant_outline_size>`          | ``0``                          |
    +---------------------------------+-----------------------------------------------------------------------------+--------------------------------+
@@ -117,6 +119,23 @@ The progress fills from bottom to top.
 Property Descriptions
 ---------------------
 
+.. _class_ProgressBar_property_editor_preview_indeterminate:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **editor_preview_indeterminate**
+
+.. rst-class:: classref-property-setget
+
+- void **set_editor_preview_indeterminate** **(** :ref:`bool<class_bool>` value **)**
+- :ref:`bool<class_bool>` **is_editor_preview_indeterminate_enabled** **(** **)**
+
+If ``false``, the :ref:`indeterminate<class_ProgressBar_property_indeterminate>` animation will be paused in the editor.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_ProgressBar_property_fill_mode:
 
 .. rst-class:: classref-property
@@ -129,6 +148,23 @@ Property Descriptions
 - :ref:`int<class_int>` **get_fill_mode** **(** **)**
 
 The fill direction. See :ref:`FillMode<enum_ProgressBar_FillMode>` for possible values.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_ProgressBar_property_indeterminate:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **indeterminate** = ``false``
+
+.. rst-class:: classref-property-setget
+
+- void **set_indeterminate** **(** :ref:`bool<class_bool>` value **)**
+- :ref:`bool<class_bool>` **is_indeterminate** **(** **)**
+
+When set to ``true``, the progress bar indicates that something is happening with an animation, but does not show the fill percentage or value.
 
 .. rst-class:: classref-item-separator
 
@@ -175,18 +211,6 @@ The color of the text.
 :ref:`Color<class_Color>` **font_outline_color** = ``Color(1, 1, 1, 1)``
 
 The tint of text outline of the **ProgressBar**.
-
-.. rst-class:: classref-item-separator
-
-----
-
-.. _class_ProgressBar_theme_color_font_shadow_color:
-
-.. rst-class:: classref-themeproperty
-
-:ref:`Color<class_Color>` **font_shadow_color** = ``Color(0, 0, 0, 1)``
-
-The color of the text's shadow.
 
 .. rst-class:: classref-item-separator
 
