@@ -10,6 +10,8 @@
 NavigationAgent3D
 =================
 
+**Experimental:** This class may be changed or removed in future versions.
+
 **Inherits:** :ref:`Node<class_Node>` **<** :ref:`Object<class_Object>`
 
 A 3D agent used to pathfind to a position while avoiding obstacles.
@@ -58,6 +60,8 @@ Properties
    | :ref:`bool<class_bool>`                                                                        | :ref:`debug_use_custom<class_NavigationAgent3D_property_debug_use_custom>`                         | ``false``             |
    +------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+-----------------------+
    | :ref:`float<class_float>`                                                                      | :ref:`height<class_NavigationAgent3D_property_height>`                                             | ``1.0``               |
+   +------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+-----------------------+
+   | :ref:`bool<class_bool>`                                                                        | :ref:`keep_y_velocity<class_NavigationAgent3D_property_keep_y_velocity>`                           | ``true``              |
    +------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+-----------------------+
    | :ref:`int<class_int>`                                                                          | :ref:`max_neighbors<class_NavigationAgent3D_property_max_neighbors>`                               | ``10``                |
    +------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+-----------------------+
@@ -157,7 +161,7 @@ Signals
 
 **link_reached** **(** :ref:`Dictionary<class_Dictionary>` details **)**
 
-Notifies when a navigation link has been reached.
+Signals that the agent reached a navigation link. Emitted when the agent moves within :ref:`path_desired_distance<class_NavigationAgent3D_property_path_desired_distance>` of the next position of the path when that position is a navigation link.
 
 The details dictionary may contain the following keys depending on the value of :ref:`path_metadata_flags<class_NavigationAgent3D_property_path_metadata_flags>`:
 
@@ -183,7 +187,9 @@ The details dictionary may contain the following keys depending on the value of 
 
 **navigation_finished** **(** **)**
 
-Emitted once per loaded path when the agent internal navigation path index reaches the last index of the loaded path array. The agent internal navigation path index can be received with :ref:`get_current_navigation_path_index<class_NavigationAgent3D_method_get_current_navigation_path_index>`.
+Signals that the agent's navigation has finished. If the target is reachable, navigation ends when the target is reached. If the target is unreachable, navigation ends when the last waypoint of the path is reached. This signal is emitted only once per loaded path.
+
+This signal will be emitted just after :ref:`target_reached<class_NavigationAgent3D_signal_target_reached>` when the target is reachable.
 
 .. rst-class:: classref-item-separator
 
@@ -213,7 +219,11 @@ Emitted when the agent had to update the loaded path:
 
 **target_reached** **(** **)**
 
-Emitted once per loaded path when the agent's global position is the first time within :ref:`target_desired_distance<class_NavigationAgent3D_property_target_desired_distance>` to the :ref:`target_position<class_NavigationAgent3D_property_target_position>`.
+Signals that the agent reached the target, i.e. the agent moved within :ref:`target_desired_distance<class_NavigationAgent3D_property_target_desired_distance>` of the :ref:`target_position<class_NavigationAgent3D_property_target_position>`. This signal is emitted only once per loaded path.
+
+This signal will be emitted just before :ref:`navigation_finished<class_NavigationAgent3D_signal_navigation_finished>` when the target is reachable.
+
+It may not always be possible to reach the target but it should always be possible to reach the final position. See :ref:`get_final_position<class_NavigationAgent3D_method_get_final_position>`.
 
 .. rst-class:: classref-item-separator
 
@@ -237,7 +247,7 @@ Notifies when the collision avoidance velocity is calculated. Emitted when :ref:
 
 **waypoint_reached** **(** :ref:`Dictionary<class_Dictionary>` details **)**
 
-Notifies when a waypoint along the path has been reached.
+Signals that the agent reached a waypoint. Emitted when the agent moves within :ref:`path_desired_distance<class_NavigationAgent3D_property_path_desired_distance>` of the next position of the path.
 
 The details dictionary may contain the following keys depending on the value of :ref:`path_metadata_flags<class_NavigationAgent3D_property_path_metadata_flags>`:
 
@@ -411,6 +421,23 @@ The height of the avoidance agent. Agents will ignore other agents or obstacles 
 
 ----
 
+.. _class_NavigationAgent3D_property_keep_y_velocity:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **keep_y_velocity** = ``true``
+
+.. rst-class:: classref-property-setget
+
+- void **set_keep_y_velocity** **(** :ref:`bool<class_bool>` value **)**
+- :ref:`bool<class_bool>` **get_keep_y_velocity** **(** **)**
+
+If ``true``, and the agent uses 2D avoidance, it will remember the set y-axis velocity and reapply it after the avoidance step. While 2D avoidance has no y-axis and simulates on a flat plane this setting can help mitigate the most obvious clipping on uneven 3D geometry.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_NavigationAgent3D_property_max_neighbors:
 
 .. rst-class:: classref-property
@@ -490,7 +517,7 @@ The distance to search for other agents.
 - void **set_path_desired_distance** **(** :ref:`float<class_float>` value **)**
 - :ref:`float<class_float>` **get_path_desired_distance** **(** **)**
 
-The distance threshold before a path point is considered to be reached. This allows agents to not have to hit a path point on the path exactly, but only to reach its general area. If this value is set too high, the NavigationAgent will skip points on the path, which can lead to leaving the navigation mesh. If this value is set too low, the NavigationAgent will be stuck in a repath loop because it will constantly overshoot or undershoot the distance to the next point on each physics frame update.
+The distance threshold before a path point is considered to be reached. This allows agents to not have to hit a path point on the path exactly, but only to reach its general area. If this value is set too high, the NavigationAgent will skip points on the path, which can lead to it leaving the navigation mesh. If this value is set too low, the NavigationAgent will be stuck in a repath loop because it will constantly overshoot the distance to the next point on each physics frame update.
 
 .. rst-class:: classref-item-separator
 
@@ -611,7 +638,11 @@ Does not affect normal pathfinding. To change an actor's pathfinding radius bake
 - void **set_target_desired_distance** **(** :ref:`float<class_float>` value **)**
 - :ref:`float<class_float>` **get_target_desired_distance** **(** **)**
 
-The distance threshold before the final target point is considered to be reached. This allows agents to not have to hit the point of the final target exactly, but only to reach its general area. If this value is set too low, the NavigationAgent will be stuck in a repath loop because it will constantly overshoot or undershoot the distance to the final target point on each physics frame update.
+The distance threshold before the target is considered to be reached. On reaching the target, :ref:`target_reached<class_NavigationAgent3D_signal_target_reached>` is emitted and navigation ends (see :ref:`is_navigation_finished<class_NavigationAgent3D_method_is_navigation_finished>` and :ref:`navigation_finished<class_NavigationAgent3D_signal_navigation_finished>`).
+
+You can make navigation end early by setting this property to a value greater than :ref:`path_desired_distance<class_NavigationAgent3D_property_path_desired_distance>` (navigation will end before reaching the last waypoint).
+
+You can also make navigation end closer to the target than each individual path position by setting this property to a value lower than :ref:`path_desired_distance<class_NavigationAgent3D_property_path_desired_distance>` (navigation won't immediately end when reaching the last waypoint). However, if the value set is too low, the agent will be stuck in a repath loop because it will constantly overshoot the distance to the target on each physics frame update.
 
 .. rst-class:: classref-item-separator
 
@@ -628,7 +659,7 @@ The distance threshold before the final target point is considered to be reached
 - void **set_target_position** **(** :ref:`Vector3<class_Vector3>` value **)**
 - :ref:`Vector3<class_Vector3>` **get_target_position** **(** **)**
 
-If set a new navigation path from the current agent position to the :ref:`target_position<class_NavigationAgent3D_property_target_position>` is requested from the NavigationServer.
+If set, a new navigation path from the current agent position to the :ref:`target_position<class_NavigationAgent3D_property_target_position>` is requested from the NavigationServer.
 
 .. rst-class:: classref-item-separator
 
@@ -847,9 +878,9 @@ Returns the :ref:`RID<class_RID>` of this agent on the :ref:`NavigationServer3D<
 
 :ref:`bool<class_bool>` **is_navigation_finished** **(** **)**
 
-Returns ``true`` if the end of the currently loaded navigation path has been reached.
+Returns ``true`` if the agent's navigation has finished. If the target is reachable, navigation ends when the target is reached. If the target is unreachable, navigation ends when the last waypoint of the path is reached.
 
-\ **Note:** While true prefer to stop calling update functions like :ref:`get_next_path_position<class_NavigationAgent3D_method_get_next_path_position>`. This avoids jittering the standing agent due to calling repeated path updates.
+\ **Note:** While ``true`` prefer to stop calling update functions like :ref:`get_next_path_position<class_NavigationAgent3D_method_get_next_path_position>`. This avoids jittering the standing agent due to calling repeated path updates.
 
 .. rst-class:: classref-item-separator
 
@@ -873,7 +904,7 @@ Returns ``true`` if :ref:`get_final_position<class_NavigationAgent3D_method_get_
 
 :ref:`bool<class_bool>` **is_target_reached** **(** **)** |const|
 
-Returns true if :ref:`target_position<class_NavigationAgent3D_property_target_position>` is reached. It may not always be possible to reach the target position. It should always be possible to reach the final position though. See :ref:`get_final_position<class_NavigationAgent3D_method_get_final_position>`.
+Returns ``true`` if the agent reached the target, i.e. the agent moved within :ref:`target_desired_distance<class_NavigationAgent3D_property_target_desired_distance>` of the :ref:`target_position<class_NavigationAgent3D_property_target_position>`. It may not always be possible to reach the target but it should always be possible to reach the final position. See :ref:`get_final_position<class_NavigationAgent3D_method_get_final_position>`.
 
 .. rst-class:: classref-item-separator
 
