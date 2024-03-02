@@ -96,7 +96,7 @@ If ``true``, discards empty areas from the atlas. This only affects final sprite
 
 :ref:`bool<class_bool>` **trim_alpha_border_from_region** = ``true``
 
-If ``true``, trims the region to exclude fully transparent pixels using a clipping rectangle (which is never rotated). This can be used to save memory. See also :ref:`trim_alpha_border_from_region<class_ResourceImporterTextureAtlas_property_trim_alpha_border_from_region>`.
+If ``true``, trims the region to exclude fully transparent pixels using a clipping rectangle (which is never rotated). This can be used to save memory. See also :ref:`crop_to_region<class_ResourceImporterTextureAtlas_property_crop_to_region>`.
 
 \ **Note:** Only effective if :ref:`import_mode<class_ResourceImporterTextureAtlas_property_import_mode>` is **Region**.
 
@@ -107,3 +107,4 @@ If ``true``, trims the region to exclude fully transparent pixels using a clippi
 .. |static| replace:: :abbr:`static (This method doesn't need an instance to be called, so it can be called directly using the class name.)`
 .. |operator| replace:: :abbr:`operator (This method describes a valid operator to use with this type as left-hand operand.)`
 .. |bitfield| replace:: :abbr:`BitField (This value is an integer composed as a bitmask of the following flags.)`
+.. |void| replace:: :abbr:`void (No return value.)`
