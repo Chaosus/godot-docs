@@ -137,6 +137,10 @@ Properties
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
    | :ref:`float<class_float>`                         | :ref:`audio/general/3d_panning_strength<class_ProjectSettings_property_audio/general/3d_panning_strength>`                                                                                                 | ``0.5``                                                                                          |
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+   | :ref:`int<class_int>`                             | :ref:`audio/general/default_playback_type<class_ProjectSettings_property_audio/general/default_playback_type>`                                                                                             | ``0``                                                                                            |
+   +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+   | :ref:`int<class_int>`                             | :ref:`audio/general/default_playback_type.web<class_ProjectSettings_property_audio/general/default_playback_type.web>`                                                                                     | ``1``                                                                                            |
+   +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`audio/general/ios/mix_with_others<class_ProjectSettings_property_audio/general/ios/mix_with_others>`                                                                                                 | ``false``                                                                                        |
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`audio/general/ios/session_category<class_ProjectSettings_property_audio/general/ios/session_category>`                                                                                               | ``0``                                                                                            |
@@ -172,6 +176,8 @@ Properties
    | :ref:`int<class_int>`                             | :ref:`debug/gdscript/warnings/assert_always_false<class_ProjectSettings_property_debug/gdscript/warnings/assert_always_false>`                                                                             | ``1``                                                                                            |
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`debug/gdscript/warnings/assert_always_true<class_ProjectSettings_property_debug/gdscript/warnings/assert_always_true>`                                                                               | ``1``                                                                                            |
+   +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+   | :ref:`int<class_int>`                             | :ref:`debug/gdscript/warnings/confusable_capture_reassignment<class_ProjectSettings_property_debug/gdscript/warnings/confusable_capture_reassignment>`                                                     | ``1``                                                                                            |
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`debug/gdscript/warnings/confusable_identifier<class_ProjectSettings_property_debug/gdscript/warnings/confusable_identifier>`                                                                         | ``1``                                                                                            |
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
@@ -1816,6 +1822,8 @@ This user directory is used for storing persistent data (``user://`` filesystem)
 
 The :ref:`application/config/use_custom_user_dir<class_ProjectSettings_property_application/config/use_custom_user_dir>` setting must be enabled for this to take effect.
 
+\ **Note:** If :ref:`application/config/custom_user_dir_name<class_ProjectSettings_property_application/config/custom_user_dir_name>` contains trailing periods, they will be stripped as folder names ending with a period are not allowed on Windows.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -2076,7 +2084,7 @@ This setting can be overridden using the ``--frame-delay <ms;>`` command line ar
 
 :ref:`bool<class_bool>` **application/run/low_processor_mode** = ``false`` :ref:`🔗<class_ProjectSettings_property_application/run/low_processor_mode>`
 
-If ``true``, enables low-processor usage mode. The screen is not redrawn if nothing changes visually. This is meant for writing applications and editors, but is pretty useless (and can hurt performance) in most games.
+If ``true``, enables low-processor usage mode. When enabled, the engine takes longer to redraw, but only redraws the screen if necessary. This may lower power consumption, and is intended for editors or mobile applications. For most games, because the screen needs to be redrawn every frame, it is recommended to keep this setting disabled.
 
 .. rst-class:: classref-item-separator
 
@@ -2252,7 +2260,7 @@ Safer override for :ref:`audio/driver/mix_rate<class_ProjectSettings_property_au
 
 :ref:`int<class_int>` **audio/driver/output_latency** = ``15`` :ref:`🔗<class_ProjectSettings_property_audio/driver/output_latency>`
 
-Specifies the preferred output latency in milliseconds for audio. Lower values will result in lower audio latency at the cost of increased CPU usage. Low values may result in audible cracking on slower hardware.
+Specifies the preferred output latency in milliseconds for audio. Lower values will result in lower audio latency at the cost of increased CPU usage. Low values may result in audible crackling on slower hardware.
 
 Audio output latency may be constrained by the host operating system and audio hardware drivers. If the host can not provide the specified audio output latency then Godot will attempt to use the nearest latency allowed by the host. As such you should always use :ref:`AudioServer.get_output_latency<class_AudioServer_method_get_output_latency>` to determine the actual audio output latency.
 
@@ -2299,6 +2307,40 @@ The default value of ``0.5`` is tuned for headphones. When using speakers, you m
 The base strength of the panning effect for all :ref:`AudioStreamPlayer3D<class_AudioStreamPlayer3D>` nodes. The panning strength can be further scaled on each Node using :ref:`AudioStreamPlayer3D.panning_strength<class_AudioStreamPlayer3D_property_panning_strength>`. A value of ``0.0`` disables stereo panning entirely, leaving only volume attenuation in place. A value of ``1.0`` completely mutes one of the channels if the sound is located exactly to the left (or right) of the listener.
 
 The default value of ``0.5`` is tuned for headphones. When using speakers, you may find lower values to sound better as speakers have a lower stereo separation compared to headphones.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_ProjectSettings_property_audio/general/default_playback_type:
+
+.. rst-class:: classref-property
+
+:ref:`int<class_int>` **audio/general/default_playback_type** = ``0`` :ref:`🔗<class_ProjectSettings_property_audio/general/default_playback_type>`
+
+**Experimental:** This property may be changed or removed in future versions.
+
+Specifies the default playback type of the platform.
+
+The default value is set to **Stream**, as most platforms have no issues mixing streams.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_ProjectSettings_property_audio/general/default_playback_type.web:
+
+.. rst-class:: classref-property
+
+:ref:`int<class_int>` **audio/general/default_playback_type.web** = ``1`` :ref:`🔗<class_ProjectSettings_property_audio/general/default_playback_type.web>`
+
+**Experimental:** This property may be changed or removed in future versions.
+
+Specifies the default playback type of the Web platform.
+
+The default value is set to **Sample** as the Web platform is not suited to mix audio streams outside of the Web Audio API, especially when exporting a single-threaded game. **Sample** allows for lower latency on the web platform at the cost of flexibility (:ref:`AudioEffect<class_AudioEffect>`\ s are not supported).
+
+\ **Warning:** Forcing **Stream** on the Web platform may cause high audio latency and crackling, especially when exporting a multi-threaded game.
 
 .. rst-class:: classref-item-separator
 
@@ -2523,6 +2565,18 @@ When set to ``warn`` or ``error``, produces a warning or an error respectively w
 :ref:`int<class_int>` **debug/gdscript/warnings/assert_always_true** = ``1`` :ref:`🔗<class_ProjectSettings_property_debug/gdscript/warnings/assert_always_true>`
 
 When set to ``warn`` or ``error``, produces a warning or an error respectively when an ``assert`` call always evaluates to true.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_ProjectSettings_property_debug/gdscript/warnings/confusable_capture_reassignment:
+
+.. rst-class:: classref-property
+
+:ref:`int<class_int>` **debug/gdscript/warnings/confusable_capture_reassignment** = ``1`` :ref:`🔗<class_ProjectSettings_property_debug/gdscript/warnings/confusable_capture_reassignment>`
+
+When set to ``warn`` or ``error``, produces a warning or an error respectively when a local variable captured by a lambda is reassigned, since this does not modify the outer local variable.
 
 .. rst-class:: classref-item-separator
 
@@ -10696,9 +10750,9 @@ Decreasing this value may improve GPU performance on certain setups, even if the
 
 :ref:`int<class_int>` **rendering/limits/global_shader_variables/buffer_size** = ``65536`` :ref:`🔗<class_ProjectSettings_property_rendering/limits/global_shader_variables/buffer_size>`
 
-.. container:: contribute
+The maximum number of uniforms that can be used by the global shader uniform buffer. Each item takes up one slot. In other words, a single uniform float and a uniform vec4 will take the same amount of space in the buffer.
 
-	There is currently no description for this property. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+\ **Note:** When using the Compatibility backend, most mobile devices (and all web exports) will be limited to a maximum size of 1024 due to hardware constraints.
 
 .. rst-class:: classref-item-separator
 
