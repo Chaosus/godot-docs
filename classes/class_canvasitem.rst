@@ -735,9 +735,9 @@ If ``true``, this **CanvasItem** is drawn. The node is only visible if all of it
 - |void| **set_y_sort_enabled**\ (\ value\: :ref:`bool<class_bool>`\ )
 - :ref:`bool<class_bool>` **is_y_sort_enabled**\ (\ )
 
-If ``true``, this and child **CanvasItem** nodes with a lower Y position are rendered in front of nodes with a higher Y position. If ``false``, this and child **CanvasItem** nodes are rendered normally in scene tree order.
+If ``true``, this and child **CanvasItem** nodes with a higher Y position are rendered in front of nodes with a lower Y position. If ``false``, this and child **CanvasItem** nodes are rendered normally in scene tree order.
 
-With Y-sorting enabled on a parent node ('A') but disabled on a child node ('B'), the child node ('B') is sorted but its children ('C1', 'C2', etc) render together on the same Y position as the child node 'B'. This allows you to organize the render order of a scene without changing the scene tree.
+With Y-sorting enabled on a parent node ('A') but disabled on a child node ('B'), the child node ('B') is sorted but its children ('C1', 'C2', etc) render together on the same Y position as the child node ('B'). This allows you to organize the render order of a scene without changing the scene tree.
 
 Nodes sort relative to each other only if they are on the same :ref:`z_index<class_CanvasItem_property_z_index>`.
 
@@ -1469,6 +1469,8 @@ Returns ``true`` if global transform notifications are communicated to children.
 :ref:`bool<class_bool>` **is_visible_in_tree**\ (\ ) |const| :ref:`🔗<class_CanvasItem_method_is_visible_in_tree>`
 
 Returns ``true`` if the node is present in the :ref:`SceneTree<class_SceneTree>`, its :ref:`visible<class_CanvasItem_property_visible>` property is ``true`` and all its ancestors are also visible. If any ancestor is hidden, this node will not be visible in the scene tree, and is therefore not drawn (see :ref:`_draw<class_CanvasItem_private_method__draw>`).
+
+Visibility is checked only in parent nodes that inherit from **CanvasItem**, :ref:`CanvasLayer<class_CanvasLayer>`, and :ref:`Window<class_Window>`. If the parent is of any other type (such as :ref:`Node<class_Node>`, :ref:`AnimationPlayer<class_AnimationPlayer>`, or :ref:`Node3D<class_Node3D>`), it is assumed to be visible.
 
 .. rst-class:: classref-item-separator
 
