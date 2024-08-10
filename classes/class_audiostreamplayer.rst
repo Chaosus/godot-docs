@@ -24,7 +24,7 @@ Description
 
 The **AudioStreamPlayer** node plays an audio stream non-positionally. It is ideal for user interfaces, menus, or background music.
 
-To use this node, :ref:`stream<class_AudioStreamPlayer_property_stream>` needs to be set to a valid :ref:`AudioStream<class_AudioStream>` resource. Playing more than one sound at the time is also supported, see :ref:`max_polyphony<class_AudioStreamPlayer_property_max_polyphony>`.
+To use this node, :ref:`stream<class_AudioStreamPlayer_property_stream>` needs to be set to a valid :ref:`AudioStream<class_AudioStream>` resource. Playing more than one sound at the same time is also supported, see :ref:`max_polyphony<class_AudioStreamPlayer_property_max_polyphony>`.
 
 If you need to play audio at a specific position, use :ref:`AudioStreamPlayer2D<class_AudioStreamPlayer2D>` or :ref:`AudioStreamPlayer3D<class_AudioStreamPlayer3D>` instead.
 
@@ -63,6 +63,8 @@ Properties
    | :ref:`MixTarget<enum_AudioStreamPlayer_MixTarget>` | :ref:`mix_target<class_AudioStreamPlayer_property_mix_target>`       | ``0``         |
    +----------------------------------------------------+----------------------------------------------------------------------+---------------+
    | :ref:`float<class_float>`                          | :ref:`pitch_scale<class_AudioStreamPlayer_property_pitch_scale>`     | ``1.0``       |
+   +----------------------------------------------------+----------------------------------------------------------------------+---------------+
+   | :ref:`PlaybackType<enum_AudioServer_PlaybackType>` | :ref:`playback_type<class_AudioStreamPlayer_property_playback_type>` | ``0``         |
    +----------------------------------------------------+----------------------------------------------------------------------+---------------+
    | :ref:`bool<class_bool>`                            | :ref:`playing<class_AudioStreamPlayer_property_playing>`             | ``false``     |
    +----------------------------------------------------+----------------------------------------------------------------------+---------------+
@@ -242,6 +244,25 @@ The mix target channels, as one of the :ref:`MixTarget<enum_AudioStreamPlayer_Mi
 - :ref:`float<class_float>` **get_pitch_scale**\ (\ )
 
 The audio's pitch and tempo, as a multiplier of the :ref:`stream<class_AudioStreamPlayer_property_stream>`'s sample rate. A value of ``2.0`` doubles the audio's pitch, while a value of ``0.5`` halves the pitch.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_AudioStreamPlayer_property_playback_type:
+
+.. rst-class:: classref-property
+
+:ref:`PlaybackType<enum_AudioServer_PlaybackType>` **playback_type** = ``0`` :ref:`🔗<class_AudioStreamPlayer_property_playback_type>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_playback_type**\ (\ value\: :ref:`PlaybackType<enum_AudioServer_PlaybackType>`\ )
+- :ref:`PlaybackType<enum_AudioServer_PlaybackType>` **get_playback_type**\ (\ )
+
+**Experimental:** This property may be changed or removed in future versions.
+
+The playback type of the stream player. If set other than to the default value, it will force that playback type.
 
 .. rst-class:: classref-item-separator
 
