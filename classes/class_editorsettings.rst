@@ -187,6 +187,8 @@ Properties
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`editors/animation/autorename_animation_tracks<class_EditorSettings_property_editors/animation/autorename_animation_tracks>`                                                                                 |
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                           | :ref:`editors/animation/confirm_insert_track<class_EditorSettings_property_editors/animation/confirm_insert_track>`                                                                                               |
+   +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`editors/animation/default_create_bezier_tracks<class_EditorSettings_property_editors/animation/default_create_bezier_tracks>`                                                                               |
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`editors/animation/default_create_reset_tracks<class_EditorSettings_property_editors/animation/default_create_reset_tracks>`                                                                                 |
@@ -305,6 +307,10 @@ Properties
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                       | :ref:`filesystem/tools/oidn/oidn_denoise_path<class_EditorSettings_property_filesystem/tools/oidn/oidn_denoise_path>`                                                                                             |
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                           | :ref:`input/buffering/agile_event_flushing<class_EditorSettings_property_input/buffering/agile_event_flushing>`                                                                                                   |
+   +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                           | :ref:`input/buffering/use_accumulated_input<class_EditorSettings_property_input/buffering/use_accumulated_input>`                                                                                                 |
+   +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`interface/editor/accept_dialog_cancel_ok_buttons<class_EditorSettings_property_interface/editor/accept_dialog_cancel_ok_buttons>`                                                                           |
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`interface/editor/automatically_open_screenshots<class_EditorSettings_property_interface/editor/automatically_open_screenshots>`                                                                             |
@@ -321,8 +327,6 @@ Properties
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`float<class_float>`                         | :ref:`interface/editor/custom_display_scale<class_EditorSettings_property_interface/editor/custom_display_scale>`                                                                                                 |
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                           | :ref:`interface/editor/debug/enable_pseudolocalization<class_EditorSettings_property_interface/editor/debug/enable_pseudolocalization>`                                                                           |
-   +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`interface/editor/display_scale<class_EditorSettings_property_interface/editor/display_scale>`                                                                                                               |
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`interface/editor/dock_tab_style<class_EditorSettings_property_interface/editor/dock_tab_style>`                                                                                                             |
@@ -332,6 +336,8 @@ Properties
    | :ref:`int<class_int>`                             | :ref:`interface/editor/editor_screen<class_EditorSettings_property_interface/editor/editor_screen>`                                                                                                               |
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`interface/editor/expand_to_title<class_EditorSettings_property_interface/editor/expand_to_title>`                                                                                                           |
+   +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                           | :ref:`interface/editor/font_allow_msdf<class_EditorSettings_property_interface/editor/font_allow_msdf>`                                                                                                           |
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`interface/editor/font_antialiasing<class_EditorSettings_property_interface/editor/font_antialiasing>`                                                                                                       |
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -569,6 +575,8 @@ Properties
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`text_editor/behavior/indent/type<class_EditorSettings_property_text_editor/behavior/indent/type>`                                                                                                           |
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`                       | :ref:`text_editor/behavior/navigation/custom_word_separators<class_EditorSettings_property_text_editor/behavior/navigation/custom_word_separators>`                                                               |
+   +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`text_editor/behavior/navigation/drag_and_drop_selection<class_EditorSettings_property_text_editor/behavior/navigation/drag_and_drop_selection>`                                                             |
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`text_editor/behavior/navigation/move_caret_on_right_click<class_EditorSettings_property_text_editor/behavior/navigation/move_caret_on_right_click>`                                                         |
@@ -580,6 +588,10 @@ Properties
    | :ref:`bool<class_bool>`                           | :ref:`text_editor/behavior/navigation/smooth_scrolling<class_EditorSettings_property_text_editor/behavior/navigation/smooth_scrolling>`                                                                           |
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`text_editor/behavior/navigation/stay_in_script_editor_on_node_selected<class_EditorSettings_property_text_editor/behavior/navigation/stay_in_script_editor_on_node_selected>`                               |
+   +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                           | :ref:`text_editor/behavior/navigation/use_custom_word_separators<class_EditorSettings_property_text_editor/behavior/navigation/use_custom_word_separators>`                                                       |
+   +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                           | :ref:`text_editor/behavior/navigation/use_default_word_separators<class_EditorSettings_property_text_editor/behavior/navigation/use_default_word_separators>`                                                     |
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`text_editor/behavior/navigation/v_scroll_speed<class_EditorSettings_property_text_editor/behavior/navigation/v_scroll_speed>`                                                                               |
    +---------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1279,7 +1291,7 @@ The grid size in units. Higher values prevent the grid from appearing "cut off" 
 
 :ref:`bool<class_bool>` **editors/3d/grid_xy_plane** :ref:`🔗<class_EditorSettings_property_editors/3d/grid_xy_plane>`
 
-If ``true``, render the grid on an XY plane. This can be useful for 3D side-scrolling games.
+If ``true``, renders the grid on the XY plane in perspective view. This can be useful for 3D side-scrolling games.
 
 .. rst-class:: classref-item-separator
 
@@ -1291,7 +1303,7 @@ If ``true``, render the grid on an XY plane. This can be useful for 3D side-scro
 
 :ref:`bool<class_bool>` **editors/3d/grid_xz_plane** :ref:`🔗<class_EditorSettings_property_editors/3d/grid_xz_plane>`
 
-If ``true``, render the grid on an XZ plane.
+If ``true``, renders the grid on the XZ plane in perspective view.
 
 .. rst-class:: classref-item-separator
 
@@ -1303,7 +1315,7 @@ If ``true``, render the grid on an XZ plane.
 
 :ref:`bool<class_bool>` **editors/3d/grid_yz_plane** :ref:`🔗<class_EditorSettings_property_editors/3d/grid_yz_plane>`
 
-If ``true``, render the grid on a YZ plane. This can be useful for 3D side-scrolling games.
+If ``true``, renders the grid on the YZ plane in perspective view. This can be useful for 3D side-scrolling games.
 
 .. rst-class:: classref-item-separator
 
@@ -1590,6 +1602,20 @@ The 3D editor gizmo color for :ref:`Joint3D<class_Joint3D>`\ s and :ref:`Physica
 :ref:`bool<class_bool>` **editors/animation/autorename_animation_tracks** :ref:`🔗<class_EditorSettings_property_editors/animation/autorename_animation_tracks>`
 
 If ``true``, automatically updates animation tracks' target paths when renaming or reparenting nodes in the Scene tree dock.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorSettings_property_editors/animation/confirm_insert_track:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **editors/animation/confirm_insert_track** :ref:`🔗<class_EditorSettings_property_editors/animation/confirm_insert_track>`
+
+If ``true``, display a confirmation dialog when adding a new track to an animation by pressing the "key" icon next to a property. Holding Shift will bypass the dialog.
+
+If ``false``, the behavior is reversed, i.e. the dialog only appears when Shift is held.
 
 .. rst-class:: classref-item-separator
 
@@ -2341,6 +2367,38 @@ To enable this feature for your specific project, use :ref:`ProjectSettings.rend
 
 ----
 
+.. _class_EditorSettings_property_input/buffering/agile_event_flushing:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **input/buffering/agile_event_flushing** :ref:`🔗<class_EditorSettings_property_input/buffering/agile_event_flushing>`
+
+If ``true``, input events will be flushed just before every idle and physics frame.
+
+If ``false``, these events will be flushed only once per process frame, between iterations of the engine.
+
+Enabling this setting can greatly improve input responsiveness, especially in devices that struggle to run at the project's intended frame rate.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorSettings_property_input/buffering/use_accumulated_input:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **input/buffering/use_accumulated_input** :ref:`🔗<class_EditorSettings_property_input/buffering/use_accumulated_input>`
+
+If ``true``, similar input events sent by the operating system are accumulated. When input accumulation is enabled, all input events generated during a frame will be merged and emitted when the frame is done rendering. Therefore, this limits the number of input method calls per second to the rendering FPS.
+
+Input accumulation can be disabled to get slightly more precise/reactive input at the cost of increased CPU usage.
+
+\ **Note:** Input accumulation is *enabled* by default.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_EditorSettings_property_interface/editor/accept_dialog_cancel_ok_buttons:
 
 .. rst-class:: classref-property
@@ -2451,20 +2509,6 @@ The custom editor scale factor to use. This can be used for displays with very h
 
 ----
 
-.. _class_EditorSettings_property_interface/editor/debug/enable_pseudolocalization:
-
-.. rst-class:: classref-property
-
-:ref:`bool<class_bool>` **interface/editor/debug/enable_pseudolocalization** :ref:`🔗<class_EditorSettings_property_interface/editor/debug/enable_pseudolocalization>`
-
-If ``true``, lengthens the editor's localizable strings and replaces their characters with accented variants. This allows spotting non-localizable strings easily, while also ensuring the UI layout doesn't break when strings are made longer (as many languages require strings to be longer).
-
-This is a debugging feature and should only be enabled when working on the editor itself.
-
-.. rst-class:: classref-item-separator
-
-----
-
 .. _class_EditorSettings_property_interface/editor/display_scale:
 
 .. rst-class:: classref-property
@@ -2528,6 +2572,18 @@ The preferred monitor to display the editor.
 Expanding main editor window content to the title, if supported by :ref:`DisplayServer<class_DisplayServer>`. See :ref:`DisplayServer.WINDOW_FLAG_EXTEND_TO_TITLE<class_DisplayServer_constant_WINDOW_FLAG_EXTEND_TO_TITLE>`.
 
 Specific to the macOS platform.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorSettings_property_interface/editor/font_allow_msdf:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **interface/editor/font_allow_msdf** :ref:`🔗<class_EditorSettings_property_interface/editor/font_allow_msdf>`
+
+If set to ``true``, MSDF font rendering will be used for the visual shader graph editor. You may need to set this to ``false`` when using a custom main font, as some fonts will look broken due to the use of self-intersecting outlines in their font data. Downloading the font from the font maker's official website as opposed to a service like Google Fonts can help resolve this issue.
 
 .. rst-class:: classref-item-separator
 
@@ -2753,6 +2809,8 @@ The default **Auto** value will only enable this if the editor was compiled with
 
 \ **Note:** If :ref:`interface/editor/update_continuously<class_EditorSettings_property_interface/editor/update_continuously>` is ``true``, the spinner icon displays in red.
 
+\ **Note:** If the editor was started with the ``--debug-canvas-item-redraw`` :doc:`command line argument <../tutorials/editor/command_line_tutorial>`, the update spinner will *never* display regardless of this setting's value. This is to avoid confusion with what would cause redrawing in real world scenarios.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -2763,7 +2821,9 @@ The default **Auto** value will only enable this if the editor was compiled with
 
 :ref:`bool<class_bool>` **interface/editor/single_window_mode** :ref:`🔗<class_EditorSettings_property_interface/editor/single_window_mode>`
 
-If ``true``, embed modal windows such as docks inside the main editor window. When single-window mode is enabled, tooltips will also be embedded inside the main editor window, which means they can't be displayed outside of the editor window.
+If ``true``, embed modal windows such as docks inside the main editor window. When single-window mode is enabled, tooltips will also be embedded inside the main editor window, which means they can't be displayed outside of the editor window. Single-window mode can be faster as it does not need to create a separate window for every popup and tooltip, which can be a slow operation depending on the operating system and rendering method in use.
+
+This is equivalent to :ref:`ProjectSettings.display/window/subwindows/embed_subwindows<class_ProjectSettings_property_display/window/subwindows/embed_subwindows>` in the running project, except the setting's value is inverted.
 
 \ **Note:** To query whether the editor can use multiple windows in an editor plugin, use :ref:`EditorInterface.is_multi_window_enabled<class_EditorInterface_method_is_multi_window_enabled>` instead of querying the value of this editor setting.
 
@@ -4045,6 +4105,18 @@ The indentation style to use (tabs or spaces).
 
 ----
 
+.. _class_EditorSettings_property_text_editor/behavior/navigation/custom_word_separators:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **text_editor/behavior/navigation/custom_word_separators** :ref:`🔗<class_EditorSettings_property_text_editor/behavior/navigation/custom_word_separators>`
+
+The characters to consider as word delimiters if :ref:`text_editor/behavior/navigation/use_custom_word_separators<class_EditorSettings_property_text_editor/behavior/navigation/use_custom_word_separators>` is ``true``. This is in addition to default characters if :ref:`text_editor/behavior/navigation/use_default_word_separators<class_EditorSettings_property_text_editor/behavior/navigation/use_default_word_separators>` is ``true``. The characters should be defined without separation, for example ``_♥=``.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_EditorSettings_property_text_editor/behavior/navigation/drag_and_drop_selection:
 
 .. rst-class:: classref-property
@@ -4099,7 +4171,7 @@ If ``true``, allows scrolling past the end of the file.
 
 :ref:`bool<class_bool>` **text_editor/behavior/navigation/smooth_scrolling** :ref:`🔗<class_EditorSettings_property_text_editor/behavior/navigation/smooth_scrolling>`
 
-If ``true``, allows scrolling in sub-line intervals and enables a smooth scrolling animation when using the mouse wheel to scroll.
+If ``true``, enables a smooth scrolling animation when using the mouse wheel to scroll. See :ref:`text_editor/behavior/navigation/v_scroll_speed<class_EditorSettings_property_text_editor/behavior/navigation/v_scroll_speed>` for the speed of this animation.
 
 \ **Note:** :ref:`text_editor/behavior/navigation/smooth_scrolling<class_EditorSettings_property_text_editor/behavior/navigation/smooth_scrolling>` currently behaves poorly in projects where :ref:`ProjectSettings.physics/common/physics_ticks_per_second<class_ProjectSettings_property_physics/common/physics_ticks_per_second>` has been increased significantly from its default value (``60``). In this case, it is recommended to disable this setting.
 
@@ -4119,13 +4191,37 @@ If ``true``, prevents automatically switching between the Script and 2D/3D scree
 
 ----
 
+.. _class_EditorSettings_property_text_editor/behavior/navigation/use_custom_word_separators:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **text_editor/behavior/navigation/use_custom_word_separators** :ref:`🔗<class_EditorSettings_property_text_editor/behavior/navigation/use_custom_word_separators>`
+
+If ``true``, uses the characters in :ref:`text_editor/behavior/navigation/custom_word_separators<class_EditorSettings_property_text_editor/behavior/navigation/custom_word_separators>` as word separators for word navigation and operations. This is in addition to the default characters if :ref:`text_editor/behavior/navigation/use_default_word_separators<class_EditorSettings_property_text_editor/behavior/navigation/use_default_word_separators>` is also enabled. Word navigation and operations include double-clicking on a word or holding :kbd:`Ctrl` (:kbd:`Cmd` on macOS) while pressing :kbd:`left`, :kbd:`right`, :kbd:`backspace`, or :kbd:`delete`.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorSettings_property_text_editor/behavior/navigation/use_default_word_separators:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **text_editor/behavior/navigation/use_default_word_separators** :ref:`🔗<class_EditorSettings_property_text_editor/behavior/navigation/use_default_word_separators>`
+
+If ``true``, uses the characters in ```!"#$%&'()*+,-./:;<=>?@[\]^`{|}~``, the Unicode General Punctuation table, and the Unicode CJK Punctuation table as word separators for word navigation and operations. If ``false``, a subset of these characters are used and does not include the characters ``<>$~^=+|``. This is in addition to custom characters if :ref:`text_editor/behavior/navigation/use_custom_word_separators<class_EditorSettings_property_text_editor/behavior/navigation/use_custom_word_separators>` is also enabled. These characters are used to determine where a word stops. Word navigation and operations include double-clicking on a word or holding :kbd:`Ctrl` (:kbd:`Cmd` on macOS) while pressing :kbd:`left`, :kbd:`right`, :kbd:`backspace`, or :kbd:`delete`.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_EditorSettings_property_text_editor/behavior/navigation/v_scroll_speed:
 
 .. rst-class:: classref-property
 
 :ref:`int<class_int>` **text_editor/behavior/navigation/v_scroll_speed** :ref:`🔗<class_EditorSettings_property_text_editor/behavior/navigation/v_scroll_speed>`
 
-The number of pixels to scroll with every mouse wheel increment. Higher values make the script scroll by faster when using the mouse wheel.
+The speed of scrolling in lines per second when :ref:`text_editor/behavior/navigation/smooth_scrolling<class_EditorSettings_property_text_editor/behavior/navigation/smooth_scrolling>` is ``true``. Higher values make the script scroll by faster when using the mouse wheel.
 
 \ **Note:** You can hold down :kbd:`Alt` while using the mouse wheel to temporarily scroll 5 times faster.
 
@@ -4199,7 +4295,7 @@ The delay in seconds after which autocompletion suggestions should be displayed 
 
 :ref:`bool<class_bool>` **text_editor/completion/code_complete_enabled** :ref:`🔗<class_EditorSettings_property_text_editor/completion/code_complete_enabled>`
 
-If ``true``, code completion will be triggered automatically after :ref:`text_editor/completion/code_complete_delay<class_EditorSettings_property_text_editor/completion/code_complete_delay>`. If ``false``, you can still trigger completion manually by pressing :kbd:`Ctrl + Space` (:kbd:`Cmd + Space` on macOS).
+If ``true``, code completion will be triggered automatically after :ref:`text_editor/completion/code_complete_delay<class_EditorSettings_property_text_editor/completion/code_complete_delay>`. Even if ``false``, code completion can be triggered manually with the ``ui_text_completion_query`` action (by default :kbd:`Ctrl + Space` or :kbd:`Cmd + Space` on macOS).
 
 .. rst-class:: classref-item-separator
 
