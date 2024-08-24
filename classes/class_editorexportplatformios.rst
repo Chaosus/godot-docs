@@ -50,6 +50,8 @@ Properties
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`application/export_project_only<class_EditorExportPlatformIOS_property_application/export_project_only>`                                                                       |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                           | :ref:`application/generate_simulator_library_if_missing<class_EditorExportPlatformIOS_property_application/generate_simulator_library_if_missing>`                                   |
+   +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`application/icon_interpolation<class_EditorExportPlatformIOS_property_application/icon_interpolation>`                                                                         |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                       | :ref:`application/min_ios_version<class_EditorExportPlatformIOS_property_application/min_ios_version>`                                                                               |
@@ -547,6 +549,18 @@ If ``true``, exports iOS project files without building an XCArchive or ``.ipa``
 
 ----
 
+.. _class_EditorExportPlatformIOS_property_application/generate_simulator_library_if_missing:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **application/generate_simulator_library_if_missing** :ref:`🔗<class_EditorExportPlatformIOS_property_application/generate_simulator_library_if_missing>`
+
+If ``true``, and ARM64 simulator library is missing from the export template, it is automatically generated from ARM64 device library.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_EditorExportPlatformIOS_property_application/icon_interpolation:
 
 .. rst-class:: classref-property
@@ -969,7 +983,7 @@ Indicates whether your app uses advertising data for tracking.
 
 :ref:`bool<class_bool>` **privacy/collected_data/audio_data/collected** :ref:`🔗<class_EditorExportPlatformIOS_property_privacy/collected_data/audio_data/collected>`
 
-Indicates whether your app collects audio data data.
+Indicates whether your app collects audio data.
 
 .. rst-class:: classref-item-separator
 
@@ -993,7 +1007,7 @@ The reasons your app collects audio data. See `Describing data use in privacy ma
 
 :ref:`bool<class_bool>` **privacy/collected_data/audio_data/linked_to_user** :ref:`🔗<class_EditorExportPlatformIOS_property_privacy/collected_data/audio_data/linked_to_user>`
 
-Indicates whether your app links audio data data to the user's identity.
+Indicates whether your app links audio data to the user's identity.
 
 .. rst-class:: classref-item-separator
 
@@ -1005,7 +1019,7 @@ Indicates whether your app links audio data data to the user's identity.
 
 :ref:`bool<class_bool>` **privacy/collected_data/audio_data/used_for_tracking** :ref:`🔗<class_EditorExportPlatformIOS_property_privacy/collected_data/audio_data/used_for_tracking>`
 
-Indicates whether your app uses audio data data for tracking.
+Indicates whether your app uses audio data for tracking.
 
 .. rst-class:: classref-item-separator
 

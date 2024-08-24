@@ -158,7 +158,7 @@ Mark the following property as exported (editable in the Inspector dock and save
     @export var image_array: Array[Image]
     @export var node_array: Array[Node]
 
-\ **Note:** Custom resources and nodes must be registered as global classes using ``class_name``.
+\ **Note:** Custom resources and nodes should be registered as global classes using ``class_name``, since the Inspector currently only supports global classes. Otherwise, a less specific type will be exported instead.
 
 \ **Note:** Node export is only supported in :ref:`Node<class_Node>`-derived classes and has a number of other limitations.
 
@@ -899,9 +899,9 @@ Returns a single character (as a :ref:`String<class_String>`) of the given Unico
 
 ::
 
-    a = char(65)      # a is "A"
-    a = char(65 + 32) # a is "a"
-    a = char(8364)    # a is "€"
+    var upper = char(65)      # upper is "A"
+    var lower = char(65 + 32) # lower is "a"
+    var euro = char(8364)     # euro is "€"
 
 .. rst-class:: classref-item-separator
 
@@ -1047,10 +1047,10 @@ Returns the length of the given Variant ``var``. The length can be the character
 
 ::
 
-    a = [1, 2, 3, 4]
+    var a = [1, 2, 3, 4]
     len(a) # Returns 4
     
-    b = "Hello!"
+    var b = "Hello!"
     len(b) # Returns 6
 
 .. rst-class:: classref-item-separator
