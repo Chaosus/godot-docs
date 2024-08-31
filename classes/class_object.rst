@@ -431,7 +431,7 @@ The example below displays a list of numbers shown as words going from ``ZERO`` 
             }
         }
     
-        private List<int> _numbers = new();
+        private Godot.Collections.Array<int> _numbers = new();
     
         public override Godot.Collections.Array<Godot.Collections.Dictionary> _GetPropertyList()
         {
@@ -468,7 +468,7 @@ The example below displays a list of numbers shown as words going from ``ZERO`` 
             if (propertyName.StartsWith("number_"))
             {
                 int index = int.Parse(propertyName.Substring("number_".Length));
-                numbers[index] = value.As<int>();
+                _numbers[index] = value.As<int>();
                 return true;
             }
             return false;
@@ -695,7 +695,7 @@ Override this method to customize existing properties. Every property info goes 
     
         public override void _ValidateProperty(Godot.Collections.Dictionary property)
         {
-            if (property["name"].AsStringName() == PropertyName.Number && IsNumberEditable)
+            if (property["name"].AsStringName() == PropertyName.Number && !IsNumberEditable)
             {
                 var usage = property["usage"].As<PropertyUsageFlags>() | PropertyUsageFlags.ReadOnly;
                 property["usage"] = (int)usage;
@@ -1201,6 +1201,8 @@ Gets the object's property indexed by the given ``property_path``. The path shou
 :ref:`int<class_int>` **get_instance_id**\ (\ ) |const| :ref:`🔗<class_Object_method_get_instance_id>`
 
 Returns the object's unique instance ID. This ID can be saved in :ref:`EncodedObjectAsID<class_EncodedObjectAsID>`, and can be used to retrieve this object instance with :ref:`@GlobalScope.instance_from_id<class_@GlobalScope_method_instance_from_id>`.
+
+\ **Note:** This ID is only useful during the current session. It won't correspond to a similar object if the ID is sent over a network, or loaded from a file at a later time.
 
 .. rst-class:: classref-item-separator
 
