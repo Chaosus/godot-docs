@@ -89,6 +89,8 @@ Methods
    +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                       | :ref:`get_distribution_name<class_OS_method_get_distribution_name>`\ (\ ) |const|                                                                                                                                                                                                                                                                                                           |
    +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`PackedByteArray<class_PackedByteArray>`     | :ref:`get_entropy<class_OS_method_get_entropy>`\ (\ size\: :ref:`int<class_int>`\ )                                                                                                                                                                                                                                                                                                         |
+   +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                       | :ref:`get_environment<class_OS_method_get_environment>`\ (\ variable\: :ref:`String<class_String>`\ ) |const|                                                                                                                                                                                                                                                                               |
    +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                       | :ref:`get_executable_path<class_OS_method_get_executable_path>`\ (\ ) |const|                                                                                                                                                                                                                                                                                                               |
@@ -122,6 +124,8 @@ Methods
    | :ref:`int<class_int>`                             | :ref:`get_static_memory_peak_usage<class_OS_method_get_static_memory_peak_usage>`\ (\ ) |const|                                                                                                                                                                                                                                                                                             |
    +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`get_static_memory_usage<class_OS_method_get_static_memory_usage>`\ (\ ) |const|                                                                                                                                                                                                                                                                                                       |
+   +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`                       | :ref:`get_system_ca_certificates<class_OS_method_get_system_ca_certificates>`\ (\ )                                                                                                                                                                                                                                                                                                         |
    +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                       | :ref:`get_system_dir<class_OS_method_get_system_dir>`\ (\ dir\: :ref:`SystemDir<enum_OS_SystemDir>`, shared_storage\: :ref:`bool<class_bool>` = true\ ) |const|                                                                                                                                                                                                                             |
    +---------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -226,6 +230,14 @@ The OpenGL 3 rendering driver. It uses OpenGL 3.3 Core Profile on desktop platfo
 :ref:`RenderingDriver<enum_OS_RenderingDriver>` **RENDERING_DRIVER_D3D12** = ``2``
 
 The Direct3D 12 rendering driver.
+
+.. _class_OS_constant_RENDERING_DRIVER_METAL:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`RenderingDriver<enum_OS_RenderingDriver>` **RENDERING_DRIVER_METAL** = ``3``
+
+The Metal rendering driver.
 
 .. rst-class:: classref-item-separator
 
@@ -787,6 +799,20 @@ Returns the same value as :ref:`get_name<class_OS_method_get_name>` for other pl
 
 ----
 
+.. _class_OS_method_get_entropy:
+
+.. rst-class:: classref-method
+
+:ref:`PackedByteArray<class_PackedByteArray>` **get_entropy**\ (\ size\: :ref:`int<class_int>`\ ) :ref:`🔗<class_OS_method_get_entropy>`
+
+Generates a :ref:`PackedByteArray<class_PackedByteArray>` of cryptographically secure random bytes with given ``size``.
+
+\ **Note:** Generating large quantities of bytes using this method can result in locking and entropy of lower quality on most platforms. Using :ref:`Crypto.generate_random_bytes<class_Crypto_method_generate_random_bytes>` is preferred in most cases.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_OS_method_get_environment:
 
 .. rst-class:: classref-method
@@ -811,7 +837,7 @@ Returns the value of the given environment variable, or an empty string if ``var
 
 Returns the file path to the current engine executable.
 
-\ **Note:** On macOS, always use :ref:`create_instance<class_OS_method_create_instance>` instead of relying on executable path.
+\ **Note:** On macOS, if you want to launch another instance of Godot, always use :ref:`create_instance<class_OS_method_create_instance>` instead of relying on the executable path.
 
 .. rst-class:: classref-item-separator
 
@@ -1039,6 +1065,8 @@ Returns the exit code of a spawned process once it has finished running (see :re
 
 Returns ``-1`` if the ``pid`` is not a PID of a spawned child process, the process is still running, or the method is not implemented for the current platform.
 
+\ **Note:** Returns ``-1`` if the ``pid`` is a macOS bundled app process.
+
 \ **Note:** This method is implemented on Android, Linux, macOS and Windows.
 
 .. rst-class:: classref-item-separator
@@ -1116,6 +1144,18 @@ Returns the maximum amount of static memory used. Only works in debug builds.
 :ref:`int<class_int>` **get_static_memory_usage**\ (\ ) |const| :ref:`🔗<class_OS_method_get_static_memory_usage>`
 
 Returns the amount of static memory being used by the program in bytes. Only works in debug builds.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_OS_method_get_system_ca_certificates:
+
+.. rst-class:: classref-method
+
+:ref:`String<class_String>` **get_system_ca_certificates**\ (\ ) :ref:`🔗<class_OS_method_get_system_ca_certificates>`
+
+Returns the list of certification authorities trusted by the operating system as a string of concatenated certificates in PEM format.
 
 .. rst-class:: classref-item-separator
 
