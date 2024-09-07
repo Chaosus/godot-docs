@@ -65,7 +65,7 @@ Methods
    :widths: auto
 
    +---------------------------------+-----------------------------------------------------------------------------------------------------------------+
-   | :ref:`RID<class_RID>`           | :ref:`_get_rid<class_Resource_private_method__get_rid>`\ (\ ) |virtual|                                         |
+   | :ref:`RID<class_RID>`           | :ref:`_get_rid<class_Resource_private_method__get_rid>`\ (\ ) |virtual| |const|                                 |
    +---------------------------------+-----------------------------------------------------------------------------------------------------------------+
    | |void|                          | :ref:`_setup_local_to_scene<class_Resource_private_method__setup_local_to_scene>`\ (\ ) |virtual|               |
    +---------------------------------+-----------------------------------------------------------------------------------------------------------------+
@@ -215,7 +215,7 @@ Method Descriptions
 
 .. rst-class:: classref-method
 
-:ref:`RID<class_RID>` **_get_rid**\ (\ ) |virtual| :ref:`🔗<class_Resource_private_method__get_rid>`
+:ref:`RID<class_RID>` **_get_rid**\ (\ ) |virtual| |const| :ref:`🔗<class_Resource_private_method__get_rid>`
 
 Override this method to return a custom :ref:`RID<class_RID>` when :ref:`get_rid<class_Resource_method_get_rid>` is called.
 
@@ -254,9 +254,15 @@ Override this method to customize the newly duplicated resource created from :re
 
 Duplicates this resource, returning a new resource with its ``export``\ ed or :ref:`@GlobalScope.PROPERTY_USAGE_STORAGE<class_@GlobalScope_constant_PROPERTY_USAGE_STORAGE>` properties copied from the original.
 
-If ``subresources`` is ``false``, a shallow copy is returned; nested resources within subresources are not duplicated and are shared from the original resource. If ``subresources`` is ``true``, a deep copy is returned; nested subresources will be duplicated and are not shared.
+If ``subresources`` is ``false``, a shallow copy is returned; nested resources within subresources are not duplicated and are shared with the original resource (with one exception; see below). If ``subresources`` is ``true``, a deep copy is returned; nested subresources will be duplicated and are not shared (with two exceptions; see below).
 
-Subresource properties with the :ref:`@GlobalScope.PROPERTY_USAGE_ALWAYS_DUPLICATE<class_@GlobalScope_constant_PROPERTY_USAGE_ALWAYS_DUPLICATE>` flag are always duplicated even with ``subresources`` set to ``false``, and properties with the :ref:`@GlobalScope.PROPERTY_USAGE_NEVER_DUPLICATE<class_@GlobalScope_constant_PROPERTY_USAGE_NEVER_DUPLICATE>` flag are never duplicated even with ``subresources`` set to ``true``.
+\ ``subresources`` is usually respected, with the following exceptions:
+
+- Subresource properties with the :ref:`@GlobalScope.PROPERTY_USAGE_ALWAYS_DUPLICATE<class_@GlobalScope_constant_PROPERTY_USAGE_ALWAYS_DUPLICATE>` flag are always duplicated.
+
+- Subresource properties with the :ref:`@GlobalScope.PROPERTY_USAGE_NEVER_DUPLICATE<class_@GlobalScope_constant_PROPERTY_USAGE_NEVER_DUPLICATE>` flag are never duplicated.
+
+- Subresources inside :ref:`Array<class_Array>` and :ref:`Dictionary<class_Dictionary>` properties are never duplicated.
 
 \ **Note:** For custom resources, this method will fail if :ref:`Object._init<class_Object_private_method__init>` has been defined with required parameters.
 
