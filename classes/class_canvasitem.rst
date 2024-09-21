@@ -735,9 +735,9 @@ If ``true``, this **CanvasItem** is drawn. The node is only visible if all of it
 - |void| **set_y_sort_enabled**\ (\ value\: :ref:`bool<class_bool>`\ )
 - :ref:`bool<class_bool>` **is_y_sort_enabled**\ (\ )
 
-If ``true``, this and child **CanvasItem** nodes with a lower Y position are rendered in front of nodes with a higher Y position. If ``false``, this and child **CanvasItem** nodes are rendered normally in scene tree order.
+If ``true``, this and child **CanvasItem** nodes with a higher Y position are rendered in front of nodes with a lower Y position. If ``false``, this and child **CanvasItem** nodes are rendered normally in scene tree order.
 
-With Y-sorting enabled on a parent node ('A') but disabled on a child node ('B'), the child node ('B') is sorted but its children ('C1', 'C2', etc) render together on the same Y position as the child node 'B'. This allows you to organize the render order of a scene without changing the scene tree.
+With Y-sorting enabled on a parent node ('A') but disabled on a child node ('B'), the child node ('B') is sorted but its children ('C1', 'C2', etc) render together on the same Y position as the child node ('B'). This allows you to organize the render order of a scene without changing the scene tree.
 
 Nodes sort relative to each other only if they are on the same :ref:`z_index<class_CanvasItem_property_z_index>`.
 
@@ -879,6 +879,8 @@ If ``antialiased`` is ``true``, half transparent "feathers" will be attached to 
 |void| **draw_colored_polygon**\ (\ points\: :ref:`PackedVector2Array<class_PackedVector2Array>`, color\: :ref:`Color<class_Color>`, uvs\: :ref:`PackedVector2Array<class_PackedVector2Array>` = PackedVector2Array(), texture\: :ref:`Texture2D<class_Texture2D>` = null\ ) :ref:`🔗<class_CanvasItem_method_draw_colored_polygon>`
 
 Draws a colored polygon of any number of points, convex or concave. Unlike :ref:`draw_polygon<class_CanvasItem_method_draw_polygon>`, a single color must be specified for the whole polygon.
+
+\ **Note:** If you frequently redraw the same polygon with a large number of vertices, consider pre-calculating the triangulation with :ref:`Geometry2D.triangulate_polygon<class_Geometry2D_method_triangulate_polygon>` and using :ref:`draw_mesh<class_CanvasItem_method_draw_mesh>`, :ref:`draw_multimesh<class_CanvasItem_method_draw_multimesh>`, or :ref:`RenderingServer.canvas_item_add_triangle_array<class_RenderingServer_method_canvas_item_add_triangle_array>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1052,6 +1054,8 @@ Draws a :ref:`MultiMesh<class_MultiMesh>` in 2D with the provided texture. See :
 |void| **draw_polygon**\ (\ points\: :ref:`PackedVector2Array<class_PackedVector2Array>`, colors\: :ref:`PackedColorArray<class_PackedColorArray>`, uvs\: :ref:`PackedVector2Array<class_PackedVector2Array>` = PackedVector2Array(), texture\: :ref:`Texture2D<class_Texture2D>` = null\ ) :ref:`🔗<class_CanvasItem_method_draw_polygon>`
 
 Draws a solid polygon of any number of points, convex or concave. Unlike :ref:`draw_colored_polygon<class_CanvasItem_method_draw_colored_polygon>`, each point's color can be changed individually. See also :ref:`draw_polyline<class_CanvasItem_method_draw_polyline>` and :ref:`draw_polyline_colors<class_CanvasItem_method_draw_polyline_colors>`. If you need more flexibility (such as being able to use bones), use :ref:`RenderingServer.canvas_item_add_triangle_array<class_RenderingServer_method_canvas_item_add_triangle_array>` instead.
+
+\ **Note:** If you frequently redraw the same polygon with a large number of vertices, consider pre-calculating the triangulation with :ref:`Geometry2D.triangulate_polygon<class_Geometry2D_method_triangulate_polygon>` and using :ref:`draw_mesh<class_CanvasItem_method_draw_mesh>`, :ref:`draw_multimesh<class_CanvasItem_method_draw_multimesh>`, or :ref:`RenderingServer.canvas_item_add_triangle_array<class_RenderingServer_method_canvas_item_add_triangle_array>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1469,6 +1473,8 @@ Returns ``true`` if global transform notifications are communicated to children.
 :ref:`bool<class_bool>` **is_visible_in_tree**\ (\ ) |const| :ref:`🔗<class_CanvasItem_method_is_visible_in_tree>`
 
 Returns ``true`` if the node is present in the :ref:`SceneTree<class_SceneTree>`, its :ref:`visible<class_CanvasItem_property_visible>` property is ``true`` and all its ancestors are also visible. If any ancestor is hidden, this node will not be visible in the scene tree, and is therefore not drawn (see :ref:`_draw<class_CanvasItem_private_method__draw>`).
+
+Visibility is checked only in parent nodes that inherit from **CanvasItem**, :ref:`CanvasLayer<class_CanvasLayer>`, and :ref:`Window<class_Window>`. If the parent is of any other type (such as :ref:`Node<class_Node>`, :ref:`AnimationPlayer<class_AnimationPlayer>`, or :ref:`Node3D<class_Node3D>`), it is assumed to be visible.
 
 .. rst-class:: classref-item-separator
 
