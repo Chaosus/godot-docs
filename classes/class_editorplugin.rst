@@ -89,6 +89,8 @@ Methods
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`add_autoload_singleton<class_EditorPlugin_method_add_autoload_singleton>`\ (\ name\: :ref:`String<class_String>`, path\: :ref:`String<class_String>`\ )                                                                                          |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                    | :ref:`add_context_menu_plugin<class_EditorPlugin_method_add_context_menu_plugin>`\ (\ slot\: :ref:`ContextMenuSlot<enum_EditorContextMenuPlugin_ContextMenuSlot>`, plugin\: :ref:`EditorContextMenuPlugin<class_EditorContextMenuPlugin>`\ )           |
+   +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Button<class_Button>`                               | :ref:`add_control_to_bottom_panel<class_EditorPlugin_method_add_control_to_bottom_panel>`\ (\ control\: :ref:`Control<class_Control>`, title\: :ref:`String<class_String>`, shortcut\: :ref:`Shortcut<class_Shortcut>` = null\ )                       |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`add_control_to_container<class_EditorPlugin_method_add_control_to_container>`\ (\ container\: :ref:`CustomControlContainer<enum_EditorPlugin_CustomControlContainer>`, control\: :ref:`Control<class_Control>`\ )                                |
@@ -98,6 +100,8 @@ Methods
    | |void|                                                    | :ref:`add_custom_type<class_EditorPlugin_method_add_custom_type>`\ (\ type\: :ref:`String<class_String>`, base\: :ref:`String<class_String>`, script\: :ref:`Script<class_Script>`, icon\: :ref:`Texture2D<class_Texture2D>`\ )                        |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`add_debugger_plugin<class_EditorPlugin_method_add_debugger_plugin>`\ (\ script\: :ref:`EditorDebuggerPlugin<class_EditorDebuggerPlugin>`\ )                                                                                                      |
+   +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                    | :ref:`add_export_platform<class_EditorPlugin_method_add_export_platform>`\ (\ platform\: :ref:`EditorExportPlatform<class_EditorExportPlatform>`\ )                                                                                                    |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`add_export_plugin<class_EditorPlugin_method_add_export_plugin>`\ (\ plugin\: :ref:`EditorExportPlugin<class_EditorExportPlugin>`\ )                                                                                                              |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -139,6 +143,8 @@ Methods
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`remove_autoload_singleton<class_EditorPlugin_method_remove_autoload_singleton>`\ (\ name\: :ref:`String<class_String>`\ )                                                                                                                        |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                    | :ref:`remove_context_menu_plugin<class_EditorPlugin_method_remove_context_menu_plugin>`\ (\ plugin\: :ref:`EditorContextMenuPlugin<class_EditorContextMenuPlugin>`\ )                                                                                  |
+   +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`remove_control_from_bottom_panel<class_EditorPlugin_method_remove_control_from_bottom_panel>`\ (\ control\: :ref:`Control<class_Control>`\ )                                                                                                     |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`remove_control_from_container<class_EditorPlugin_method_remove_control_from_container>`\ (\ container\: :ref:`CustomControlContainer<enum_EditorPlugin_CustomControlContainer>`, control\: :ref:`Control<class_Control>`\ )                      |
@@ -148,6 +154,8 @@ Methods
    | |void|                                                    | :ref:`remove_custom_type<class_EditorPlugin_method_remove_custom_type>`\ (\ type\: :ref:`String<class_String>`\ )                                                                                                                                      |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`remove_debugger_plugin<class_EditorPlugin_method_remove_debugger_plugin>`\ (\ script\: :ref:`EditorDebuggerPlugin<class_EditorDebuggerPlugin>`\ )                                                                                                |
+   +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                    | :ref:`remove_export_platform<class_EditorPlugin_method_remove_export_platform>`\ (\ platform\: :ref:`EditorExportPlatform<class_EditorExportPlatform>`\ )                                                                                              |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`remove_export_plugin<class_EditorPlugin_method_remove_export_plugin>`\ (\ plugin\: :ref:`EditorExportPlugin<class_EditorExportPlugin>`\ )                                                                                                        |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -586,7 +594,7 @@ Called by the engine when the 3D editor's viewport is updated. Use the ``overlay
 
     func _forward_3d_draw_over_viewport(overlay):
         # Draw a circle at cursor position.
-        overlay.draw_circle(overlay.get_local_mouse_position(), 64)
+        overlay.draw_circle(overlay.get_local_mouse_position(), 64, Color.WHITE)
     
     func _forward_3d_gui_input(camera, event):
         if event is InputEventMouseMotion:
@@ -642,8 +650,6 @@ You need to enable calling of this method by using :ref:`set_force_draw_over_for
 
 Called when there is a root node in the current edited scene, :ref:`_handles<class_EditorPlugin_private_method__handles>` is implemented, and an :ref:`InputEvent<class_InputEvent>` happens in the 3D viewport. The return value decides whether the :ref:`InputEvent<class_InputEvent>` is consumed or forwarded to other **EditorPlugin**\ s. See :ref:`AfterGUIInput<enum_EditorPlugin_AfterGUIInput>` for options.
 
-\ **Example:**\ 
-
 
 .. tabs::
 
@@ -663,9 +669,7 @@ Called when there is a root node in the current edited scene, :ref:`_handles<cla
 
 
 
-Must ``return EditorPlugin.AFTER_GUI_INPUT_PASS`` in order to forward the :ref:`InputEvent<class_InputEvent>` to other Editor classes.
-
-\ **Example:**\ 
+This method must return :ref:`AFTER_GUI_INPUT_PASS<class_EditorPlugin_constant_AFTER_GUI_INPUT_PASS>` in order to forward the :ref:`InputEvent<class_InputEvent>` to other Editor classes.
 
 
 .. tabs::
@@ -759,9 +763,7 @@ You need to enable calling of this method by using :ref:`set_force_draw_over_for
 
 :ref:`bool<class_bool>` **_forward_canvas_gui_input**\ (\ event\: :ref:`InputEvent<class_InputEvent>`\ ) |virtual| :ref:`🔗<class_EditorPlugin_private_method__forward_canvas_gui_input>`
 
-Called when there is a root node in the current edited scene, :ref:`_handles<class_EditorPlugin_private_method__handles>` is implemented and an :ref:`InputEvent<class_InputEvent>` happens in the 2D viewport. Intercepts the :ref:`InputEvent<class_InputEvent>`, if ``return true`` **EditorPlugin** consumes the ``event``, otherwise forwards ``event`` to other Editor classes.
-
-\ **Example:**\ 
+Called when there is a root node in the current edited scene, :ref:`_handles<class_EditorPlugin_private_method__handles>` is implemented, and an :ref:`InputEvent<class_InputEvent>` happens in the 2D viewport. If this method returns ``true``, ``event`` is intercepted by this **EditorPlugin**, otherwise ``event`` is forwarded to other Editor classes.
 
 
 .. tabs::
@@ -782,9 +784,7 @@ Called when there is a root node in the current edited scene, :ref:`_handles<cla
 
 
 
-Must ``return false`` in order to forward the :ref:`InputEvent<class_InputEvent>` to other Editor classes.
-
-\ **Example:**\ 
+This method must return ``false`` in order to forward the :ref:`InputEvent<class_InputEvent>` to other Editor classes.
 
 
 .. tabs::
@@ -1089,6 +1089,20 @@ Adds a script at ``path`` to the Autoload list as ``name``.
 
 ----
 
+.. _class_EditorPlugin_method_add_context_menu_plugin:
+
+.. rst-class:: classref-method
+
+|void| **add_context_menu_plugin**\ (\ slot\: :ref:`ContextMenuSlot<enum_EditorContextMenuPlugin_ContextMenuSlot>`, plugin\: :ref:`EditorContextMenuPlugin<class_EditorContextMenuPlugin>`\ ) :ref:`🔗<class_EditorPlugin_method_add_context_menu_plugin>`
+
+Adds a plugin to the context menu. ``slot`` is the context menu where the plugin will be added.
+
+See :ref:`ContextMenuSlot<enum_EditorContextMenuPlugin_ContextMenuSlot>` for available context menus. A plugin instance can belong only to a single context menu slot.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_EditorPlugin_method_add_control_to_bottom_panel:
 
 .. rst-class:: classref-method
@@ -1143,7 +1157,7 @@ Optionally, you can specify a shortcut parameter. When pressed, this shortcut wi
 
 |void| **add_custom_type**\ (\ type\: :ref:`String<class_String>`, base\: :ref:`String<class_String>`, script\: :ref:`Script<class_Script>`, icon\: :ref:`Texture2D<class_Texture2D>`\ ) :ref:`🔗<class_EditorPlugin_method_add_custom_type>`
 
-Adds a custom type, which will appear in the list of nodes or resources. An icon can be optionally passed.
+Adds a custom type, which will appear in the list of nodes or resources.
 
 When a given node or resource is selected, the base type will be instantiated (e.g. "Node3D", "Control", "Resource"), then the script will be loaded and set to this object.
 
@@ -1166,6 +1180,18 @@ During run-time, this will be a simple object with a script so this function doe
 |void| **add_debugger_plugin**\ (\ script\: :ref:`EditorDebuggerPlugin<class_EditorDebuggerPlugin>`\ ) :ref:`🔗<class_EditorPlugin_method_add_debugger_plugin>`
 
 Adds a :ref:`Script<class_Script>` as debugger plugin to the Debugger. The script must extend :ref:`EditorDebuggerPlugin<class_EditorDebuggerPlugin>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorPlugin_method_add_export_platform:
+
+.. rst-class:: classref-method
+
+|void| **add_export_platform**\ (\ platform\: :ref:`EditorExportPlatform<class_EditorExportPlatform>`\ ) :ref:`🔗<class_EditorPlugin_method_add_export_platform>`
+
+Registers a new :ref:`EditorExportPlatform<class_EditorExportPlatform>`. Export platforms provides functionality of exporting to the specific platform.
 
 .. rst-class:: classref-item-separator
 
@@ -1453,6 +1479,18 @@ Removes an Autoload ``name`` from the list.
 
 ----
 
+.. _class_EditorPlugin_method_remove_context_menu_plugin:
+
+.. rst-class:: classref-method
+
+|void| **remove_context_menu_plugin**\ (\ plugin\: :ref:`EditorContextMenuPlugin<class_EditorContextMenuPlugin>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_context_menu_plugin>`
+
+Removes the specified context menu plugin.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_EditorPlugin_method_remove_control_from_bottom_panel:
 
 .. rst-class:: classref-method
@@ -1513,6 +1551,18 @@ Removes the debugger plugin with given script from the Debugger.
 
 ----
 
+.. _class_EditorPlugin_method_remove_export_platform:
+
+.. rst-class:: classref-method
+
+|void| **remove_export_platform**\ (\ platform\: :ref:`EditorExportPlatform<class_EditorExportPlatform>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_export_platform>`
+
+Removes an export platform registered by :ref:`add_export_platform<class_EditorPlugin_method_add_export_platform>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_EditorPlugin_method_remove_export_plugin:
 
 .. rst-class:: classref-method
@@ -1543,7 +1593,7 @@ Removes an import plugin registered by :ref:`add_import_plugin<class_EditorPlugi
 
 |void| **remove_inspector_plugin**\ (\ plugin\: :ref:`EditorInspectorPlugin<class_EditorInspectorPlugin>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_inspector_plugin>`
 
-Removes an inspector plugin registered by :ref:`add_import_plugin<class_EditorPlugin_method_add_import_plugin>`
+Removes an inspector plugin registered by :ref:`add_inspector_plugin<class_EditorPlugin_method_add_inspector_plugin>`.
 
 .. rst-class:: classref-item-separator
 
