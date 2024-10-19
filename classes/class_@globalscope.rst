@@ -3045,9 +3045,7 @@ enum **Error**: :ref:`🔗<enum_@GlobalScope_Error>`
 
 Methods that return :ref:`Error<enum_@GlobalScope_Error>` return :ref:`OK<class_@GlobalScope_constant_OK>` when no error occurred.
 
-Since :ref:`OK<class_@GlobalScope_constant_OK>` has value 0, and all other error constants are positive integers, it can also be used in boolean checks.
-
-\ **Example:**\ 
+Since :ref:`OK<class_@GlobalScope_constant_OK>` has value ``0``, and all other error constants are positive integers, it can also be used in boolean checks.
 
 ::
 
@@ -3702,7 +3700,7 @@ If a property is :ref:`Array<class_Array>`, hints the editor how to show element
 
 
 
-Examples:
+\ **Examples:**\ 
 
 
 .. tabs::
@@ -3806,6 +3804,14 @@ Hints that an :ref:`int<class_int>` property is a pointer. Used by GDExtension.
 
 Hints that a property is an :ref:`Array<class_Array>` with the stored type specified in the hint string.
 
+.. _class_@GlobalScope_constant_PROPERTY_HINT_DICTIONARY_TYPE:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`PropertyHint<enum_@GlobalScope_PropertyHint>` **PROPERTY_HINT_DICTIONARY_TYPE** = ``38``
+
+Hints that a property is a :ref:`Dictionary<class_Dictionary>` with the stored types specified in the hint string.
+
 .. _class_@GlobalScope_constant_PROPERTY_HINT_LOCALE_ID:
 
 .. rst-class:: classref-enumeration-constant
@@ -3846,11 +3852,26 @@ Hints that a quaternion property should disable the temporary euler editor.
 
 Hints that a string property is a password, and every character is replaced with the secret character.
 
+.. _class_@GlobalScope_constant_PROPERTY_HINT_TOOL_BUTTON:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`PropertyHint<enum_@GlobalScope_PropertyHint>` **PROPERTY_HINT_TOOL_BUTTON** = ``39``
+
+Hints that a :ref:`Callable<class_Callable>` property should be displayed as a clickable button. When the button is pressed, the callable is called. The hint string specifies the button text and optionally an icon from the ``"EditorIcons"`` theme type.
+
+.. code:: text
+
+    "Click me!" - A button with the text "Click me!" and the default "Callable" icon.
+    "Click me!,ColorRect" - A button with the text "Click me!" and the "ColorRect" icon.
+
+\ **Note:** A :ref:`Callable<class_Callable>` cannot be properly serialized and stored in a file, so it is recommended to use :ref:`PROPERTY_USAGE_EDITOR<class_@GlobalScope_constant_PROPERTY_USAGE_EDITOR>` instead of :ref:`PROPERTY_USAGE_DEFAULT<class_@GlobalScope_constant_PROPERTY_USAGE_DEFAULT>`.
+
 .. _class_@GlobalScope_constant_PROPERTY_HINT_MAX:
 
 .. rst-class:: classref-enumeration-constant
 
-:ref:`PropertyHint<enum_@GlobalScope_PropertyHint>` **PROPERTY_HINT_MAX** = ``38``
+:ref:`PropertyHint<enum_@GlobalScope_PropertyHint>` **PROPERTY_HINT_MAX** = ``40``
 
 Represents the size of the :ref:`PropertyHint<enum_@GlobalScope_PropertyHint>` enum.
 
@@ -3878,7 +3899,7 @@ The property is not stored, and does not display in the editor. This is the defa
 
 :ref:`PropertyUsageFlags<enum_@GlobalScope_PropertyUsageFlags>` **PROPERTY_USAGE_STORAGE** = ``2``
 
-The property is serialized and saved in the scene file (default).
+The property is serialized and saved in the scene file (default for exported properties).
 
 .. _class_@GlobalScope_constant_PROPERTY_USAGE_EDITOR:
 
@@ -3886,7 +3907,7 @@ The property is serialized and saved in the scene file (default).
 
 :ref:`PropertyUsageFlags<enum_@GlobalScope_PropertyUsageFlags>` **PROPERTY_USAGE_EDITOR** = ``4``
 
-The property is shown in the :ref:`EditorInspector<class_EditorInspector>` (default).
+The property is shown in the :ref:`EditorInspector<class_EditorInspector>` (default for exported properties).
 
 .. _class_@GlobalScope_constant_PROPERTY_USAGE_INTERNAL:
 
@@ -5322,7 +5343,7 @@ Returns the hyperbolic arc (also called inverse) cosine of ``x``, returning a va
 
 :ref:`float<class_float>` **angle_difference**\ (\ from\: :ref:`float<class_float>`, to\: :ref:`float<class_float>`\ ) :ref:`🔗<class_@GlobalScope_method_angle_difference>`
 
-Returns the difference between the two angles, in the range of ``[-PI, +PI]``. When ``from`` and ``to`` are opposite, returns ``-PI`` if ``from`` is smaller than ``to``, or ``PI`` otherwise.
+Returns the difference between the two angles (in radians), in the range of ``[-PI, +PI]``. When ``from`` and ``to`` are opposite, returns ``-PI`` if ``from`` is smaller than ``to``, or ``PI`` otherwise.
 
 .. rst-class:: classref-item-separator
 
@@ -6084,9 +6105,9 @@ This function is faster than using :ref:`is_equal_approx<class_@GlobalScope_meth
 
 :ref:`Variant<class_Variant>` **lerp**\ (\ from\: :ref:`Variant<class_Variant>`, to\: :ref:`Variant<class_Variant>`, weight\: :ref:`Variant<class_Variant>`\ ) :ref:`🔗<class_@GlobalScope_method_lerp>`
 
-Linearly interpolates between two values by the factor defined in ``weight``. To perform interpolation, ``weight`` should be between ``0.0`` and ``1.0`` (inclusive). However, values outside this range are allowed and can be used to perform *extrapolation*. If this is not desired, use :ref:`clamp<class_@GlobalScope_method_clamp>` on the result of this function.
+Linearly interpolates between two values by the factor defined in ``weight``. To perform interpolation, ``weight`` should be between ``0.0`` and ``1.0`` (inclusive). However, values outside this range are allowed and can be used to perform *extrapolation*. If this is not desired, use :ref:`clampf<class_@GlobalScope_method_clampf>` to limit ``weight``.
 
-Both ``from`` and ``to`` must be the same type. Supported types: :ref:`int<class_int>`, :ref:`float<class_float>`, :ref:`Vector2<class_Vector2>`, :ref:`Vector3<class_Vector3>`, :ref:`Vector4<class_Vector4>`, :ref:`Color<class_Color>`, :ref:`Quaternion<class_Quaternion>`, :ref:`Basis<class_Basis>`.
+Both ``from`` and ``to`` must be the same type. Supported types: :ref:`int<class_int>`, :ref:`float<class_float>`, :ref:`Vector2<class_Vector2>`, :ref:`Vector3<class_Vector3>`, :ref:`Vector4<class_Vector4>`, :ref:`Color<class_Color>`, :ref:`Quaternion<class_Quaternion>`, :ref:`Basis<class_Basis>`, :ref:`Transform2D<class_Transform2D>`, :ref:`Transform3D<class_Transform3D>`.
 
 ::
 
@@ -6094,7 +6115,7 @@ Both ``from`` and ``to`` must be the same type. Supported types: :ref:`int<class
 
 See also :ref:`inverse_lerp<class_@GlobalScope_method_inverse_lerp>` which performs the reverse of this operation. To perform eased interpolation with :ref:`lerp<class_@GlobalScope_method_lerp>`, combine it with :ref:`ease<class_@GlobalScope_method_ease>` or :ref:`smoothstep<class_@GlobalScope_method_smoothstep>`. See also :ref:`remap<class_@GlobalScope_method_remap>` to map a continuous series of values to another.
 
-\ **Note:** For better type safety, use :ref:`lerpf<class_@GlobalScope_method_lerpf>`, :ref:`Vector2.lerp<class_Vector2_method_lerp>`, :ref:`Vector3.lerp<class_Vector3_method_lerp>`, :ref:`Vector4.lerp<class_Vector4_method_lerp>`, :ref:`Color.lerp<class_Color_method_lerp>`, :ref:`Quaternion.slerp<class_Quaternion_method_slerp>` or :ref:`Basis.slerp<class_Basis_method_slerp>`.
+\ **Note:** For better type safety, use :ref:`lerpf<class_@GlobalScope_method_lerpf>`, :ref:`Vector2.lerp<class_Vector2_method_lerp>`, :ref:`Vector3.lerp<class_Vector3_method_lerp>`, :ref:`Vector4.lerp<class_Vector4_method_lerp>`, :ref:`Color.lerp<class_Color_method_lerp>`, :ref:`Quaternion.slerp<class_Quaternion_method_slerp>`, :ref:`Basis.slerp<class_Basis_method_slerp>`, :ref:`Transform2D.interpolate_with<class_Transform2D_method_interpolate_with>`, or :ref:`Transform3D.interpolate_with<class_Transform3D_method_interpolate_with>`.
 
 .. rst-class:: classref-item-separator
 
@@ -6150,15 +6171,12 @@ See also :ref:`inverse_lerp<class_@GlobalScope_method_inverse_lerp>` which perfo
 
 :ref:`float<class_float>` **linear_to_db**\ (\ lin\: :ref:`float<class_float>`\ ) :ref:`🔗<class_@GlobalScope_method_linear_to_db>`
 
-Converts from linear energy to decibels (audio). This can be used to implement volume sliders that behave as expected (since volume isn't linear).
+Converts from linear energy to decibels (audio). Since volume is not normally linear, this can be used to implement volume sliders that behave as expected.
 
-\ **Example:**\ 
+\ **Example:** Change the Master bus's volume through a :ref:`Slider<class_Slider>` node, which ranges from ``0.0`` to ``1.0``:
 
 ::
 
-    # "Slider" refers to a node that inherits Range such as HSlider or VSlider.
-    # Its range must be configured to go from 0 to 1.
-    # Change the bus name if you'd like to change the volume of a specific bus only.
     AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db($Slider.value))
 
 .. rst-class:: classref-item-separator
@@ -6431,7 +6449,7 @@ Converts one or more arguments of any type to string in the best way possible an
 
 
 
-\ **Note:** Consider using :ref:`push_error<class_@GlobalScope_method_push_error>` and :ref:`push_warning<class_@GlobalScope_method_push_warning>` to print error and warning messages instead of :ref:`print<class_@GlobalScope_method_print>` or :ref:`print_rich<class_@GlobalScope_method_print_rich>`. This distinguishes them from print messages used for debugging purposes, while also displaying a stack trace when an error or warning is printed.
+\ **Note:** Consider using :ref:`push_error<class_@GlobalScope_method_push_error>` and :ref:`push_warning<class_@GlobalScope_method_push_warning>` to print error and warning messages instead of :ref:`print<class_@GlobalScope_method_print>` or :ref:`print_rich<class_@GlobalScope_method_print_rich>`. This distinguishes them from print messages used for debugging purposes, while also displaying a stack trace when an error or warning is printed. See also :ref:`Engine.print_to_stdout<class_Engine_property_print_to_stdout>` and :ref:`ProjectSettings.application/run/disable_stdout<class_ProjectSettings_property_application/run/disable_stdout>`.
 
 .. rst-class:: classref-item-separator
 
@@ -7020,7 +7038,7 @@ Returns ``-1.0`` if ``x`` is negative, ``1.0`` if ``x`` is positive, and ``0.0``
 
 :ref:`int<class_int>` **signi**\ (\ x\: :ref:`int<class_int>`\ ) :ref:`🔗<class_@GlobalScope_method_signi>`
 
-Returns ``-1`` if ``x`` is negative, ``1`` if ``x`` is positive, and ``0`` if if ``x`` is zero.
+Returns ``-1`` if ``x`` is negative, ``1`` if ``x`` is positive, and ``0`` if ``x`` is zero.
 
 ::
 
@@ -7072,9 +7090,11 @@ Returns the hyperbolic sine of ``x``.
 
 :ref:`float<class_float>` **smoothstep**\ (\ from\: :ref:`float<class_float>`, to\: :ref:`float<class_float>`, x\: :ref:`float<class_float>`\ ) :ref:`🔗<class_@GlobalScope_method_smoothstep>`
 
-Returns the result of smoothly interpolating the value of ``x`` between ``0`` and ``1``, based on the where ``x`` lies with respect to the edges ``from`` and ``to``.
+Returns a smooth cubic Hermite interpolation between ``0`` and ``1``.
 
-The return value is ``0`` if ``x <= from``, and ``1`` if ``x >= to``. If ``x`` lies between ``from`` and ``to``, the returned value follows an S-shaped curve that maps ``x`` between ``0`` and ``1``.
+For positive ranges (when ``from <= to``) the return value is ``0`` when ``x <= from``, and ``1`` when ``x >= to``. If ``x`` lies between ``from`` and ``to``, the return value follows an S-shaped curve that smoothly transitions from ``0`` to ``1``.
+
+For negative ranges (when ``from > to``) the function is mirrored and returns ``1`` when ``x <= to`` and ``0`` when ``x >= from``.
 
 This S-shaped curve is the cubic Hermite interpolator, given by ``f(y) = 3*y^2 - 2*y^3`` where ``y = (x-from) / (to-from)``.
 
@@ -7087,7 +7107,9 @@ This S-shaped curve is the cubic Hermite interpolator, given by ``f(y) = 3*y^2 -
 
 Compared to :ref:`ease<class_@GlobalScope_method_ease>` with a curve value of ``-1.6521``, :ref:`smoothstep<class_@GlobalScope_method_smoothstep>` returns the smoothest possible curve with no sudden changes in the derivative. If you need to perform more advanced transitions, use :ref:`Tween<class_Tween>` or :ref:`AnimationPlayer<class_AnimationPlayer>`.
 
-\ `Comparison between smoothstep() and ease(x, -1.6521) return values <https://raw.githubusercontent.com/godotengine/godot-docs/master/img/smoothstep_ease_comparison.png>`__
+\ `Comparison between smoothstep() and ease(x, -1.6521) return values <https://raw.githubusercontent.com/godotengine/godot-docs/master/img/smoothstep_ease_comparison.png>`__\ 
+
+\ `Smoothstep() return values with positive, zero, and negative ranges <https://raw.githubusercontent.com/godotengine/godot-docs/master/img/smoothstep_range.webp>`__
 
 .. rst-class:: classref-item-separator
 

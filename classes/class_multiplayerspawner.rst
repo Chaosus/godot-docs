@@ -79,7 +79,7 @@ Signals
 
 **despawned**\ (\ node\: :ref:`Node<class_Node>`\ ) :ref:`🔗<class_MultiplayerSpawner_signal_despawned>`
 
-Emitted when a spawnable scene or custom spawn was despawned by the multiplayer authority. Only called on puppets.
+Emitted when a spawnable scene or custom spawn was despawned by the multiplayer authority. Only called on remote peers.
 
 .. rst-class:: classref-item-separator
 
@@ -91,7 +91,7 @@ Emitted when a spawnable scene or custom spawn was despawned by the multiplayer 
 
 **spawned**\ (\ node\: :ref:`Node<class_Node>`\ ) :ref:`🔗<class_MultiplayerSpawner_signal_spawned>`
 
-Emitted when a spawnable scene or custom spawn was spawned by the multiplayer authority. Only called on puppets.
+Emitted when a spawnable scene or custom spawn was spawned by the multiplayer authority. Only called on remote peers.
 
 .. rst-class:: classref-section-separator
 
@@ -113,7 +113,7 @@ Property Descriptions
 - |void| **set_spawn_function**\ (\ value\: :ref:`Callable<class_Callable>`\ )
 - :ref:`Callable<class_Callable>` **get_spawn_function**\ (\ )
 
-Method called on all peers when for every custom :ref:`spawn<class_MultiplayerSpawner_method_spawn>` requested by the authority. Will receive the ``data`` parameter, and should return a :ref:`Node<class_Node>` that is not in the scene tree.
+Method called on all peers when a custom :ref:`spawn<class_MultiplayerSpawner_method_spawn>` is requested by the authority. Will receive the ``data`` parameter, and should return a :ref:`Node<class_Node>` that is not in the scene tree.
 
 \ **Note:** The returned node should **not** be added to the scene with :ref:`Node.add_child<class_Node_method_add_child>`. This is done automatically.
 
@@ -132,7 +132,7 @@ Method called on all peers when for every custom :ref:`spawn<class_MultiplayerSp
 - |void| **set_spawn_limit**\ (\ value\: :ref:`int<class_int>`\ )
 - :ref:`int<class_int>` **get_spawn_limit**\ (\ )
 
-Maximum nodes that is allowed to be spawned by this spawner. Includes both spawnable scenes and custom spawns.
+Maximum number of nodes allowed to be spawned by this spawner. Includes both spawnable scenes and custom spawns.
 
 When set to ``0`` (the default), there is no limit.
 
