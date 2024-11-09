@@ -27,6 +27,8 @@ Description
 
 \ **Performance:** It is greatly advised to enable low-processor usage mode (see :ref:`OS.low_processor_usage_mode<class_OS_property_low_processor_usage_mode>`) when using GraphEdits.
 
+\ **Note:** Keep in mind that :ref:`Node.get_children<class_Node_method_get_children>` will also return the connection layer node named ``_connection_layer`` due to technical limitations. This behavior may change in future releases.
+
 .. rst-class:: classref-reftable-group
 
 Properties
@@ -289,6 +291,18 @@ Emitted when user drags a connection from an output port into the empty space of
 **copy_nodes_request**\ (\ ) :ref:`🔗<class_GraphEdit_signal_copy_nodes_request>`
 
 Emitted when this **GraphEdit** captures a ``ui_copy`` action (:kbd:`Ctrl + C` by default). In general, this signal indicates that the selected :ref:`GraphElement<class_GraphElement>`\ s should be copied.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_GraphEdit_signal_cut_nodes_request:
+
+.. rst-class:: classref-signal
+
+**cut_nodes_request**\ (\ ) :ref:`🔗<class_GraphEdit_signal_cut_nodes_request>`
+
+Emitted when this **GraphEdit** captures a ``ui_cut`` action (:kbd:`Ctrl + X` by default). In general, this signal indicates that the selected :ref:`GraphElement<class_GraphElement>`\ s should be cut.
 
 .. rst-class:: classref-item-separator
 
