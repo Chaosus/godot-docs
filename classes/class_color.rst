@@ -48,29 +48,35 @@ Properties
 .. table::
    :widths: auto
 
-   +---------------------------+------------------------------------+---------+
-   | :ref:`float<class_float>` | :ref:`a<class_Color_property_a>`   | ``1.0`` |
-   +---------------------------+------------------------------------+---------+
-   | :ref:`int<class_int>`     | :ref:`a8<class_Color_property_a8>` | ``255`` |
-   +---------------------------+------------------------------------+---------+
-   | :ref:`float<class_float>` | :ref:`b<class_Color_property_b>`   | ``0.0`` |
-   +---------------------------+------------------------------------+---------+
-   | :ref:`int<class_int>`     | :ref:`b8<class_Color_property_b8>` | ``0``   |
-   +---------------------------+------------------------------------+---------+
-   | :ref:`float<class_float>` | :ref:`g<class_Color_property_g>`   | ``0.0`` |
-   +---------------------------+------------------------------------+---------+
-   | :ref:`int<class_int>`     | :ref:`g8<class_Color_property_g8>` | ``0``   |
-   +---------------------------+------------------------------------+---------+
-   | :ref:`float<class_float>` | :ref:`h<class_Color_property_h>`   | ``0.0`` |
-   +---------------------------+------------------------------------+---------+
-   | :ref:`float<class_float>` | :ref:`r<class_Color_property_r>`   | ``0.0`` |
-   +---------------------------+------------------------------------+---------+
-   | :ref:`int<class_int>`     | :ref:`r8<class_Color_property_r8>` | ``0``   |
-   +---------------------------+------------------------------------+---------+
-   | :ref:`float<class_float>` | :ref:`s<class_Color_property_s>`   | ``0.0`` |
-   +---------------------------+------------------------------------+---------+
-   | :ref:`float<class_float>` | :ref:`v<class_Color_property_v>`   | ``0.0`` |
-   +---------------------------+------------------------------------+---------+
+   +---------------------------+------------------------------------------------+---------+
+   | :ref:`float<class_float>` | :ref:`a<class_Color_property_a>`               | ``1.0`` |
+   +---------------------------+------------------------------------------------+---------+
+   | :ref:`int<class_int>`     | :ref:`a8<class_Color_property_a8>`             | ``255`` |
+   +---------------------------+------------------------------------------------+---------+
+   | :ref:`float<class_float>` | :ref:`b<class_Color_property_b>`               | ``0.0`` |
+   +---------------------------+------------------------------------------------+---------+
+   | :ref:`int<class_int>`     | :ref:`b8<class_Color_property_b8>`             | ``0``   |
+   +---------------------------+------------------------------------------------+---------+
+   | :ref:`float<class_float>` | :ref:`g<class_Color_property_g>`               | ``0.0`` |
+   +---------------------------+------------------------------------------------+---------+
+   | :ref:`int<class_int>`     | :ref:`g8<class_Color_property_g8>`             | ``0``   |
+   +---------------------------+------------------------------------------------+---------+
+   | :ref:`float<class_float>` | :ref:`h<class_Color_property_h>`               | ``0.0`` |
+   +---------------------------+------------------------------------------------+---------+
+   | :ref:`float<class_float>` | :ref:`ok_hsl_h<class_Color_property_ok_hsl_h>` | ``0.0`` |
+   +---------------------------+------------------------------------------------+---------+
+   | :ref:`float<class_float>` | :ref:`ok_hsl_l<class_Color_property_ok_hsl_l>` | ``0.0`` |
+   +---------------------------+------------------------------------------------+---------+
+   | :ref:`float<class_float>` | :ref:`ok_hsl_s<class_Color_property_ok_hsl_s>` | ``0.0`` |
+   +---------------------------+------------------------------------------------+---------+
+   | :ref:`float<class_float>` | :ref:`r<class_Color_property_r>`               | ``0.0`` |
+   +---------------------------+------------------------------------------------+---------+
+   | :ref:`int<class_int>`     | :ref:`r8<class_Color_property_r8>`             | ``0``   |
+   +---------------------------+------------------------------------------------+---------+
+   | :ref:`float<class_float>` | :ref:`s<class_Color_property_s>`               | ``0.0`` |
+   +---------------------------+------------------------------------------------+---------+
+   | :ref:`float<class_float>` | :ref:`v<class_Color_property_v>`               | ``0.0`` |
+   +---------------------------+------------------------------------------------+---------+
 
 .. rst-class:: classref-reftable-group
 
@@ -1462,6 +1468,42 @@ The HSV hue of this color, on the range 0 to 1.
 
 ----
 
+.. _class_Color_property_ok_hsl_h:
+
+.. rst-class:: classref-property
+
+:ref:`float<class_float>` **ok_hsl_h** = ``0.0`` :ref:`🔗<class_Color_property_ok_hsl_h>`
+
+The OKHSL hue of this color, on the range 0 to 1.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Color_property_ok_hsl_l:
+
+.. rst-class:: classref-property
+
+:ref:`float<class_float>` **ok_hsl_l** = ``0.0`` :ref:`🔗<class_Color_property_ok_hsl_l>`
+
+The OKHSL lightness of this color, on the range 0 to 1.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Color_property_ok_hsl_s:
+
+.. rst-class:: classref-property
+
+:ref:`float<class_float>` **ok_hsl_s** = ``0.0`` :ref:`🔗<class_Color_property_ok_hsl_s>`
+
+The OKHSL saturation of this color, on the range 0 to 1.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_Color_property_r:
 
 .. rst-class:: classref-property
@@ -1523,7 +1565,7 @@ Constructor Descriptions
 
 Constructs a default **Color** from opaque black. This is the same as :ref:`BLACK<class_Color_constant_BLACK>`.
 
-\ **Note:** in C#, constructs an empty color with all of its components set to ``0.0`` (transparent black).
+\ **Note:** In C#, this constructs a **Color** with all of its components set to ``0.0`` (transparent black).
 
 .. rst-class:: classref-item-separator
 
@@ -1771,6 +1813,8 @@ Decodes a **Color** from an RGBE9995 format integer. See :ref:`Image.FORMAT_RGBE
 
 Creates a **Color** from the given string, which can be either an HTML color code or a named color (case-insensitive). Returns ``default`` if the color cannot be inferred from the string.
 
+If you want to create a color from String in a constant expression, use the equivalent constructor instead (i.e. ``Color("color string")``).
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -1795,7 +1839,7 @@ Returns the light intensity of the color, as a value between 0.0 and 1.0 (inclus
 
 :ref:`Color<class_Color>` **hex**\ (\ hex\: :ref:`int<class_int>`\ ) |static| :ref:`🔗<class_Color_method_hex>`
 
-Returns the **Color** associated with the provided ``hex`` integer in 32-bit RGBA format (8 bits per channel).
+Returns the **Color** associated with the provided ``hex`` integer in 32-bit RGBA format (8 bits per channel). This method is the inverse of :ref:`to_rgba32<class_Color_method_to_rgba32>`.
 
 In GDScript and C#, the :ref:`int<class_int>` is best visualized with hexadecimal notation (``"0x"`` prefix, making it ``"0xRRGGBBAA"``).
 
@@ -1816,6 +1860,8 @@ In GDScript and C#, the :ref:`int<class_int>` is best visualized with hexadecima
 
 
 
+If you want to use hex notation in a constant expression, use the equivalent constructor instead (i.e. ``Color(0xRRGGBBAA)``).
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -1826,7 +1872,7 @@ In GDScript and C#, the :ref:`int<class_int>` is best visualized with hexadecima
 
 :ref:`Color<class_Color>` **hex64**\ (\ hex\: :ref:`int<class_int>`\ ) |static| :ref:`🔗<class_Color_method_hex64>`
 
-Returns the **Color** associated with the provided ``hex`` integer in 64-bit RGBA format (16 bits per channel).
+Returns the **Color** associated with the provided ``hex`` integer in 64-bit RGBA format (16 bits per channel). This method is the inverse of :ref:`to_rgba64<class_Color_method_to_rgba64>`.
 
 In GDScript and C#, the :ref:`int<class_int>` is best visualized with hexadecimal notation (``"0x"`` prefix, making it ``"0xRRRRGGGGBBBBAAAA"``).
 
@@ -2174,7 +2220,7 @@ Setting ``with_alpha`` to ``false``, excludes alpha from the hexadecimal string,
 
 :ref:`int<class_int>` **to_rgba32**\ (\ ) |const| :ref:`🔗<class_Color_method_to_rgba32>`
 
-Returns the color converted to a 32-bit integer in RGBA format (each component is 8 bits). RGBA is Godot's default format.
+Returns the color converted to a 32-bit integer in RGBA format (each component is 8 bits). RGBA is Godot's default format. This method is the inverse of :ref:`hex<class_Color_method_hex>`.
 
 
 .. tabs::
@@ -2201,7 +2247,7 @@ Returns the color converted to a 32-bit integer in RGBA format (each component i
 
 :ref:`int<class_int>` **to_rgba64**\ (\ ) |const| :ref:`🔗<class_Color_method_to_rgba64>`
 
-Returns the color converted to a 64-bit integer in RGBA format (each component is 16 bits). RGBA is Godot's default format.
+Returns the color converted to a 64-bit integer in RGBA format (each component is 16 bits). RGBA is Godot's default format. This method is the inverse of :ref:`hex64<class_Color_method_hex64>`.
 
 
 .. tabs::
