@@ -238,32 +238,47 @@ Operators
 
 .. rst-class:: classref-descriptions-group
 
-Constants
----------
+Enumerations
+------------
+
+.. _enum_Vector3_Axis:
+
+.. rst-class:: classref-enumeration
+
+enum **Axis**: :ref:`🔗<enum_Vector3_Axis>`
 
 .. _class_Vector3_constant_AXIS_X:
 
-.. rst-class:: classref-constant
+.. rst-class:: classref-enumeration-constant
 
-**AXIS_X** = ``0`` :ref:`🔗<class_Vector3_constant_AXIS_X>`
+:ref:`Axis<enum_Vector3_Axis>` **AXIS_X** = ``0``
 
 Enumerated value for the X axis. Returned by :ref:`max_axis_index<class_Vector3_method_max_axis_index>` and :ref:`min_axis_index<class_Vector3_method_min_axis_index>`.
 
 .. _class_Vector3_constant_AXIS_Y:
 
-.. rst-class:: classref-constant
+.. rst-class:: classref-enumeration-constant
 
-**AXIS_Y** = ``1`` :ref:`🔗<class_Vector3_constant_AXIS_Y>`
+:ref:`Axis<enum_Vector3_Axis>` **AXIS_Y** = ``1``
 
 Enumerated value for the Y axis. Returned by :ref:`max_axis_index<class_Vector3_method_max_axis_index>` and :ref:`min_axis_index<class_Vector3_method_min_axis_index>`.
 
 .. _class_Vector3_constant_AXIS_Z:
 
-.. rst-class:: classref-constant
+.. rst-class:: classref-enumeration-constant
 
-**AXIS_Z** = ``2`` :ref:`🔗<class_Vector3_constant_AXIS_Z>`
+:ref:`Axis<enum_Vector3_Axis>` **AXIS_Z** = ``2``
 
 Enumerated value for the Z axis. Returned by :ref:`max_axis_index<class_Vector3_method_max_axis_index>` and :ref:`min_axis_index<class_Vector3_method_min_axis_index>`.
+
+.. rst-class:: classref-section-separator
+
+----
+
+.. rst-class:: classref-descriptions-group
+
+Constants
+---------
 
 .. _class_Vector3_constant_ZERO:
 
@@ -666,7 +681,7 @@ Returns the distance between this vector and ``to``.
 
 Returns the dot product of this vector and ``with``. This can be used to compare the angle between two vectors. For example, this can be used to determine whether an enemy is facing the player.
 
-The dot product will be ``0`` for a straight angle (90 degrees), greater than 0 for angles narrower than 90 degrees and lower than 0 for angles wider than 90 degrees.
+The dot product will be ``0`` for a right angle (90 degrees), greater than 0 for angles narrower than 90 degrees and lower than 0 for angles wider than 90 degrees.
 
 When using unit (normalized) vectors, the result will always be between ``-1.0`` (180 degree angle) when the vectors are facing opposite directions, and ``1.0`` (0 degree angle) when the vectors are aligned.
 

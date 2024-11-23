@@ -59,9 +59,15 @@ Methods
    +------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                          | :ref:`_is_monophonic<class_AudioStream_private_method__is_monophonic>`\ (\ ) |virtual| |const|               |
    +------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                                          | :ref:`can_be_sampled<class_AudioStream_method_can_be_sampled>`\ (\ ) |const|                                 |
+   +------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------+
+   | :ref:`AudioSample<class_AudioSample>`                            | :ref:`generate_sample<class_AudioStream_method_generate_sample>`\ (\ ) |const|                               |
+   +------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------+
    | :ref:`float<class_float>`                                        | :ref:`get_length<class_AudioStream_method_get_length>`\ (\ ) |const|                                         |
    +------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------+
    | :ref:`AudioStreamPlayback<class_AudioStreamPlayback>`            | :ref:`instantiate_playback<class_AudioStream_method_instantiate_playback>`\ (\ )                             |
+   +------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                                          | :ref:`is_meta_stream<class_AudioStream_method_is_meta_stream>`\ (\ ) |const|                                 |
    +------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                          | :ref:`is_monophonic<class_AudioStream_method_is_monophonic>`\ (\ ) |const|                                   |
    +------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------+
@@ -162,7 +168,7 @@ Override this method to customize the name assigned to this audio stream. Unused
 
 :ref:`AudioStreamPlayback<class_AudioStreamPlayback>` **_instantiate_playback**\ (\ ) |virtual| |const| :ref:`🔗<class_AudioStream_private_method__instantiate_playback>`
 
-Override this method to customize the returned value of :ref:`instantiate_playback<class_AudioStream_method_instantiate_playback>`. Should returned a new :ref:`AudioStreamPlayback<class_AudioStreamPlayback>` created when the stream is played (such as by an :ref:`AudioStreamPlayer<class_AudioStreamPlayer>`)..
+Override this method to customize the returned value of :ref:`instantiate_playback<class_AudioStream_method_instantiate_playback>`. Should return a new :ref:`AudioStreamPlayback<class_AudioStreamPlayback>` created when the stream is played (such as by an :ref:`AudioStreamPlayer<class_AudioStreamPlayer>`).
 
 .. rst-class:: classref-item-separator
 
@@ -175,6 +181,34 @@ Override this method to customize the returned value of :ref:`instantiate_playba
 :ref:`bool<class_bool>` **_is_monophonic**\ (\ ) |virtual| |const| :ref:`🔗<class_AudioStream_private_method__is_monophonic>`
 
 Override this method to customize the returned value of :ref:`is_monophonic<class_AudioStream_method_is_monophonic>`. Should return ``true`` if this audio stream only supports one channel.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_AudioStream_method_can_be_sampled:
+
+.. rst-class:: classref-method
+
+:ref:`bool<class_bool>` **can_be_sampled**\ (\ ) |const| :ref:`🔗<class_AudioStream_method_can_be_sampled>`
+
+**Experimental:** This method may be changed or removed in future versions.
+
+Returns if the current **AudioStream** can be used as a sample. Only static streams can be sampled.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_AudioStream_method_generate_sample:
+
+.. rst-class:: classref-method
+
+:ref:`AudioSample<class_AudioSample>` **generate_sample**\ (\ ) |const| :ref:`🔗<class_AudioStream_method_generate_sample>`
+
+**Experimental:** This method may be changed or removed in future versions.
+
+Generates an :ref:`AudioSample<class_AudioSample>` based on the current stream.
 
 .. rst-class:: classref-item-separator
 
@@ -199,6 +233,18 @@ Returns the length of the audio stream in seconds.
 :ref:`AudioStreamPlayback<class_AudioStreamPlayback>` **instantiate_playback**\ (\ ) :ref:`🔗<class_AudioStream_method_instantiate_playback>`
 
 Returns a newly created :ref:`AudioStreamPlayback<class_AudioStreamPlayback>` intended to play this audio stream. Useful for when you want to extend :ref:`_instantiate_playback<class_AudioStream_private_method__instantiate_playback>` but call :ref:`instantiate_playback<class_AudioStream_method_instantiate_playback>` from an internally held AudioStream subresource. An example of this can be found in the source code for ``AudioStreamRandomPitch::instantiate_playback``.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_AudioStream_method_is_meta_stream:
+
+.. rst-class:: classref-method
+
+:ref:`bool<class_bool>` **is_meta_stream**\ (\ ) |const| :ref:`🔗<class_AudioStream_method_is_meta_stream>`
+
+Returns ``true`` if the stream is a collection of other streams, ``false`` otherwise.
 
 .. rst-class:: classref-item-separator
 
