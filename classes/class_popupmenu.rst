@@ -148,6 +148,8 @@ Methods
    +--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                          | :ref:`is_item_shortcut_disabled<class_PopupMenu_method_is_item_shortcut_disabled>`\ (\ index\: :ref:`int<class_int>`\ ) |const|                                                                                                                                                            |
    +--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                          | :ref:`is_native_menu<class_PopupMenu_method_is_native_menu>`\ (\ ) |const|                                                                                                                                                                                                                 |
+   +--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                          | :ref:`is_system_menu<class_PopupMenu_method_is_system_menu>`\ (\ ) |const|                                                                                                                                                                                                                 |
    +--------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                           | :ref:`remove_item<class_PopupMenu_method_remove_item>`\ (\ index\: :ref:`int<class_int>`\ )                                                                                                                                                                                                |
@@ -445,6 +447,8 @@ The number of items currently in the list.
 
 If ``true``, :ref:`MenuBar<class_MenuBar>` will use native menu when supported.
 
+\ **Note:** If **PopupMenu** is linked to :ref:`StatusIndicator<class_StatusIndicator>`, :ref:`MenuBar<class_MenuBar>`, or another **PopupMenu** item it can use native menu regardless of this property, use :ref:`is_native_menu<class_PopupMenu_method_is_native_menu>` to check it.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -650,10 +654,6 @@ Contrarily to normal binary items, multistate items can have more than two state
 
 An ``id`` can optionally be provided, as well as an accelerator (``accel``). If no ``id`` is provided, one will be created from the index. If no ``accel`` is provided, then the default value of 0 (corresponding to :ref:`@GlobalScope.KEY_NONE<class_@GlobalScope_constant_KEY_NONE>`) will be assigned to the item (which means it won't have any accelerator). See :ref:`get_item_accelerator<class_PopupMenu_method_get_item_accelerator>` for more info on accelerators.
 
-\ **Note:** Multistate items don't update their state automatically and must be done manually. See :ref:`toggle_item_multistate<class_PopupMenu_method_toggle_item_multistate>`, :ref:`set_item_multistate<class_PopupMenu_method_set_item_multistate>` and :ref:`get_item_multistate<class_PopupMenu_method_get_item_multistate>` for more info on how to control it.
-
-Example usage:
-
 ::
 
     func _ready():
@@ -669,6 +669,8 @@ Example usage:
                     2:
                         print("Third state")
             )
+
+\ **Note:** Multistate items don't update their state automatically and must be done manually. See :ref:`toggle_item_multistate<class_PopupMenu_method_toggle_item_multistate>`, :ref:`set_item_multistate<class_PopupMenu_method_set_item_multistate>` and :ref:`get_item_multistate<class_PopupMenu_method_get_item_multistate>` for more info on how to control it.
 
 .. rst-class:: classref-item-separator
 
@@ -1071,6 +1073,18 @@ Returns ``true`` if the item is a separator. If it is, it will be displayed as a
 :ref:`bool<class_bool>` **is_item_shortcut_disabled**\ (\ index\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_PopupMenu_method_is_item_shortcut_disabled>`
 
 Returns ``true`` if the specified item's shortcut is disabled.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_PopupMenu_method_is_native_menu:
+
+.. rst-class:: classref-method
+
+:ref:`bool<class_bool>` **is_native_menu**\ (\ ) |const| :ref:`🔗<class_PopupMenu_method_is_native_menu>`
+
+Returns ``true`` if the system native menu is supported and currently used by this **PopupMenu**.
 
 .. rst-class:: classref-item-separator
 
@@ -1819,7 +1833,7 @@ Font size of the menu items.
 
 :ref:`StyleBox<class_StyleBox>` **panel** :ref:`🔗<class_PopupMenu_theme_style_panel>`
 
-:ref:`StyleBox<class_StyleBox>` for the the background panel.
+:ref:`StyleBox<class_StyleBox>` for the background panel.
 
 .. rst-class:: classref-item-separator
 
