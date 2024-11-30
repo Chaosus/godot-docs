@@ -31,6 +31,8 @@ The **LightmapGI** node is used to compute and store baked lightmaps. Lightmaps 
 
 \ **Note:** If no custom lightmappers are installed, **LightmapGI** can only be baked from devices that support the Forward+ or Mobile rendering backends.
 
+\ **Note:** The **LightmapGI** node only bakes light data for child nodes of its parent. Nodes further up the hierarchy of the scene will not be baked.
+
 .. rst-class:: classref-introduction-group
 
 Tutorials
@@ -272,6 +274,22 @@ The user aborted the lightmap baking operation (typically by clicking the **Canc
 :ref:`BakeError<enum_LightmapGI_BakeError>` **BAKE_ERROR_TEXTURE_SIZE_TOO_SMALL** = ``9``
 
 Lightmap baking failed as the maximum texture size is too small to fit some of the meshes marked for baking.
+
+.. _class_LightmapGI_constant_BAKE_ERROR_LIGHTMAP_TOO_SMALL:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`BakeError<enum_LightmapGI_BakeError>` **BAKE_ERROR_LIGHTMAP_TOO_SMALL** = ``10``
+
+Lightmap baking failed as the lightmap is too small.
+
+.. _class_LightmapGI_constant_BAKE_ERROR_ATLAS_TOO_SMALL:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`BakeError<enum_LightmapGI_BakeError>` **BAKE_ERROR_ATLAS_TOO_SMALL** = ``11``
+
+Lightmap baking failed as the lightmap was unable to fit into an atlas.
 
 .. rst-class:: classref-item-separator
 
@@ -602,7 +620,7 @@ The maximum texture size for the generated texture atlas. Higher values will res
 
 The quality preset to use when baking lightmaps. This affects bake times, but output file sizes remain mostly identical across quality levels.
 
-To further speed up bake times, decrease :ref:`bounces<class_LightmapGI_property_bounces>`, disable :ref:`use_denoiser<class_LightmapGI_property_use_denoiser>` and increase the lightmap texel size on 3D scenes in the Import doc.
+To further speed up bake times, decrease :ref:`bounces<class_LightmapGI_property_bounces>`, disable :ref:`use_denoiser<class_LightmapGI_property_use_denoiser>` and increase the lightmap texel size on 3D scenes in the Import dock.
 
 .. rst-class:: classref-item-separator
 
@@ -620,6 +638,8 @@ To further speed up bake times, decrease :ref:`bounces<class_LightmapGI_property
 - :ref:`float<class_float>` **get_texel_scale**\ (\ )
 
 Scales the lightmap texel density of all meshes for the current bake. This is a multiplier that builds upon the existing lightmap texel size defined in each imported 3D scene, along with the per-mesh density multiplier (which is designed to be used when the same mesh is used at different scales). Lower values will result in faster bake times.
+
+For example, doubling :ref:`texel_scale<class_LightmapGI_property_texel_scale>` doubles the lightmap texture resolution for all objects *on each axis*, so it will *quadruple* the texel count.
 
 .. rst-class:: classref-item-separator
 

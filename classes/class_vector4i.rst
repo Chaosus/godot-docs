@@ -155,40 +155,55 @@ Operators
 
 .. rst-class:: classref-descriptions-group
 
-Constants
----------
+Enumerations
+------------
+
+.. _enum_Vector4i_Axis:
+
+.. rst-class:: classref-enumeration
+
+enum **Axis**: :ref:`🔗<enum_Vector4i_Axis>`
 
 .. _class_Vector4i_constant_AXIS_X:
 
-.. rst-class:: classref-constant
+.. rst-class:: classref-enumeration-constant
 
-**AXIS_X** = ``0`` :ref:`🔗<class_Vector4i_constant_AXIS_X>`
+:ref:`Axis<enum_Vector4i_Axis>` **AXIS_X** = ``0``
 
 Enumerated value for the X axis. Returned by :ref:`max_axis_index<class_Vector4i_method_max_axis_index>` and :ref:`min_axis_index<class_Vector4i_method_min_axis_index>`.
 
 .. _class_Vector4i_constant_AXIS_Y:
 
-.. rst-class:: classref-constant
+.. rst-class:: classref-enumeration-constant
 
-**AXIS_Y** = ``1`` :ref:`🔗<class_Vector4i_constant_AXIS_Y>`
+:ref:`Axis<enum_Vector4i_Axis>` **AXIS_Y** = ``1``
 
 Enumerated value for the Y axis. Returned by :ref:`max_axis_index<class_Vector4i_method_max_axis_index>` and :ref:`min_axis_index<class_Vector4i_method_min_axis_index>`.
 
 .. _class_Vector4i_constant_AXIS_Z:
 
-.. rst-class:: classref-constant
+.. rst-class:: classref-enumeration-constant
 
-**AXIS_Z** = ``2`` :ref:`🔗<class_Vector4i_constant_AXIS_Z>`
+:ref:`Axis<enum_Vector4i_Axis>` **AXIS_Z** = ``2``
 
 Enumerated value for the Z axis. Returned by :ref:`max_axis_index<class_Vector4i_method_max_axis_index>` and :ref:`min_axis_index<class_Vector4i_method_min_axis_index>`.
 
 .. _class_Vector4i_constant_AXIS_W:
 
-.. rst-class:: classref-constant
+.. rst-class:: classref-enumeration-constant
 
-**AXIS_W** = ``3`` :ref:`🔗<class_Vector4i_constant_AXIS_W>`
+:ref:`Axis<enum_Vector4i_Axis>` **AXIS_W** = ``3``
 
 Enumerated value for the W axis. Returned by :ref:`max_axis_index<class_Vector4i_method_max_axis_index>` and :ref:`min_axis_index<class_Vector4i_method_min_axis_index>`.
+
+.. rst-class:: classref-section-separator
+
+----
+
+.. rst-class:: classref-descriptions-group
+
+Constants
+---------
 
 .. _class_Vector4i_constant_ZERO:
 
@@ -566,7 +581,7 @@ Gets the remainder of each component of the **Vector4i** with the components of 
 
 :ref:`Vector4i<class_Vector4i>` **operator %**\ (\ right\: :ref:`int<class_int>`\ ) :ref:`🔗<class_Vector4i_operator_mod_int>`
 
-Gets the remainder of each component of the **Vector4i** with the the given :ref:`int<class_int>`. This operation uses truncated division, which is often not desired as it does not work well with negative numbers. Consider using :ref:`@GlobalScope.posmod<class_@GlobalScope_method_posmod>` instead if you want to handle negative numbers.
+Gets the remainder of each component of the **Vector4i** with the given :ref:`int<class_int>`. This operation uses truncated division, which is often not desired as it does not work well with negative numbers. Consider using :ref:`@GlobalScope.posmod<class_@GlobalScope_method_posmod>` instead if you want to handle negative numbers.
 
 ::
 

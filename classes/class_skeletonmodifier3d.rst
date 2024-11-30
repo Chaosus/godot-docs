@@ -12,7 +12,7 @@ SkeletonModifier3D
 
 **Inherits:** :ref:`Node3D<class_Node3D>` **<** :ref:`Node<class_Node>` **<** :ref:`Object<class_Object>`
 
-**Inherited By:** :ref:`PhysicalBoneSimulator3D<class_PhysicalBoneSimulator3D>`, :ref:`SkeletonIK3D<class_SkeletonIK3D>`, :ref:`XRBodyModifier3D<class_XRBodyModifier3D>`, :ref:`XRHandModifier3D<class_XRHandModifier3D>`
+**Inherited By:** :ref:`LookAtModifier3D<class_LookAtModifier3D>`, :ref:`PhysicalBoneSimulator3D<class_PhysicalBoneSimulator3D>`, :ref:`RetargetModifier3D<class_RetargetModifier3D>`, :ref:`SkeletonIK3D<class_SkeletonIK3D>`, :ref:`XRBodyModifier3D<class_XRBodyModifier3D>`, :ref:`XRHandModifier3D<class_XRHandModifier3D>`
 
 A Node that may modify Skeleton3D's bone.
 
@@ -25,7 +25,14 @@ Description
 
 If there is :ref:`AnimationMixer<class_AnimationMixer>`, modification always performs after playback process of the :ref:`AnimationMixer<class_AnimationMixer>`.
 
-This node should be used to implement custom IK solvers, constraints, or skeleton physics
+This node should be used to implement custom IK solvers, constraints, or skeleton physics.
+
+.. rst-class:: classref-introduction-group
+
+Tutorials
+---------
+
+- `Design of the Skeleton Modifier 3D <https://godotengine.org/article/design-of-the-skeleton-modifier-3d/>`__
 
 .. rst-class:: classref-reftable-group
 

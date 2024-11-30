@@ -157,6 +157,8 @@ Methods
    +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                                      | :ref:`font_get_supported_chars<class_TextServer_method_font_get_supported_chars>`\ (\ font_rid\: :ref:`RID<class_RID>`\ ) |const|                                                                                                                                                                                                                                                                         |
    +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`PackedInt32Array<class_PackedInt32Array>`                  | :ref:`font_get_supported_glyphs<class_TextServer_method_font_get_supported_glyphs>`\ (\ font_rid\: :ref:`RID<class_RID>`\ ) |const|                                                                                                                                                                                                                                                                       |
+   +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                                            | :ref:`font_get_texture_count<class_TextServer_method_font_get_texture_count>`\ (\ font_rid\: :ref:`RID<class_RID>`, size\: :ref:`Vector2i<class_Vector2i>`\ ) |const|                                                                                                                                                                                                                                     |
    +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Image<class_Image>`                                        | :ref:`font_get_texture_image<class_TextServer_method_font_get_texture_image>`\ (\ font_rid\: :ref:`RID<class_RID>`, size\: :ref:`Vector2i<class_Vector2i>`, texture_index\: :ref:`int<class_int>`\ ) |const|                                                                                                                                                                                              |
@@ -1894,6 +1896,16 @@ Returns outline contours of the glyph as a :ref:`Dictionary<class_Dictionary>` w
 
 \ ``orientation``    - :ref:`bool<class_bool>`, contour orientation. If ``true``, clockwise contours must be filled.
 
+- Two successive :ref:`CONTOUR_CURVE_TAG_ON<class_TextServer_constant_CONTOUR_CURVE_TAG_ON>` points indicate a line segment.
+
+- One :ref:`CONTOUR_CURVE_TAG_OFF_CONIC<class_TextServer_constant_CONTOUR_CURVE_TAG_OFF_CONIC>` point between two :ref:`CONTOUR_CURVE_TAG_ON<class_TextServer_constant_CONTOUR_CURVE_TAG_ON>` points indicates a single conic (quadratic) Bézier arc.
+
+- Two :ref:`CONTOUR_CURVE_TAG_OFF_CUBIC<class_TextServer_constant_CONTOUR_CURVE_TAG_OFF_CUBIC>` points between two :ref:`CONTOUR_CURVE_TAG_ON<class_TextServer_constant_CONTOUR_CURVE_TAG_ON>` points indicate a single cubic Bézier arc.
+
+- Two successive :ref:`CONTOUR_CURVE_TAG_OFF_CONIC<class_TextServer_constant_CONTOUR_CURVE_TAG_OFF_CONIC>` points indicate two successive conic (quadratic) Bézier arcs with a virtual :ref:`CONTOUR_CURVE_TAG_ON<class_TextServer_constant_CONTOUR_CURVE_TAG_ON>` point at their middle.
+
+- Each contour is closed. The last point of a contour uses the first point of a contour as its next point, and vice versa. The first point can be :ref:`CONTOUR_CURVE_TAG_OFF_CONIC<class_TextServer_constant_CONTOUR_CURVE_TAG_OFF_CONIC>` point.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -2245,6 +2257,18 @@ Returns font subpixel glyph positioning mode.
 :ref:`String<class_String>` **font_get_supported_chars**\ (\ font_rid\: :ref:`RID<class_RID>`\ ) |const| :ref:`🔗<class_TextServer_method_font_get_supported_chars>`
 
 Returns a string containing all the characters available in the font.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TextServer_method_font_get_supported_glyphs:
+
+.. rst-class:: classref-method
+
+:ref:`PackedInt32Array<class_PackedInt32Array>` **font_get_supported_glyphs**\ (\ font_rid\: :ref:`RID<class_RID>`\ ) |const| :ref:`🔗<class_TextServer_method_font_get_supported_glyphs>`
+
+Returns an array containing all glyph indices in the font.
 
 .. rst-class:: classref-item-separator
 
@@ -4145,7 +4169,7 @@ Returns array of the composite character boundaries.
 ::
 
     var ts = TextServerManager.get_primary_interface()
-    print(ts.string_get_word_breaks("Test ❤️‍🔥 Test")) # Prints [1, 2, 3, 4, 5, 9, 10, 11, 12, 13, 14]
+    print(ts.string_get_character_breaks("Test ❤️‍🔥 Test")) # Prints [1, 2, 3, 4, 5, 9, 10, 11, 12, 13, 14]
 
 .. rst-class:: classref-item-separator
 
@@ -4164,8 +4188,9 @@ When ``chars_per_line`` is greater than zero, line break boundaries are returned
 ::
 
     var ts = TextServerManager.get_primary_interface()
-    print(ts.string_get_word_breaks("Godot Engine")) # Prints [0, 5, 6, 12]
-    print(ts.string_get_word_breaks("Godot Engine", "en", 5)) # Prints [0, 5, 6, 11, 11, 12]
+    print(ts.string_get_word_breaks("The Godot Engine, 4")) # Prints [0, 3, 4, 9, 10, 16, 18, 19], which corresponds to the following substrings: "The", "Godot", "Engine", "4"
+    print(ts.string_get_word_breaks("The Godot Engine, 4", "en", 5)) # Prints [0, 3, 4, 9, 10, 15, 15, 19], which corresponds to the following substrings: "The", "Godot", "Engin", "e, 4"
+    print(ts.string_get_word_breaks("The Godot Engine, 4", "en", 10)) # Prints [0, 9, 10, 19], which corresponds to the following substrings: "The Godot", "Engine, 4"
 
 .. rst-class:: classref-item-separator
 

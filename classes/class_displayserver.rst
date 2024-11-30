@@ -190,7 +190,11 @@ Methods
    +-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                                  | :ref:`global_menu_set_popup_callbacks<class_DisplayServer_method_global_menu_set_popup_callbacks>`\ (\ menu_root\: :ref:`String<class_String>`, open_callback\: :ref:`Callable<class_Callable>`, close_callback\: :ref:`Callable<class_Callable>`\ )                                                                                                                                                                                                                                                                                                                |
    +-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                                                 | :ref:`has_additional_outputs<class_DisplayServer_method_has_additional_outputs>`\ (\ ) |const|                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+   +-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                                 | :ref:`has_feature<class_DisplayServer_method_has_feature>`\ (\ feature\: :ref:`Feature<enum_DisplayServer_Feature>`\ ) |const|                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+   +-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                                                 | :ref:`has_hardware_keyboard<class_DisplayServer_method_has_hardware_keyboard>`\ (\ ) |const|                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
    +-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                                  | :ref:`help_set_search_callbacks<class_DisplayServer_method_help_set_search_callbacks>`\ (\ search_callback\: :ref:`Callable<class_Callable>`, action_callback\: :ref:`Callable<class_Callable>`\ )                                                                                                                                                                                                                                                                                                                                                                  |
    +-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -229,6 +233,8 @@ Methods
    | |void|                                                                  | :ref:`mouse_set_mode<class_DisplayServer_method_mouse_set_mode>`\ (\ mouse_mode\: :ref:`MouseMode<enum_DisplayServer_MouseMode>`\ )                                                                                                                                                                                                                                                                                                                                                                                                                                 |
    +-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                                  | :ref:`process_events<class_DisplayServer_method_process_events>`\ (\ )                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+   +-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                                  | :ref:`register_additional_output<class_DisplayServer_method_register_additional_output>`\ (\ object\: :ref:`Object<class_Object>`\ )                                                                                                                                                                                                                                                                                                                                                                                                                                |
    +-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                                                   | :ref:`screen_get_dpi<class_DisplayServer_method_screen_get_dpi>`\ (\ screen\: :ref:`int<class_int>` = -1\ ) |const|                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
    +-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -297,6 +303,8 @@ Methods
    | |void|                                                                  | :ref:`tts_speak<class_DisplayServer_method_tts_speak>`\ (\ text\: :ref:`String<class_String>`, voice\: :ref:`String<class_String>`, volume\: :ref:`int<class_int>` = 50, pitch\: :ref:`float<class_float>` = 1.0, rate\: :ref:`float<class_float>` = 1.0, utterance_id\: :ref:`int<class_int>` = 0, interrupt\: :ref:`bool<class_bool>` = false\ )                                                                                                                                                                                                                  |
    +-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                                  | :ref:`tts_stop<class_DisplayServer_method_tts_stop>`\ (\ )                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+   +-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                                  | :ref:`unregister_additional_output<class_DisplayServer_method_unregister_additional_output>`\ (\ object\: :ref:`Object<class_Object>`\ )                                                                                                                                                                                                                                                                                                                                                                                                                            |
    +-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                                                   | :ref:`virtual_keyboard_get_height<class_DisplayServer_method_virtual_keyboard_get_height>`\ (\ ) |const|                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
    +-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -610,7 +618,15 @@ Display server supports spawning text input dialogs using the operating system's
 
 :ref:`Feature<enum_DisplayServer_Feature>` **FEATURE_NATIVE_DIALOG_FILE** = ``25``
 
-Display server supports spawning dialogs for selecting files or directories using the operating system's native look-and-feel. See :ref:`file_dialog_show<class_DisplayServer_method_file_dialog_show>` and :ref:`file_dialog_with_options_show<class_DisplayServer_method_file_dialog_with_options_show>`. **Windows, macOS, Linux (X11/Wayland)**
+Display server supports spawning dialogs for selecting files or directories using the operating system's native look-and-feel. See :ref:`file_dialog_show<class_DisplayServer_method_file_dialog_show>`. **Windows, macOS, Linux (X11/Wayland), Android**
+
+.. _class_DisplayServer_constant_FEATURE_NATIVE_DIALOG_FILE_EXTRA:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`Feature<enum_DisplayServer_Feature>` **FEATURE_NATIVE_DIALOG_FILE_EXTRA** = ``26``
+
+The display server supports all features of :ref:`FEATURE_NATIVE_DIALOG_FILE<class_DisplayServer_constant_FEATURE_NATIVE_DIALOG_FILE>`, with the added functionality of Options and native dialog file access to ``res://`` and ``user://`` paths. See :ref:`file_dialog_show<class_DisplayServer_method_file_dialog_show>` and :ref:`file_dialog_with_options_show<class_DisplayServer_method_file_dialog_with_options_show>`. **Windows, macOS, Linux (X11/Wayland)**
 
 .. rst-class:: classref-item-separator
 
@@ -1054,6 +1070,8 @@ Full screen mode with full multi-window support.
 
 Full screen window covers the entire display area of a screen and has no decorations. The display's video mode is not changed.
 
+\ **On Android:** This enables immersive mode.
+
 \ **On Windows:** Multi-window full-screen mode has a 1px border of the :ref:`ProjectSettings.rendering/environment/defaults/default_clear_color<class_ProjectSettings_property_rendering/environment/defaults/default_clear_color>` color.
 
 \ **On macOS:** A new desktop is used to display the running project.
@@ -1069,6 +1087,8 @@ Full screen window covers the entire display area of a screen and has no decorat
 A single window full screen mode. This mode has less overhead, but only one window can be open on a given screen at a time (opening a child window or application switching will trigger a full screen transition).
 
 Full screen window covers the entire display area of a screen and has no border or decorations. The display's video mode is not changed.
+
+\ **On Android:** This enables immersive mode.
 
 \ **On Windows:** Depending on video driver, full screen transition might cause screens to go black for a moment.
 
@@ -1162,11 +1182,21 @@ Use :ref:`window_get_safe_title_margins<class_DisplayServer_method_window_get_sa
 
 All mouse events are passed to the underlying window of the same application.
 
+.. _class_DisplayServer_constant_WINDOW_FLAG_SHARP_CORNERS:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`WindowFlags<enum_DisplayServer_WindowFlags>` **WINDOW_FLAG_SHARP_CORNERS** = ``8``
+
+Window style is overridden, forcing sharp corners.
+
+\ **Note:** This flag is implemented only on Windows (11).
+
 .. _class_DisplayServer_constant_WINDOW_FLAG_MAX:
 
 .. rst-class:: classref-enumeration-constant
 
-:ref:`WindowFlags<enum_DisplayServer_WindowFlags>` **WINDOW_FLAG_MAX** = ``8``
+:ref:`WindowFlags<enum_DisplayServer_WindowFlags>` **WINDOW_FLAG_MAX** = ``9``
 
 Max value of the :ref:`WindowFlags<enum_DisplayServer_WindowFlags>`.
 
@@ -1314,6 +1344,8 @@ Display handle:
 
 - Linux (X11): ``X11::Display*`` for the display.
 
+- Linux (Wayland): ``wl_display`` for the display.
+
 - Android: ``EGLDisplay`` for the display.
 
 .. _class_DisplayServer_constant_WINDOW_HANDLE:
@@ -1327,6 +1359,8 @@ Window handle:
 - Windows: ``HWND`` for the window.
 
 - Linux (X11): ``X11::Window*`` for the window.
+
+- Linux (Wayland): ``wl_surface`` for the window.
 
 - macOS: ``NSWindow*`` for the window.
 
@@ -1360,9 +1394,35 @@ OpenGL context (only with the GL Compatibility renderer):
 
 - Linux (X11): ``GLXContext*`` for the window.
 
+- Linux (Wayland): ``EGLContext`` for the window.
+
 - macOS: ``NSOpenGLContext*`` for the window (native GL), or ``EGLContext`` for the window (ANGLE).
 
 - Android: ``EGLContext`` for the window.
+
+.. _class_DisplayServer_constant_EGL_DISPLAY:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`HandleType<enum_DisplayServer_HandleType>` **EGL_DISPLAY** = ``4``
+
+- Windows: ``EGLDisplay`` for the window (ANGLE).
+
+- macOS: ``EGLDisplay`` for the window (ANGLE).
+
+- Linux (Wayland): ``EGLDisplay`` for the window.
+
+.. _class_DisplayServer_constant_EGL_CONFIG:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`HandleType<enum_DisplayServer_HandleType>` **EGL_CONFIG** = ``5``
+
+- Windows: ``EGLConfig`` for the window (ANGLE).
+
+- macOS: ``EGLConfig`` for the window (ANGLE).
+
+- Linux (Wayland): ``EGLConfig`` for the window.
 
 .. rst-class:: classref-item-separator
 
@@ -1508,6 +1568,8 @@ Returns the user's clipboard as a string if possible.
 
 Returns the user's clipboard as an image if possible.
 
+\ **Note:** This method uses the copied pixel data, e.g. from a image editing software or a web browser, not an image file copied from file explorer.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -1648,7 +1710,7 @@ Removes the application status indicator.
 
 Shows a text input dialog which uses the operating system's native look-and-feel. ``callback`` should accept a single :ref:`String<class_String>` parameter which contains the text field's contents.
 
-\ **Note:** This method is implemented if the display server has the :ref:`FEATURE_NATIVE_DIALOG_INPUT<class_DisplayServer_constant_FEATURE_NATIVE_DIALOG_INPUT>` feature. Supported platforms include macOS and Windows.
+\ **Note:** This method is implemented if the display server has the :ref:`FEATURE_NATIVE_DIALOG_INPUT<class_DisplayServer_constant_FEATURE_NATIVE_DIALOG_INPUT>` feature. Supported platforms include macOS, Windows, and Android.
 
 .. rst-class:: classref-item-separator
 
@@ -1692,15 +1754,17 @@ Displays OS native dialog for selecting files or directories in the file system.
 
 Each filter string in the ``filters`` array should be formatted like this: ``*.txt,*.doc;Text Files``. The description text of the filter is optional and can be omitted. See also :ref:`FileDialog.filters<class_FileDialog_property_filters>`.
 
-Callbacks have the following arguments: ``status: bool, selected_paths: PackedStringArray, selected_filter_index: int``.
+Callbacks have the following arguments: ``status: bool, selected_paths: PackedStringArray, selected_filter_index: int``. **On Android,** callback argument ``selected_filter_index`` is always zero.
 
-\ **Note:** This method is implemented if the display server has the :ref:`FEATURE_NATIVE_DIALOG_FILE<class_DisplayServer_constant_FEATURE_NATIVE_DIALOG_FILE>` feature. Supported platforms include Linux (X11/Wayland), Windows, and macOS.
+\ **Note:** This method is implemented if the display server has the :ref:`FEATURE_NATIVE_DIALOG_FILE<class_DisplayServer_constant_FEATURE_NATIVE_DIALOG_FILE>` feature. Supported platforms include Linux (X11/Wayland), Windows, macOS, and Android.
 
 \ **Note:** ``current_directory`` might be ignored.
 
-\ **Note:** On Linux, ``show_hidden`` is ignored.
+\ **Note:** On Android, the filter strings in the ``filters`` array should be specified using MIME types, for example:``image/png, image/jpeg"``. Additionally, the ``mode`` :ref:`FILE_DIALOG_MODE_OPEN_ANY<class_DisplayServer_constant_FILE_DIALOG_MODE_OPEN_ANY>` is not supported on Android.
 
-\ **Note:** On macOS, native file dialogs have no title.
+\ **Note:** On Android and Linux, ``show_hidden`` is ignored.
+
+\ **Note:** On Android and macOS, native file dialogs have no title.
 
 \ **Note:** On macOS, sandboxed apps will save security-scoped bookmarks to retain access to the opened folders across multiple sessions. Use :ref:`OS.get_granted_permissions<class_OS_method_get_granted_permissions>` to get a list of saved bookmarks.
 
@@ -1728,7 +1792,7 @@ Each filter string in the ``filters`` array should be formatted like this: ``*.t
 
 Callbacks have the following arguments: ``status: bool, selected_paths: PackedStringArray, selected_filter_index: int, selected_option: Dictionary``.
 
-\ **Note:** This method is implemented if the display server has the :ref:`FEATURE_NATIVE_DIALOG_FILE<class_DisplayServer_constant_FEATURE_NATIVE_DIALOG_FILE>` feature. Supported platforms include Linux (X11/Wayland), Windows, and macOS.
+\ **Note:** This method is implemented if the display server has the :ref:`FEATURE_NATIVE_DIALOG_FILE_EXTRA<class_DisplayServer_constant_FEATURE_NATIVE_DIALOG_FILE_EXTRA>` feature. Supported platforms include Linux (X11/Wayland), Windows, and macOS.
 
 \ **Note:** ``current_directory`` might be ignored.
 
@@ -1764,7 +1828,7 @@ Forces window manager processing while ignoring all :ref:`InputEvent<class_Input
 
 Returns OS theme accent color. Returns ``Color(0, 0, 0, 0)``, if accent color is unknown.
 
-\ **Note:** This method is implemented on macOS and Windows.
+\ **Note:** This method is implemented on macOS, Windows, and Android.
 
 .. rst-class:: classref-item-separator
 
@@ -1866,7 +1930,7 @@ Returns the number of displays available.
 
 :ref:`int<class_int>` **get_screen_from_rect**\ (\ rect\: :ref:`Rect2<class_Rect2>`\ ) |const| :ref:`🔗<class_DisplayServer_method_get_screen_from_rect>`
 
-Returns index of the screen which contains specified rectangle.
+Returns the index of the screen that overlaps the most with the given rectangle. Returns ``-1`` if the rectangle doesn't overlap with any screen or has no area.
 
 .. rst-class:: classref-item-separator
 
@@ -2875,6 +2939,18 @@ Registers callables to emit when the menu is respectively about to show or close
 
 ----
 
+.. _class_DisplayServer_method_has_additional_outputs:
+
+.. rst-class:: classref-method
+
+:ref:`bool<class_bool>` **has_additional_outputs**\ (\ ) |const| :ref:`🔗<class_DisplayServer_method_has_additional_outputs>`
+
+Returns ``true`` if any additional outputs have been registered via :ref:`register_additional_output<class_DisplayServer_method_register_additional_output>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_DisplayServer_method_has_feature:
 
 .. rst-class:: classref-method
@@ -2882,6 +2958,20 @@ Registers callables to emit when the menu is respectively about to show or close
 :ref:`bool<class_bool>` **has_feature**\ (\ feature\: :ref:`Feature<enum_DisplayServer_Feature>`\ ) |const| :ref:`🔗<class_DisplayServer_method_has_feature>`
 
 Returns ``true`` if the specified ``feature`` is supported by the current **DisplayServer**, ``false`` otherwise.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_DisplayServer_method_has_hardware_keyboard:
+
+.. rst-class:: classref-method
+
+:ref:`bool<class_bool>` **has_hardware_keyboard**\ (\ ) |const| :ref:`🔗<class_DisplayServer_method_has_hardware_keyboard>`
+
+Returns ``true`` if hardware keyboard is connected.
+
+\ **Note:** This method is implemented on Android and iOS, on other platforms this method always returns ``true``.
 
 .. rst-class:: classref-item-separator
 
@@ -3143,6 +3233,20 @@ Perform window manager processing, including input flushing. See also :ref:`forc
 
 ----
 
+.. _class_DisplayServer_method_register_additional_output:
+
+.. rst-class:: classref-method
+
+|void| **register_additional_output**\ (\ object\: :ref:`Object<class_Object>`\ ) :ref:`🔗<class_DisplayServer_method_register_additional_output>`
+
+Registers an :ref:`Object<class_Object>` which represents an additional output that will be rendered too, beyond normal windows. The :ref:`Object<class_Object>` is only used as an identifier, which can be later passed to :ref:`unregister_additional_output<class_DisplayServer_method_unregister_additional_output>`.
+
+This can be used to prevent Godot from skipping rendering when no normal windows are visible.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_DisplayServer_method_screen_get_dpi:
 
 .. rst-class:: classref-method
@@ -3291,7 +3395,7 @@ Returns the scale factor of the specified screen by index.
 
 \ **Note:** On Linux (Wayland), the returned value is accurate only when ``screen`` is :ref:`SCREEN_OF_MAIN_WINDOW<class_DisplayServer_constant_SCREEN_OF_MAIN_WINDOW>`. Due to API limitations, passing a direct index will return a rounded-up integer, if the screen has a fractional scale (e.g. ``1.25`` would get rounded up to ``2.0``).
 
-\ **Note:** This method is implemented only on macOS and Linux (Wayland).
+\ **Note:** This method is implemented on Android, iOS, Web, macOS, and Linux (Wayland).
 
 .. rst-class:: classref-item-separator
 
@@ -3708,6 +3812,18 @@ Stops synthesis in progress and removes all utterances from the queue.
 \ **Note:** This method is implemented on Android, iOS, Web, Linux (X11/Linux), macOS, and Windows.
 
 \ **Note:** :ref:`ProjectSettings.audio/general/text_to_speech<class_ProjectSettings_property_audio/general/text_to_speech>` should be ``true`` to use text-to-speech.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_DisplayServer_method_unregister_additional_output:
+
+.. rst-class:: classref-method
+
+|void| **unregister_additional_output**\ (\ object\: :ref:`Object<class_Object>`\ ) :ref:`🔗<class_DisplayServer_method_unregister_additional_output>`
+
+Unregisters an :ref:`Object<class_Object>` representing an additional output, that was registered via :ref:`register_additional_output<class_DisplayServer_method_register_additional_output>`.
 
 .. rst-class:: classref-item-separator
 
@@ -4211,6 +4327,8 @@ Sets the minimum size for the given window to ``min_size`` in pixels. Normally, 
 
 Sets window mode for the given window to ``mode``. See :ref:`WindowMode<enum_DisplayServer_WindowMode>` for possible values and how each mode behaves.
 
+\ **Note:** On Android, setting it to :ref:`WINDOW_MODE_FULLSCREEN<class_DisplayServer_constant_WINDOW_MODE_FULLSCREEN>` or :ref:`WINDOW_MODE_EXCLUSIVE_FULLSCREEN<class_DisplayServer_constant_WINDOW_MODE_EXCLUSIVE_FULLSCREEN>` will enable immersive mode.
+
 \ **Note:** Setting the window to full screen forcibly sets the borderless flag to ``true``, so make sure to set it back to ``false`` when not wanted.
 
 .. rst-class:: classref-item-separator
@@ -4351,7 +4469,7 @@ Sets the title of the given window to ``title``.
 
 |void| **window_set_transient**\ (\ window_id\: :ref:`int<class_int>`, parent_window_id\: :ref:`int<class_int>`\ ) :ref:`🔗<class_DisplayServer_method_window_set_transient>`
 
-Sets window transient parent. Transient window is will be destroyed with its transient parent and will return focus to their parent when closed. The transient window is displayed on top of a non-exclusive full-screen parent window. Transient windows can't enter full-screen mode.
+Sets window transient parent. Transient window will be destroyed with its transient parent and will return focus to their parent when closed. The transient window is displayed on top of a non-exclusive full-screen parent window. Transient windows can't enter full-screen mode.
 
 \ **Note:** It's recommended to change this value using :ref:`Window.transient<class_Window_property_transient>` instead.
 
