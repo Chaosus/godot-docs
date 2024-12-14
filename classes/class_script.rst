@@ -65,6 +65,8 @@ Methods
    +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Variant<class_Variant>`                                    | :ref:`get_property_default_value<class_Script_method_get_property_default_value>`\ (\ property\: :ref:`StringName<class_StringName>`\ ) |
    +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`Variant<class_Variant>`                                    | :ref:`get_rpc_config<class_Script_method_get_rpc_config>`\ (\ ) |const|                                                                 |
+   +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Dictionary<class_Dictionary>`                              | :ref:`get_script_constant_map<class_Script_method_get_script_constant_map>`\ (\ )                                                       |
    +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Array<class_Array>`\[:ref:`Dictionary<class_Dictionary>`\] | :ref:`get_script_method_list<class_Script_method_get_script_method_list>`\ (\ )                                                         |
@@ -198,6 +200,18 @@ Returns the default value of the specified property.
 
 ----
 
+.. _class_Script_method_get_rpc_config:
+
+.. rst-class:: classref-method
+
+:ref:`Variant<class_Variant>` **get_rpc_config**\ (\ ) |const| :ref:`🔗<class_Script_method_get_rpc_config>`
+
+Returns a :ref:`Dictionary<class_Dictionary>` mapping method names to their RPC configuration defined by this script.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_Script_method_get_script_constant_map:
 
 .. rst-class:: classref-method
@@ -265,6 +279,8 @@ Returns ``true`` if the script, or a base class, defines a signal with the given
 :ref:`bool<class_bool>` **has_source_code**\ (\ ) |const| :ref:`🔗<class_Script_method_has_source_code>`
 
 Returns ``true`` if the script contains non-empty source code.
+
+\ **Note:** If a script does not have source code, this does not mean that it is invalid or unusable. For example, a :ref:`GDScript<class_GDScript>` that was exported with binary tokenization has no source code, but still behaves as expected and could be instantiated. This can be checked with :ref:`can_instantiate<class_Script_method_can_instantiate>`.
 
 .. rst-class:: classref-item-separator
 

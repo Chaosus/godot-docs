@@ -100,6 +100,7 @@ Nodes
     class_editorresourcepreview
     class_editorscriptpicker
     class_editorspinslider
+    class_editortoaster
     class_filedialog
     class_filesystemdock
     class_flowcontainer
@@ -147,6 +148,7 @@ Nodes
     class_line2d
     class_lineedit
     class_linkbutton
+    class_lookatmodifier3d
     class_margincontainer
     class_marker2d
     class_marker3d
@@ -172,11 +174,15 @@ Nodes
     class_node3d
     class_occluderinstance3d
     class_omnilight3d
+    class_openxrbindingmodifiereditor
     class_openxrcompositionlayer
     class_openxrcompositionlayercylinder
     class_openxrcompositionlayerequirect
     class_openxrcompositionlayerquad
     class_openxrhand
+    class_openxrinteractionprofileeditor
+    class_openxrinteractionprofileeditorbase
+    class_openxrvisibilitymask
     class_optionbutton
     class_panel
     class_panelcontainer
@@ -208,6 +214,7 @@ Nodes
     class_remotetransform2d
     class_remotetransform3d
     class_resourcepreloader
+    class_retargetmodifier3d
     class_richtextlabel
     class_rigidbody2d
     class_rigidbody3d
@@ -298,6 +305,7 @@ Resources
     class_animationnodeblendspace1d
     class_animationnodeblendspace2d
     class_animationnodeblendtree
+    class_animationnodeextension
     class_animationnodeoneshot
     class_animationnodeoutput
     class_animationnodestatemachine
@@ -370,6 +378,7 @@ Resources
     class_capsuleshape3d
     class_circleshape2d
     class_codehighlighter
+    class_colorpalette
     class_compositor
     class_compositoreffect
     class_compressedcubemap
@@ -397,6 +406,7 @@ Resources
     class_editorsettings
     class_editorsyntaxhighlighter
     class_environment
+    class_externaltexture
     class_fastnoiselite
     class_fbxdocument
     class_fbxstate
@@ -406,6 +416,7 @@ Resources
     class_fontvariation
     class_gdextension
     class_gdscript
+    class_gdscriptsyntaxhighlighter
     class_gltfaccessor
     class_gltfanimation
     class_gltfbufferview
@@ -471,10 +482,17 @@ Resources
     class_occluderpolygon2d
     class_oggpacketsequence
     class_openxraction
+    class_openxractionbindingmodifier
     class_openxractionmap
     class_openxractionset
+    class_openxranalogthresholdmodifier
+    class_openxrbindingmodifier
+    class_openxrdpadbindingmodifier
+    class_openxrhapticbase
+    class_openxrhapticvibration
     class_openxrinteractionprofile
     class_openxripbinding
+    class_openxripbindingmodifier
     class_optimizedtranslation
     class_ormmaterial3d
     class_packeddatacontainer
@@ -701,6 +719,8 @@ Other objects
     class_astargrid2d
     class_audioeffectinstance
     class_audioeffectspectrumanalyzerinstance
+    class_audiosample
+    class_audiosampleplayback
     class_audioserver
     class_audiostreamgeneratorplayback
     class_audiostreamplayback
@@ -720,10 +740,12 @@ Other objects
     class_diraccess
     class_displayserver
     class_dtlsserver
+    class_editorcontextmenuplugin
     class_editordebuggerplugin
     class_editordebuggersession
     class_editorexportplatform
     class_editorexportplatformandroid
+    class_editorexportplatformextension
     class_editorexportplatformios
     class_editorexportplatformlinuxbsd
     class_editorexportplatformmacos
@@ -731,6 +753,7 @@ Other objects
     class_editorexportplatformweb
     class_editorexportplatformwindows
     class_editorexportplugin
+    class_editorexportpreset
     class_editorfeatureprofile
     class_editorfilesystemdirectory
     class_editorfilesystemimportformatsupportquery
@@ -767,6 +790,7 @@ Other objects
     class_gdextensionmanager
     class_geometry2d
     class_geometry3d
+    class_gltfobjectmodelproperty
     class_hashingcontext
     class_hmaccontext
     class_httpclient
@@ -778,6 +802,7 @@ Other objects
     class_ip
     class_javaclass
     class_javaclasswrapper
+    class_javaobject
     class_javascriptbridge
     class_javascriptobject
     class_jnisingleton
@@ -909,6 +934,7 @@ Other objects
     class_scriptlanguage
     class_scriptlanguageextension
     class_semaphore
+    class_shaderincludedb
     class_skinreference
     class_streampeer
     class_streampeerbuffer
@@ -931,6 +957,7 @@ Other objects
     class_tiledata
     class_time
     class_tlsoptions
+    class_translationdomain
     class_translationserver
     class_treeitem
     class_trianglemesh
@@ -974,10 +1001,12 @@ Editor-only
     :name: toc-class-ref-editors
 
     class_editorcommandpalette
+    class_editorcontextmenuplugin
     class_editordebuggerplugin
     class_editordebuggersession
     class_editorexportplatform
     class_editorexportplatformandroid
+    class_editorexportplatformextension
     class_editorexportplatformios
     class_editorexportplatformlinuxbsd
     class_editorexportplatformmacos
@@ -985,6 +1014,7 @@ Editor-only
     class_editorexportplatformweb
     class_editorexportplatformwindows
     class_editorexportplugin
+    class_editorexportpreset
     class_editorfeatureprofile
     class_editorfiledialog
     class_editorfilesystem
@@ -1017,6 +1047,7 @@ Editor-only
     class_editorsettings
     class_editorspinslider
     class_editorsyntaxhighlighter
+    class_editortoaster
     class_editortranslationparserplugin
     class_editorundoredomanager
     class_editorvcsinterface

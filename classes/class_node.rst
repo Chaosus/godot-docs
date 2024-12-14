@@ -177,6 +177,8 @@ Methods
    +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`float<class_float>`                                        | :ref:`get_process_delta_time<class_Node_method_get_process_delta_time>`\ (\ ) |const|                                                                                                                                                   |
    +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`Variant<class_Variant>`                                    | :ref:`get_rpc_config<class_Node_method_get_rpc_config>`\ (\ ) |const|                                                                                                                                                                   |
+   +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                          | :ref:`get_scene_instance_load_placeholder<class_Node_method_get_scene_instance_load_placeholder>`\ (\ ) |const|                                                                                                                         |
    +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`SceneTree<class_SceneTree>`                                | :ref:`get_tree<class_Node_method_get_tree>`\ (\ ) |const|                                                                                                                                                                               |
@@ -294,6 +296,8 @@ Methods
    | |void|                                                           | :ref:`set_scene_instance_load_placeholder<class_Node_method_set_scene_instance_load_placeholder>`\ (\ load_placeholder\: :ref:`bool<class_bool>`\ )                                                                                     |
    +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                           | :ref:`set_thread_safe<class_Node_method_set_thread_safe>`\ (\ property\: :ref:`StringName<class_StringName>`, value\: :ref:`Variant<class_Variant>`\ )                                                                                  |
+   +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                           | :ref:`set_translation_domain_inherited<class_Node_method_set_translation_domain_inherited>`\ (\ )                                                                                                                                       |
    +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                           | :ref:`update_configuration_warnings<class_Node_method_update_configuration_warnings>`\ (\ )                                                                                                                                             |
    +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -632,7 +636,7 @@ Duplicate the node's script (also overriding the duplicated children's scripts, 
 
 :ref:`DuplicateFlags<enum_Node_DuplicateFlags>` **DUPLICATE_USE_INSTANTIATION** = ``8``
 
-Duplicate using :ref:`PackedScene.instantiate<class_PackedScene_method_instantiate>`. If the node comes from a scene saved on disk, re-uses :ref:`PackedScene.instantiate<class_PackedScene_method_instantiate>` as the base for the duplicated node and its children.
+Duplicate using :ref:`PackedScene.instantiate<class_PackedScene_method_instantiate>`. If the node comes from a scene saved on disk, reuses :ref:`PackedScene.instantiate<class_PackedScene_method_instantiate>` as the base for the duplicated node and its children.
 
 .. rst-class:: classref-item-separator
 
@@ -971,7 +975,7 @@ Implemented on desktop platforms.
 
 Notification received from the OS when a go back request is sent (e.g. pressing the "Back" button on Android).
 
-Implemented only on iOS.
+Implemented only on Android.
 
 .. _class_Node_constant_NOTIFICATION_WM_SIZE_CHANGED:
 
@@ -1208,9 +1212,9 @@ The name of the node. This name must be unique among the siblings (other child n
 - |void| **set_owner**\ (\ value\: :ref:`Node<class_Node>`\ )
 - :ref:`Node<class_Node>` **get_owner**\ (\ )
 
-The owner of this node. The owner must be an ancestor of this node. When packing the owner node in a :ref:`PackedScene<class_PackedScene>`, all the nodes it owns are also saved with it.
+The owner of this node. The owner must be an ancestor of this node. When packing the owner node in a :ref:`PackedScene<class_PackedScene>`, all the nodes it owns are also saved with it. See also :ref:`unique_name_in_owner<class_Node_property_unique_name_in_owner>`.
 
-\ **Note:** In the editor, nodes not owned by the scene root are usually not displayed in the Scene dock, and will **not** be saved. To prevent this, remember to set the owner after calling :ref:`add_child<class_Node_method_add_child>`. See also (see :ref:`unique_name_in_owner<class_Node_property_unique_name_in_owner>`)
+\ **Note:** In the editor, nodes not owned by the scene root are usually not displayed in the Scene dock, and will **not** be saved. To prevent this, remember to set the owner after calling :ref:`add_child<class_Node_method_add_child>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1263,7 +1267,7 @@ The node's processing behavior (see :ref:`ProcessMode<enum_Node_ProcessMode>`). 
 - |void| **set_physics_process_priority**\ (\ value\: :ref:`int<class_int>`\ )
 - :ref:`int<class_int>` **get_physics_process_priority**\ (\ )
 
-Similar to :ref:`process_priority<class_Node_property_process_priority>` but for :ref:`NOTIFICATION_PHYSICS_PROCESS<class_Node_constant_NOTIFICATION_PHYSICS_PROCESS>`, :ref:`_physics_process<class_Node_private_method__physics_process>` or the internal version.
+Similar to :ref:`process_priority<class_Node_property_process_priority>` but for :ref:`NOTIFICATION_PHYSICS_PROCESS<class_Node_constant_NOTIFICATION_PHYSICS_PROCESS>`, :ref:`_physics_process<class_Node_private_method__physics_process>`, or :ref:`NOTIFICATION_INTERNAL_PHYSICS_PROCESS<class_Node_constant_NOTIFICATION_INTERNAL_PHYSICS_PROCESS>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1280,7 +1284,7 @@ Similar to :ref:`process_priority<class_Node_property_process_priority>` but for
 - |void| **set_process_priority**\ (\ value\: :ref:`int<class_int>`\ )
 - :ref:`int<class_int>` **get_process_priority**\ (\ )
 
-The node's execution order of the process callbacks (:ref:`_process<class_Node_private_method__process>`, :ref:`_physics_process<class_Node_private_method__physics_process>`, and internal processing). Nodes whose priority value is *lower* call their process callbacks first, regardless of tree order.
+The node's execution order of the process callbacks (:ref:`_process<class_Node_private_method__process>`, :ref:`NOTIFICATION_PROCESS<class_Node_constant_NOTIFICATION_PROCESS>`, and :ref:`NOTIFICATION_INTERNAL_PROCESS<class_Node_constant_NOTIFICATION_INTERNAL_PROCESS>`). Nodes whose priority value is *lower* call their process callbacks first, regardless of tree order.
 
 .. rst-class:: classref-item-separator
 
@@ -1467,13 +1471,17 @@ For gameplay input, :ref:`_unhandled_input<class_Node_private_method__unhandled_
 
 |void| **_physics_process**\ (\ delta\: :ref:`float<class_float>`\ ) |virtual| :ref:`🔗<class_Node_private_method__physics_process>`
 
-Called during the physics processing step of the main loop. Physics processing means that the frame rate is synced to the physics, i.e. the ``delta`` variable should be constant. ``delta`` is in seconds.
+Called during the physics processing step of the main loop. Physics processing means that the frame rate is synced to the physics, i.e. the ``delta`` parameter will *generally* be constant (see exceptions below). ``delta`` is in seconds.
 
 It is only called if physics processing is enabled, which is done automatically if this method is overridden, and can be toggled with :ref:`set_physics_process<class_Node_method_set_physics_process>`.
+
+Processing happens in order of :ref:`process_physics_priority<class_Node_property_process_physics_priority>`, lower priority values are called first. Nodes with the same priority are processed in tree order, or top to bottom as seen in the editor (also known as pre-order traversal).
 
 Corresponds to the :ref:`NOTIFICATION_PHYSICS_PROCESS<class_Node_constant_NOTIFICATION_PHYSICS_PROCESS>` notification in :ref:`Object._notification<class_Object_private_method__notification>`.
 
 \ **Note:** This method is only called if the node is present in the scene tree (i.e. if it's not an orphan).
+
+\ **Note:** ``delta`` will be larger than expected if running at a framerate lower than :ref:`Engine.physics_ticks_per_second<class_Engine_property_physics_ticks_per_second>` / :ref:`Engine.max_physics_steps_per_frame<class_Engine_property_max_physics_steps_per_frame>` FPS. This is done to avoid "spiral of death" scenarios where performance would plummet due to an ever-increasing number of physics steps per frame. This behavior affects both :ref:`_process<class_Node_private_method__process>` and :ref:`_physics_process<class_Node_private_method__physics_process>`. As a result, avoid using ``delta`` for time measurements in real-world seconds. Use the :ref:`Time<class_Time>` singleton's methods for this purpose instead, such as :ref:`Time.get_ticks_usec<class_Time_method_get_ticks_usec>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1489,9 +1497,13 @@ Called during the processing step of the main loop. Processing happens at every 
 
 It is only called if processing is enabled, which is done automatically if this method is overridden, and can be toggled with :ref:`set_process<class_Node_method_set_process>`.
 
+Processing happens in order of :ref:`process_priority<class_Node_property_process_priority>`, lower priority values are called first. Nodes with the same priority are processed in tree order, or top to bottom as seen in the editor (also known as pre-order traversal).
+
 Corresponds to the :ref:`NOTIFICATION_PROCESS<class_Node_constant_NOTIFICATION_PROCESS>` notification in :ref:`Object._notification<class_Object_private_method__notification>`.
 
 \ **Note:** This method is only called if the node is present in the scene tree (i.e. if it's not an orphan).
+
+\ **Note:** ``delta`` will be larger than expected if running at a framerate lower than :ref:`Engine.physics_ticks_per_second<class_Engine_property_physics_ticks_per_second>` / :ref:`Engine.max_physics_steps_per_frame<class_Engine_property_max_physics_steps_per_frame>` FPS. This is done to avoid "spiral of death" scenarios where performance would plummet due to an ever-increasing number of physics steps per frame. This behavior affects both :ref:`_process<class_Node_private_method__process>` and :ref:`_physics_process<class_Node_private_method__physics_process>`. As a result, avoid using ``delta`` for time measurements in real-world seconds. Use the :ref:`Time<class_Time>` singleton's methods for this purpose instead, such as :ref:`Time.get_ticks_usec<class_Time_method_get_ticks_usec>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1781,7 +1793,7 @@ The Tween will start automatically on the next process frame or physics frame (d
 
 :ref:`Node<class_Node>` **duplicate**\ (\ flags\: :ref:`int<class_int>` = 15\ ) |const| :ref:`🔗<class_Node_method_duplicate>`
 
-Duplicates the node, returning a new node with all of its properties, signals and groups copied from the original. The behavior can be tweaked through the ``flags`` (see :ref:`DuplicateFlags<enum_Node_DuplicateFlags>`).
+Duplicates the node, returning a new node with all of its properties, signals, groups, and children copied from the original. The behavior can be tweaked through the ``flags`` (see :ref:`DuplicateFlags<enum_Node_DuplicateFlags>`).
 
 \ **Note:** For nodes with a :ref:`Script<class_Script>` attached, if :ref:`Object._init<class_Object_private_method__init>` has been defined with required parameters, the duplicated node will not have a :ref:`Script<class_Script>`.
 
@@ -2145,6 +2157,8 @@ If ``use_unique_path`` is ``true``, returns the shortest path accounting for thi
 
 Returns the time elapsed (in seconds) since the last physics callback. This value is identical to :ref:`_physics_process<class_Node_private_method__physics_process>`'s ``delta`` parameter, and is often consistent at run-time, unless :ref:`Engine.physics_ticks_per_second<class_Engine_property_physics_ticks_per_second>` is changed. See also :ref:`NOTIFICATION_PHYSICS_PROCESS<class_Node_constant_NOTIFICATION_PHYSICS_PROCESS>`.
 
+\ **Note:** The returned value will be larger than expected if running at a framerate lower than :ref:`Engine.physics_ticks_per_second<class_Engine_property_physics_ticks_per_second>` / :ref:`Engine.max_physics_steps_per_frame<class_Engine_property_max_physics_steps_per_frame>` FPS. This is done to avoid "spiral of death" scenarios where performance would plummet due to an ever-increasing number of physics steps per frame. This behavior affects both :ref:`_process<class_Node_private_method__process>` and :ref:`_physics_process<class_Node_private_method__physics_process>`. As a result, avoid using ``delta`` for time measurements in real-world seconds. Use the :ref:`Time<class_Time>` singleton's methods for this purpose instead, such as :ref:`Time.get_ticks_usec<class_Time_method_get_ticks_usec>`.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -2156,6 +2170,20 @@ Returns the time elapsed (in seconds) since the last physics callback. This valu
 :ref:`float<class_float>` **get_process_delta_time**\ (\ ) |const| :ref:`🔗<class_Node_method_get_process_delta_time>`
 
 Returns the time elapsed (in seconds) since the last process callback. This value is identical to :ref:`_process<class_Node_private_method__process>`'s ``delta`` parameter, and may vary from frame to frame. See also :ref:`NOTIFICATION_PROCESS<class_Node_constant_NOTIFICATION_PROCESS>`.
+
+\ **Note:** The returned value will be larger than expected if running at a framerate lower than :ref:`Engine.physics_ticks_per_second<class_Engine_property_physics_ticks_per_second>` / :ref:`Engine.max_physics_steps_per_frame<class_Engine_property_max_physics_steps_per_frame>` FPS. This is done to avoid "spiral of death" scenarios where performance would plummet due to an ever-increasing number of physics steps per frame. This behavior affects both :ref:`_process<class_Node_private_method__process>` and :ref:`_physics_process<class_Node_private_method__physics_process>`. As a result, avoid using ``delta`` for time measurements in real-world seconds. Use the :ref:`Time<class_Time>` singleton's methods for this purpose instead, such as :ref:`Time.get_ticks_usec<class_Time_method_get_ticks_usec>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Node_method_get_rpc_config:
+
+.. rst-class:: classref-method
+
+:ref:`Variant<class_Variant>` **get_rpc_config**\ (\ ) |const| :ref:`🔗<class_Node_method_get_rpc_config>`
+
+Returns a :ref:`Dictionary<class_Dictionary>` mapping method names to their RPC configuration defined for this node using :ref:`rpc_config<class_Node_method_rpc_config>`.
 
 .. rst-class:: classref-item-separator
 
@@ -2980,6 +3008,20 @@ If set to ``true``, the node becomes a :ref:`InstancePlaceholder<class_InstanceP
 |void| **set_thread_safe**\ (\ property\: :ref:`StringName<class_StringName>`, value\: :ref:`Variant<class_Variant>`\ ) :ref:`🔗<class_Node_method_set_thread_safe>`
 
 Similar to :ref:`call_thread_safe<class_Node_method_call_thread_safe>`, but for setting properties.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Node_method_set_translation_domain_inherited:
+
+.. rst-class:: classref-method
+
+|void| **set_translation_domain_inherited**\ (\ ) :ref:`🔗<class_Node_method_set_translation_domain_inherited>`
+
+Makes this node inherit the translation domain from its parent node. If this node has no parent, the main translation domain will be used.
+
+This is the default behavior for all nodes. Calling :ref:`Object.set_translation_domain<class_Object_method_set_translation_domain>` disables this behavior.
 
 .. rst-class:: classref-item-separator
 
