@@ -76,6 +76,8 @@ Properties
    +--------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------+
    | :ref:`float<class_float>`                                          | :ref:`pitch_scale<class_AudioStreamPlayer3D_property_pitch_scale>`                                                   | ``1.0``       |
    +--------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------+
+   | :ref:`PlaybackType<enum_AudioServer_PlaybackType>`                 | :ref:`playback_type<class_AudioStreamPlayer3D_property_playback_type>`                                               | ``0``         |
+   +--------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------+
    | :ref:`bool<class_bool>`                                            | :ref:`playing<class_AudioStreamPlayer3D_property_playing>`                                                           | ``false``     |
    +--------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------+
    | :ref:`AudioStream<class_AudioStream>`                              | :ref:`stream<class_AudioStreamPlayer3D_property_stream>`                                                             |               |
@@ -473,6 +475,25 @@ The pitch and the tempo of the audio, as a multiplier of the audio sample's samp
 
 ----
 
+.. _class_AudioStreamPlayer3D_property_playback_type:
+
+.. rst-class:: classref-property
+
+:ref:`PlaybackType<enum_AudioServer_PlaybackType>` **playback_type** = ``0`` :ref:`🔗<class_AudioStreamPlayer3D_property_playback_type>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_playback_type**\ (\ value\: :ref:`PlaybackType<enum_AudioServer_PlaybackType>`\ )
+- :ref:`PlaybackType<enum_AudioServer_PlaybackType>` **get_playback_type**\ (\ )
+
+**Experimental:** This property may be changed or removed in future versions.
+
+The playback type of the stream player. If set other than to the default value, it will force that playback type.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_AudioStreamPlayer3D_property_playing:
 
 .. rst-class:: classref-property
@@ -481,6 +502,7 @@ The pitch and the tempo of the audio, as a multiplier of the audio sample's samp
 
 .. rst-class:: classref-property-setget
 
+- |void| **set_playing**\ (\ value\: :ref:`bool<class_bool>`\ )
 - :ref:`bool<class_bool>` **is_playing**\ (\ )
 
 If ``true``, audio is playing or is queued to be played (see :ref:`play<class_AudioStreamPlayer3D_method_play>`).

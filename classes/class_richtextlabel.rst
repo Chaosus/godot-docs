@@ -21,6 +21,8 @@ Description
 
 A control for displaying text that can contain custom fonts, images, and basic formatting. **RichTextLabel** manages these as an internal tag stack. It also adapts itself to given width/heights.
 
+\ **Note:** :ref:`newline<class_RichTextLabel_method_newline>`, :ref:`push_paragraph<class_RichTextLabel_method_push_paragraph>`, ``"\n"``, ``"\r\n"``, ``p`` tag, and alignment tags start a new paragraph. Each paragraph is processed independently, in its own BiDi context. If you want to force line wrapping within paragraph, any other line breaking character can be used, for example, Form Feed (U+000C), Next Line (U+0085), Line Separator (U+2028).
+
 \ **Note:** Assignments to :ref:`text<class_RichTextLabel_property_text>` clear the tag stack and reconstruct it from the property's contents. Any edits made to :ref:`text<class_RichTextLabel_property_text>` will erase previous edits made from other manual sources such as :ref:`append_text<class_RichTextLabel_method_append_text>` and the ``push_*`` / :ref:`pop<class_RichTextLabel_method_pop>` methods.
 
 \ **Note:** RichTextLabel doesn't support entangled BBCode tags. For example, instead of using ``[b]bold[i]bold italic[/b]italic[/i]``, use ``[b]bold[i]bold italic[/i][/b][i]italic[/i]``.
@@ -67,6 +69,10 @@ Properties
    +-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                                     | :ref:`hint_underlined<class_RichTextLabel_property_hint_underlined>`                                             | ``true``                                                                  |
    +-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`HorizontalAlignment<enum_@GlobalScope_HorizontalAlignment>`           | :ref:`horizontal_alignment<class_RichTextLabel_property_horizontal_alignment>`                                   | ``0``                                                                     |
+   +-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | |bitfield|\[:ref:`JustificationFlag<enum_TextServer_JustificationFlag>`\]   | :ref:`justification_flags<class_RichTextLabel_property_justification_flags>`                                     | ``163``                                                                   |
+   +-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
    | :ref:`String<class_String>`                                                 | :ref:`language<class_RichTextLabel_property_language>`                                                           | ``""``                                                                    |
    +-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                                     | :ref:`meta_underlined<class_RichTextLabel_property_meta_underlined>`                                             | ``true``                                                                  |
@@ -87,11 +93,15 @@ Properties
    +-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
    | :ref:`int<class_int>`                                                       | :ref:`tab_size<class_RichTextLabel_property_tab_size>`                                                           | ``4``                                                                     |
    +-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`PackedFloat32Array<class_PackedFloat32Array>`                         | :ref:`tab_stops<class_RichTextLabel_property_tab_stops>`                                                         | ``PackedFloat32Array()``                                                  |
+   +-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
    | :ref:`String<class_String>`                                                 | :ref:`text<class_RichTextLabel_property_text>`                                                                   | ``""``                                                                    |
    +-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
    | :ref:`TextDirection<enum_Control_TextDirection>`                            | :ref:`text_direction<class_RichTextLabel_property_text_direction>`                                               | ``0``                                                                     |
    +-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                                     | :ref:`threaded<class_RichTextLabel_property_threaded>`                                                           | ``false``                                                                 |
+   +-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`VerticalAlignment<enum_@GlobalScope_VerticalAlignment>`               | :ref:`vertical_alignment<class_RichTextLabel_property_vertical_alignment>`                                       | ``0``                                                                     |
    +-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
    | :ref:`int<class_int>`                                                       | :ref:`visible_characters<class_RichTextLabel_property_visible_characters>`                                       | ``-1``                                                                    |
    +-----------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
@@ -157,6 +167,8 @@ Methods
    +-------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`             | :ref:`invalidate_paragraph<class_RichTextLabel_method_invalidate_paragraph>`\ (\ paragraph\: :ref:`int<class_int>`\ )                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
    +-------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`             | :ref:`is_finished<class_RichTextLabel_method_is_finished>`\ (\ ) |const|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+   +-------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`             | :ref:`is_menu_visible<class_RichTextLabel_method_is_menu_visible>`\ (\ ) |const|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
    +-------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`             | :ref:`is_ready<class_RichTextLabel_method_is_ready>`\ (\ ) |const|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -207,7 +219,7 @@ Methods
    +-------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                              | :ref:`push_list<class_RichTextLabel_method_push_list>`\ (\ level\: :ref:`int<class_int>`, type\: :ref:`ListType<enum_RichTextLabel_ListType>`, capitalize\: :ref:`bool<class_bool>`, bullet\: :ref:`String<class_String>` = "•"\ )                                                                                                                                                                                                                                                                                                                                                                                                            |
    +-------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | |void|                              | :ref:`push_meta<class_RichTextLabel_method_push_meta>`\ (\ data\: :ref:`Variant<class_Variant>`, underline_mode\: :ref:`MetaUnderline<enum_RichTextLabel_MetaUnderline>` = 1\ )                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+   | |void|                              | :ref:`push_meta<class_RichTextLabel_method_push_meta>`\ (\ data\: :ref:`Variant<class_Variant>`, underline_mode\: :ref:`MetaUnderline<enum_RichTextLabel_MetaUnderline>` = 1, tooltip\: :ref:`String<class_String>` = ""\ )                                                                                                                                                                                                                                                                                                                                                                                                                   |
    +-------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                              | :ref:`push_mono<class_RichTextLabel_method_push_mono>`\ (\ )                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
    +-------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -722,6 +734,40 @@ If ``true``, the label underlines hint tags such as ``[hint=description]{text}[/
 
 ----
 
+.. _class_RichTextLabel_property_horizontal_alignment:
+
+.. rst-class:: classref-property
+
+:ref:`HorizontalAlignment<enum_@GlobalScope_HorizontalAlignment>` **horizontal_alignment** = ``0`` :ref:`🔗<class_RichTextLabel_property_horizontal_alignment>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_horizontal_alignment**\ (\ value\: :ref:`HorizontalAlignment<enum_@GlobalScope_HorizontalAlignment>`\ )
+- :ref:`HorizontalAlignment<enum_@GlobalScope_HorizontalAlignment>` **get_horizontal_alignment**\ (\ )
+
+Controls the text's horizontal alignment. Supports left, center, right, and fill, or justify. Set it to one of the :ref:`HorizontalAlignment<enum_@GlobalScope_HorizontalAlignment>` constants.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_RichTextLabel_property_justification_flags:
+
+.. rst-class:: classref-property
+
+|bitfield|\[:ref:`JustificationFlag<enum_TextServer_JustificationFlag>`\] **justification_flags** = ``163`` :ref:`🔗<class_RichTextLabel_property_justification_flags>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_justification_flags**\ (\ value\: |bitfield|\[:ref:`JustificationFlag<enum_TextServer_JustificationFlag>`\]\ )
+- |bitfield|\[:ref:`JustificationFlag<enum_TextServer_JustificationFlag>`\] **get_justification_flags**\ (\ )
+
+Line fill alignment rules. See :ref:`JustificationFlag<enum_TextServer_JustificationFlag>` for more information.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_RichTextLabel_property_language:
 
 .. rst-class:: classref-property
@@ -894,6 +940,25 @@ The number of spaces associated with a single tab length. Does not affect ``\t``
 
 ----
 
+.. _class_RichTextLabel_property_tab_stops:
+
+.. rst-class:: classref-property
+
+:ref:`PackedFloat32Array<class_PackedFloat32Array>` **tab_stops** = ``PackedFloat32Array()`` :ref:`🔗<class_RichTextLabel_property_tab_stops>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_tab_stops**\ (\ value\: :ref:`PackedFloat32Array<class_PackedFloat32Array>`\ )
+- :ref:`PackedFloat32Array<class_PackedFloat32Array>` **get_tab_stops**\ (\ )
+
+Aligns text to the given tab-stops.
+
+**Note:** The returned array is *copied* and any changes to it will not update the original property value. See :ref:`PackedFloat32Array<class_PackedFloat32Array>` for more details.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_RichTextLabel_property_text:
 
 .. rst-class:: classref-property
@@ -942,6 +1007,23 @@ Base text writing direction.
 - :ref:`bool<class_bool>` **is_threaded**\ (\ )
 
 If ``true``, text processing is done in a background thread.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_RichTextLabel_property_vertical_alignment:
+
+.. rst-class:: classref-property
+
+:ref:`VerticalAlignment<enum_@GlobalScope_VerticalAlignment>` **vertical_alignment** = ``0`` :ref:`🔗<class_RichTextLabel_property_vertical_alignment>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_vertical_alignment**\ (\ value\: :ref:`VerticalAlignment<enum_@GlobalScope_VerticalAlignment>`\ )
+- :ref:`VerticalAlignment<enum_@GlobalScope_VerticalAlignment>` **get_vertical_alignment**\ (\ )
+
+Controls the text's vertical alignment. Supports top, center, bottom, and fill. Set it to one of the :ref:`VerticalAlignment<enum_@GlobalScope_VerticalAlignment>` constants.
 
 .. rst-class:: classref-item-separator
 
@@ -1089,7 +1171,7 @@ Clears the current selection.
 
 Returns the line number of the character position provided. Line and character numbers are both zero-indexed.
 
-\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_ready<class_RichTextLabel_method_is_ready>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
+\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_finished<class_RichTextLabel_method_is_finished>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
 
 .. rst-class:: classref-item-separator
 
@@ -1103,7 +1185,7 @@ Returns the line number of the character position provided. Line and character n
 
 Returns the paragraph number of the character position provided. Paragraph and character numbers are both zero-indexed.
 
-\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_ready<class_RichTextLabel_method_is_ready>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
+\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_finished<class_RichTextLabel_method_is_finished>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
 
 .. rst-class:: classref-item-separator
 
@@ -1117,7 +1199,7 @@ Returns the paragraph number of the character position provided. Paragraph and c
 
 Returns the height of the content.
 
-\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_ready<class_RichTextLabel_method_is_ready>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
+\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_finished<class_RichTextLabel_method_is_finished>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
 
 .. rst-class:: classref-item-separator
 
@@ -1131,7 +1213,7 @@ Returns the height of the content.
 
 Returns the width of the content.
 
-\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_ready<class_RichTextLabel_method_is_ready>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
+\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_finished<class_RichTextLabel_method_is_finished>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
 
 .. rst-class:: classref-item-separator
 
@@ -1145,7 +1227,9 @@ Returns the width of the content.
 
 Returns the total number of lines in the text. Wrapped text is counted as multiple lines.
 
-\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_ready<class_RichTextLabel_method_is_ready>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
+\ **Note:** If :ref:`visible_characters_behavior<class_RichTextLabel_property_visible_characters_behavior>` is set to :ref:`TextServer.VC_CHARS_BEFORE_SHAPING<class_TextServer_constant_VC_CHARS_BEFORE_SHAPING>` only visible wrapped lines are counted.
+
+\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_finished<class_RichTextLabel_method_is_finished>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
 
 .. rst-class:: classref-item-separator
 
@@ -1159,7 +1243,7 @@ Returns the total number of lines in the text. Wrapped text is counted as multip
 
 Returns the vertical offset of the line found at the provided index.
 
-\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_ready<class_RichTextLabel_method_is_ready>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
+\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_finished<class_RichTextLabel_method_is_finished>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
 
 .. rst-class:: classref-item-separator
 
@@ -1244,7 +1328,7 @@ Returns the total number of paragraphs (newlines or ``p`` tags in the tag stack'
 
 Returns the vertical offset of the paragraph found at the provided index.
 
-\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_ready<class_RichTextLabel_method_is_ready>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
+\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_finished<class_RichTextLabel_method_is_finished>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
 
 .. rst-class:: classref-item-separator
 
@@ -1332,7 +1416,7 @@ Returns the vertical scrollbar.
 
 Returns the number of visible lines.
 
-\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_ready<class_RichTextLabel_method_is_ready>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
+\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_finished<class_RichTextLabel_method_is_finished>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
 
 .. rst-class:: classref-item-separator
 
@@ -1346,7 +1430,7 @@ Returns the number of visible lines.
 
 Returns the number of visible paragraphs. A paragraph is considered visible if at least one of its lines is visible.
 
-\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_ready<class_RichTextLabel_method_is_ready>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
+\ **Note:** If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, this method returns a value for the loaded part of the document. Use :ref:`is_finished<class_RichTextLabel_method_is_finished>` or :ref:`finished<class_RichTextLabel_signal_finished>` to determine whether document is fully loaded.
 
 .. rst-class:: classref-item-separator
 
@@ -1358,9 +1442,9 @@ Returns the number of visible paragraphs. A paragraph is considered visible if a
 
 |void| **install_effect**\ (\ effect\: :ref:`Variant<class_Variant>`\ ) :ref:`🔗<class_RichTextLabel_method_install_effect>`
 
-Installs a custom effect. This can also be done in the RichTextLabel inspector using the :ref:`custom_effects<class_RichTextLabel_property_custom_effects>` property. ``effect`` should be a valid :ref:`RichTextEffect<class_RichTextEffect>`.
+Installs a custom effect. This can also be done in the Inspector through the :ref:`custom_effects<class_RichTextLabel_property_custom_effects>` property. ``effect`` should be a valid :ref:`RichTextEffect<class_RichTextEffect>`.
 
-Example RichTextEffect:
+\ **Example:** With the following script extending from :ref:`RichTextEffect<class_RichTextEffect>`:
 
 ::
 
@@ -1372,7 +1456,7 @@ Example RichTextEffect:
     
     # ...
 
-Registering the above effect in RichTextLabel from script:
+The above effect can be installed in **RichTextLabel** from a script:
 
 ::
 
@@ -1401,6 +1485,18 @@ Invalidates ``paragraph`` and all subsequent paragraphs cache.
 
 ----
 
+.. _class_RichTextLabel_method_is_finished:
+
+.. rst-class:: classref-method
+
+:ref:`bool<class_bool>` **is_finished**\ (\ ) |const| :ref:`🔗<class_RichTextLabel_method_is_finished>`
+
+If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, returns ``true`` if the background thread has finished text processing, otherwise always return ``true``.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_RichTextLabel_method_is_menu_visible:
 
 .. rst-class:: classref-method
@@ -1418,6 +1514,8 @@ Returns whether the menu is visible. Use this instead of ``get_menu().visible`` 
 .. rst-class:: classref-method
 
 :ref:`bool<class_bool>` **is_ready**\ (\ ) |const| :ref:`🔗<class_RichTextLabel_method_is_ready>`
+
+**Deprecated:** Use :ref:`is_finished<class_RichTextLabel_method_is_finished>` instead.
 
 If :ref:`threaded<class_RichTextLabel_property_threaded>` is enabled, returns ``true`` if the background thread has finished text processing, otherwise always return ``true``.
 
@@ -1707,7 +1805,7 @@ Adds ``[ol]`` or ``[ul]`` tag to the tag stack. Multiplies ``level`` by current 
 
 .. rst-class:: classref-method
 
-|void| **push_meta**\ (\ data\: :ref:`Variant<class_Variant>`, underline_mode\: :ref:`MetaUnderline<enum_RichTextLabel_MetaUnderline>` = 1\ ) :ref:`🔗<class_RichTextLabel_method_push_meta>`
+|void| **push_meta**\ (\ data\: :ref:`Variant<class_Variant>`, underline_mode\: :ref:`MetaUnderline<enum_RichTextLabel_MetaUnderline>` = 1, tooltip\: :ref:`String<class_String>` = ""\ ) :ref:`🔗<class_RichTextLabel_method_push_meta>`
 
 Adds a meta tag to the tag stack. Similar to the BBCode ``[url=something]{text}[/url]``, but supports non-:ref:`String<class_String>` metadata types.
 
@@ -2064,7 +2162,7 @@ The default background color for odd rows.
 
 :ref:`int<class_int>` **line_separation** = ``0`` :ref:`🔗<class_RichTextLabel_theme_constant_line_separation>`
 
-The vertical space between lines.
+Additional vertical spacing between lines (in pixels), spacing is added to line descent. This value can be negative.
 
 .. rst-class:: classref-item-separator
 
