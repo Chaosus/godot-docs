@@ -58,6 +58,8 @@ Methods
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                            | :ref:`call_recursive<class_TreeItem_method_call_recursive>`\ (\ method\: :ref:`StringName<class_StringName>`, ...\ ) |vararg|                                                                                                                                       |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                            | :ref:`clear_buttons<class_TreeItem_method_clear_buttons>`\ (\ )                                                                                                                                                                                                     |
+   +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                            | :ref:`clear_custom_bg_color<class_TreeItem_method_clear_custom_bg_color>`\ (\ column\: :ref:`int<class_int>`\ )                                                                                                                                                     |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                            | :ref:`clear_custom_color<class_TreeItem_method_clear_custom_color>`\ (\ column\: :ref:`int<class_int>`\ )                                                                                                                                                           |
@@ -67,6 +69,8 @@ Methods
    | |void|                                                            | :ref:`deselect<class_TreeItem_method_deselect>`\ (\ column\: :ref:`int<class_int>`\ )                                                                                                                                                                               |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                            | :ref:`erase_button<class_TreeItem_method_erase_button>`\ (\ column\: :ref:`int<class_int>`, button_index\: :ref:`int<class_int>`\ )                                                                                                                                 |
+   +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`AutoTranslateMode<enum_Node_AutoTranslateMode>`             | :ref:`get_auto_translate_mode<class_TreeItem_method_get_auto_translate_mode>`\ (\ column\: :ref:`int<class_int>`\ ) |const|                                                                                                                                         |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`AutowrapMode<enum_TextServer_AutowrapMode>`                 | :ref:`get_autowrap_mode<class_TreeItem_method_get_autowrap_mode>`\ (\ column\: :ref:`int<class_int>`\ ) |const|                                                                                                                                                     |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -109,6 +113,8 @@ Methods
    | :ref:`int<class_int>`                                             | :ref:`get_icon_max_width<class_TreeItem_method_get_icon_max_width>`\ (\ column\: :ref:`int<class_int>`\ ) |const|                                                                                                                                                   |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Color<class_Color>`                                         | :ref:`get_icon_modulate<class_TreeItem_method_get_icon_modulate>`\ (\ column\: :ref:`int<class_int>`\ ) |const|                                                                                                                                                     |
+   +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`Texture2D<class_Texture2D>`                                 | :ref:`get_icon_overlay<class_TreeItem_method_get_icon_overlay>`\ (\ column\: :ref:`int<class_int>`\ ) |const|                                                                                                                                                       |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Rect2<class_Rect2>`                                         | :ref:`get_icon_region<class_TreeItem_method_get_icon_region>`\ (\ column\: :ref:`int<class_int>`\ ) |const|                                                                                                                                                         |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -184,6 +190,8 @@ Methods
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                            | :ref:`select<class_TreeItem_method_select>`\ (\ column\: :ref:`int<class_int>`\ )                                                                                                                                                                                   |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                            | :ref:`set_auto_translate_mode<class_TreeItem_method_set_auto_translate_mode>`\ (\ column\: :ref:`int<class_int>`, mode\: :ref:`AutoTranslateMode<enum_Node_AutoTranslateMode>`\ )                                                                                   |
+   +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                            | :ref:`set_autowrap_mode<class_TreeItem_method_set_autowrap_mode>`\ (\ column\: :ref:`int<class_int>`, autowrap_mode\: :ref:`AutowrapMode<enum_TextServer_AutowrapMode>`\ )                                                                                          |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                            | :ref:`set_button<class_TreeItem_method_set_button>`\ (\ column\: :ref:`int<class_int>`, button_index\: :ref:`int<class_int>`, button\: :ref:`Texture2D<class_Texture2D>`\ )                                                                                         |
@@ -225,6 +233,8 @@ Methods
    | |void|                                                            | :ref:`set_icon_max_width<class_TreeItem_method_set_icon_max_width>`\ (\ column\: :ref:`int<class_int>`, width\: :ref:`int<class_int>`\ )                                                                                                                            |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                            | :ref:`set_icon_modulate<class_TreeItem_method_set_icon_modulate>`\ (\ column\: :ref:`int<class_int>`, modulate\: :ref:`Color<class_Color>`\ )                                                                                                                       |
+   +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                            | :ref:`set_icon_overlay<class_TreeItem_method_set_icon_overlay>`\ (\ column\: :ref:`int<class_int>`, texture\: :ref:`Texture2D<class_Texture2D>`\ )                                                                                                                  |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                            | :ref:`set_icon_region<class_TreeItem_method_set_icon_region>`\ (\ column\: :ref:`int<class_int>`, region\: :ref:`Rect2<class_Rect2>`\ )                                                                                                                             |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -280,7 +290,7 @@ enum **TreeCellMode**: :ref:`🔗<enum_TreeItem_TreeCellMode>`
 
 :ref:`TreeCellMode<enum_TreeItem_TreeCellMode>` **CELL_MODE_STRING** = ``0``
 
-Cell shows a string label. When editable, the text can be edited using a :ref:`LineEdit<class_LineEdit>`, or a :ref:`TextEdit<class_TextEdit>` popup if :ref:`set_edit_multiline<class_TreeItem_method_set_edit_multiline>` is used.
+Cell shows a string label, optionally with an icon. When editable, the text can be edited using a :ref:`LineEdit<class_LineEdit>`, or a :ref:`TextEdit<class_TextEdit>` popup if :ref:`set_edit_multiline<class_TreeItem_method_set_edit_multiline>` is used.
 
 .. _class_TreeItem_constant_CELL_MODE_CHECK:
 
@@ -288,7 +298,7 @@ Cell shows a string label. When editable, the text can be edited using a :ref:`L
 
 :ref:`TreeCellMode<enum_TreeItem_TreeCellMode>` **CELL_MODE_CHECK** = ``1``
 
-Cell shows a checkbox, optionally with text. The checkbox can be pressed, released, or indeterminate (via :ref:`set_indeterminate<class_TreeItem_method_set_indeterminate>`). The checkbox can't be clicked unless the cell is editable.
+Cell shows a checkbox, optionally with text and an icon. The checkbox can be pressed, released, or indeterminate (via :ref:`set_indeterminate<class_TreeItem_method_set_indeterminate>`). The checkbox can't be clicked unless the cell is editable.
 
 .. _class_TreeItem_constant_CELL_MODE_RANGE:
 
@@ -306,7 +316,7 @@ This cell can also be used in a text dropdown mode when you assign a text with :
 
 :ref:`TreeCellMode<enum_TreeItem_TreeCellMode>` **CELL_MODE_ICON** = ``3``
 
-Cell shows an icon. It can't be edited nor display text.
+Cell shows an icon. It can't be edited nor display text. The icon is always centered within the cell.
 
 .. _class_TreeItem_constant_CELL_MODE_CUSTOM:
 
@@ -408,7 +418,7 @@ Method Descriptions
 
 |void| **add_button**\ (\ column\: :ref:`int<class_int>`, button\: :ref:`Texture2D<class_Texture2D>`, id\: :ref:`int<class_int>` = -1, disabled\: :ref:`bool<class_bool>` = false, tooltip_text\: :ref:`String<class_String>` = ""\ ) :ref:`🔗<class_TreeItem_method_add_button>`
 
-Adds a button with :ref:`Texture2D<class_Texture2D>` ``button`` at column ``column``. The ``id`` is used to identify the button in the according :ref:`Tree.button_clicked<class_Tree_signal_button_clicked>` signal and can be different from the buttons index. If not specified, the next available index is used, which may be retrieved by calling :ref:`get_button_count<class_TreeItem_method_get_button_count>` immediately before this method. Optionally, the button can be ``disabled`` and have a ``tooltip_text``.
+Adds a button with :ref:`Texture2D<class_Texture2D>` ``button`` to the end of the cell at column ``column``. The ``id`` is used to identify the button in the according :ref:`Tree.button_clicked<class_Tree_signal_button_clicked>` signal and can be different from the buttons index. If not specified, the next available index is used, which may be retrieved by calling :ref:`get_button_count<class_TreeItem_method_get_button_count>` immediately before this method. Optionally, the button can be ``disabled`` and have a ``tooltip_text``.
 
 .. rst-class:: classref-item-separator
 
@@ -433,6 +443,18 @@ Adds a previously unparented **TreeItem** as a direct child of this one. The ``c
 |void| **call_recursive**\ (\ method\: :ref:`StringName<class_StringName>`, ...\ ) |vararg| :ref:`🔗<class_TreeItem_method_call_recursive>`
 
 Calls the ``method`` on the actual TreeItem and its children recursively. Pass parameters as a comma separated list.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TreeItem_method_clear_buttons:
+
+.. rst-class:: classref-method
+
+|void| **clear_buttons**\ (\ ) :ref:`🔗<class_TreeItem_method_clear_buttons>`
+
+Removes all buttons from all columns of this item.
 
 .. rst-class:: classref-item-separator
 
@@ -495,6 +517,18 @@ Deselects the given column.
 |void| **erase_button**\ (\ column\: :ref:`int<class_int>`, button_index\: :ref:`int<class_int>`\ ) :ref:`🔗<class_TreeItem_method_erase_button>`
 
 Removes the button at index ``button_index`` in column ``column``.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TreeItem_method_get_auto_translate_mode:
+
+.. rst-class:: classref-method
+
+:ref:`AutoTranslateMode<enum_Node_AutoTranslateMode>` **get_auto_translate_mode**\ (\ column\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_TreeItem_method_get_auto_translate_mode>`
+
+Returns the column's auto translate mode.
 
 .. rst-class:: classref-item-separator
 
@@ -754,6 +788,18 @@ Returns the :ref:`Color<class_Color>` modulating the column's icon.
 
 ----
 
+.. _class_TreeItem_method_get_icon_overlay:
+
+.. rst-class:: classref-method
+
+:ref:`Texture2D<class_Texture2D>` **get_icon_overlay**\ (\ column\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_TreeItem_method_get_icon_overlay>`
+
+Returns the given column's icon overlay :ref:`Texture2D<class_Texture2D>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_TreeItem_method_get_icon_region:
 
 .. rst-class:: classref-method
@@ -808,7 +854,7 @@ Returns the metadata value that was set for the given column using :ref:`set_met
 
 :ref:`TreeItem<class_TreeItem>` **get_next**\ (\ ) |const| :ref:`🔗<class_TreeItem_method_get_next>`
 
-Returns the next sibling TreeItem in the tree or a null object if there is none.
+Returns the next sibling TreeItem in the tree or a ``null`` object if there is none.
 
 .. rst-class:: classref-item-separator
 
@@ -848,7 +894,7 @@ If ``wrap`` is enabled, the method will wrap around to the first visible element
 
 :ref:`TreeItem<class_TreeItem>` **get_parent**\ (\ ) |const| :ref:`🔗<class_TreeItem_method_get_parent>`
 
-Returns the parent TreeItem or a null object if there is none.
+Returns the parent TreeItem or a ``null`` object if there is none.
 
 .. rst-class:: classref-item-separator
 
@@ -860,7 +906,7 @@ Returns the parent TreeItem or a null object if there is none.
 
 :ref:`TreeItem<class_TreeItem>` **get_prev**\ (\ ) :ref:`🔗<class_TreeItem_method_get_prev>`
 
-Returns the previous sibling TreeItem in the tree or a null object if there is none.
+Returns the previous sibling TreeItem in the tree or a ``null`` object if there is none.
 
 .. rst-class:: classref-item-separator
 
@@ -1214,6 +1260,20 @@ Selects the given ``column``.
 
 ----
 
+.. _class_TreeItem_method_set_auto_translate_mode:
+
+.. rst-class:: classref-method
+
+|void| **set_auto_translate_mode**\ (\ column\: :ref:`int<class_int>`, mode\: :ref:`AutoTranslateMode<enum_Node_AutoTranslateMode>`\ ) :ref:`🔗<class_TreeItem_method_set_auto_translate_mode>`
+
+Sets the given column's auto translate mode to ``mode``.
+
+All columns use :ref:`Node.AUTO_TRANSLATE_MODE_INHERIT<class_Node_constant_AUTO_TRANSLATE_MODE_INHERIT>` by default, which uses the same auto translate mode as the :ref:`Tree<class_Tree>` itself.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_TreeItem_method_set_autowrap_mode:
 
 .. rst-class:: classref-method
@@ -1444,7 +1504,7 @@ If ``enable`` is ``true``, the given ``column`` is expanded to the right.
 
 |void| **set_icon**\ (\ column\: :ref:`int<class_int>`, texture\: :ref:`Texture2D<class_Texture2D>`\ ) :ref:`🔗<class_TreeItem_method_set_icon>`
 
-Sets the given cell's icon :ref:`Texture2D<class_Texture2D>`. The cell has to be in :ref:`CELL_MODE_ICON<class_TreeItem_constant_CELL_MODE_ICON>` mode.
+Sets the given cell's icon :ref:`Texture2D<class_Texture2D>`. If the cell is in :ref:`CELL_MODE_ICON<class_TreeItem_constant_CELL_MODE_ICON>` mode, the icon is displayed in the center of the cell. Otherwise, the icon is displayed before the cell's text. :ref:`CELL_MODE_RANGE<class_TreeItem_constant_CELL_MODE_RANGE>` does not display an icon.
 
 .. rst-class:: classref-item-separator
 
@@ -1469,6 +1529,18 @@ Sets the maximum allowed width of the icon in the given ``column``. This limit i
 |void| **set_icon_modulate**\ (\ column\: :ref:`int<class_int>`, modulate\: :ref:`Color<class_Color>`\ ) :ref:`🔗<class_TreeItem_method_set_icon_modulate>`
 
 Modulates the given column's icon with ``modulate``.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TreeItem_method_set_icon_overlay:
+
+.. rst-class:: classref-method
+
+|void| **set_icon_overlay**\ (\ column\: :ref:`int<class_int>`, texture\: :ref:`Texture2D<class_Texture2D>`\ ) :ref:`🔗<class_TreeItem_method_set_icon_overlay>`
+
+Sets the given cell's icon overlay :ref:`Texture2D<class_Texture2D>`. The cell has to be in :ref:`CELL_MODE_ICON<class_TreeItem_constant_CELL_MODE_ICON>` mode, and icon has to be set. Overlay is drawn on top of icon, in the bottom left corner.
 
 .. rst-class:: classref-item-separator
 
