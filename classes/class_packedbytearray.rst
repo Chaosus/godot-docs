@@ -124,6 +124,8 @@ Methods
    +-----------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                               | :ref:`find<class_PackedByteArray_method_find>`\ (\ value\: :ref:`int<class_int>`, from\: :ref:`int<class_int>` = 0\ ) |const|                                                                 |
    +-----------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`int<class_int>`                               | :ref:`get<class_PackedByteArray_method_get>`\ (\ index\: :ref:`int<class_int>`\ ) |const|                                                                                                     |
+   +-----------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                         | :ref:`get_string_from_ascii<class_PackedByteArray_method_get_string_from_ascii>`\ (\ ) |const|                                                                                                |
    +-----------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                         | :ref:`get_string_from_utf8<class_PackedByteArray_method_get_string_from_utf8>`\ (\ ) |const|                                                                                                  |
@@ -677,6 +679,18 @@ Searches the array for a value and returns its index or ``-1`` if not found. Opt
 
 ----
 
+.. _class_PackedByteArray_method_get:
+
+.. rst-class:: classref-method
+
+:ref:`int<class_int>` **get**\ (\ index\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_PackedByteArray_method_get>`
+
+Returns the byte at the given ``index`` in the array. This is the same as using the ``[]`` operator (``array[index]``).
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_PackedByteArray_method_get_string_from_ascii:
 
 .. rst-class:: classref-method
@@ -779,7 +793,7 @@ Returns a hexadecimal representation of this array as a :ref:`String<class_Strin
 
  .. code-tab:: csharp
 
-    var array = new byte[] {11, 46, 255};
+    byte[] array = [11, 46, 255];
     GD.Print(array.HexEncode()); // Prints: 0b2eff
 
 
