@@ -44,10 +44,12 @@ Despite their name, node paths may also point to a property:
 
 ::
 
-    ^"position"            # Points to this object's position.
-    ^"position:x"          # Points to this object's position in the x axis.
+    ^":position"           # Points to this object's position.
+    ^":position:x"         # Points to this object's position in the x axis.
     ^"Camera3D:rotation:y" # Points to the child Camera3D and its y rotation.
     ^"/root:size:x"        # Points to the root Window and its width.
+
+In some situations, it's possible to omit the leading ``:`` when pointing to an object's property. As an example, this is the case with :ref:`Object.set_indexed<class_Object_method_set_indexed>` and :ref:`Tween.tween_property<class_Tween_method_tween_property>`, as those methods call :ref:`get_as_property_path<class_NodePath_method_get_as_property_path>` under the hood. However, it's generally recommended to keep the ``:`` prefix.
 
 Node paths cannot check whether they are valid and may point to nodes or properties that do not exist. Their meaning depends entirely on the context in which they're used.
 
@@ -169,7 +171,7 @@ Constructs a **NodePath** from a :ref:`String<class_String>`. The created path i
 
 The "subnames" optionally included after the path to the target node can point to properties, and can also be nested.
 
-Examples of strings that could be node paths:
+The following strings can be valid node paths:
 
 ::
 
@@ -228,7 +230,7 @@ Returns a copy of this node path with a colon character (``:``) prefixed, transf
     
     // propertyPath points to the "position" in the "x" axis of this node.
     NodePath propertyPath = nodePath.GetAsPropertyPath();
-    GD.Print(propertyPath); // Prints ":position:x".
+    GD.Print(propertyPath); // Prints ":position:x"
 
 
 
@@ -262,12 +264,12 @@ Returns all property subnames concatenated with a colon character (``:``) as a s
  .. code-tab:: gdscript
 
     var node_path = ^"Sprite2D:texture:resource_name"
-    print(node_path.get_concatenated_subnames()) # Prints "texture:resource_name".
+    print(node_path.get_concatenated_subnames()) # Prints "texture:resource_name"
 
  .. code-tab:: csharp
 
     var nodePath = new NodePath("Sprite2D:texture:resource_name");
-    GD.Print(nodePath.GetConcatenatedSubnames()); // Prints "texture:resource_name".
+    GD.Print(nodePath.GetConcatenatedSubnames()); // Prints "texture:resource_name"
 
 
 
@@ -289,16 +291,16 @@ Returns the node name indicated by ``idx``, starting from 0. If ``idx`` is out o
  .. code-tab:: gdscript
 
     var sprite_path = NodePath("../RigidBody2D/Sprite2D")
-    print(sprite_path.get_name(0)) # Prints "..".
-    print(sprite_path.get_name(1)) # Prints "RigidBody2D".
-    print(sprite_path.get_name(2)) # Prints "Sprite".
+    print(sprite_path.get_name(0)) # Prints ".."
+    print(sprite_path.get_name(1)) # Prints "RigidBody2D"
+    print(sprite_path.get_name(2)) # Prints "Sprite"
 
  .. code-tab:: csharp
 
     var spritePath = new NodePath("../RigidBody2D/Sprite2D");
-    GD.Print(spritePath.GetName(0)); // Prints "..".
-    GD.Print(spritePath.GetName(1)); // Prints "PathFollow2D".
-    GD.Print(spritePath.GetName(2)); // Prints "Sprite".
+    GD.Print(spritePath.GetName(0)); // Prints ".."
+    GD.Print(spritePath.GetName(1)); // Prints "PathFollow2D"
+    GD.Print(spritePath.GetName(2)); // Prints "Sprite"
 
 
 
@@ -334,14 +336,14 @@ Returns the property name indicated by ``idx``, starting from 0. If ``idx`` is o
  .. code-tab:: gdscript
 
     var path_to_name = NodePath("Sprite2D:texture:resource_name")
-    print(path_to_name.get_subname(0)) # Prints "texture".
-    print(path_to_name.get_subname(1)) # Prints "resource_name".
+    print(path_to_name.get_subname(0)) # Prints "texture"
+    print(path_to_name.get_subname(1)) # Prints "resource_name"
 
  .. code-tab:: csharp
 
     var pathToName = new NodePath("Sprite2D:texture:resource_name");
-    GD.Print(pathToName.GetSubname(0)); // Prints "texture".
-    GD.Print(pathToName.GetSubname(1)); // Prints "resource_name".
+    GD.Print(pathToName.GetSubname(0)); // Prints "texture"
+    GD.Print(pathToName.GetSubname(1)); // Prints "resource_name"
 
 
 
