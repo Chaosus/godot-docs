@@ -228,7 +228,7 @@ Multiplies each component of the :ref:`Color<class_Color>`, including the alpha,
 
 ::
 
-    print(1.5 * Color(0.5, 0.5, 0.5)) # Prints "(0.75, 0.75, 0.75, 1.5)"
+    print(1.5 * Color(0.5, 0.5, 0.5)) # Prints (0.75, 0.75, 0.75, 1.5)
 
 .. rst-class:: classref-item-separator
 
@@ -256,7 +256,7 @@ Multiplies each component of the :ref:`Vector2<class_Vector2>` by the given **fl
 
 ::
 
-    print(2.5 * Vector2(1, 3)) # Prints "(2.5, 7.5)"
+    print(2.5 * Vector2(1, 3)) # Prints (2.5, 7.5)
 
 .. rst-class:: classref-item-separator
 
@@ -272,7 +272,7 @@ Multiplies each component of the :ref:`Vector2i<class_Vector2i>` by the given **
 
 ::
 
-    print(0.9 * Vector2i(10, 15)) # Prints "(9, 13.5)"
+    print(0.9 * Vector2i(10, 15)) # Prints (9.0, 13.5)
 
 .. rst-class:: classref-item-separator
 
@@ -300,7 +300,7 @@ Multiplies each component of the :ref:`Vector3i<class_Vector3i>` by the given **
 
 ::
 
-    print(0.9 * Vector3i(10, 15, 20)) # Prints "(9, 13.5, 18)"
+    print(0.9 * Vector3i(10, 15, 20)) # Prints (9.0, 13.5, 18.0)
 
 .. rst-class:: classref-item-separator
 
@@ -328,7 +328,7 @@ Multiplies each component of the :ref:`Vector4i<class_Vector4i>` by the given **
 
 ::
 
-    print(0.9 * Vector4i(10, 15, 20, -10)) # Prints "(9, 13.5, 18, -9)"
+    print(0.9 * Vector4i(10, 15, 20, -10)) # Prints (9.0, 13.5, 18.0, -9.0)
 
 .. rst-class:: classref-item-separator
 

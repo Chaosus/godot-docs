@@ -98,6 +98,8 @@ Properties
    +-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+-----------------------+
    | :ref:`Hinting<enum_TextServer_Hinting>`                         | :ref:`hinting<class_FontFile_property_hinting>`                                                       | ``1``                 |
    +-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+-----------------------+
+   | :ref:`bool<class_bool>`                                         | :ref:`keep_rounding_remainders<class_FontFile_property_keep_rounding_remainders>`                     | ``true``              |
+   +-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+-----------------------+
    | :ref:`int<class_int>`                                           | :ref:`msdf_pixel_range<class_FontFile_property_msdf_pixel_range>`                                     | ``16``                |
    +-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------+-----------------------+
    | :ref:`int<class_int>`                                           | :ref:`msdf_size<class_FontFile_property_msdf_size>`                                                   | ``48``                |
@@ -489,6 +491,23 @@ Font hinting mode. Used by dynamic fonts only.
 
 ----
 
+.. _class_FontFile_property_keep_rounding_remainders:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **keep_rounding_remainders** = ``true`` :ref:`🔗<class_FontFile_property_keep_rounding_remainders>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_keep_rounding_remainders**\ (\ value\: :ref:`bool<class_bool>`\ )
+- :ref:`bool<class_bool>` **get_keep_rounding_remainders**\ (\ )
+
+If set to ``true``, when aligning glyphs to the pixel boundaries rounding remainders are accumulated to ensure more uniform glyph distribution. This setting has no effect if subpixel positioning is enabled.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_FontFile_property_msdf_pixel_range:
 
 .. rst-class:: classref-property
@@ -661,7 +680,7 @@ Removes all kerning overrides.
 
 |void| **clear_size_cache**\ (\ cache_index\: :ref:`int<class_int>`\ ) :ref:`🔗<class_FontFile_method_clear_size_cache>`
 
-Removes all font sizes from the cache entry
+Removes all font sizes from the cache entry.
 
 .. rst-class:: classref-item-separator
 
