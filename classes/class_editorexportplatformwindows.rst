@@ -187,7 +187,7 @@ If set to ``1``, ANGLE libraries are exported with the exported application. If 
 
 :ref:`int<class_int>` **application/export_d3d12** :ref:`🔗<class_EditorExportPlatformWindows_property_application/export_d3d12>`
 
-If set to ``1``, Direct3D 12 runtime (DXIL, Agility SDK, PIX) libraries are exported with the exported application. If set to ``0``, Direct3D 12 libraries are exported only if :ref:`ProjectSettings.rendering/rendering_device/driver<class_ProjectSettings_property_rendering/rendering_device/driver>` is set to ``"d3d12"``.
+If set to ``1``, the Direct3D 12 runtime libraries (Agility SDK, PIX) are exported with the exported application. If set to ``0``, Direct3D 12 libraries are exported only if :ref:`ProjectSettings.rendering/rendering_device/driver<class_ProjectSettings_property_rendering/rendering_device/driver>` is set to ``"d3d12"``.
 
 .. rst-class:: classref-item-separator
 
@@ -298,8 +298,6 @@ Trademarks and registered trademarks that apply to the file. Optional. See `Stri
 Application executable architecture.
 
 Supported architectures: ``x86_32``, ``x86_64``, and ``arm64``.
-
-Official export templates include ``x86_32`` and ``x86_64`` binaries only.
 
 .. rst-class:: classref-item-separator
 
