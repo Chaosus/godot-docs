@@ -141,7 +141,7 @@ Some :ref:`Tweener<class_Tweener>`\ s use transitions and eases. The first accep
 
 \ `Tween easing and transition types cheatsheet <https://raw.githubusercontent.com/godotengine/godot-docs/master/img/tween_cheatsheet.webp>`__\ 
 
-\ **Note:** Tweens are not designed to be re-used and trying to do so results in an undefined behavior. Create a new Tween for each animation and every time you replay an animation from start. Keep in mind that Tweens start immediately, so only create a Tween when you want to start animating.
+\ **Note:** Tweens are not designed to be reused and trying to do so results in an undefined behavior. Create a new Tween for each animation and every time you replay an animation from start. Keep in mind that Tweens start immediately, so only create a Tween when you want to start animating.
 
 \ **Note:** The tween is processed after all of the nodes in the current frame, i.e. node's :ref:`Node._process<class_Node_private_method__process>` method would be called before the tween (or :ref:`Node._physics_process<class_Node_private_method__physics_process>` depending on the value passed to :ref:`set_process_mode<class_Tween_method_set_process_mode>`).
 
@@ -180,6 +180,8 @@ Methods
    +-----------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Tween<class_Tween>`                     | :ref:`set_ease<class_Tween_method_set_ease>`\ (\ ease\: :ref:`EaseType<enum_Tween_EaseType>`\ )                                                                                                                                                                                                                                                                            |
    +-----------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`Tween<class_Tween>`                     | :ref:`set_ignore_time_scale<class_Tween_method_set_ignore_time_scale>`\ (\ ignore\: :ref:`bool<class_bool>` = true\ )                                                                                                                                                                                                                                                      |
+   +-----------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Tween<class_Tween>`                     | :ref:`set_loops<class_Tween_method_set_loops>`\ (\ loops\: :ref:`int<class_int>` = 0\ )                                                                                                                                                                                                                                                                                    |
    +-----------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Tween<class_Tween>`                     | :ref:`set_parallel<class_Tween_method_set_parallel>`\ (\ parallel\: :ref:`bool<class_bool>` = true\ )                                                                                                                                                                                                                                                                      |
@@ -201,6 +203,8 @@ Methods
    | :ref:`MethodTweener<class_MethodTweener>`     | :ref:`tween_method<class_Tween_method_tween_method>`\ (\ method\: :ref:`Callable<class_Callable>`, from\: :ref:`Variant<class_Variant>`, to\: :ref:`Variant<class_Variant>`, duration\: :ref:`float<class_float>`\ )                                                                                                                                                       |
    +-----------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`PropertyTweener<class_PropertyTweener>` | :ref:`tween_property<class_Tween_method_tween_property>`\ (\ object\: :ref:`Object<class_Object>`, property\: :ref:`NodePath<class_NodePath>`, final_val\: :ref:`Variant<class_Variant>`, duration\: :ref:`float<class_float>`\ )                                                                                                                                          |
+   +-----------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`SubtweenTweener<class_SubtweenTweener>` | :ref:`tween_subtween<class_Tween_method_tween_subtween>`\ (\ subtween\: :ref:`Tween<class_Tween>`\ )                                                                                                                                                                                                                                                                       |
    +-----------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. rst-class:: classref-section-separator
@@ -617,8 +621,6 @@ Aborts all tweening operations and invalidates the **Tween**.
 
 Makes the next :ref:`Tweener<class_Tweener>` run parallelly to the previous one.
 
-\ **Example:**\ 
-
 
 .. tabs::
 
@@ -678,9 +680,28 @@ Resumes a paused or stopped **Tween**.
 
 :ref:`Tween<class_Tween>` **set_ease**\ (\ ease\: :ref:`EaseType<enum_Tween_EaseType>`\ ) :ref:`🔗<class_Tween_method_set_ease>`
 
-Sets the default ease type for :ref:`PropertyTweener<class_PropertyTweener>`\ s and :ref:`MethodTweener<class_MethodTweener>`\ s animated by this **Tween**.
+Sets the default ease type for :ref:`PropertyTweener<class_PropertyTweener>`\ s and :ref:`MethodTweener<class_MethodTweener>`\ s appended after this method.
 
-If not specified, the default value is :ref:`EASE_IN_OUT<class_Tween_constant_EASE_IN_OUT>`.
+Before this method is called, the default ease type is :ref:`EASE_IN_OUT<class_Tween_constant_EASE_IN_OUT>`.
+
+::
+
+    var tween = create_tween()
+    tween.tween_property(self, "position", Vector2(300, 0), 0.5) # Uses EASE_IN_OUT.
+    tween.set_ease(Tween.EASE_IN)
+    tween.tween_property(self, "rotation_degrees", 45.0, 0.5) # Uses EASE_IN.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Tween_method_set_ignore_time_scale:
+
+.. rst-class:: classref-method
+
+:ref:`Tween<class_Tween>` **set_ignore_time_scale**\ (\ ignore\: :ref:`bool<class_bool>` = true\ ) :ref:`🔗<class_Tween_method_set_ignore_time_scale>`
+
+If ``ignore`` is ``true``, the tween will ignore :ref:`Engine.time_scale<class_Engine_property_time_scale>` and update with the real, elapsed time. This affects all :ref:`Tweener<class_Tweener>`\ s and their delays. Default value is ``false``.
 
 .. rst-class:: classref-item-separator
 
@@ -768,9 +789,16 @@ Scales the speed of tweening. This affects all :ref:`Tweener<class_Tweener>`\ s 
 
 :ref:`Tween<class_Tween>` **set_trans**\ (\ trans\: :ref:`TransitionType<enum_Tween_TransitionType>`\ ) :ref:`🔗<class_Tween_method_set_trans>`
 
-Sets the default transition type for :ref:`PropertyTweener<class_PropertyTweener>`\ s and :ref:`MethodTweener<class_MethodTweener>`\ s animated by this **Tween**.
+Sets the default transition type for :ref:`PropertyTweener<class_PropertyTweener>`\ s and :ref:`MethodTweener<class_MethodTweener>`\ s appended after this method.
 
-If not specified, the default value is :ref:`TRANS_LINEAR<class_Tween_constant_TRANS_LINEAR>`.
+Before this method is called, the default transition type is :ref:`TRANS_LINEAR<class_Tween_constant_TRANS_LINEAR>`.
+
+::
+
+    var tween = create_tween()
+    tween.tween_property(self, "position", Vector2(300, 0), 0.5) # Uses TRANS_LINEAR.
+    tween.set_trans(Tween.TRANS_SINE)
+    tween.tween_property(self, "rotation_degrees", 45.0, 0.5) # Uses TRANS_SINE.
 
 .. rst-class:: classref-item-separator
 
@@ -783,6 +811,24 @@ If not specified, the default value is :ref:`TRANS_LINEAR<class_Tween_constant_T
 |void| **stop**\ (\ ) :ref:`🔗<class_Tween_method_stop>`
 
 Stops the tweening and resets the **Tween** to its initial state. This will not remove any appended :ref:`Tweener<class_Tweener>`\ s.
+
+\ **Note:** This does *not* reset targets of :ref:`PropertyTweener<class_PropertyTweener>`\ s to their values when the **Tween** first started.
+
+::
+
+    var tween = create_tween()
+    
+    # Will move from 0 to 500 over 1 second.
+    position.x = 0.0
+    tween.tween_property(self, "position:x", 500, 1.0)
+    
+    # Will be at (about) 250 when the timer finishes.
+    await get_tree().create_timer(0.5).timeout
+    
+    # Will now move from (about) 250 to 500 over 1 second,
+    # thus at half the speed as before.
+    tween.stop()
+    tween.play()
 
 \ **Note:** If a Tween is stopped and not bound to any node, it will exist indefinitely until manually started or invalidated. If you lose a reference to such Tween, you can retrieve it using :ref:`SceneTree.get_processed_tweens<class_SceneTree_method_get_processed_tweens>`.
 
@@ -965,8 +1011,6 @@ Creates and appends a :ref:`MethodTweener<class_MethodTweener>`. This method is 
 
 Creates and appends a :ref:`PropertyTweener<class_PropertyTweener>`. This method tweens a ``property`` of an ``object`` between an initial value and ``final_val`` in a span of time equal to ``duration``, in seconds. The initial value by default is the property's value at the time the tweening of the :ref:`PropertyTweener<class_PropertyTweener>` starts.
 
-\ **Example:**\ 
-
 
 .. tabs::
 
@@ -1006,6 +1050,35 @@ will move the sprite to position (100, 200) and then to (200, 300). If you use :
     tween.TweenProperty(GetNode("Sprite"), "position", Vector2.Right * 300.0f, 1.0f).AsRelative().FromCurrent().SetTrans(Tween.TransitionType.Expo);
 
 
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Tween_method_tween_subtween:
+
+.. rst-class:: classref-method
+
+:ref:`SubtweenTweener<class_SubtweenTweener>` **tween_subtween**\ (\ subtween\: :ref:`Tween<class_Tween>`\ ) :ref:`🔗<class_Tween_method_tween_subtween>`
+
+Creates and appends a :ref:`SubtweenTweener<class_SubtweenTweener>`. This method can be used to nest ``subtween`` within this **Tween**, allowing for the creation of more complex and composable sequences.
+
+::
+
+    # Subtween will rotate the object.
+    var subtween = create_tween()
+    subtween.tween_property(self, "rotation_degrees", 45.0, 1.0)
+    subtween.tween_property(self, "rotation_degrees", 0.0, 1.0)
+    
+    # Parent tween will execute the subtween as one of its steps.
+    var tween = create_tween()
+    tween.tween_property(self, "position:x", 500, 3.0)
+    tween.tween_subtween(subtween)
+    tween.tween_property(self, "position:x", 300, 2.0)
+
+\ **Note:** The methods :ref:`pause<class_Tween_method_pause>`, :ref:`stop<class_Tween_method_stop>`, and :ref:`set_loops<class_Tween_method_set_loops>` can cause the parent **Tween** to get stuck on the subtween step; see the documentation for those methods for more information.
+
+\ **Note:** The pause and process modes set by :ref:`set_pause_mode<class_Tween_method_set_pause_mode>` and :ref:`set_process_mode<class_Tween_method_set_process_mode>` on ``subtween`` will be overridden by the parent **Tween**'s settings.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`

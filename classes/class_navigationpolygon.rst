@@ -39,7 +39,7 @@ To bake a navigation mesh at least one outline needs to be added that defines th
  .. code-tab:: csharp
 
     var newNavigationMesh = new NavigationPolygon();
-    var boundingOutline = new Vector2[] { new Vector2(0, 0), new Vector2(0, 50), new Vector2(50, 50), new Vector2(50, 0) };
+    Vector2[] boundingOutline = [new Vector2(0, 0), new Vector2(0, 50), new Vector2(50, 50), new Vector2(50, 0)];
     newNavigationMesh.AddOutline(boundingOutline);
     NavigationServer2D.BakeFromSourceGeometryData(newNavigationMesh, new NavigationMeshSourceGeometryData2D());
     GetNode<NavigationRegion2D>("NavigationRegion2D").NavigationPolygon = newNavigationMesh;
@@ -63,9 +63,9 @@ Adding vertices and polygon indices manually.
  .. code-tab:: csharp
 
     var newNavigationMesh = new NavigationPolygon();
-    var newVertices = new Vector2[] { new Vector2(0, 0), new Vector2(0, 50), new Vector2(50, 50), new Vector2(50, 0) };
+    Vector2[] newVertices = [new Vector2(0, 0), new Vector2(0, 50), new Vector2(50, 50), new Vector2(50, 0)];
     newNavigationMesh.Vertices = newVertices;
-    var newPolygonIndices = new int[] { 0, 1, 2, 3 };
+    int[] newPolygonIndices = [0, 1, 2, 3];
     newNavigationMesh.AddPolygon(newPolygonIndices);
     GetNode<NavigationRegion2D>("NavigationRegion2D").NavigationPolygon = newNavigationMesh;
 
@@ -88,25 +88,27 @@ Properties
 .. table::
    :widths: auto
 
-   +----------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
-   | :ref:`float<class_float>`                                            | :ref:`agent_radius<class_NavigationPolygon_property_agent_radius>`                             | ``10.0``                                        |
-   +----------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
-   | :ref:`Rect2<class_Rect2>`                                            | :ref:`baking_rect<class_NavigationPolygon_property_baking_rect>`                               | ``Rect2(0, 0, 0, 0)``                           |
-   +----------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
-   | :ref:`Vector2<class_Vector2>`                                        | :ref:`baking_rect_offset<class_NavigationPolygon_property_baking_rect_offset>`                 | ``Vector2(0, 0)``                               |
-   +----------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
-   | :ref:`float<class_float>`                                            | :ref:`border_size<class_NavigationPolygon_property_border_size>`                               | ``0.0``                                         |
-   +----------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
-   | :ref:`float<class_float>`                                            | :ref:`cell_size<class_NavigationPolygon_property_cell_size>`                                   | ``1.0``                                         |
-   +----------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
-   | :ref:`int<class_int>`                                                | :ref:`parsed_collision_mask<class_NavigationPolygon_property_parsed_collision_mask>`           | ``4294967295``                                  |
-   +----------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
-   | :ref:`ParsedGeometryType<enum_NavigationPolygon_ParsedGeometryType>` | :ref:`parsed_geometry_type<class_NavigationPolygon_property_parsed_geometry_type>`             | ``2``                                           |
-   +----------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
-   | :ref:`StringName<class_StringName>`                                  | :ref:`source_geometry_group_name<class_NavigationPolygon_property_source_geometry_group_name>` | ``&"navigation_polygon_source_geometry_group"`` |
-   +----------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
-   | :ref:`SourceGeometryMode<enum_NavigationPolygon_SourceGeometryMode>` | :ref:`source_geometry_mode<class_NavigationPolygon_property_source_geometry_mode>`             | ``0``                                           |
-   +----------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
+   +------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
+   | :ref:`float<class_float>`                                              | :ref:`agent_radius<class_NavigationPolygon_property_agent_radius>`                             | ``10.0``                                        |
+   +------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
+   | :ref:`Rect2<class_Rect2>`                                              | :ref:`baking_rect<class_NavigationPolygon_property_baking_rect>`                               | ``Rect2(0, 0, 0, 0)``                           |
+   +------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
+   | :ref:`Vector2<class_Vector2>`                                          | :ref:`baking_rect_offset<class_NavigationPolygon_property_baking_rect_offset>`                 | ``Vector2(0, 0)``                               |
+   +------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
+   | :ref:`float<class_float>`                                              | :ref:`border_size<class_NavigationPolygon_property_border_size>`                               | ``0.0``                                         |
+   +------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
+   | :ref:`float<class_float>`                                              | :ref:`cell_size<class_NavigationPolygon_property_cell_size>`                                   | ``1.0``                                         |
+   +------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
+   | :ref:`int<class_int>`                                                  | :ref:`parsed_collision_mask<class_NavigationPolygon_property_parsed_collision_mask>`           | ``4294967295``                                  |
+   +------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
+   | :ref:`ParsedGeometryType<enum_NavigationPolygon_ParsedGeometryType>`   | :ref:`parsed_geometry_type<class_NavigationPolygon_property_parsed_geometry_type>`             | ``2``                                           |
+   +------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
+   | :ref:`SamplePartitionType<enum_NavigationPolygon_SamplePartitionType>` | :ref:`sample_partition_type<class_NavigationPolygon_property_sample_partition_type>`           | ``0``                                           |
+   +------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
+   | :ref:`StringName<class_StringName>`                                    | :ref:`source_geometry_group_name<class_NavigationPolygon_property_source_geometry_group_name>` | ``&"navigation_polygon_source_geometry_group"`` |
+   +------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
+   | :ref:`SourceGeometryMode<enum_NavigationPolygon_SourceGeometryMode>`   | :ref:`source_geometry_mode<class_NavigationPolygon_property_source_geometry_mode>`             | ``0``                                           |
+   +------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+-------------------------------------------------+
 
 .. rst-class:: classref-reftable-group
 
@@ -162,6 +164,40 @@ Methods
 
 Enumerations
 ------------
+
+.. _enum_NavigationPolygon_SamplePartitionType:
+
+.. rst-class:: classref-enumeration
+
+enum **SamplePartitionType**: :ref:`🔗<enum_NavigationPolygon_SamplePartitionType>`
+
+.. _class_NavigationPolygon_constant_SAMPLE_PARTITION_CONVEX_PARTITION:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`SamplePartitionType<enum_NavigationPolygon_SamplePartitionType>` **SAMPLE_PARTITION_CONVEX_PARTITION** = ``0``
+
+Convex partitioning that yields navigation mesh with convex polygons.
+
+.. _class_NavigationPolygon_constant_SAMPLE_PARTITION_TRIANGULATE:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`SamplePartitionType<enum_NavigationPolygon_SamplePartitionType>` **SAMPLE_PARTITION_TRIANGULATE** = ``1``
+
+Triangulation partitioning that yields navigation mesh with triangle polygons.
+
+.. _class_NavigationPolygon_constant_SAMPLE_PARTITION_MAX:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`SamplePartitionType<enum_NavigationPolygon_SamplePartitionType>` **SAMPLE_PARTITION_MAX** = ``2``
+
+Represents the size of the :ref:`SamplePartitionType<enum_NavigationPolygon_SamplePartitionType>` enum.
+
+.. rst-class:: classref-item-separator
+
+----
 
 .. _enum_NavigationPolygon_ParsedGeometryType:
 
@@ -372,6 +408,23 @@ Only used when :ref:`parsed_geometry_type<class_NavigationPolygon_property_parse
 - :ref:`ParsedGeometryType<enum_NavigationPolygon_ParsedGeometryType>` **get_parsed_geometry_type**\ (\ )
 
 Determines which type of nodes will be parsed as geometry. See :ref:`ParsedGeometryType<enum_NavigationPolygon_ParsedGeometryType>` for possible values.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_NavigationPolygon_property_sample_partition_type:
+
+.. rst-class:: classref-property
+
+:ref:`SamplePartitionType<enum_NavigationPolygon_SamplePartitionType>` **sample_partition_type** = ``0`` :ref:`🔗<class_NavigationPolygon_property_sample_partition_type>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_sample_partition_type**\ (\ value\: :ref:`SamplePartitionType<enum_NavigationPolygon_SamplePartitionType>`\ )
+- :ref:`SamplePartitionType<enum_NavigationPolygon_SamplePartitionType>` **get_sample_partition_type**\ (\ )
+
+Partitioning algorithm for creating the navigation mesh polys. See :ref:`SamplePartitionType<enum_NavigationPolygon_SamplePartitionType>` for possible values.
 
 .. rst-class:: classref-item-separator
 
