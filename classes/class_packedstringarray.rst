@@ -83,6 +83,8 @@ Methods
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`find<class_PackedStringArray_method_find>`\ (\ value\: :ref:`String<class_String>`, from\: :ref:`int<class_int>` = 0\ ) |const|      |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`                       | :ref:`get<class_PackedStringArray_method_get>`\ (\ index\: :ref:`int<class_int>`\ ) |const|                                                |
+   +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`has<class_PackedStringArray_method_has>`\ (\ value\: :ref:`String<class_String>`\ ) |const|                                          |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`insert<class_PackedStringArray_method_insert>`\ (\ at_index\: :ref:`int<class_int>`, value\: :ref:`String<class_String>`\ )          |
@@ -272,6 +274,18 @@ Searches the array for a value and returns its index or ``-1`` if not found. Opt
 
 ----
 
+.. _class_PackedStringArray_method_get:
+
+.. rst-class:: classref-method
+
+:ref:`String<class_String>` **get**\ (\ index\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_PackedStringArray_method_get>`
+
+Returns the :ref:`String<class_String>` at the given ``index`` in the array. This is the same as using the ``[]`` operator (``array[index]``).
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_PackedStringArray_method_has:
 
 .. rst-class:: classref-method
@@ -426,7 +440,7 @@ Sorts the elements of the array in ascending order.
 
 :ref:`PackedByteArray<class_PackedByteArray>` **to_byte_array**\ (\ ) |const| :ref:`🔗<class_PackedStringArray_method_to_byte_array>`
 
-Returns a :ref:`PackedByteArray<class_PackedByteArray>` with each string encoded as bytes.
+Returns a :ref:`PackedByteArray<class_PackedByteArray>` with each string encoded as UTF-8. Strings are ``null`` terminated.
 
 .. rst-class:: classref-section-separator
 
