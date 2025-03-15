@@ -39,6 +39,10 @@ Properties
    :widths: auto
 
    +------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+----------------------+
+   | :ref:`Array<class_Array>`\[:ref:`RID<class_RID>`\]                                             | :ref:`excluded_regions<class_NavigationPathQueryParameters3D_property_excluded_regions>`           | ``[]``               |
+   +------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+----------------------+
+   | :ref:`Array<class_Array>`\[:ref:`RID<class_RID>`\]                                             | :ref:`included_regions<class_NavigationPathQueryParameters3D_property_included_regions>`           | ``[]``               |
+   +------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+----------------------+
    | :ref:`RID<class_RID>`                                                                          | :ref:`map<class_NavigationPathQueryParameters3D_property_map>`                                     | ``RID()``            |
    +------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------+----------------------+
    | |bitfield|\[:ref:`PathMetadataFlags<enum_NavigationPathQueryParameters3D_PathMetadataFlags>`\] | :ref:`metadata_flags<class_NavigationPathQueryParameters3D_property_metadata_flags>`               | ``7``                |
@@ -107,6 +111,14 @@ Applies a funnel algorithm to the raw path corridor found by the pathfinding alg
 
 Centers every path position in the middle of the traveled navigation mesh polygon edge. This creates better paths for tile- or gridbased layouts that restrict the movement to the cells center.
 
+.. _class_NavigationPathQueryParameters3D_constant_PATH_POSTPROCESSING_NONE:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`PathPostProcessing<enum_NavigationPathQueryParameters3D_PathPostProcessing>` **PATH_POSTPROCESSING_NONE** = ``2``
+
+Applies no postprocessing and returns the raw path corridor as found by the pathfinding algorithm.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -165,6 +177,44 @@ Include all available metadata about the returned path.
 
 Property Descriptions
 ---------------------
+
+.. _class_NavigationPathQueryParameters3D_property_excluded_regions:
+
+.. rst-class:: classref-property
+
+:ref:`Array<class_Array>`\[:ref:`RID<class_RID>`\] **excluded_regions** = ``[]`` :ref:`🔗<class_NavigationPathQueryParameters3D_property_excluded_regions>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_excluded_regions**\ (\ value\: :ref:`Array<class_Array>`\[:ref:`RID<class_RID>`\]\ )
+- :ref:`Array<class_Array>`\[:ref:`RID<class_RID>`\] **get_excluded_regions**\ (\ )
+
+The list of region :ref:`RID<class_RID>`\ s that will be excluded from the path query. Use :ref:`NavigationRegion3D.get_rid()<class_NavigationRegion3D_method_get_rid>` to get the :ref:`RID<class_RID>` associated with a :ref:`NavigationRegion3D<class_NavigationRegion3D>` node.
+
+\ **Note:** The returned array is copied and any changes to it will not update the original property value. To update the value you need to modify the returned array, and then set it to the property again.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_NavigationPathQueryParameters3D_property_included_regions:
+
+.. rst-class:: classref-property
+
+:ref:`Array<class_Array>`\[:ref:`RID<class_RID>`\] **included_regions** = ``[]`` :ref:`🔗<class_NavigationPathQueryParameters3D_property_included_regions>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_included_regions**\ (\ value\: :ref:`Array<class_Array>`\[:ref:`RID<class_RID>`\]\ )
+- :ref:`Array<class_Array>`\[:ref:`RID<class_RID>`\] **get_included_regions**\ (\ )
+
+The list of region :ref:`RID<class_RID>`\ s that will be included by the path query. Use :ref:`NavigationRegion3D.get_rid()<class_NavigationRegion3D_method_get_rid>` to get the :ref:`RID<class_RID>` associated with a :ref:`NavigationRegion3D<class_NavigationRegion3D>` node. If left empty all regions are included. If a region ends up being both included and excluded at the same time it will be excluded.
+
+\ **Note:** The returned array is copied and any changes to it will not update the original property value. To update the value you need to modify the returned array, and then set it to the property again.
+
+.. rst-class:: classref-item-separator
+
+----
 
 .. _class_NavigationPathQueryParameters3D_property_map:
 
