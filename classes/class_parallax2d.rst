@@ -10,8 +10,6 @@
 Parallax2D
 ==========
 
-**Experimental:** This node is meant to replace :ref:`ParallaxBackground<class_ParallaxBackground>` and :ref:`ParallaxLayer<class_ParallaxLayer>`. The implementation may change in the future.
-
 **Inherits:** :ref:`Node2D<class_Node2D>` **<** :ref:`CanvasItem<class_CanvasItem>` **<** :ref:`Node<class_Node>` **<** :ref:`Object<class_Object>`
 
 A node used to create a parallax scrolling background.
@@ -24,6 +22,13 @@ Description
 A **Parallax2D** is used to create a parallax effect. It can move at a different speed relative to the camera movement using :ref:`scroll_scale<class_Parallax2D_property_scroll_scale>`. This creates an illusion of depth in a 2D game. If manual scrolling is desired, the :ref:`Camera2D<class_Camera2D>` position can be ignored with :ref:`ignore_camera_scroll<class_Parallax2D_property_ignore_camera_scroll>`.
 
 \ **Note:** Any changes to this node's position made after it enters the scene tree will be overridden if :ref:`ignore_camera_scroll<class_Parallax2D_property_ignore_camera_scroll>` is ``false`` or :ref:`screen_offset<class_Parallax2D_property_screen_offset>` is modified.
+
+.. rst-class:: classref-introduction-group
+
+Tutorials
+---------
+
+- :doc:`2D Parallax <../tutorials/2d/2d_parallax>`
 
 .. rst-class:: classref-reftable-group
 
