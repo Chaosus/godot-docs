@@ -158,6 +158,8 @@ Theme Properties
    +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`int<class_int>`             | :ref:`outline_size<class_TabBar_theme_constant_outline_size>`                | ``0``                               |
    +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`int<class_int>`             | :ref:`tab_separation<class_TabBar_theme_constant_tab_separation>`            | ``0``                               |
+   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`Font<class_Font>`           | :ref:`font<class_TabBar_theme_font_font>`                                    |                                     |
    +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`int<class_int>`             | :ref:`font_size<class_TabBar_theme_font_size_font_size>`                     |                                     |
@@ -216,7 +218,7 @@ Emitted when the active tab is rearranged via mouse drag. See :ref:`drag_to_rear
 
 **tab_button_pressed**\ (\ tab\: :ref:`int<class_int>`\ ) :ref:`🔗<class_TabBar_signal_tab_button_pressed>`
 
-Emitted when a tab's right button is pressed. See :ref:`set_tab_button_icon<class_TabBar_method_set_tab_button_icon>`.
+Emitted when a tab's right button is pressed. See :ref:`set_tab_button_icon()<class_TabBar_method_set_tab_button_icon>`.
 
 .. rst-class:: classref-item-separator
 
@@ -740,7 +742,7 @@ Returns tab title language code.
 
 :ref:`Variant<class_Variant>` **get_tab_metadata**\ (\ tab_idx\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_TabBar_method_get_tab_metadata>`
 
-Returns the metadata value set to the tab at index ``tab_idx`` using :ref:`set_tab_metadata<class_TabBar_method_set_tab_metadata>`. If no metadata was previously set, returns ``null`` by default.
+Returns the metadata value set to the tab at index ``tab_idx`` using :ref:`set_tab_metadata()<class_TabBar_method_set_tab_metadata>`. If no metadata was previously set, returns ``null`` by default.
 
 .. rst-class:: classref-item-separator
 
@@ -956,7 +958,7 @@ Sets language code of tab title used for line-breaking and text shaping algorith
 
 |void| **set_tab_metadata**\ (\ tab_idx\: :ref:`int<class_int>`, metadata\: :ref:`Variant<class_Variant>`\ ) :ref:`🔗<class_TabBar_method_set_tab_metadata>`
 
-Sets the metadata value for the tab at index ``tab_idx``, which can be retrieved later using :ref:`get_tab_metadata<class_TabBar_method_get_tab_metadata>`.
+Sets the metadata value for the tab at index ``tab_idx``, which can be retrieved later using :ref:`get_tab_metadata()<class_TabBar_method_get_tab_metadata>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1095,7 +1097,7 @@ The horizontal separation between the elements inside tabs.
 
 :ref:`int<class_int>` **icon_max_width** = ``0`` :ref:`🔗<class_TabBar_theme_constant_icon_max_width>`
 
-The maximum allowed width of the tab's icon. This limit is applied on top of the default size of the icon, but before the value set with :ref:`set_tab_icon_max_width<class_TabBar_method_set_tab_icon_max_width>`. The height is adjusted according to the icon's ratio.
+The maximum allowed width of the tab's icon. This limit is applied on top of the default size of the icon, but before the value set with :ref:`set_tab_icon_max_width()<class_TabBar_method_set_tab_icon_max_width>`. The height is adjusted according to the icon's ratio.
 
 .. rst-class:: classref-item-separator
 
@@ -1110,6 +1112,18 @@ The maximum allowed width of the tab's icon. This limit is applied on top of the
 The size of the tab text outline.
 
 \ **Note:** If using a font with :ref:`FontFile.multichannel_signed_distance_field<class_FontFile_property_multichannel_signed_distance_field>` enabled, its :ref:`FontFile.msdf_pixel_range<class_FontFile_property_msdf_pixel_range>` must be set to at least *twice* the value of :ref:`outline_size<class_TabBar_theme_constant_outline_size>` for outline rendering to look correct. Otherwise, the outline may appear to be cut off earlier than intended.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TabBar_theme_constant_tab_separation:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`int<class_int>` **tab_separation** = ``0`` :ref:`🔗<class_TabBar_theme_constant_tab_separation>`
+
+The space between tabs in the tab bar.
 
 .. rst-class:: classref-item-separator
 
