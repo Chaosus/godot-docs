@@ -37,15 +37,13 @@ Properties
 .. table::
    :widths: auto
 
-   +-----------------------------------------------+--------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
-   | :ref:`PackedByteArray<class_PackedByteArray>` | :ref:`_data<class_PortableCompressedTexture2D_property__data>`                                   | ``PackedByteArray()``                                                                  |
-   +-----------------------------------------------+--------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                       | :ref:`keep_compressed_buffer<class_PortableCompressedTexture2D_property_keep_compressed_buffer>` | ``false``                                                                              |
-   +-----------------------------------------------+--------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                       | resource_local_to_scene                                                                          | ``false`` (overrides :ref:`Resource<class_Resource_property_resource_local_to_scene>`) |
-   +-----------------------------------------------+--------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
-   | :ref:`Vector2<class_Vector2>`                 | :ref:`size_override<class_PortableCompressedTexture2D_property_size_override>`                   | ``Vector2(0, 0)``                                                                      |
-   +-----------------------------------------------+--------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
+   +-------------------------------+--------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`       | :ref:`keep_compressed_buffer<class_PortableCompressedTexture2D_property_keep_compressed_buffer>` | ``false``                                                                              |
+   +-------------------------------+--------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`       | resource_local_to_scene                                                                          | ``false`` (overrides :ref:`Resource<class_Resource_property_resource_local_to_scene>`) |
+   +-------------------------------+--------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
+   | :ref:`Vector2<class_Vector2>` | :ref:`size_override<class_PortableCompressedTexture2D_property_size_override>`                   | ``Vector2(0, 0)``                                                                      |
+   +-------------------------------+--------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------+
 
 .. rst-class:: classref-reftable-group
 
@@ -154,6 +152,18 @@ enum **CompressionMode**: :ref:`🔗<enum_PortableCompressedTexture2D_Compressio
 
 
 
+.. _class_PortableCompressedTexture2D_constant_COMPRESSION_MODE_ASTC:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`CompressionMode<enum_PortableCompressedTexture2D_CompressionMode>` **COMPRESSION_MODE_ASTC** = ``6``
+
+.. container:: contribute
+
+	There is currently no description for this enum. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+
+
+
 .. rst-class:: classref-section-separator
 
 ----
@@ -162,20 +172,6 @@ enum **CompressionMode**: :ref:`🔗<enum_PortableCompressedTexture2D_Compressio
 
 Property Descriptions
 ---------------------
-
-.. _class_PortableCompressedTexture2D_property__data:
-
-.. rst-class:: classref-property
-
-:ref:`PackedByteArray<class_PackedByteArray>` **_data** = ``PackedByteArray()`` :ref:`🔗<class_PortableCompressedTexture2D_property__data>`
-
-.. container:: contribute
-
-	There is currently no description for this property. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
-
-.. rst-class:: classref-item-separator
-
-----
 
 .. _class_PortableCompressedTexture2D_property_keep_compressed_buffer:
 

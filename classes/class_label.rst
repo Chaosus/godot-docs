@@ -42,9 +42,13 @@ Properties
    +-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
    | :ref:`AutowrapMode<enum_TextServer_AutowrapMode>`                           | :ref:`autowrap_mode<class_Label_property_autowrap_mode>`                                                 | ``0``                                                                        |
    +-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
+   | |bitfield|\[:ref:`LineBreakFlag<enum_TextServer_LineBreakFlag>`\]           | :ref:`autowrap_trim_flags<class_Label_property_autowrap_trim_flags>`                                     | ``192``                                                                      |
+   +-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                                     | :ref:`clip_text<class_Label_property_clip_text>`                                                         | ``false``                                                                    |
    +-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                                                 | :ref:`ellipsis_char<class_Label_property_ellipsis_char>`                                                 | ``"…"``                                                                      |
+   +-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
+   | :ref:`FocusMode<enum_Control_FocusMode>`                                    | focus_mode                                                                                               | ``3`` (overrides :ref:`Control<class_Control_property_focus_mode>`)          |
    +-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
    | :ref:`HorizontalAlignment<enum_@GlobalScope_HorizontalAlignment>`           | :ref:`horizontal_alignment<class_Label_property_horizontal_alignment>`                                   | ``0``                                                                        |
    +-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
@@ -59,6 +63,8 @@ Properties
    | :ref:`int<class_int>`                                                       | :ref:`max_lines_visible<class_Label_property_max_lines_visible>`                                         | ``-1``                                                                       |
    +-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
    | :ref:`MouseFilter<enum_Control_MouseFilter>`                                | mouse_filter                                                                                             | ``2`` (overrides :ref:`Control<class_Control_property_mouse_filter>`)        |
+   +-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`                                                 | :ref:`paragraph_separator<class_Label_property_paragraph_separator>`                                     | ``"\\n"``                                                                    |
    +-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
    | |bitfield|\[:ref:`SizeFlags<enum_Control_SizeFlags>`\]                      | size_flags_vertical                                                                                      | ``4`` (overrides :ref:`Control<class_Control_property_size_flags_vertical>`) |
    +-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------+
@@ -124,6 +130,8 @@ Theme Properties
    +---------------------------------+----------------------------------------------------------------------------+-----------------------+
    | :ref:`int<class_int>`           | :ref:`outline_size<class_Label_theme_constant_outline_size>`               | ``0``                 |
    +---------------------------------+----------------------------------------------------------------------------+-----------------------+
+   | :ref:`int<class_int>`           | :ref:`paragraph_spacing<class_Label_theme_constant_paragraph_spacing>`     | ``0``                 |
+   +---------------------------------+----------------------------------------------------------------------------+-----------------------+
    | :ref:`int<class_int>`           | :ref:`shadow_offset_x<class_Label_theme_constant_shadow_offset_x>`         | ``1``                 |
    +---------------------------------+----------------------------------------------------------------------------+-----------------------+
    | :ref:`int<class_int>`           | :ref:`shadow_offset_y<class_Label_theme_constant_shadow_offset_y>`         | ``1``                 |
@@ -133,6 +141,8 @@ Theme Properties
    | :ref:`Font<class_Font>`         | :ref:`font<class_Label_theme_font_font>`                                   |                       |
    +---------------------------------+----------------------------------------------------------------------------+-----------------------+
    | :ref:`int<class_int>`           | :ref:`font_size<class_Label_theme_font_size_font_size>`                    |                       |
+   +---------------------------------+----------------------------------------------------------------------------+-----------------------+
+   | :ref:`StyleBox<class_StyleBox>` | :ref:`focus<class_Label_theme_style_focus>`                                |                       |
    +---------------------------------+----------------------------------------------------------------------------+-----------------------+
    | :ref:`StyleBox<class_StyleBox>` | :ref:`normal<class_Label_theme_style_normal>`                              |                       |
    +---------------------------------+----------------------------------------------------------------------------+-----------------------+
@@ -158,6 +168,23 @@ Property Descriptions
 - :ref:`AutowrapMode<enum_TextServer_AutowrapMode>` **get_autowrap_mode**\ (\ )
 
 If set to something other than :ref:`TextServer.AUTOWRAP_OFF<class_TextServer_constant_AUTOWRAP_OFF>`, the text gets wrapped inside the node's bounding rectangle. If you resize the node, it will change its height automatically to show all the text. To see how each mode behaves, see :ref:`AutowrapMode<enum_TextServer_AutowrapMode>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Label_property_autowrap_trim_flags:
+
+.. rst-class:: classref-property
+
+|bitfield|\[:ref:`LineBreakFlag<enum_TextServer_LineBreakFlag>`\] **autowrap_trim_flags** = ``192`` :ref:`🔗<class_Label_property_autowrap_trim_flags>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_autowrap_trim_flags**\ (\ value\: |bitfield|\[:ref:`LineBreakFlag<enum_TextServer_LineBreakFlag>`\]\ )
+- |bitfield|\[:ref:`LineBreakFlag<enum_TextServer_LineBreakFlag>`\] **get_autowrap_trim_flags**\ (\ )
+
+Autowrap space trimming flags. See :ref:`TextServer.BREAK_TRIM_START_EDGE_SPACES<class_TextServer_constant_BREAK_TRIM_START_EDGE_SPACES>` and :ref:`TextServer.BREAK_TRIM_END_EDGE_SPACES<class_TextServer_constant_BREAK_TRIM_END_EDGE_SPACES>` for more info.
 
 .. rst-class:: classref-item-separator
 
@@ -225,7 +252,7 @@ Controls the text's horizontal alignment. Supports left, center, right, and fill
 - |void| **set_justification_flags**\ (\ value\: |bitfield|\[:ref:`JustificationFlag<enum_TextServer_JustificationFlag>`\]\ )
 - |bitfield|\[:ref:`JustificationFlag<enum_TextServer_JustificationFlag>`\] **get_justification_flags**\ (\ )
 
-Line fill alignment rules. For more info see :ref:`JustificationFlag<enum_TextServer_JustificationFlag>`.
+Line fill alignment rules. See :ref:`JustificationFlag<enum_TextServer_JustificationFlag>` for more information.
 
 .. rst-class:: classref-item-separator
 
@@ -294,6 +321,23 @@ The number of the lines ignored and not displayed from the start of the :ref:`te
 - :ref:`int<class_int>` **get_max_lines_visible**\ (\ )
 
 Limits the lines of text the node shows on screen.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Label_property_paragraph_separator:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **paragraph_separator** = ``"\\n"`` :ref:`🔗<class_Label_property_paragraph_separator>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_paragraph_separator**\ (\ value\: :ref:`String<class_String>`\ )
+- :ref:`String<class_String>` **get_paragraph_separator**\ (\ )
+
+String used as a paragraph separator. Each paragraph is processed independently, in its own BiDi context.
 
 .. rst-class:: classref-item-separator
 
@@ -484,7 +528,7 @@ Sets the clipping behavior when :ref:`visible_characters<class_Label_property_vi
 - |void| **set_visible_ratio**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_visible_ratio**\ (\ )
 
-The fraction of characters to display, relative to the total number of characters (see :ref:`get_total_character_count<class_Label_method_get_total_character_count>`). If set to ``1.0``, all characters are displayed. If set to ``0.5``, only half of the characters will be displayed. This can be useful when animating the text appearing in a dialog box.
+The fraction of characters to display, relative to the total number of characters (see :ref:`get_total_character_count()<class_Label_method_get_total_character_count>`). If set to ``1.0``, all characters are displayed. If set to ``0.5``, only half of the characters will be displayed. This can be useful when animating the text appearing in a dialog box.
 
 \ **Note:** Setting this property updates :ref:`visible_characters<class_Label_property_visible_characters>` accordingly.
 
@@ -503,7 +547,7 @@ Method Descriptions
 
 :ref:`Rect2<class_Rect2>` **get_character_bounds**\ (\ pos\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_Label_method_get_character_bounds>`
 
-Returns the bounding rectangle of the character at position ``pos``. If the character is a non-visual character or ``pos`` is outside the valid range, an empty :ref:`Rect2<class_Rect2>` is returned. If the character is a part of a composite grapheme, the bounding rectangle of the whole grapheme is returned.
+Returns the bounding rectangle of the character at position ``pos`` in the label's local coordinate system. If the character is a non-visual character or ``pos`` is outside the valid range, an empty :ref:`Rect2<class_Rect2>` is returned. If the character is a part of a composite grapheme, the bounding rectangle of the whole grapheme is returned.
 
 .. rst-class:: classref-item-separator
 
@@ -608,7 +652,7 @@ The color of text outline.
 
 :ref:`int<class_int>` **line_spacing** = ``3`` :ref:`🔗<class_Label_theme_constant_line_spacing>`
 
-Vertical space between lines in multiline **Label**.
+Additional vertical spacing between lines (in pixels), spacing is added to line descent. This value can be negative.
 
 .. rst-class:: classref-item-separator
 
@@ -625,6 +669,18 @@ Text outline size.
 \ **Note:** If using a font with :ref:`FontFile.multichannel_signed_distance_field<class_FontFile_property_multichannel_signed_distance_field>` enabled, its :ref:`FontFile.msdf_pixel_range<class_FontFile_property_msdf_pixel_range>` must be set to at least *twice* the value of :ref:`outline_size<class_Label_theme_constant_outline_size>` for outline rendering to look correct. Otherwise, the outline may appear to be cut off earlier than intended.
 
 \ **Note:** Using a value that is larger than half the font size is not recommended, as the font outline may fail to be fully closed in this case.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Label_theme_constant_paragraph_spacing:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`int<class_int>` **paragraph_spacing** = ``0`` :ref:`🔗<class_Label_theme_constant_paragraph_spacing>`
+
+Vertical space between paragraphs. Added on top of :ref:`line_spacing<class_Label_theme_constant_line_spacing>`.
 
 .. rst-class:: classref-item-separator
 
@@ -685,6 +741,18 @@ The size of the shadow outline.
 :ref:`int<class_int>` **font_size** :ref:`🔗<class_Label_theme_font_size_font_size>`
 
 Font size of the **Label**'s text.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Label_theme_style_focus:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`StyleBox<class_StyleBox>` **focus** :ref:`🔗<class_Label_theme_style_focus>`
+
+:ref:`StyleBox<class_StyleBox>` used when the **Label** is focused (when used with assistive apps).
 
 .. rst-class:: classref-item-separator
 
