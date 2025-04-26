@@ -113,7 +113,7 @@ Overrides the :ref:`AABB<class_AABB>` with one defined by user for use with frus
 - |void| **set_flip_faces**\ (\ value\: :ref:`bool<class_bool>`\ )
 - :ref:`bool<class_bool>` **get_flip_faces**\ (\ )
 
-If set, the order of the vertices in each triangle are reversed resulting in the backside of the mesh being drawn.
+If ``true``, the order of the vertices in each triangle is reversed, resulting in the backside of the mesh being drawn.
 
 This gives the same result as using :ref:`BaseMaterial3D.CULL_FRONT<class_BaseMaterial3D_constant_CULL_FRONT>` in :ref:`BaseMaterial3D.cull_mode<class_BaseMaterial3D_property_cull_mode>`.
 
@@ -180,7 +180,9 @@ Override this method to customize how this primitive mesh should be generated. S
 
 :ref:`Array<class_Array>` **get_mesh_arrays**\ (\ ) |const| :ref:`🔗<class_PrimitiveMesh_method_get_mesh_arrays>`
 
-Returns mesh arrays used to constitute surface of :ref:`Mesh<class_Mesh>`. The result can be passed to :ref:`ArrayMesh.add_surface_from_arrays<class_ArrayMesh_method_add_surface_from_arrays>` to create a new surface. For example:
+Returns the mesh arrays used to make up the surface of this primitive mesh.
+
+\ **Example:** Pass the result to :ref:`ArrayMesh.add_surface_from_arrays()<class_ArrayMesh_method_add_surface_from_arrays>` to create a new surface:
 
 
 .. tabs::
