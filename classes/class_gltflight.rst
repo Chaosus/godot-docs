@@ -12,14 +12,14 @@ GLTFLight
 
 **Inherits:** :ref:`Resource<class_Resource>` **<** :ref:`RefCounted<class_RefCounted>` **<** :ref:`Object<class_Object>`
 
-Represents a GLTF light.
+Represents a glTF light.
 
 .. rst-class:: classref-introduction-group
 
 Description
 -----------
 
-Represents a light as defined by the ``KHR_lights_punctual`` GLTF extension.
+Represents a light as defined by the ``KHR_lights_punctual`` glTF extension.
 
 .. rst-class:: classref-introduction-group
 
@@ -28,7 +28,7 @@ Tutorials
 
 - :doc:`Runtime file loading and saving <../tutorials/io/runtime_file_loading_and_saving>`
 
-- `KHR_lights_punctual GLTF extension spec <https://github.com/KhronosGroup/glTF/blob/main/extensions/2.0/Khronos/KHR_lights_punctual>`__
+- `KHR_lights_punctual glTF extension spec <https://github.com/KhronosGroup/glTF/blob/main/extensions/2.0/Khronos/KHR_lights_punctual>`__
 
 .. rst-class:: classref-reftable-group
 
@@ -94,7 +94,9 @@ Property Descriptions
 - |void| **set_color**\ (\ value\: :ref:`Color<class_Color>`\ )
 - :ref:`Color<class_Color>` **get_color**\ (\ )
 
-The :ref:`Color<class_Color>` of the light. Defaults to white. A black color causes the light to have no effect.
+The :ref:`Color<class_Color>` of the light in linear space. Defaults to white. A black color causes the light to have no effect.
+
+This value is linear to match glTF, but will be converted to nonlinear sRGB when creating a Godot :ref:`Light3D<class_Light3D>` node upon import, or converted to linear when exporting a Godot :ref:`Light3D<class_Light3D>` to glTF.
 
 .. rst-class:: classref-item-separator
 
@@ -183,7 +185,7 @@ At this angle, the light drops off to zero brightness. Between the inner and out
 - |void| **set_range**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_range**\ (\ )
 
-The range of the light, beyond which the light has no effect. GLTF lights with no range defined behave like physical lights (which have infinite range). When creating a Godot light, the range is clamped to 4096.
+The range of the light, beyond which the light has no effect. glTF lights with no range defined behave like physical lights (which have infinite range). When creating a Godot light, the range is clamped to ``4096.0``.
 
 .. rst-class:: classref-section-separator
 
