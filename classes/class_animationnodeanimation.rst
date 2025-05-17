@@ -41,6 +41,8 @@ Properties
    :widths: auto
 
    +-------------------------------------------------------+---------------------------------------------------------------------------------------+-----------+
+   | :ref:`bool<class_bool>`                               | :ref:`advance_on_start<class_AnimationNodeAnimation_property_advance_on_start>`       | ``false`` |
+   +-------------------------------------------------------+---------------------------------------------------------------------------------------+-----------+
    | :ref:`StringName<class_StringName>`                   | :ref:`animation<class_AnimationNodeAnimation_property_animation>`                     | ``&""``   |
    +-------------------------------------------------------+---------------------------------------------------------------------------------------+-----------+
    | :ref:`LoopMode<enum_Animation_LoopMode>`              | :ref:`loop_mode<class_AnimationNodeAnimation_property_loop_mode>`                     |           |
@@ -96,6 +98,25 @@ Plays animation in backward direction.
 Property Descriptions
 ---------------------
 
+.. _class_AnimationNodeAnimation_property_advance_on_start:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **advance_on_start** = ``false`` :ref:`🔗<class_AnimationNodeAnimation_property_advance_on_start>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_advance_on_start**\ (\ value\: :ref:`bool<class_bool>`\ )
+- :ref:`bool<class_bool>` **is_advance_on_start**\ (\ )
+
+If ``true``, on receiving a request to play an animation from the start, the first frame is not drawn, but only processed, and playback starts from the next frame.
+
+See also the notes of :ref:`AnimationPlayer.play()<class_AnimationPlayer_method_play>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_AnimationNodeAnimation_property_animation:
 
 .. rst-class:: classref-property
@@ -125,6 +146,8 @@ Animation to use as an output. It is one of the animations provided by :ref:`Ani
 - :ref:`LoopMode<enum_Animation_LoopMode>` **get_loop_mode**\ (\ )
 
 If :ref:`use_custom_timeline<class_AnimationNodeAnimation_property_use_custom_timeline>` is ``true``, override the loop settings of the original :ref:`Animation<class_Animation>` resource with the value.
+
+\ **Note:** If the :ref:`Animation.loop_mode<class_Animation_property_loop_mode>` isn't set to looping, the :ref:`Animation.track_set_interpolation_loop_wrap()<class_Animation_method_track_set_interpolation_loop_wrap>` option will not be respected. If you cannot get the expected behavior, consider duplicating the :ref:`Animation<class_Animation>` resource and changing the loop settings.
 
 .. rst-class:: classref-item-separator
 
