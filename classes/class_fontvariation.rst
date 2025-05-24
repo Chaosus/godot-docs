@@ -29,8 +29,8 @@ To use simulated bold font variant:
  .. code-tab:: gdscript
 
     var fv = FontVariation.new()
-    fv.set_base_font(load("res://BarlowCondensed-Regular.ttf"))
-    fv.set_variation_embolden(1.2)
+    fv.base_font = load("res://BarlowCondensed-Regular.ttf")
+    fv.variation_embolden = 1.2
     $Label.add_theme_font_override("font", fv)
     $Label.add_theme_font_size_override("font_size", 64)
 
@@ -274,9 +274,9 @@ Active face index in the TrueType / OpenType collection file.
 
 Font OpenType variation coordinates. More info: `OpenType variation tags <https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg>`__.
 
-\ **Note:** This :ref:`Dictionary<class_Dictionary>` uses OpenType tags as keys. Variation axes can be identified both by tags (:ref:`int<class_int>`, e.g. ``0x77678674``) and names (:ref:`String<class_String>`, e.g. ``wght``). Some axes might be accessible by multiple names. For example, ``wght`` refers to the same axis as ``weight``. Tags on the other hand are unique. To convert between names and tags, use :ref:`TextServer.name_to_tag<class_TextServer_method_name_to_tag>` and :ref:`TextServer.tag_to_name<class_TextServer_method_tag_to_name>`.
+\ **Note:** This :ref:`Dictionary<class_Dictionary>` uses OpenType tags as keys. Variation axes can be identified both by tags (:ref:`int<class_int>`, e.g. ``0x77678674``) and names (:ref:`String<class_String>`, e.g. ``wght``). Some axes might be accessible by multiple names. For example, ``wght`` refers to the same axis as ``weight``. Tags on the other hand are unique. To convert between names and tags, use :ref:`TextServer.name_to_tag()<class_TextServer_method_name_to_tag>` and :ref:`TextServer.tag_to_name()<class_TextServer_method_tag_to_name>`.
 
-\ **Note:** To get available variation axes of a font, use :ref:`Font.get_supported_variation_list<class_Font_method_get_supported_variation_list>`.
+\ **Note:** To get available variation axes of a font, use :ref:`Font.get_supported_variation_list()<class_Font_method_get_supported_variation_list>`.
 
 .. rst-class:: classref-item-separator
 

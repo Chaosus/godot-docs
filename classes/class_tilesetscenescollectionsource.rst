@@ -19,9 +19,42 @@ Exposes a set of scenes as tiles for a :ref:`TileSet<class_TileSet>` resource.
 Description
 -----------
 
-When placed on a :ref:`TileMap<class_TileMap>`, tiles from **TileSetScenesCollectionSource** will automatically instantiate an associated scene at the cell's position in the TileMap.
+When placed on a :ref:`TileMapLayer<class_TileMapLayer>`, tiles from **TileSetScenesCollectionSource** will automatically instantiate an associated scene at the cell's position in the TileMapLayer.
 
-Scenes are instantiated as children of the :ref:`TileMap<class_TileMap>` when it enters the tree. If you add/remove a scene tile in the :ref:`TileMap<class_TileMap>` that is already inside the tree, the :ref:`TileMap<class_TileMap>` will automatically instantiate/free the scene accordingly.
+Scenes are instantiated as children of the :ref:`TileMapLayer<class_TileMapLayer>` when it enters the tree. If you add/remove a scene tile in the :ref:`TileMapLayer<class_TileMapLayer>` that is already inside the tree, the :ref:`TileMapLayer<class_TileMapLayer>` will automatically instantiate/free the scene accordingly.
+
+\ **Note:** Scene tiles all occupy one tile slot and instead use alternate tile ID to identify scene index. :ref:`TileSetSource.get_tiles_count()<class_TileSetSource_method_get_tiles_count>` will always return ``1``. Use :ref:`get_scene_tiles_count()<class_TileSetScenesCollectionSource_method_get_scene_tiles_count>` to get a number of scenes in a **TileSetScenesCollectionSource**.
+
+Use this code if you want to find the scene path at a given tile in :ref:`TileMapLayer<class_TileMapLayer>`:
+
+
+.. tabs::
+
+ .. code-tab:: gdscript
+
+    var source_id = tile_map_layer.get_cell_source_id(Vector2i(x, y))
+    if source_id > -1:
+        var scene_source = tile_map_layer.tile_set.get_source(source_id)
+        if scene_source is TileSetScenesCollectionSource:
+            var alt_id = tile_map_layer.get_cell_alternative_tile(Vector2i(x, y))
+            # The assigned PackedScene.
+            var scene = scene_source.get_scene_tile_scene(alt_id)
+
+ .. code-tab:: csharp
+
+    int sourceId = tileMapLayer.GetCellSourceId(new Vector2I(x, y));
+    if (sourceId > -1)
+    {
+        TileSetSource source = tileMapLayer.TileSet.GetSource(sourceId);
+        if (source is TileSetScenesCollectionSource sceneSource)
+        {
+            int altId = tileMapLayer.GetCellAlternativeTile(new Vector2I(x, y));
+            // The assigned PackedScene.
+            PackedScene scene = sceneSource.GetSceneTileScene(altId);
+        }
+    }
+
+
 
 .. rst-class:: classref-reftable-group
 
@@ -84,7 +117,7 @@ Returns a newly generated unique ID.
 
 :ref:`int<class_int>` **get_next_scene_tile_id**\ (\ ) |const| :ref:`🔗<class_TileSetScenesCollectionSource_method_get_next_scene_tile_id>`
 
-Returns the scene ID a following call to :ref:`create_scene_tile<class_TileSetScenesCollectionSource_method_create_scene_tile>` would return.
+Returns the scene ID a following call to :ref:`create_scene_tile()<class_TileSetScenesCollectionSource_method_create_scene_tile>` would return.
 
 .. rst-class:: classref-item-separator
 
@@ -192,7 +225,7 @@ Changes a scene tile's ID from ``id`` to ``new_id``. This will fail if there is 
 
 |void| **set_scene_tile_scene**\ (\ id\: :ref:`int<class_int>`, packed_scene\: :ref:`PackedScene<class_PackedScene>`\ ) :ref:`🔗<class_TileSetScenesCollectionSource_method_set_scene_tile_scene>`
 
-Assigns a :ref:`PackedScene<class_PackedScene>` resource to the scene tile with ``id``. This will fail if the scene does not extend CanvasItem, as positioning properties are needed to place the scene on the TileMap.
+Assigns a :ref:`PackedScene<class_PackedScene>` resource to the scene tile with ``id``. This will fail if the scene does not extend :ref:`CanvasItem<class_CanvasItem>`, as positioning properties are needed to place the scene on the :ref:`TileMapLayer<class_TileMapLayer>`.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
