@@ -19,7 +19,7 @@ Represents a key on a keyboard being pressed or released.
 Description
 -----------
 
-An input event for keys on a keyboard. Supports key presses, key releases and :ref:`echo<class_InputEventKey_property_echo>` events. It can also be received in :ref:`Node._unhandled_key_input<class_Node_private_method__unhandled_key_input>`.
+An input event for keys on a keyboard. Supports key presses, key releases and :ref:`echo<class_InputEventKey_property_echo>` events. It can also be received in :ref:`Node._unhandled_key_input()<class_Node_private_method__unhandled_key_input>`.
 
 \ **Note:** Events received from the keyboard usually have all properties set. Event mappings should have only one of the :ref:`keycode<class_InputEventKey_property_keycode>`, :ref:`physical_keycode<class_InputEventKey_property_physical_keycode>` or :ref:`unicode<class_InputEventKey_property_unicode>` set.
 
@@ -100,7 +100,9 @@ Property Descriptions
 - |void| **set_echo**\ (\ value\: :ref:`bool<class_bool>`\ )
 - :ref:`bool<class_bool>` **is_echo**\ (\ )
 
-If ``true``, the key was already pressed before this event. It means the user is holding the key down.
+If ``true``, the key was already pressed before this event. An echo event is a repeated key event sent when the user is holding down the key.
+
+\ **Note:** The rate at which echo events are sent is typically around 20 events per second (after holding down the key for roughly half a second). However, the key repeat delay/speed can be changed by the user or disabled entirely in the operating system settings. To ensure your project works correctly on all configurations, do not assume the user has a specific key repeat configuration in your project's behavior.
 
 .. rst-class:: classref-item-separator
 
@@ -190,7 +192,7 @@ Represents the location of a key which has both left and right versions, such as
 
 Represents the physical location of a key on the 101/102-key US QWERTY keyboard, which corresponds to one of the :ref:`Key<enum_@GlobalScope_Key>` constants.
 
-To get a human-readable representation of the **InputEventKey**, use :ref:`OS.get_keycode_string<class_OS_method_get_keycode_string>` in combination with :ref:`DisplayServer.keyboard_get_keycode_from_physical<class_DisplayServer_method_keyboard_get_keycode_from_physical>`:
+To get a human-readable representation of the **InputEventKey**, use :ref:`OS.get_keycode_string()<class_OS_method_get_keycode_string>` in combination with :ref:`DisplayServer.keyboard_get_keycode_from_physical()<class_DisplayServer_method_keyboard_get_keycode_from_physical>`:
 
 
 .. tabs::
@@ -247,7 +249,7 @@ If ``true``, the key's state is pressed. If ``false``, the key's state is releas
 - |void| **set_unicode**\ (\ value\: :ref:`int<class_int>`\ )
 - :ref:`int<class_int>` **get_unicode**\ (\ )
 
-The key Unicode character code (when relevant), shifted by modifier keys. Unicode character codes for composite characters and complex scripts may not be available unless IME input mode is active. See :ref:`Window.set_ime_active<class_Window_method_set_ime_active>` for more information.
+The key Unicode character code (when relevant), shifted by modifier keys. Unicode character codes for composite characters and complex scripts may not be available unless IME input mode is active. See :ref:`Window.set_ime_active()<class_Window_method_set_ime_active>` for more information.
 
 .. rst-class:: classref-section-separator
 
