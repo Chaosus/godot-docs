@@ -93,6 +93,8 @@ Properties
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`debug/export_console_wrapper<class_EditorExportPlatformWindows_property_debug/export_console_wrapper>`                       |
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                           | :ref:`shader_baker/enabled<class_EditorExportPlatformWindows_property_shader_baker/enabled>`                                       |
+   +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                       | :ref:`ssh_remote_deploy/cleanup_script<class_EditorExportPlatformWindows_property_ssh_remote_deploy/cleanup_script>`               |
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`ssh_remote_deploy/enabled<class_EditorExportPlatformWindows_property_ssh_remote_deploy/enabled>`                             |
@@ -187,7 +189,7 @@ If set to ``1``, ANGLE libraries are exported with the exported application. If 
 
 :ref:`int<class_int>` **application/export_d3d12** :ref:`🔗<class_EditorExportPlatformWindows_property_application/export_d3d12>`
 
-If set to ``1``, Direct3D 12 runtime (DXIL, Agility SDK, PIX) libraries are exported with the exported application. If set to ``0``, Direct3D 12 libraries are exported only if :ref:`ProjectSettings.rendering/rendering_device/driver<class_ProjectSettings_property_rendering/rendering_device/driver>` is set to ``"d3d12"``.
+If set to ``1``, the Direct3D 12 runtime libraries (Agility SDK, PIX) are exported with the exported application. If set to ``0``, Direct3D 12 libraries are exported only if :ref:`ProjectSettings.rendering/rendering_device/driver<class_ProjectSettings_property_rendering/rendering_device/driver>` is set to ``"d3d12"``.
 
 .. rst-class:: classref-item-separator
 
@@ -298,8 +300,6 @@ Trademarks and registered trademarks that apply to the file. Optional. See `Stri
 Application executable architecture.
 
 Supported architectures: ``x86_32``, ``x86_64``, and ``arm64``.
-
-Official export templates include ``x86_32`` and ``x86_64`` binaries only.
 
 .. rst-class:: classref-item-separator
 
@@ -464,6 +464,18 @@ Path to the custom export template. If left empty, default template is used.
 :ref:`int<class_int>` **debug/export_console_wrapper** :ref:`🔗<class_EditorExportPlatformWindows_property_debug/export_console_wrapper>`
 
 If ``true``, a console wrapper executable is exported alongside the main executable, which allows running the project with enabled console output.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorExportPlatformWindows_property_shader_baker/enabled:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **shader_baker/enabled** :ref:`🔗<class_EditorExportPlatformWindows_property_shader_baker/enabled>`
+
+If ``true``, shaders will be compiled and embedded in the application. This option is only supported when using the Forward+ and Mobile renderers.
 
 .. rst-class:: classref-item-separator
 
