@@ -144,7 +144,7 @@ Emitted when the user contextual goto and the item is in the same script.
 
 .. rst-class:: classref-signal
 
-**request_save_previous_state**\ (\ line\: :ref:`int<class_int>`\ ) :ref:`🔗<class_ScriptEditorBase_signal_request_save_previous_state>`
+**request_save_previous_state**\ (\ state\: :ref:`Dictionary<class_Dictionary>`\ ) :ref:`🔗<class_ScriptEditorBase_signal_request_save_previous_state>`
 
 Emitted when the user changes current script or moves caret by 10 or more columns within the same script.
 
@@ -190,6 +190,7 @@ Adds a :ref:`EditorSyntaxHighlighter<class_EditorSyntaxHighlighter>` to the open
 Returns the underlying :ref:`Control<class_Control>` used for editing scripts. For text scripts, this is a :ref:`CodeEdit<class_CodeEdit>`.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
