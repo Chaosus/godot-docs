@@ -12,6 +12,8 @@ EditorSyntaxHighlighter
 
 **Inherits:** :ref:`SyntaxHighlighter<class_SyntaxHighlighter>` **<** :ref:`Resource<class_Resource>` **<** :ref:`RefCounted<class_RefCounted>` **<** :ref:`Object<class_Object>`
 
+**Inherited By:** :ref:`GDScriptSyntaxHighlighter<class_GDScriptSyntaxHighlighter>`
+
 Base class for :ref:`SyntaxHighlighter<class_SyntaxHighlighter>` used by the :ref:`ScriptEditor<class_ScriptEditor>`.
 
 .. rst-class:: classref-introduction-group
@@ -21,7 +23,7 @@ Description
 
 Base class that all :ref:`SyntaxHighlighter<class_SyntaxHighlighter>`\ s used by the :ref:`ScriptEditor<class_ScriptEditor>` extend from.
 
-Add a syntax highlighter to an individual script by calling :ref:`ScriptEditorBase.add_syntax_highlighter<class_ScriptEditorBase_method_add_syntax_highlighter>`. To apply to all scripts on open, call :ref:`ScriptEditor.register_syntax_highlighter<class_ScriptEditor_method_register_syntax_highlighter>`.
+Add a syntax highlighter to an individual script by calling :ref:`ScriptEditorBase.add_syntax_highlighter()<class_ScriptEditorBase_method_add_syntax_highlighter>`. To apply to all scripts on open, call :ref:`ScriptEditor.register_syntax_highlighter()<class_ScriptEditor_method_register_syntax_highlighter>`.
 
 .. rst-class:: classref-reftable-group
 
@@ -67,6 +69,7 @@ Virtual method which can be overridden to return the syntax highlighter name.
 Virtual method which can be overridden to return the supported language names.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
