@@ -32,7 +32,11 @@ Methods
    +------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                          | :ref:`can_instantiate<class_ClassDB_method_can_instantiate>`\ (\ class\: :ref:`StringName<class_StringName>`\ ) |const|                                                                                                                                 |
    +------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`Variant<class_Variant>`                                    | :ref:`class_call_static<class_ClassDB_method_class_call_static>`\ (\ class\: :ref:`StringName<class_StringName>`, method\: :ref:`StringName<class_StringName>`, ...\ ) |vararg|                                                                         |
+   +------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                          | :ref:`class_exists<class_ClassDB_method_class_exists>`\ (\ class\: :ref:`StringName<class_StringName>`\ ) |const|                                                                                                                                       |
+   +------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`APIType<enum_ClassDB_APIType>`                             | :ref:`class_get_api_type<class_ClassDB_method_class_get_api_type>`\ (\ class\: :ref:`StringName<class_StringName>`\ ) |const|                                                                                                                           |
    +------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`PackedStringArray<class_PackedStringArray>`                | :ref:`class_get_enum_constants<class_ClassDB_method_class_get_enum_constants>`\ (\ class\: :ref:`StringName<class_StringName>`, enum\: :ref:`StringName<class_StringName>`, no_inheritance\: :ref:`bool<class_bool>` = false\ ) |const|                 |
    +------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -52,7 +56,11 @@ Methods
    +------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Variant<class_Variant>`                                    | :ref:`class_get_property_default_value<class_ClassDB_method_class_get_property_default_value>`\ (\ class\: :ref:`StringName<class_StringName>`, property\: :ref:`StringName<class_StringName>`\ ) |const|                                               |
    +------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`StringName<class_StringName>`                              | :ref:`class_get_property_getter<class_ClassDB_method_class_get_property_getter>`\ (\ class\: :ref:`StringName<class_StringName>`, property\: :ref:`StringName<class_StringName>`\ )                                                                     |
+   +------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Array<class_Array>`\[:ref:`Dictionary<class_Dictionary>`\] | :ref:`class_get_property_list<class_ClassDB_method_class_get_property_list>`\ (\ class\: :ref:`StringName<class_StringName>`, no_inheritance\: :ref:`bool<class_bool>` = false\ ) |const|                                                               |
+   +------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`StringName<class_StringName>`                              | :ref:`class_get_property_setter<class_ClassDB_method_class_get_property_setter>`\ (\ class\: :ref:`StringName<class_StringName>`, property\: :ref:`StringName<class_StringName>`\ )                                                                     |
    +------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Dictionary<class_Dictionary>`                              | :ref:`class_get_signal<class_ClassDB_method_class_get_signal>`\ (\ class\: :ref:`StringName<class_StringName>`, signal\: :ref:`StringName<class_StringName>`\ ) |const|                                                                                 |
    +------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -89,6 +97,61 @@ Methods
 
 .. rst-class:: classref-descriptions-group
 
+Enumerations
+------------
+
+.. _enum_ClassDB_APIType:
+
+.. rst-class:: classref-enumeration
+
+enum **APIType**: :ref:`🔗<enum_ClassDB_APIType>`
+
+.. _class_ClassDB_constant_API_CORE:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`APIType<enum_ClassDB_APIType>` **API_CORE** = ``0``
+
+Native Core class type.
+
+.. _class_ClassDB_constant_API_EDITOR:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`APIType<enum_ClassDB_APIType>` **API_EDITOR** = ``1``
+
+Native Editor class type.
+
+.. _class_ClassDB_constant_API_EXTENSION:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`APIType<enum_ClassDB_APIType>` **API_EXTENSION** = ``2``
+
+GDExtension class type.
+
+.. _class_ClassDB_constant_API_EDITOR_EXTENSION:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`APIType<enum_ClassDB_APIType>` **API_EDITOR_EXTENSION** = ``3``
+
+GDExtension Editor class type.
+
+.. _class_ClassDB_constant_API_NONE:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`APIType<enum_ClassDB_APIType>` **API_NONE** = ``4``
+
+Unknown class type.
+
+.. rst-class:: classref-section-separator
+
+----
+
+.. rst-class:: classref-descriptions-group
+
 Method Descriptions
 -------------------
 
@@ -104,6 +167,18 @@ Returns ``true`` if objects can be instantiated from the specified ``class``, ot
 
 ----
 
+.. _class_ClassDB_method_class_call_static:
+
+.. rst-class:: classref-method
+
+:ref:`Variant<class_Variant>` **class_call_static**\ (\ class\: :ref:`StringName<class_StringName>`, method\: :ref:`StringName<class_StringName>`, ...\ ) |vararg| :ref:`🔗<class_ClassDB_method_class_call_static>`
+
+Calls a static method on a class.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_ClassDB_method_class_exists:
 
 .. rst-class:: classref-method
@@ -111,6 +186,18 @@ Returns ``true`` if objects can be instantiated from the specified ``class``, ot
 :ref:`bool<class_bool>` **class_exists**\ (\ class\: :ref:`StringName<class_StringName>`\ ) |const| :ref:`🔗<class_ClassDB_method_class_exists>`
 
 Returns whether the specified ``class`` is available or not.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_ClassDB_method_class_get_api_type:
+
+.. rst-class:: classref-method
+
+:ref:`APIType<enum_ClassDB_APIType>` **class_get_api_type**\ (\ class\: :ref:`StringName<class_StringName>`\ ) |const| :ref:`🔗<class_ClassDB_method_class_get_api_type>`
+
+Returns the API type of the specified ``class``.
 
 .. rst-class:: classref-item-separator
 
@@ -226,6 +313,18 @@ Returns the default value of ``property`` of ``class`` or its ancestor classes.
 
 ----
 
+.. _class_ClassDB_method_class_get_property_getter:
+
+.. rst-class:: classref-method
+
+:ref:`StringName<class_StringName>` **class_get_property_getter**\ (\ class\: :ref:`StringName<class_StringName>`, property\: :ref:`StringName<class_StringName>`\ ) :ref:`🔗<class_ClassDB_method_class_get_property_getter>`
+
+Returns the getter method name of ``property`` of ``class``.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_ClassDB_method_class_get_property_list:
 
 .. rst-class:: classref-method
@@ -233,6 +332,18 @@ Returns the default value of ``property`` of ``class`` or its ancestor classes.
 :ref:`Array<class_Array>`\[:ref:`Dictionary<class_Dictionary>`\] **class_get_property_list**\ (\ class\: :ref:`StringName<class_StringName>`, no_inheritance\: :ref:`bool<class_bool>` = false\ ) |const| :ref:`🔗<class_ClassDB_method_class_get_property_list>`
 
 Returns an array with all the properties of ``class`` or its ancestry if ``no_inheritance`` is ``false``.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_ClassDB_method_class_get_property_setter:
+
+.. rst-class:: classref-method
+
+:ref:`StringName<class_StringName>` **class_get_property_setter**\ (\ class\: :ref:`StringName<class_StringName>`, property\: :ref:`StringName<class_StringName>`\ ) :ref:`🔗<class_ClassDB_method_class_get_property_setter>`
+
+Returns the setter method name of ``property`` of ``class``.
 
 .. rst-class:: classref-item-separator
 
@@ -256,7 +367,7 @@ Returns the ``signal`` data of ``class`` or its ancestry. The returned value is 
 
 :ref:`Array<class_Array>`\[:ref:`Dictionary<class_Dictionary>`\] **class_get_signal_list**\ (\ class\: :ref:`StringName<class_StringName>`, no_inheritance\: :ref:`bool<class_bool>` = false\ ) |const| :ref:`🔗<class_ClassDB_method_class_get_signal_list>`
 
-Returns an array with all the signals of ``class`` or its ancestry if ``no_inheritance`` is ``false``. Every element of the array is a :ref:`Dictionary<class_Dictionary>` as described in :ref:`class_get_signal<class_ClassDB_method_class_get_signal>`.
+Returns an array with all the signals of ``class`` or its ancestry if ``no_inheritance`` is ``false``. Every element of the array is a :ref:`Dictionary<class_Dictionary>` as described in :ref:`class_get_signal()<class_ClassDB_method_class_get_signal>`.
 
 .. rst-class:: classref-item-separator
 
@@ -403,6 +514,7 @@ Returns whether ``class`` (or its ancestor classes if ``no_inheritance`` is ``fa
 Returns whether ``inherits`` is an ancestor of ``class`` or not.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

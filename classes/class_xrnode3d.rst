@@ -14,7 +14,7 @@ XRNode3D
 
 **Inherited By:** :ref:`XRAnchor3D<class_XRAnchor3D>`, :ref:`XRController3D<class_XRController3D>`
 
-A spatial node that has its position automatically updated by the :ref:`XRServer<class_XRServer>`.
+A 3D node that has its position automatically updated by the :ref:`XRServer<class_XRServer>`.
 
 .. rst-class:: classref-introduction-group
 
@@ -38,13 +38,15 @@ Properties
 .. table::
    :widths: auto
 
-   +-------------------------------------+---------------------------------------------------------------------+----------------+
-   | :ref:`StringName<class_StringName>` | :ref:`pose<class_XRNode3D_property_pose>`                           | ``&"default"`` |
-   +-------------------------------------+---------------------------------------------------------------------+----------------+
-   | :ref:`bool<class_bool>`             | :ref:`show_when_tracked<class_XRNode3D_property_show_when_tracked>` | ``false``      |
-   +-------------------------------------+---------------------------------------------------------------------+----------------+
-   | :ref:`StringName<class_StringName>` | :ref:`tracker<class_XRNode3D_property_tracker>`                     | ``&""``        |
-   +-------------------------------------+---------------------------------------------------------------------+----------------+
+   +---------------------------------------------------------------------+---------------------------------------------------------------------+-------------------------------------------------------------------------------+
+   | :ref:`PhysicsInterpolationMode<enum_Node_PhysicsInterpolationMode>` | physics_interpolation_mode                                          | ``2`` (overrides :ref:`Node<class_Node_property_physics_interpolation_mode>`) |
+   +---------------------------------------------------------------------+---------------------------------------------------------------------+-------------------------------------------------------------------------------+
+   | :ref:`StringName<class_StringName>`                                 | :ref:`pose<class_XRNode3D_property_pose>`                           | ``&"default"``                                                                |
+   +---------------------------------------------------------------------+---------------------------------------------------------------------+-------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                                             | :ref:`show_when_tracked<class_XRNode3D_property_show_when_tracked>` | ``false``                                                                     |
+   +---------------------------------------------------------------------+---------------------------------------------------------------------+-------------------------------------------------------------------------------+
+   | :ref:`StringName<class_StringName>`                                 | :ref:`tracker<class_XRNode3D_property_tracker>`                     | ``&""``                                                                       |
+   +---------------------------------------------------------------------+---------------------------------------------------------------------+-------------------------------------------------------------------------------+
 
 .. rst-class:: classref-reftable-group
 
@@ -196,7 +198,16 @@ Triggers a haptic pulse on a device associated with this interface.
 
 \ ``action_name`` is the name of the action for this pulse.
 
+\ ``frequency`` is the frequency of the pulse, set to ``0.0`` to have the system use a default frequency.
+
+\ ``amplitude`` is the amplitude of the pulse between ``0.0`` and ``1.0``.
+
+\ ``duration_sec`` is the duration of the pulse in seconds.
+
+\ ``delay_sec`` is a delay in seconds before the pulse is given.
+
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
