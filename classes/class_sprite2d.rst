@@ -231,6 +231,8 @@ The number of columns in the sprite sheet. When this property is changed, :ref:`
 
 The texture's drawing offset.
 
+\ **Note:** When you increase :ref:`offset<class_Sprite2D_property_offset>`.y in Sprite2D, the sprite moves downward on screen (i.e., +Y is down).
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -263,7 +265,7 @@ If ``true``, texture is cut from a larger atlas texture. See :ref:`region_rect<c
 - |void| **set_region_filter_clip_enabled**\ (\ value\: :ref:`bool<class_bool>`\ )
 - :ref:`bool<class_bool>` **is_region_filter_clip_enabled**\ (\ )
 
-If ``true``, the outermost pixels get blurred out. :ref:`region_enabled<class_Sprite2D_property_region_enabled>` must be ``true``.
+If ``true``, the area outside of the :ref:`region_rect<class_Sprite2D_property_region_rect>` is clipped to avoid bleeding of the surrounding texture pixels. :ref:`region_enabled<class_Sprite2D_property_region_enabled>` must be ``true``.
 
 .. rst-class:: classref-item-separator
 
@@ -331,9 +333,9 @@ Method Descriptions
 
 :ref:`Rect2<class_Rect2>` **get_rect**\ (\ ) |const| :ref:`🔗<class_Sprite2D_method_get_rect>`
 
-Returns a :ref:`Rect2<class_Rect2>` representing the Sprite2D's boundary in local coordinates. Can be used to detect if the Sprite2D was clicked.
+Returns a :ref:`Rect2<class_Rect2>` representing the Sprite2D's boundary in local coordinates.
 
-\ **Example:**\ 
+\ **Example:** Detect if the Sprite2D was clicked:
 
 
 .. tabs::
@@ -378,6 +380,7 @@ Returns ``true``, if the pixel at the given position is opaque and ``false`` in 
 \ **Note:** It also returns ``false``, if the sprite's texture is ``null`` or if the given position is invalid.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
