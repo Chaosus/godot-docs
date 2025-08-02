@@ -57,7 +57,11 @@ Properties
    +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+-----------+
    | :ref:`int<class_int>`               | :ref:`hinting<class_ResourceImporterDynamicFont_property_hinting>`                                                       | ``1``     |
    +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+-----------+
+   | :ref:`bool<class_bool>`             | :ref:`keep_rounding_remainders<class_ResourceImporterDynamicFont_property_keep_rounding_remainders>`                     | ``true``  |
+   +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+-----------+
    | :ref:`Dictionary<class_Dictionary>` | :ref:`language_support<class_ResourceImporterDynamicFont_property_language_support>`                                     | ``{}``    |
+   +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+-----------+
+   | :ref:`bool<class_bool>`             | :ref:`modulate_color_glyphs<class_ResourceImporterDynamicFont_property_modulate_color_glyphs>`                           | ``false`` |
    +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+-----------+
    | :ref:`int<class_int>`               | :ref:`msdf_pixel_range<class_ResourceImporterDynamicFont_property_msdf_pixel_range>`                                     | ``8``     |
    +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+-----------+
@@ -73,7 +77,7 @@ Properties
    +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+-----------+
    | :ref:`Dictionary<class_Dictionary>` | :ref:`script_support<class_ResourceImporterDynamicFont_property_script_support>`                                         | ``{}``    |
    +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+-----------+
-   | :ref:`int<class_int>`               | :ref:`subpixel_positioning<class_ResourceImporterDynamicFont_property_subpixel_positioning>`                             | ``1``     |
+   | :ref:`int<class_int>`               | :ref:`subpixel_positioning<class_ResourceImporterDynamicFont_property_subpixel_positioning>`                             | ``4``     |
    +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------+-----------+
 
 .. rst-class:: classref-section-separator
@@ -197,6 +201,18 @@ The hinting mode to use. This controls how aggressively glyph edges should be sn
 
 ----
 
+.. _class_ResourceImporterDynamicFont_property_keep_rounding_remainders:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **keep_rounding_remainders** = ``true`` :ref:`🔗<class_ResourceImporterDynamicFont_property_keep_rounding_remainders>`
+
+If set to ``true``, when aligning glyphs to the pixel boundaries rounding remainders are accumulated to ensure more uniform glyph distribution. This setting has no effect if subpixel positioning is enabled.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_ResourceImporterDynamicFont_property_language_support:
 
 .. rst-class:: classref-property
@@ -204,6 +220,18 @@ The hinting mode to use. This controls how aggressively glyph edges should be sn
 :ref:`Dictionary<class_Dictionary>` **language_support** = ``{}`` :ref:`🔗<class_ResourceImporterDynamicFont_property_language_support>`
 
 Override the list of languages supported by this font. If left empty, this is supplied by the font metadata. There is usually no need to change this. See also :ref:`script_support<class_ResourceImporterDynamicFont_property_script_support>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_ResourceImporterDynamicFont_property_modulate_color_glyphs:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **modulate_color_glyphs** = ``false`` :ref:`🔗<class_ResourceImporterDynamicFont_property_modulate_color_glyphs>`
+
+If set to ``true``, color modulation is applied when drawing colored glyphs, otherwise it's applied to the monochrome glyphs only.
 
 .. rst-class:: classref-item-separator
 
@@ -239,7 +267,7 @@ Source font size used to generate MSDF textures. Higher values allow for more pr
 
 :ref:`bool<class_bool>` **multichannel_signed_distance_field** = ``false`` :ref:`🔗<class_ResourceImporterDynamicFont_property_multichannel_signed_distance_field>`
 
-If set to ``true``, the default font will use multichannel signed distance field (MSDF) for crisp rendering at any size. Since this approach does not rely on rasterizing the font every time its size changes, this allows for resizing the font in real-time without any performance penalty. Text will also not look grainy for :ref:`Control<class_Control>`\ s that are scaled down (or for :ref:`Label3D<class_Label3D>`\ s viewed from a long distance).
+If set to ``true``, the font will use multichannel signed distance field (MSDF) for crisp rendering at any size. Since this approach does not rely on rasterizing the font every time its size changes, this allows for resizing the font in real-time without any performance penalty. Text will also not look grainy for :ref:`Control<class_Control>`\ s that are scaled down (or for :ref:`Label3D<class_Label3D>`\ s viewed from a long distance).
 
 MSDF font rendering can be combined with :ref:`generate_mipmaps<class_ResourceImporterDynamicFont_property_generate_mipmaps>` to further improve font rendering quality when scaled down.
 
@@ -265,7 +293,7 @@ The OpenType features to enable, disable or set a value for this font. This can 
 
 :ref:`float<class_float>` **oversampling** = ``0.0`` :ref:`🔗<class_ResourceImporterDynamicFont_property_oversampling>`
 
-If set to a value greater than ``0.0``, overrides the oversampling factor for the font. This can be used to render the font at a higher or lower resolution than intended without affecting its physical size. In most cases, this should be left at ``0.0``.
+If set to a positive value, overrides the oversampling factor of the viewport this font is used in. See :ref:`Viewport.oversampling<class_Viewport_property_oversampling>`. This value doesn't override the ``oversampling`` parameter of ``draw_*`` methods.
 
 .. rst-class:: classref-item-separator
 
@@ -299,7 +327,7 @@ Override the list of language scripts supported by this font. If left empty, thi
 
 .. rst-class:: classref-property
 
-:ref:`int<class_int>` **subpixel_positioning** = ``1`` :ref:`🔗<class_ResourceImporterDynamicFont_property_subpixel_positioning>`
+:ref:`int<class_int>` **subpixel_positioning** = ``4`` :ref:`🔗<class_ResourceImporterDynamicFont_property_subpixel_positioning>`
 
 Subpixel positioning improves font rendering appearance, especially at smaller font sizes. The downside is that it takes more time to initially render the font, which can cause stuttering during gameplay, especially if used with large font sizes. This should be set to **Disabled** for fonts with a pixel art appearance.
 
@@ -311,7 +339,10 @@ Subpixel positioning improves font rendering appearance, especially at smaller f
 
 \ **One Quarter of a Pixel:** Always perform precise subpixel positioning regardless of font size. Highest quality, slowest rendering.
 
+\ **Auto (Except Pixel Fonts):** **Disabled** for the pixel style fonts (each glyph contours contain only straight horizontal and vertical lines), **Auto** for the other fonts.
+
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
