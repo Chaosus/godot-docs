@@ -21,7 +21,7 @@ Description
 
 Godot editor's script editor.
 
-\ **Note:** This class shouldn't be instantiated directly. Instead, access the singleton using :ref:`EditorInterface.get_script_editor<class_EditorInterface_method_get_script_editor>`.
+\ **Note:** This class shouldn't be instantiated directly. Instead, access the singleton using :ref:`EditorInterface.get_script_editor()<class_EditorInterface_method_get_script_editor>`.
 
 .. rst-class:: classref-reftable-group
 
@@ -31,6 +31,10 @@ Methods
 .. table::
    :widths: auto
 
+   +------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                                       | :ref:`clear_docs_from_script<class_ScriptEditor_method_clear_docs_from_script>`\ (\ script\: :ref:`Script<class_Script>`\ )                                                             |
+   +------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`PackedStringArray<class_PackedStringArray>`                            | :ref:`get_breakpoints<class_ScriptEditor_method_get_breakpoints>`\ (\ )                                                                                                                 |
    +------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`ScriptEditorBase<class_ScriptEditorBase>`                              | :ref:`get_current_editor<class_ScriptEditor_method_get_current_editor>`\ (\ ) |const|                                                                                                   |
    +------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -49,6 +53,8 @@ Methods
    | |void|                                                                       | :ref:`register_syntax_highlighter<class_ScriptEditor_method_register_syntax_highlighter>`\ (\ syntax_highlighter\: :ref:`EditorSyntaxHighlighter<class_EditorSyntaxHighlighter>`\ )     |
    +------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                                       | :ref:`unregister_syntax_highlighter<class_ScriptEditor_method_unregister_syntax_highlighter>`\ (\ syntax_highlighter\: :ref:`EditorSyntaxHighlighter<class_EditorSyntaxHighlighter>`\ ) |
+   +------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                                       | :ref:`update_docs_from_script<class_ScriptEditor_method_update_docs_from_script>`\ (\ script\: :ref:`Script<class_Script>`\ )                                                           |
    +------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. rst-class:: classref-section-separator
@@ -88,6 +94,32 @@ Emitted when editor is about to close the active script. Argument is a :ref:`Scr
 
 Method Descriptions
 -------------------
+
+.. _class_ScriptEditor_method_clear_docs_from_script:
+
+.. rst-class:: classref-method
+
+|void| **clear_docs_from_script**\ (\ script\: :ref:`Script<class_Script>`\ ) :ref:`🔗<class_ScriptEditor_method_clear_docs_from_script>`
+
+Removes the documentation for the given ``script``.
+
+\ **Note:** This should be called whenever the script is changed to keep the open documentation state up to date.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_ScriptEditor_method_get_breakpoints:
+
+.. rst-class:: classref-method
+
+:ref:`PackedStringArray<class_PackedStringArray>` **get_breakpoints**\ (\ ) :ref:`🔗<class_ScriptEditor_method_get_breakpoints>`
+
+Returns array of breakpoints.
+
+.. rst-class:: classref-item-separator
+
+----
 
 .. _class_ScriptEditor_method_get_current_editor:
 
@@ -146,8 +178,6 @@ Returns an array with all :ref:`Script<class_Script>` objects which are currentl
 Opens help for the given topic. The ``topic`` is an encoded string that controls which class, method, constant, signal, annotation, property, or theme item should be focused.
 
 The supported ``topic`` formats include ``class_name:class``, ``class_method:class:method``, ``class_constant:class:constant``, ``class_signal:class:signal``, ``class_annotation:class:@annotation``, ``class_property:class:property``, and ``class_theme_item:class:item``, where ``class`` is the class name, ``method`` is the method name, ``constant`` is the constant name, ``signal`` is the signal name, ``annotation`` is the annotation name, ``property`` is the property name, and ``item`` is the theme item.
-
-\ **Examples:**\ 
 
 ::
 
@@ -222,7 +252,22 @@ Unregisters the :ref:`EditorSyntaxHighlighter<class_EditorSyntaxHighlighter>` fr
 
 \ **Note:** The :ref:`EditorSyntaxHighlighter<class_EditorSyntaxHighlighter>` will still be applied to scripts that are already opened.
 
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_ScriptEditor_method_update_docs_from_script:
+
+.. rst-class:: classref-method
+
+|void| **update_docs_from_script**\ (\ script\: :ref:`Script<class_Script>`\ ) :ref:`🔗<class_ScriptEditor_method_update_docs_from_script>`
+
+Updates the documentation for the given ``script``.
+
+\ **Note:** This should be called whenever the script is changed to keep the open documentation state up to date.
+
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
