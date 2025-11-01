@@ -32,7 +32,9 @@ Properties
    :widths: auto
 
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
-   | :ref:`FocusMode<enum_Control_FocusMode>`                          | focus_mode                                                                                                    | ``0`` (overrides :ref:`Control<class_Control_property_focus_mode>`)                 |
+   | :ref:`String<class_String>`                                       | :ref:`ellipsis_char<class_LinkButton_property_ellipsis_char>`                                                 | ``"…"``                                                                             |
+   +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
+   | :ref:`FocusMode<enum_Control_FocusMode>`                          | focus_mode                                                                                                    | ``3`` (overrides :ref:`Control<class_Control_property_focus_mode>`)                 |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                                       | :ref:`language<class_LinkButton_property_language>`                                                           | ``""``                                                                              |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
@@ -45,6 +47,8 @@ Properties
    | :ref:`String<class_String>`                                       | :ref:`text<class_LinkButton_property_text>`                                                                   | ``""``                                                                              |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
    | :ref:`TextDirection<enum_Control_TextDirection>`                  | :ref:`text_direction<class_LinkButton_property_text_direction>`                                               | ``0``                                                                               |
+   +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
+   | :ref:`OverrunBehavior<enum_TextServer_OverrunBehavior>`           | :ref:`text_overrun_behavior<class_LinkButton_property_text_overrun_behavior>`                                 | ``0``                                                                               |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
    | :ref:`UnderlineMode<enum_LinkButton_UnderlineMode>`               | :ref:`underline<class_LinkButton_property_underline>`                                                         | ``0``                                                                               |
    +-------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
@@ -133,6 +137,23 @@ The LinkButton will never show an underline at the bottom of its text.
 Property Descriptions
 ---------------------
 
+.. _class_LinkButton_property_ellipsis_char:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **ellipsis_char** = ``"…"`` :ref:`🔗<class_LinkButton_property_ellipsis_char>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_ellipsis_char**\ (\ value\: :ref:`String<class_String>`\ )
+- :ref:`String<class_String>` **get_ellipsis_char**\ (\ )
+
+Ellipsis character used for text clipping.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_LinkButton_property_language:
 
 .. rst-class:: classref-property
@@ -218,6 +239,23 @@ Base text writing direction.
 
 ----
 
+.. _class_LinkButton_property_text_overrun_behavior:
+
+.. rst-class:: classref-property
+
+:ref:`OverrunBehavior<enum_TextServer_OverrunBehavior>` **text_overrun_behavior** = ``0`` :ref:`🔗<class_LinkButton_property_text_overrun_behavior>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_text_overrun_behavior**\ (\ value\: :ref:`OverrunBehavior<enum_TextServer_OverrunBehavior>`\ )
+- :ref:`OverrunBehavior<enum_TextServer_OverrunBehavior>` **get_text_overrun_behavior**\ (\ )
+
+Sets the clipping behavior when the text exceeds the node's bounding rectangle.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_LinkButton_property_underline:
 
 .. rst-class:: classref-property
@@ -229,7 +267,7 @@ Base text writing direction.
 - |void| **set_underline_mode**\ (\ value\: :ref:`UnderlineMode<enum_LinkButton_UnderlineMode>`\ )
 - :ref:`UnderlineMode<enum_LinkButton_UnderlineMode>` **get_underline_mode**\ (\ )
 
-The underline mode to use for the text. See :ref:`UnderlineMode<enum_LinkButton_UnderlineMode>` for the available modes.
+The underline mode to use for the text.
 
 .. rst-class:: classref-item-separator
 
@@ -246,9 +284,7 @@ The underline mode to use for the text. See :ref:`UnderlineMode<enum_LinkButton_
 - |void| **set_uri**\ (\ value\: :ref:`String<class_String>`\ )
 - :ref:`String<class_String>` **get_uri**\ (\ )
 
-The `URI <https://en.wikipedia.org/wiki/Uniform_Resource_Identifier>`__ for this **LinkButton**. If set to a valid URI, pressing the button opens the URI using the operating system's default program for the protocol (via :ref:`OS.shell_open<class_OS_method_shell_open>`). HTTP and HTTPS URLs open the default web browser.
-
-\ **Examples:**\ 
+The `URI <https://en.wikipedia.org/wiki/Uniform_Resource_Identifier>`__ for this **LinkButton**. If set to a valid URI, pressing the button opens the URI using the operating system's default program for the protocol (via :ref:`OS.shell_open()<class_OS_method_shell_open>`). HTTP and HTTPS URLs open the default web browser.
 
 
 .. tabs::
@@ -419,6 +455,7 @@ Font size of the **LinkButton**'s text.
 :ref:`StyleBox<class_StyleBox>` used when the **LinkButton** is focused. The :ref:`focus<class_LinkButton_theme_style_focus>` :ref:`StyleBox<class_StyleBox>` is displayed *over* the base :ref:`StyleBox<class_StyleBox>`, so a partially transparent :ref:`StyleBox<class_StyleBox>` should be used to ensure the base :ref:`StyleBox<class_StyleBox>` remains visible. A :ref:`StyleBox<class_StyleBox>` that represents an outline or an underline works well for this purpose. To disable the focus visual effect, assign a :ref:`StyleBoxEmpty<class_StyleBoxEmpty>` resource. Note that disabling the focus visual effect will harm keyboard/controller navigation usability, so this is not recommended for accessibility reasons.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
