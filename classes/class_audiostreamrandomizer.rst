@@ -34,6 +34,8 @@ Properties
    +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+---------+
    | :ref:`float<class_float>`                                    | :ref:`random_pitch<class_AudioStreamRandomizer_property_random_pitch>`                       | ``1.0`` |
    +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+---------+
+   | :ref:`float<class_float>`                                    | :ref:`random_pitch_semitones<class_AudioStreamRandomizer_property_random_pitch_semitones>`   | ``0.0`` |
+   +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+---------+
    | :ref:`float<class_float>`                                    | :ref:`random_volume_offset_db<class_AudioStreamRandomizer_property_random_volume_offset_db>` | ``0.0`` |
    +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+---------+
    | :ref:`int<class_int>`                                        | :ref:`streams_count<class_AudioStreamRandomizer_property_streams_count>`                     | ``0``   |
@@ -139,7 +141,28 @@ Controls how this AudioStreamRandomizer picks which AudioStream to play next.
 - |void| **set_random_pitch**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_random_pitch**\ (\ )
 
-The intensity of random pitch variation. A value of 1 means no variation.
+The largest possible frequency multiplier of the random pitch variation. A value of ``1.0`` means no variation.
+
+\ **Note:** Setting this property also sets :ref:`random_pitch_semitones<class_AudioStreamRandomizer_property_random_pitch_semitones>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_AudioStreamRandomizer_property_random_pitch_semitones:
+
+.. rst-class:: classref-property
+
+:ref:`float<class_float>` **random_pitch_semitones** = ``0.0`` :ref:`🔗<class_AudioStreamRandomizer_property_random_pitch_semitones>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_random_pitch_semitones**\ (\ value\: :ref:`float<class_float>`\ )
+- :ref:`float<class_float>` **get_random_pitch_semitones**\ (\ )
+
+The largest possible distance, in semitones, of the random pitch variation. A value of ``0.0`` means no variation.
+
+\ **Note:** Setting this property also sets :ref:`random_pitch<class_AudioStreamRandomizer_property_random_pitch>`.
 
 .. rst-class:: classref-item-separator
 
@@ -265,6 +288,7 @@ Set the AudioStream at the specified index.
 Set the probability weight of the stream at the specified index. The higher this value, the more likely that the randomizer will choose this stream during random playback modes.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
