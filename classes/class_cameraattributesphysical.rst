@@ -109,7 +109,7 @@ The maximum luminance (in EV100) used when calculating auto exposure. When calcu
 - |void| **set_auto_exposure_min_exposure_value**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_auto_exposure_min_exposure_value**\ (\ )
 
-The minimum luminance luminance (in EV100) used when calculating auto exposure. When calculating scene average luminance, color values will be clamped to at least this value. This limits the auto-exposure from exposing above a certain brightness, resulting in a cut off point where the scene will remain dark.
+The minimum luminance (in EV100) used when calculating auto exposure. When calculating scene average luminance, color values will be clamped to at least this value. This limits the auto-exposure from exposing above a certain brightness, resulting in a cut off point where the scene will remain dark.
 
 .. rst-class:: classref-item-separator
 
@@ -235,6 +235,7 @@ Method Descriptions
 Returns the vertical field of view that corresponds to the :ref:`frustum_focal_length<class_CameraAttributesPhysical_property_frustum_focal_length>`. This value is calculated internally whenever :ref:`frustum_focal_length<class_CameraAttributesPhysical_property_frustum_focal_length>` is changed.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
