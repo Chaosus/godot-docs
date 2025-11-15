@@ -219,7 +219,7 @@ Method Descriptions
 
 .. container:: contribute
 
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+	There is currently no description for this method. Please help us by `contributing one <https://contributing.godotengine.org/en/latest/documentation/class_reference.html>`__!
 
 .. rst-class:: classref-item-separator
 
@@ -233,7 +233,7 @@ Method Descriptions
 
 Returns the bounds of the baked voxel data as an :ref:`AABB<class_AABB>`, which should match :ref:`VoxelGI.size<class_VoxelGI_property_size>` after being baked (which only contains the size as a :ref:`Vector3<class_Vector3>`).
 
-\ **Note:** If the size was modified without baking the VoxelGI data, then the value of :ref:`get_bounds<class_VoxelGIData_method_get_bounds>` and :ref:`VoxelGI.size<class_VoxelGI_property_size>` will not match.
+\ **Note:** If the size was modified without baking the VoxelGI data, then the value of :ref:`get_bounds()<class_VoxelGIData_method_get_bounds>` and :ref:`VoxelGI.size<class_VoxelGI_property_size>` will not match.
 
 .. rst-class:: classref-item-separator
 
@@ -247,7 +247,7 @@ Returns the bounds of the baked voxel data as an :ref:`AABB<class_AABB>`, which 
 
 .. container:: contribute
 
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+	There is currently no description for this method. Please help us by `contributing one <https://contributing.godotengine.org/en/latest/documentation/class_reference.html>`__!
 
 .. rst-class:: classref-item-separator
 
@@ -261,7 +261,7 @@ Returns the bounds of the baked voxel data as an :ref:`AABB<class_AABB>`, which 
 
 .. container:: contribute
 
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+	There is currently no description for this method. Please help us by `contributing one <https://contributing.godotengine.org/en/latest/documentation/class_reference.html>`__!
 
 .. rst-class:: classref-item-separator
 
@@ -275,7 +275,7 @@ Returns the bounds of the baked voxel data as an :ref:`AABB<class_AABB>`, which 
 
 .. container:: contribute
 
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+	There is currently no description for this method. Please help us by `contributing one <https://contributing.godotengine.org/en/latest/documentation/class_reference.html>`__!
 
 .. rst-class:: classref-item-separator
 
@@ -289,7 +289,7 @@ Returns the bounds of the baked voxel data as an :ref:`AABB<class_AABB>`, which 
 
 .. container:: contribute
 
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+	There is currently no description for this method. Please help us by `contributing one <https://contributing.godotengine.org/en/latest/documentation/class_reference.html>`__!
 
 .. rst-class:: classref-item-separator
 
@@ -303,9 +303,10 @@ Returns the bounds of the baked voxel data as an :ref:`AABB<class_AABB>`, which 
 
 .. container:: contribute
 
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+	There is currently no description for this method. Please help us by `contributing one <https://contributing.godotengine.org/en/latest/documentation/class_reference.html>`__!
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

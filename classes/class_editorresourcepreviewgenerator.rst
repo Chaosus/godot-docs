@@ -19,7 +19,7 @@ Custom generator of previews.
 Description
 -----------
 
-Custom code to generate previews. Please check ``file_dialog/thumbnail_size`` in :ref:`EditorSettings<class_EditorSettings>` to find out the right size to do previews at.
+Custom code to generate previews. Check :ref:`EditorSettings.filesystem/file_dialog/thumbnail_size<class_EditorSettings_property_filesystem/file_dialog/thumbnail_size>` to find a proper size to generate previews at.
 
 .. rst-class:: classref-reftable-group
 
@@ -32,13 +32,13 @@ Methods
    +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`           | :ref:`_can_generate_small_preview<class_EditorResourcePreviewGenerator_private_method__can_generate_small_preview>`\ (\ ) |virtual| |const|                                                                                                             |
    +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`Texture2D<class_Texture2D>` | :ref:`_generate<class_EditorResourcePreviewGenerator_private_method__generate>`\ (\ resource\: :ref:`Resource<class_Resource>`, size\: :ref:`Vector2i<class_Vector2i>`, metadata\: :ref:`Dictionary<class_Dictionary>`\ ) |virtual| |const|             |
+   | :ref:`Texture2D<class_Texture2D>` | :ref:`_generate<class_EditorResourcePreviewGenerator_private_method__generate>`\ (\ resource\: :ref:`Resource<class_Resource>`, size\: :ref:`Vector2i<class_Vector2i>`, metadata\: :ref:`Dictionary<class_Dictionary>`\ ) |virtual| |required| |const|  |
    +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Texture2D<class_Texture2D>` | :ref:`_generate_from_path<class_EditorResourcePreviewGenerator_private_method__generate_from_path>`\ (\ path\: :ref:`String<class_String>`, size\: :ref:`Vector2i<class_Vector2i>`, metadata\: :ref:`Dictionary<class_Dictionary>`\ ) |virtual| |const| |
    +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`           | :ref:`_generate_small_preview_automatically<class_EditorResourcePreviewGenerator_private_method__generate_small_preview_automatically>`\ (\ ) |virtual| |const|                                                                                         |
    +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`           | :ref:`_handles<class_EditorResourcePreviewGenerator_private_method__handles>`\ (\ type\: :ref:`String<class_String>`\ ) |virtual| |const|                                                                                                               |
+   | :ref:`bool<class_bool>`           | :ref:`_handles<class_EditorResourcePreviewGenerator_private_method__handles>`\ (\ type\: :ref:`String<class_String>`\ ) |virtual| |required| |const|                                                                                                    |
    +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. rst-class:: classref-section-separator
@@ -56,7 +56,7 @@ Method Descriptions
 
 :ref:`bool<class_bool>` **_can_generate_small_preview**\ (\ ) |virtual| |const| :ref:`🔗<class_EditorResourcePreviewGenerator_private_method__can_generate_small_preview>`
 
-If this function returns ``true``, the generator will call :ref:`_generate<class_EditorResourcePreviewGenerator_private_method__generate>` or :ref:`_generate_from_path<class_EditorResourcePreviewGenerator_private_method__generate_from_path>` for small previews as well.
+If this function returns ``true``, the generator will call :ref:`_generate()<class_EditorResourcePreviewGenerator_private_method__generate>` or :ref:`_generate_from_path()<class_EditorResourcePreviewGenerator_private_method__generate_from_path>` for small previews as well.
 
 By default, it returns ``false``.
 
@@ -68,15 +68,15 @@ By default, it returns ``false``.
 
 .. rst-class:: classref-method
 
-:ref:`Texture2D<class_Texture2D>` **_generate**\ (\ resource\: :ref:`Resource<class_Resource>`, size\: :ref:`Vector2i<class_Vector2i>`, metadata\: :ref:`Dictionary<class_Dictionary>`\ ) |virtual| |const| :ref:`🔗<class_EditorResourcePreviewGenerator_private_method__generate>`
+:ref:`Texture2D<class_Texture2D>` **_generate**\ (\ resource\: :ref:`Resource<class_Resource>`, size\: :ref:`Vector2i<class_Vector2i>`, metadata\: :ref:`Dictionary<class_Dictionary>`\ ) |virtual| |required| |const| :ref:`🔗<class_EditorResourcePreviewGenerator_private_method__generate>`
 
 Generate a preview from a given resource with the specified size. This must always be implemented.
 
-Returning an empty texture is an OK way to fail and let another generator take care.
+Returning ``null`` is an OK way to fail and let another generator take care.
 
 Care must be taken because this function is always called from a thread (not the main thread).
 
-\ ``metadata`` dictionary can be modified to store file-specific metadata that can be used in :ref:`EditorResourceTooltipPlugin._make_tooltip_for_path<class_EditorResourceTooltipPlugin_private_method__make_tooltip_for_path>` (like image size, sample length etc.).
+\ ``metadata`` dictionary can be modified to store file-specific metadata that can be used in :ref:`EditorResourceTooltipPlugin._make_tooltip_for_path()<class_EditorResourceTooltipPlugin_private_method__make_tooltip_for_path>` (like image size, sample length etc.).
 
 .. rst-class:: classref-item-separator
 
@@ -88,13 +88,13 @@ Care must be taken because this function is always called from a thread (not the
 
 :ref:`Texture2D<class_Texture2D>` **_generate_from_path**\ (\ path\: :ref:`String<class_String>`, size\: :ref:`Vector2i<class_Vector2i>`, metadata\: :ref:`Dictionary<class_Dictionary>`\ ) |virtual| |const| :ref:`🔗<class_EditorResourcePreviewGenerator_private_method__generate_from_path>`
 
-Generate a preview directly from a path with the specified size. Implementing this is optional, as default code will load and call :ref:`_generate<class_EditorResourcePreviewGenerator_private_method__generate>`.
+Generate a preview directly from a path with the specified size. Implementing this is optional, as default code will load and call :ref:`_generate()<class_EditorResourcePreviewGenerator_private_method__generate>`.
 
-Returning an empty texture is an OK way to fail and let another generator take care.
+Returning ``null`` is an OK way to fail and let another generator take care.
 
 Care must be taken because this function is always called from a thread (not the main thread).
 
-\ ``metadata`` dictionary can be modified to store file-specific metadata that can be used in :ref:`EditorResourceTooltipPlugin._make_tooltip_for_path<class_EditorResourceTooltipPlugin_private_method__make_tooltip_for_path>` (like image size, sample length etc.).
+\ ``metadata`` dictionary can be modified to store file-specific metadata that can be used in :ref:`EditorResourceTooltipPlugin._make_tooltip_for_path()<class_EditorResourceTooltipPlugin_private_method__make_tooltip_for_path>` (like image size, sample length etc.).
 
 .. rst-class:: classref-item-separator
 
@@ -106,7 +106,7 @@ Care must be taken because this function is always called from a thread (not the
 
 :ref:`bool<class_bool>` **_generate_small_preview_automatically**\ (\ ) |virtual| |const| :ref:`🔗<class_EditorResourcePreviewGenerator_private_method__generate_small_preview_automatically>`
 
-If this function returns ``true``, the generator will automatically generate the small previews from the normal preview texture generated by the methods :ref:`_generate<class_EditorResourcePreviewGenerator_private_method__generate>` or :ref:`_generate_from_path<class_EditorResourcePreviewGenerator_private_method__generate_from_path>`.
+If this function returns ``true``, the generator will automatically generate the small previews from the normal preview texture generated by the methods :ref:`_generate()<class_EditorResourcePreviewGenerator_private_method__generate>` or :ref:`_generate_from_path()<class_EditorResourcePreviewGenerator_private_method__generate_from_path>`.
 
 By default, it returns ``false``.
 
@@ -118,11 +118,12 @@ By default, it returns ``false``.
 
 .. rst-class:: classref-method
 
-:ref:`bool<class_bool>` **_handles**\ (\ type\: :ref:`String<class_String>`\ ) |virtual| |const| :ref:`🔗<class_EditorResourcePreviewGenerator_private_method__handles>`
+:ref:`bool<class_bool>` **_handles**\ (\ type\: :ref:`String<class_String>`\ ) |virtual| |required| |const| :ref:`🔗<class_EditorResourcePreviewGenerator_private_method__handles>`
 
 Returns ``true`` if your generator supports the resource of type ``type``.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
