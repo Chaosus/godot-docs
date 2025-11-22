@@ -12,7 +12,7 @@ VisualInstance3D
 
 **Inherits:** :ref:`Node3D<class_Node3D>` **<** :ref:`Node<class_Node>` **<** :ref:`Object<class_Object>`
 
-**Inherited By:** :ref:`Decal<class_Decal>`, :ref:`FogVolume<class_FogVolume>`, :ref:`GeometryInstance3D<class_GeometryInstance3D>`, :ref:`GPUParticlesAttractor3D<class_GPUParticlesAttractor3D>`, :ref:`GPUParticlesCollision3D<class_GPUParticlesCollision3D>`, :ref:`Light3D<class_Light3D>`, :ref:`LightmapGI<class_LightmapGI>`, :ref:`ReflectionProbe<class_ReflectionProbe>`, :ref:`RootMotionView<class_RootMotionView>`, :ref:`VisibleOnScreenNotifier3D<class_VisibleOnScreenNotifier3D>`, :ref:`VoxelGI<class_VoxelGI>`
+**Inherited By:** :ref:`Decal<class_Decal>`, :ref:`FogVolume<class_FogVolume>`, :ref:`GeometryInstance3D<class_GeometryInstance3D>`, :ref:`GPUParticlesAttractor3D<class_GPUParticlesAttractor3D>`, :ref:`GPUParticlesCollision3D<class_GPUParticlesCollision3D>`, :ref:`Light3D<class_Light3D>`, :ref:`LightmapGI<class_LightmapGI>`, :ref:`OccluderInstance3D<class_OccluderInstance3D>`, :ref:`OpenXRVisibilityMask<class_OpenXRVisibilityMask>`, :ref:`ReflectionProbe<class_ReflectionProbe>`, :ref:`RootMotionView<class_RootMotionView>`, :ref:`VisibleOnScreenNotifier3D<class_VisibleOnScreenNotifier3D>`, :ref:`VoxelGI<class_VoxelGI>`
 
 Parent of all visual 3D nodes.
 
@@ -31,13 +31,13 @@ Properties
 .. table::
    :widths: auto
 
-   +---------------------------+-----------------------------------------------------------------------------------------+---------+
-   | :ref:`int<class_int>`     | :ref:`layers<class_VisualInstance3D_property_layers>`                                   | ``1``   |
-   +---------------------------+-----------------------------------------------------------------------------------------+---------+
-   | :ref:`float<class_float>` | :ref:`sorting_offset<class_VisualInstance3D_property_sorting_offset>`                   | ``0.0`` |
-   +---------------------------+-----------------------------------------------------------------------------------------+---------+
-   | :ref:`bool<class_bool>`   | :ref:`sorting_use_aabb_center<class_VisualInstance3D_property_sorting_use_aabb_center>` |         |
-   +---------------------------+-----------------------------------------------------------------------------------------+---------+
+   +---------------------------+-----------------------------------------------------------------------------------------+-------+
+   | :ref:`int<class_int>`     | :ref:`layers<class_VisualInstance3D_property_layers>`                                   | ``1`` |
+   +---------------------------+-----------------------------------------------------------------------------------------+-------+
+   | :ref:`float<class_float>` | :ref:`sorting_offset<class_VisualInstance3D_property_sorting_offset>`                   |       |
+   +---------------------------+-----------------------------------------------------------------------------------------+-------+
+   | :ref:`bool<class_bool>`   | :ref:`sorting_use_aabb_center<class_VisualInstance3D_property_sorting_use_aabb_center>` |       |
+   +---------------------------+-----------------------------------------------------------------------------------------+-------+
 
 .. rst-class:: classref-reftable-group
 
@@ -89,7 +89,7 @@ This object will only be visible for :ref:`Camera3D<class_Camera3D>`\ s whose cu
 
 For :ref:`Light3D<class_Light3D>`\ s, this can be used to control which **VisualInstance3D**\ s are affected by a specific light. For :ref:`GPUParticles3D<class_GPUParticles3D>`, this can be used to control which particles are effected by a specific attractor. For :ref:`Decal<class_Decal>`\ s, this can be used to control which **VisualInstance3D**\ s are affected by a specific decal.
 
-To adjust :ref:`layers<class_VisualInstance3D_property_layers>` more easily using a script, use :ref:`get_layer_mask_value<class_VisualInstance3D_method_get_layer_mask_value>` and :ref:`set_layer_mask_value<class_VisualInstance3D_method_set_layer_mask_value>`.
+To adjust :ref:`layers<class_VisualInstance3D_property_layers>` more easily using a script, use :ref:`get_layer_mask_value()<class_VisualInstance3D_method_get_layer_mask_value>` and :ref:`set_layer_mask_value()<class_VisualInstance3D_method_set_layer_mask_value>`.
 
 \ **Note:** :ref:`VoxelGI<class_VoxelGI>`, SDFGI and :ref:`LightmapGI<class_LightmapGI>` will always take all layers into account to determine what contributes to global illumination. If this is an issue, set :ref:`GeometryInstance3D.gi_mode<class_GeometryInstance3D_property_gi_mode>` to :ref:`GeometryInstance3D.GI_MODE_DISABLED<class_GeometryInstance3D_constant_GI_MODE_DISABLED>` for meshes and :ref:`Light3D.light_bake_mode<class_Light3D_property_light_bake_mode>` to :ref:`Light3D.BAKE_DISABLED<class_Light3D_constant_BAKE_DISABLED>` for lights to exclude them from global illumination.
 
@@ -101,7 +101,7 @@ To adjust :ref:`layers<class_VisualInstance3D_property_layers>` more easily usin
 
 .. rst-class:: classref-property
 
-:ref:`float<class_float>` **sorting_offset** = ``0.0`` :ref:`🔗<class_VisualInstance3D_property_sorting_offset>`
+:ref:`float<class_float>` **sorting_offset** :ref:`🔗<class_VisualInstance3D_property_sorting_offset>`
 
 .. rst-class:: classref-property-setget
 
@@ -146,7 +146,7 @@ Method Descriptions
 
 .. container:: contribute
 
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+	There is currently no description for this method. Please help us by `contributing one <https://contributing.godotengine.org/en/latest/documentation/class_reference.html>`__!
 
 .. rst-class:: classref-item-separator
 
@@ -182,7 +182,7 @@ Returns the RID of the resource associated with this **VisualInstance3D**. For e
 
 :ref:`RID<class_RID>` **get_instance**\ (\ ) |const| :ref:`🔗<class_VisualInstance3D_method_get_instance>`
 
-Returns the RID of this instance. This RID is the same as the RID returned by :ref:`RenderingServer.instance_create<class_RenderingServer_method_instance_create>`. This RID is needed if you want to call :ref:`RenderingServer<class_RenderingServer>` functions directly on this **VisualInstance3D**.
+Returns the RID of this instance. This RID is the same as the RID returned by :ref:`RenderingServer.instance_create()<class_RenderingServer_method_instance_create>`. This RID is needed if you want to call :ref:`RenderingServer<class_RenderingServer>` functions directly on this **VisualInstance3D**.
 
 .. rst-class:: classref-item-separator
 
@@ -206,7 +206,7 @@ Returns whether or not the specified layer of the :ref:`layers<class_VisualInsta
 
 |void| **set_base**\ (\ base\: :ref:`RID<class_RID>`\ ) :ref:`🔗<class_VisualInstance3D_method_set_base>`
 
-Sets the resource that is instantiated by this **VisualInstance3D**, which changes how the engine handles the **VisualInstance3D** under the hood. Equivalent to :ref:`RenderingServer.instance_set_base<class_RenderingServer_method_instance_set_base>`.
+Sets the resource that is instantiated by this **VisualInstance3D**, which changes how the engine handles the **VisualInstance3D** under the hood. Equivalent to :ref:`RenderingServer.instance_set_base()<class_RenderingServer_method_instance_set_base>`.
 
 .. rst-class:: classref-item-separator
 
@@ -221,6 +221,7 @@ Sets the resource that is instantiated by this **VisualInstance3D**, which chang
 Based on ``value``, enables or disables the specified layer in the :ref:`layers<class_VisualInstance3D_property_layers>`, given a ``layer_number`` between 1 and 20.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
