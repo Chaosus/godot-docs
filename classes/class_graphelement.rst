@@ -40,6 +40,8 @@ Properties
    +-------------------------------+---------------------------------------------------------------------+-------------------+
    | :ref:`bool<class_bool>`       | :ref:`resizable<class_GraphElement_property_resizable>`             | ``false``         |
    +-------------------------------+---------------------------------------------------------------------+-------------------+
+   | :ref:`bool<class_bool>`       | :ref:`scaling_menus<class_GraphElement_property_scaling_menus>`     | ``false``         |
+   +-------------------------------+---------------------------------------------------------------------+-------------------+
    | :ref:`bool<class_bool>`       | :ref:`selectable<class_GraphElement_property_selectable>`           | ``true``          |
    +-------------------------------+---------------------------------------------------------------------+-------------------+
    | :ref:`bool<class_bool>`       | :ref:`selected<class_GraphElement_property_selected>`               | ``false``         |
@@ -220,6 +222,23 @@ If ``true``, the user can resize the GraphElement.
 
 ----
 
+.. _class_GraphElement_property_scaling_menus:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **scaling_menus** = ``false`` :ref:`🔗<class_GraphElement_property_scaling_menus>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_scaling_menus**\ (\ value\: :ref:`bool<class_bool>`\ )
+- :ref:`bool<class_bool>` **is_scaling_menus**\ (\ )
+
+If ``true``, :ref:`PopupMenu<class_PopupMenu>`\ s that are descendants of the GraphElement are scaled with the :ref:`GraphEdit<class_GraphEdit>` zoom.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_GraphElement_property_selectable:
 
 .. rst-class:: classref-property
@@ -268,6 +287,7 @@ Theme Property Descriptions
 The icon used for the resizer, visible when :ref:`resizable<class_GraphElement_property_resizable>` is enabled.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
