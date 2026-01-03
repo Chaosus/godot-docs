@@ -21,6 +21,8 @@ The RID :ref:`Variant<class_Variant>` type is used to access a low-level resourc
 
 A low-level resource may correspond to a high-level :ref:`Resource<class_Resource>`, such as :ref:`Texture<class_Texture>` or :ref:`Mesh<class_Mesh>`.
 
+\ **Note:** RIDs are only useful during the current session. It won't correspond to a similar resource if sent over a network, or loaded from a file at a later time.
+
 .. note::
 
 	There are notable differences when using this API with C#. See :ref:`doc_c_sharp_differences` for more information.
@@ -100,7 +102,7 @@ Constructs an empty **RID** with the invalid ID ``0``.
 
 :ref:`RID<class_RID>` **RID**\ (\ from\: :ref:`RID<class_RID>`\ )
 
-Constructs a **RID** as a copy of the given **RID**.
+Constructs an **RID** as a copy of the given **RID**.
 
 .. rst-class:: classref-section-separator
 
@@ -209,6 +211,7 @@ Returns ``true`` if the **RID**'s ID is greater than ``right``'s ID.
 Returns ``true`` if the **RID**'s ID is greater than or equal to ``right``'s ID.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
