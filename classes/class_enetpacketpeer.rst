@@ -21,7 +21,7 @@ Description
 
 A PacketPeer implementation representing a peer of an :ref:`ENetConnection<class_ENetConnection>`.
 
-This class cannot be instantiated directly but can be retrieved during :ref:`ENetConnection.service<class_ENetConnection_method_service>` or via :ref:`ENetConnection.get_peers<class_ENetConnection_method_get_peers>`.
+This class cannot be instantiated directly but can be retrieved during :ref:`ENetConnection.service()<class_ENetConnection_method_service>` or via :ref:`ENetConnection.get_peers()<class_ENetConnection_method_get_peers>`.
 
 \ **Note:** When exporting to Android, make sure to enable the ``INTERNET`` permission in the Android export preset before exporting the project or using one-click deploy. Otherwise, network communication of any kind will be blocked by Android.
 
@@ -42,6 +42,8 @@ Methods
 
    +-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                           | :ref:`get_channels<class_ENetPacketPeer_method_get_channels>`\ (\ ) |const|                                                                                                                   |
+   +-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`int<class_int>`                           | :ref:`get_packet_flags<class_ENetPacketPeer_method_get_packet_flags>`\ (\ ) |const|                                                                                                           |
    +-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                     | :ref:`get_remote_address<class_ENetPacketPeer_method_get_remote_address>`\ (\ ) |const|                                                                                                       |
    +-------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -141,7 +143,7 @@ The peer is currently connected and ready to communicate with.
 
 :ref:`PeerState<enum_ENetPacketPeer_PeerState>` **STATE_DISCONNECT_LATER** = ``6``
 
-The peer is slated to disconnect after it has no more outgoing packets to send.
+The peer is expected to disconnect after it has no more outgoing packets to send.
 
 .. _class_ENetPacketPeer_constant_STATE_DISCONNECTING:
 
@@ -304,7 +306,7 @@ Constants
 
 **PACKET_LOSS_SCALE** = ``65536`` :ref:`🔗<class_ENetPacketPeer_constant_PACKET_LOSS_SCALE>`
 
-The reference scale for packet loss. See :ref:`get_statistic<class_ENetPacketPeer_method_get_statistic>` and :ref:`PEER_PACKET_LOSS<class_ENetPacketPeer_constant_PEER_PACKET_LOSS>`.
+The reference scale for packet loss. See :ref:`get_statistic()<class_ENetPacketPeer_method_get_statistic>` and :ref:`PEER_PACKET_LOSS<class_ENetPacketPeer_constant_PEER_PACKET_LOSS>`.
 
 .. _class_ENetPacketPeer_constant_PACKET_THROTTLE_SCALE:
 
@@ -312,7 +314,7 @@ The reference scale for packet loss. See :ref:`get_statistic<class_ENetPacketPee
 
 **PACKET_THROTTLE_SCALE** = ``32`` :ref:`🔗<class_ENetPacketPeer_constant_PACKET_THROTTLE_SCALE>`
 
-The reference value for throttle configuration. The default value is ``32``. See :ref:`throttle_configure<class_ENetPacketPeer_method_throttle_configure>`.
+The reference value for throttle configuration. The default value is ``32``. See :ref:`throttle_configure()<class_ENetPacketPeer_method_throttle_configure>`.
 
 .. _class_ENetPacketPeer_constant_FLAG_RELIABLE:
 
@@ -359,6 +361,18 @@ Returns the number of channels allocated for communication with peer.
 
 ----
 
+.. _class_ENetPacketPeer_method_get_packet_flags:
+
+.. rst-class:: classref-method
+
+:ref:`int<class_int>` **get_packet_flags**\ (\ ) |const| :ref:`🔗<class_ENetPacketPeer_method_get_packet_flags>`
+
+Returns the ENet flags of the next packet in the received queue. See ``FLAG_*`` constants for available packet flags. Note that not all flags are replicated from the sending peer to the receiving peer.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_ENetPacketPeer_method_get_remote_address:
 
 .. rst-class:: classref-method
@@ -389,7 +403,7 @@ Returns the remote port of this peer.
 
 :ref:`PeerState<enum_ENetPacketPeer_PeerState>` **get_state**\ (\ ) |const| :ref:`🔗<class_ENetPacketPeer_method_get_state>`
 
-Returns the current peer state. See :ref:`PeerState<enum_ENetPacketPeer_PeerState>`.
+Returns the current peer state.
 
 .. rst-class:: classref-item-separator
 
@@ -401,7 +415,7 @@ Returns the current peer state. See :ref:`PeerState<enum_ENetPacketPeer_PeerStat
 
 :ref:`float<class_float>` **get_statistic**\ (\ statistic\: :ref:`PeerStatistic<enum_ENetPacketPeer_PeerStatistic>`\ ) :ref:`🔗<class_ENetPacketPeer_method_get_statistic>`
 
-Returns the requested ``statistic`` for this peer. See :ref:`PeerStatistic<enum_ENetPacketPeer_PeerStatistic>`.
+Returns the requested ``statistic`` for this peer.
 
 .. rst-class:: classref-item-separator
 
@@ -425,7 +439,7 @@ Returns ``true`` if the peer is currently active (i.e. the associated :ref:`ENet
 
 |void| **peer_disconnect**\ (\ data\: :ref:`int<class_int>` = 0\ ) :ref:`🔗<class_ENetPacketPeer_method_peer_disconnect>`
 
-Request a disconnection from a peer. An :ref:`ENetConnection.EVENT_DISCONNECT<class_ENetConnection_constant_EVENT_DISCONNECT>` will be generated during :ref:`ENetConnection.service<class_ENetConnection_method_service>` once the disconnection is complete.
+Request a disconnection from a peer. An :ref:`ENetConnection.EVENT_DISCONNECT<class_ENetConnection_constant_EVENT_DISCONNECT>` will be generated during :ref:`ENetConnection.service()<class_ENetConnection_method_service>` once the disconnection is complete.
 
 .. rst-class:: classref-item-separator
 
@@ -437,7 +451,7 @@ Request a disconnection from a peer. An :ref:`ENetConnection.EVENT_DISCONNECT<cl
 
 |void| **peer_disconnect_later**\ (\ data\: :ref:`int<class_int>` = 0\ ) :ref:`🔗<class_ENetPacketPeer_method_peer_disconnect_later>`
 
-Request a disconnection from a peer, but only after all queued outgoing packets are sent. An :ref:`ENetConnection.EVENT_DISCONNECT<class_ENetConnection_constant_EVENT_DISCONNECT>` will be generated during :ref:`ENetConnection.service<class_ENetConnection_method_service>` once the disconnection is complete.
+Request a disconnection from a peer, but only after all queued outgoing packets are sent. An :ref:`ENetConnection.EVENT_DISCONNECT<class_ENetConnection_constant_EVENT_DISCONNECT>` will be generated during :ref:`ENetConnection.service()<class_ENetConnection_method_service>` once the disconnection is complete.
 
 .. rst-class:: classref-item-separator
 
@@ -534,6 +548,7 @@ When the throttle has a value of ``0``, all unreliable packets are dropped by EN
 Intermediate values for the throttle represent intermediate probabilities between 0% and 100% of unreliable packets being sent. The bandwidth limits of the local and foreign hosts are taken into account to determine a sensible limit for the throttle probability above which it should not raise even in the best of conditions.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
