@@ -25,7 +25,7 @@ A class stored as a resource. A script extends the functionality of all objects 
 
 This is the base class for all scripts and should not be used directly. Trying to create a new script with this class will result in an error.
 
-The ``new`` method of a script subclass creates a new instance. :ref:`Object.set_script<class_Object_method_set_script>` extends an existing object, if that object's class matches one of the script's base classes.
+The ``new`` method of a script subclass creates a new instance. :ref:`Object.set_script()<class_Object_method_set_script>` extends an existing object, if that object's class matches one of the script's base classes.
 
 .. rst-class:: classref-introduction-group
 
@@ -64,6 +64,8 @@ Methods
    | :ref:`StringName<class_StringName>`                              | :ref:`get_instance_base_type<class_Script_method_get_instance_base_type>`\ (\ ) |const|                                                 |
    +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Variant<class_Variant>`                                    | :ref:`get_property_default_value<class_Script_method_get_property_default_value>`\ (\ property\: :ref:`StringName<class_StringName>`\ ) |
+   +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`Variant<class_Variant>`                                    | :ref:`get_rpc_config<class_Script_method_get_rpc_config>`\ (\ ) |const|                                                                 |
    +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Dictionary<class_Dictionary>`                              | :ref:`get_script_constant_map<class_Script_method_get_script_constant_map>`\ (\ )                                                       |
    +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
@@ -162,7 +164,7 @@ To give the script a global name, you can use the ``class_name`` keyword in GDSc
  .. code-tab:: csharp
 
     using Godot;
-    
+
     [GlobalClass]
     public partial class MyNode : Node
     {
@@ -198,6 +200,18 @@ Returns the default value of the specified property.
 
 ----
 
+.. _class_Script_method_get_rpc_config:
+
+.. rst-class:: classref-method
+
+:ref:`Variant<class_Variant>` **get_rpc_config**\ (\ ) |const| :ref:`🔗<class_Script_method_get_rpc_config>`
+
+Returns a :ref:`Dictionary<class_Dictionary>` mapping method names to their RPC configuration defined by this script.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_Script_method_get_script_constant_map:
 
 .. rst-class:: classref-method
@@ -218,6 +232,8 @@ Returns a dictionary containing constant names and their values.
 
 Returns the list of methods in this **Script**.
 
+\ **Note:** The dictionaries returned by this method are formatted identically to those returned by :ref:`Object.get_method_list()<class_Object_method_get_method_list>`.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -230,6 +246,8 @@ Returns the list of methods in this **Script**.
 
 Returns the list of properties in this **Script**.
 
+\ **Note:** The dictionaries returned by this method are formatted identically to those returned by :ref:`Object.get_property_list()<class_Object_method_get_property_list>`.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -240,7 +258,9 @@ Returns the list of properties in this **Script**.
 
 :ref:`Array<class_Array>`\[:ref:`Dictionary<class_Dictionary>`\] **get_script_signal_list**\ (\ ) :ref:`🔗<class_Script_method_get_script_signal_list>`
 
-Returns the list of user signals defined in this **Script**.
+Returns the list of signals defined in this **Script**.
+
+\ **Note:** The dictionaries returned by this method are formatted identically to those returned by :ref:`Object.get_signal_list()<class_Object_method_get_signal_list>`.
 
 .. rst-class:: classref-item-separator
 
@@ -265,6 +285,8 @@ Returns ``true`` if the script, or a base class, defines a signal with the given
 :ref:`bool<class_bool>` **has_source_code**\ (\ ) |const| :ref:`🔗<class_Script_method_has_source_code>`
 
 Returns ``true`` if the script contains non-empty source code.
+
+\ **Note:** If a script does not have source code, this does not mean that it is invalid or unusable. For example, a :ref:`GDScript<class_GDScript>` that was exported with binary tokenization has no source code, but still behaves as expected and could be instantiated. This can be checked with :ref:`can_instantiate()<class_Script_method_can_instantiate>`.
 
 .. rst-class:: classref-item-separator
 
@@ -315,6 +337,7 @@ Returns ``true`` if the script is a tool script. A tool script can run in the ed
 Reloads the script's class implementation. Returns an error code.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

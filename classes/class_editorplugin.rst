@@ -12,6 +12,8 @@ EditorPlugin
 
 **Inherits:** :ref:`Node<class_Node>` **<** :ref:`Object<class_Object>`
 
+**Inherited By:** :ref:`GridMapEditorPlugin<class_GridMapEditorPlugin>`
+
 Used by the editor to extend its functionality.
 
 .. rst-class:: classref-introduction-group
@@ -81,6 +83,8 @@ Methods
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`_make_visible<class_EditorPlugin_private_method__make_visible>`\ (\ visible\: :ref:`bool<class_bool>`\ ) |virtual|                                                                                                                               |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`PackedStringArray<class_PackedStringArray>`         | :ref:`_run_scene<class_EditorPlugin_private_method__run_scene>`\ (\ scene\: :ref:`String<class_String>`, args\: :ref:`PackedStringArray<class_PackedStringArray>`\ ) |virtual| |const|                                                                 |
+   +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`_save_external_data<class_EditorPlugin_private_method__save_external_data>`\ (\ ) |virtual|                                                                                                                                                      |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`_set_state<class_EditorPlugin_private_method__set_state>`\ (\ state\: :ref:`Dictionary<class_Dictionary>`\ ) |virtual|                                                                                                                           |
@@ -88,6 +92,8 @@ Methods
    | |void|                                                    | :ref:`_set_window_layout<class_EditorPlugin_private_method__set_window_layout>`\ (\ configuration\: :ref:`ConfigFile<class_ConfigFile>`\ ) |virtual|                                                                                                   |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`add_autoload_singleton<class_EditorPlugin_method_add_autoload_singleton>`\ (\ name\: :ref:`String<class_String>`, path\: :ref:`String<class_String>`\ )                                                                                          |
+   +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                    | :ref:`add_context_menu_plugin<class_EditorPlugin_method_add_context_menu_plugin>`\ (\ slot\: :ref:`ContextMenuSlot<enum_EditorContextMenuPlugin_ContextMenuSlot>`, plugin\: :ref:`EditorContextMenuPlugin<class_EditorContextMenuPlugin>`\ )           |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Button<class_Button>`                               | :ref:`add_control_to_bottom_panel<class_EditorPlugin_method_add_control_to_bottom_panel>`\ (\ control\: :ref:`Control<class_Control>`, title\: :ref:`String<class_String>`, shortcut\: :ref:`Shortcut<class_Shortcut>` = null\ )                       |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -98,6 +104,10 @@ Methods
    | |void|                                                    | :ref:`add_custom_type<class_EditorPlugin_method_add_custom_type>`\ (\ type\: :ref:`String<class_String>`, base\: :ref:`String<class_String>`, script\: :ref:`Script<class_Script>`, icon\: :ref:`Texture2D<class_Texture2D>`\ )                        |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`add_debugger_plugin<class_EditorPlugin_method_add_debugger_plugin>`\ (\ script\: :ref:`EditorDebuggerPlugin<class_EditorDebuggerPlugin>`\ )                                                                                                      |
+   +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                    | :ref:`add_dock<class_EditorPlugin_method_add_dock>`\ (\ dock\: :ref:`EditorDock<class_EditorDock>`\ )                                                                                                                                                  |
+   +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                    | :ref:`add_export_platform<class_EditorPlugin_method_add_export_platform>`\ (\ platform\: :ref:`EditorExportPlatform<class_EditorExportPlatform>`\ )                                                                                                    |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`add_export_plugin<class_EditorPlugin_method_add_export_plugin>`\ (\ plugin\: :ref:`EditorExportPlugin<class_EditorExportPlugin>`\ )                                                                                                              |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -139,6 +149,8 @@ Methods
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`remove_autoload_singleton<class_EditorPlugin_method_remove_autoload_singleton>`\ (\ name\: :ref:`String<class_String>`\ )                                                                                                                        |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                    | :ref:`remove_context_menu_plugin<class_EditorPlugin_method_remove_context_menu_plugin>`\ (\ plugin\: :ref:`EditorContextMenuPlugin<class_EditorContextMenuPlugin>`\ )                                                                                  |
+   +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`remove_control_from_bottom_panel<class_EditorPlugin_method_remove_control_from_bottom_panel>`\ (\ control\: :ref:`Control<class_Control>`\ )                                                                                                     |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`remove_control_from_container<class_EditorPlugin_method_remove_control_from_container>`\ (\ container\: :ref:`CustomControlContainer<enum_EditorPlugin_CustomControlContainer>`, control\: :ref:`Control<class_Control>`\ )                      |
@@ -148,6 +160,10 @@ Methods
    | |void|                                                    | :ref:`remove_custom_type<class_EditorPlugin_method_remove_custom_type>`\ (\ type\: :ref:`String<class_String>`\ )                                                                                                                                      |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`remove_debugger_plugin<class_EditorPlugin_method_remove_debugger_plugin>`\ (\ script\: :ref:`EditorDebuggerPlugin<class_EditorDebuggerPlugin>`\ )                                                                                                |
+   +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                    | :ref:`remove_dock<class_EditorPlugin_method_remove_dock>`\ (\ dock\: :ref:`EditorDock<class_EditorDock>`\ )                                                                                                                                            |
+   +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                    | :ref:`remove_export_platform<class_EditorPlugin_method_remove_export_platform>`\ (\ platform\: :ref:`EditorExportPlatform<class_EditorExportPlatform>`\ )                                                                                              |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                    | :ref:`remove_export_plugin<class_EditorPlugin_method_remove_export_plugin>`\ (\ plugin\: :ref:`EditorExportPlugin<class_EditorExportPlugin>`\ )                                                                                                        |
    +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -193,7 +209,7 @@ Signals
 
 **main_screen_changed**\ (\ screen_name\: :ref:`String<class_String>`\ ) :ref:`🔗<class_EditorPlugin_signal_main_screen_changed>`
 
-Emitted when user changes the workspace (**2D**, **3D**, **Script**, **AssetLib**). Also works with custom screens defined by plugins.
+Emitted when user changes the workspace (**2D**, **3D**, **Script**, **Game**, **AssetLib**). Also works with custom screens defined by plugins.
 
 .. rst-class:: classref-item-separator
 
@@ -378,6 +394,14 @@ Tab of Project Settings dialog, to the right of other tabs.
 
 enum **DockSlot**: :ref:`🔗<enum_EditorPlugin_DockSlot>`
 
+.. _class_EditorPlugin_constant_DOCK_SLOT_NONE:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`DockSlot<enum_EditorPlugin_DockSlot>` **DOCK_SLOT_NONE** = ``-1``
+
+The dock is closed.
+
 .. _class_EditorPlugin_constant_DOCK_SLOT_LEFT_UL:
 
 .. rst-class:: classref-enumeration-constant
@@ -442,11 +466,19 @@ Dock slot, right side, upper-right (empty in default layout).
 
 Dock slot, right side, bottom-right (empty in default layout).
 
+.. _class_EditorPlugin_constant_DOCK_SLOT_BOTTOM:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`DockSlot<enum_EditorPlugin_DockSlot>` **DOCK_SLOT_BOTTOM** = ``8``
+
+Bottom panel.
+
 .. _class_EditorPlugin_constant_DOCK_SLOT_MAX:
 
 .. rst-class:: classref-enumeration-constant
 
-:ref:`DockSlot<enum_EditorPlugin_DockSlot>` **DOCK_SLOT_MAX** = ``8``
+:ref:`DockSlot<enum_EditorPlugin_DockSlot>` **DOCK_SLOT_MAX** = ``9``
 
 Represents the size of the :ref:`DockSlot<enum_EditorPlugin_DockSlot>` enum.
 
@@ -515,7 +547,7 @@ This is used, for example, in shader editors to let the plugin know that it must
 
 This method is called when the editor is about to run the project. The plugin can then perform required operations before the project runs.
 
-This method must return a boolean. If this method returns ``false``, the project will not run. The run is aborted immediately, so this also prevents all other plugins' :ref:`_build<class_EditorPlugin_private_method__build>` methods from running.
+This method must return a boolean. If this method returns ``false``, the project will not run. The run is aborted immediately, so this also prevents all other plugins' :ref:`_build()<class_EditorPlugin_private_method__build>` methods from running.
 
 .. rst-class:: classref-item-separator
 
@@ -577,7 +609,7 @@ Called by the engine when the user enables the **EditorPlugin** in the Plugin ta
 
 |void| **_forward_3d_draw_over_viewport**\ (\ viewport_control\: :ref:`Control<class_Control>`\ ) |virtual| :ref:`🔗<class_EditorPlugin_private_method__forward_3d_draw_over_viewport>`
 
-Called by the engine when the 3D editor's viewport is updated. Use the ``overlay`` :ref:`Control<class_Control>` for drawing. You can update the viewport manually by calling :ref:`update_overlays<class_EditorPlugin_method_update_overlays>`.
+Called by the engine when the 3D editor's viewport is updated. ``viewport_control`` is an overlay on top of the viewport and it can be used for drawing. You can update the viewport manually by calling :ref:`update_overlays()<class_EditorPlugin_method_update_overlays>`.
 
 
 .. tabs::
@@ -585,12 +617,12 @@ Called by the engine when the 3D editor's viewport is updated. Use the ``overlay
  .. code-tab:: gdscript
 
     func _forward_3d_draw_over_viewport(overlay):
-        # Draw a circle at cursor position.
-        overlay.draw_circle(overlay.get_local_mouse_position(), 64)
-    
+        # Draw a circle at the cursor's position.
+        overlay.draw_circle(overlay.get_local_mouse_position(), 64, Color.WHITE)
+
     func _forward_3d_gui_input(camera, event):
         if event is InputEventMouseMotion:
-            # Redraw viewport when cursor is moved.
+            # Redraw the viewport when the cursor is moved.
             update_overlays()
             return EditorPlugin.AFTER_GUI_INPUT_STOP
         return EditorPlugin.AFTER_GUI_INPUT_PASS
@@ -599,15 +631,15 @@ Called by the engine when the 3D editor's viewport is updated. Use the ``overlay
 
     public override void _Forward3DDrawOverViewport(Control viewportControl)
     {
-        // Draw a circle at cursor position.
+        // Draw a circle at the cursor's position.
         viewportControl.DrawCircle(viewportControl.GetLocalMousePosition(), 64, Colors.White);
     }
-    
+
     public override EditorPlugin.AfterGuiInput _Forward3DGuiInput(Camera3D viewportCamera, InputEvent @event)
     {
         if (@event is InputEventMouseMotion)
         {
-            // Redraw viewport when cursor is moved.
+            // Redraw the viewport when the cursor is moved.
             UpdateOverlays();
             return EditorPlugin.AfterGuiInput.Stop;
         }
@@ -626,9 +658,9 @@ Called by the engine when the 3D editor's viewport is updated. Use the ``overlay
 
 |void| **_forward_3d_force_draw_over_viewport**\ (\ viewport_control\: :ref:`Control<class_Control>`\ ) |virtual| :ref:`🔗<class_EditorPlugin_private_method__forward_3d_force_draw_over_viewport>`
 
-This method is the same as :ref:`_forward_3d_draw_over_viewport<class_EditorPlugin_private_method__forward_3d_draw_over_viewport>`, except it draws on top of everything. Useful when you need an extra layer that shows over anything else.
+This method is the same as :ref:`_forward_3d_draw_over_viewport()<class_EditorPlugin_private_method__forward_3d_draw_over_viewport>`, except it draws on top of everything. Useful when you need an extra layer that shows over anything else.
 
-You need to enable calling of this method by using :ref:`set_force_draw_over_forwarding_enabled<class_EditorPlugin_method_set_force_draw_over_forwarding_enabled>`.
+You need to enable calling of this method by using :ref:`set_force_draw_over_forwarding_enabled()<class_EditorPlugin_method_set_force_draw_over_forwarding_enabled>`.
 
 .. rst-class:: classref-item-separator
 
@@ -640,9 +672,7 @@ You need to enable calling of this method by using :ref:`set_force_draw_over_for
 
 :ref:`int<class_int>` **_forward_3d_gui_input**\ (\ viewport_camera\: :ref:`Camera3D<class_Camera3D>`, event\: :ref:`InputEvent<class_InputEvent>`\ ) |virtual| :ref:`🔗<class_EditorPlugin_private_method__forward_3d_gui_input>`
 
-Called when there is a root node in the current edited scene, :ref:`_handles<class_EditorPlugin_private_method__handles>` is implemented, and an :ref:`InputEvent<class_InputEvent>` happens in the 3D viewport. The return value decides whether the :ref:`InputEvent<class_InputEvent>` is consumed or forwarded to other **EditorPlugin**\ s. See :ref:`AfterGUIInput<enum_EditorPlugin_AfterGUIInput>` for options.
-
-\ **Example:**\ 
+Called when there is a root node in the current edited scene, :ref:`_handles()<class_EditorPlugin_private_method__handles>` is implemented, and an :ref:`InputEvent<class_InputEvent>` happens in the 3D viewport. The return value decides whether the :ref:`InputEvent<class_InputEvent>` is consumed or forwarded to other **EditorPlugin**\ s. See :ref:`AfterGUIInput<enum_EditorPlugin_AfterGUIInput>` for options.
 
 
 .. tabs::
@@ -663,9 +693,7 @@ Called when there is a root node in the current edited scene, :ref:`_handles<cla
 
 
 
-Must ``return EditorPlugin.AFTER_GUI_INPUT_PASS`` in order to forward the :ref:`InputEvent<class_InputEvent>` to other Editor classes.
-
-\ **Example:**\ 
+This method must return :ref:`AFTER_GUI_INPUT_PASS<class_EditorPlugin_constant_AFTER_GUI_INPUT_PASS>` in order to forward the :ref:`InputEvent<class_InputEvent>` to other Editor classes.
 
 
 .. tabs::
@@ -696,7 +724,7 @@ Must ``return EditorPlugin.AFTER_GUI_INPUT_PASS`` in order to forward the :ref:`
 
 |void| **_forward_canvas_draw_over_viewport**\ (\ viewport_control\: :ref:`Control<class_Control>`\ ) |virtual| :ref:`🔗<class_EditorPlugin_private_method__forward_canvas_draw_over_viewport>`
 
-Called by the engine when the 2D editor's viewport is updated. Use the ``overlay`` :ref:`Control<class_Control>` for drawing. You can update the viewport manually by calling :ref:`update_overlays<class_EditorPlugin_method_update_overlays>`.
+Called by the engine when the 2D editor's viewport is updated. ``viewport_control`` is an overlay on top of the viewport and it can be used for drawing. You can update the viewport manually by calling :ref:`update_overlays()<class_EditorPlugin_method_update_overlays>`.
 
 
 .. tabs::
@@ -704,12 +732,12 @@ Called by the engine when the 2D editor's viewport is updated. Use the ``overlay
  .. code-tab:: gdscript
 
     func _forward_canvas_draw_over_viewport(overlay):
-        # Draw a circle at cursor position.
+        # Draw a circle at the cursor's position.
         overlay.draw_circle(overlay.get_local_mouse_position(), 64, Color.WHITE)
-    
+
     func _forward_canvas_gui_input(event):
         if event is InputEventMouseMotion:
-            # Redraw viewport when cursor is moved.
+            # Redraw the viewport when the cursor is moved.
             update_overlays()
             return true
         return false
@@ -718,15 +746,15 @@ Called by the engine when the 2D editor's viewport is updated. Use the ``overlay
 
     public override void _ForwardCanvasDrawOverViewport(Control viewportControl)
     {
-        // Draw a circle at cursor position.
+        // Draw a circle at the cursor's position.
         viewportControl.DrawCircle(viewportControl.GetLocalMousePosition(), 64, Colors.White);
     }
-    
+
     public override bool _ForwardCanvasGuiInput(InputEvent @event)
     {
         if (@event is InputEventMouseMotion)
         {
-            // Redraw viewport when cursor is moved.
+            // Redraw the viewport when the cursor is moved.
             UpdateOverlays();
             return true;
         }
@@ -745,9 +773,9 @@ Called by the engine when the 2D editor's viewport is updated. Use the ``overlay
 
 |void| **_forward_canvas_force_draw_over_viewport**\ (\ viewport_control\: :ref:`Control<class_Control>`\ ) |virtual| :ref:`🔗<class_EditorPlugin_private_method__forward_canvas_force_draw_over_viewport>`
 
-This method is the same as :ref:`_forward_canvas_draw_over_viewport<class_EditorPlugin_private_method__forward_canvas_draw_over_viewport>`, except it draws on top of everything. Useful when you need an extra layer that shows over anything else.
+This method is the same as :ref:`_forward_canvas_draw_over_viewport()<class_EditorPlugin_private_method__forward_canvas_draw_over_viewport>`, except it draws on top of everything. Useful when you need an extra layer that shows over anything else.
 
-You need to enable calling of this method by using :ref:`set_force_draw_over_forwarding_enabled<class_EditorPlugin_method_set_force_draw_over_forwarding_enabled>`.
+You need to enable calling of this method by using :ref:`set_force_draw_over_forwarding_enabled()<class_EditorPlugin_method_set_force_draw_over_forwarding_enabled>`.
 
 .. rst-class:: classref-item-separator
 
@@ -759,9 +787,7 @@ You need to enable calling of this method by using :ref:`set_force_draw_over_for
 
 :ref:`bool<class_bool>` **_forward_canvas_gui_input**\ (\ event\: :ref:`InputEvent<class_InputEvent>`\ ) |virtual| :ref:`🔗<class_EditorPlugin_private_method__forward_canvas_gui_input>`
 
-Called when there is a root node in the current edited scene, :ref:`_handles<class_EditorPlugin_private_method__handles>` is implemented and an :ref:`InputEvent<class_InputEvent>` happens in the 2D viewport. Intercepts the :ref:`InputEvent<class_InputEvent>`, if ``return true`` **EditorPlugin** consumes the ``event``, otherwise forwards ``event`` to other Editor classes.
-
-\ **Example:**\ 
+Called when there is a root node in the current edited scene, :ref:`_handles()<class_EditorPlugin_private_method__handles>` is implemented, and an :ref:`InputEvent<class_InputEvent>` happens in the 2D viewport. If this method returns ``true``, ``event`` is intercepted by this **EditorPlugin**, otherwise ``event`` is forwarded to other Editor classes.
 
 
 .. tabs::
@@ -782,9 +808,7 @@ Called when there is a root node in the current edited scene, :ref:`_handles<cla
 
 
 
-Must ``return false`` in order to forward the :ref:`InputEvent<class_InputEvent>` to other Editor classes.
-
-\ **Example:**\ 
+This method must return ``false`` in order to forward the :ref:`InputEvent<class_InputEvent>` to other Editor classes.
 
 
 .. tabs::
@@ -835,7 +859,7 @@ This is for editors that edit script-based objects. You can return a list of bre
 
 Override this method in your plugin to return a :ref:`Texture2D<class_Texture2D>` in order to give it an icon.
 
-For main screen plugins, this appears at the top of the screen, to the right of the "2D", "3D", "Script", and "AssetLib" buttons.
+For main screen plugins, this appears at the top of the screen, to the right of the "2D", "3D", "Script", "Game", and "AssetLib" buttons.
 
 Ideally, the plugin icon should be white with a transparent background and 16×16 pixels in size.
 
@@ -874,7 +898,7 @@ Ideally, the plugin icon should be white with a transparent background and 16×1
 
 Override this method in your plugin to provide the name of the plugin when displayed in the Godot editor.
 
-For main screen plugins, this appears at the top of the screen, to the right of the "2D", "3D", "Script", and "AssetLib" buttons.
+For main screen plugins, this appears at the top of the screen, to the right of the "2D", "3D", "Script", "Game", and "AssetLib" buttons.
 
 .. rst-class:: classref-item-separator
 
@@ -886,18 +910,18 @@ For main screen plugins, this appears at the top of the screen, to the right of 
 
 :ref:`Dictionary<class_Dictionary>` **_get_state**\ (\ ) |virtual| |const| :ref:`🔗<class_EditorPlugin_private_method__get_state>`
 
-Override this method to provide a state data you want to be saved, like view position, grid settings, folding, etc. This is used when saving the scene (so state is kept when opening it again) and for switching tabs (so state can be restored when the tab returns). This data is automatically saved for each scene in an ``editstate`` file in the editor metadata folder. If you want to store global (scene-independent) editor data for your plugin, you can use :ref:`_get_window_layout<class_EditorPlugin_private_method__get_window_layout>` instead.
+Override this method to provide a state data you want to be saved, like view position, grid settings, folding, etc. This is used when saving the scene (so state is kept when opening it again) and for switching tabs (so state can be restored when the tab returns). This data is automatically saved for each scene in an ``editstate`` file in the editor metadata folder. If you want to store global (scene-independent) editor data for your plugin, you can use :ref:`_get_window_layout()<class_EditorPlugin_private_method__get_window_layout>` instead.
 
-Use :ref:`_set_state<class_EditorPlugin_private_method__set_state>` to restore your saved state.
+Use :ref:`_set_state()<class_EditorPlugin_private_method__set_state>` to restore your saved state.
 
 \ **Note:** This method should not be used to save important settings that should persist with the project.
 
-\ **Note:** You must implement :ref:`_get_plugin_name<class_EditorPlugin_private_method__get_plugin_name>` for the state to be stored and restored correctly.
+\ **Note:** You must implement :ref:`_get_plugin_name()<class_EditorPlugin_private_method__get_plugin_name>` for the state to be stored and restored correctly.
 
 ::
 
     func _get_state():
-        var state = {"zoom": zoom, "preferred_color": my_color}
+        var state = { "zoom": zoom, "preferred_color": my_color }
         return state
 
 .. rst-class:: classref-item-separator
@@ -914,19 +938,19 @@ Override this method to provide a custom message that lists unsaved changes. The
 
 When closing a scene, ``for_scene`` is the path to the scene being closed. You can use it to handle built-in resources in that scene.
 
-If the user confirms saving, :ref:`_save_external_data<class_EditorPlugin_private_method__save_external_data>` will be called, before closing the editor.
+If the user confirms saving, :ref:`_save_external_data()<class_EditorPlugin_private_method__save_external_data>` will be called, before closing the editor.
 
 ::
 
     func _get_unsaved_status(for_scene):
         if not unsaved:
             return ""
-    
+
         if for_scene.is_empty():
             return "Save changes in MyCustomPlugin before closing?"
         else:
             return "Scene %s has changes from MyCustomPlugin. Save before closing?" % for_scene.get_file()
-    
+
     func _save_external_data():
         unsaved = false
 
@@ -948,9 +972,9 @@ If the plugin has no scene-specific changes, you can ignore the calls when closi
 
 |void| **_get_window_layout**\ (\ configuration\: :ref:`ConfigFile<class_ConfigFile>`\ ) |virtual| :ref:`🔗<class_EditorPlugin_private_method__get_window_layout>`
 
-Override this method to provide the GUI layout of the plugin or any other data you want to be stored. This is used to save the project's editor layout when :ref:`queue_save_layout<class_EditorPlugin_method_queue_save_layout>` is called or the editor layout was changed (for example changing the position of a dock). The data is stored in the ``editor_layout.cfg`` file in the editor metadata directory.
+Override this method to provide the GUI layout of the plugin or any other data you want to be stored. This is used to save the project's editor layout when :ref:`queue_save_layout()<class_EditorPlugin_method_queue_save_layout>` is called or the editor layout was changed (for example changing the position of a dock). The data is stored in the ``editor_layout.cfg`` file in the editor metadata directory.
 
-Use :ref:`_set_window_layout<class_EditorPlugin_private_method__set_window_layout>` to restore your saved layout.
+Use :ref:`_set_window_layout()<class_EditorPlugin_private_method__set_window_layout>` to restore your saved layout.
 
 ::
 
@@ -968,7 +992,7 @@ Use :ref:`_set_window_layout<class_EditorPlugin_private_method__set_window_layou
 
 :ref:`bool<class_bool>` **_handles**\ (\ object\: :ref:`Object<class_Object>`\ ) |virtual| |const| :ref:`🔗<class_EditorPlugin_private_method__handles>`
 
-Implement this function if your plugin edits a specific type of object (Resource or Node). If you return ``true``, then you will get the functions :ref:`_edit<class_EditorPlugin_private_method__edit>` and :ref:`_make_visible<class_EditorPlugin_private_method__make_visible>` called when the editor requests them. If you have declared the methods :ref:`_forward_canvas_gui_input<class_EditorPlugin_private_method__forward_canvas_gui_input>` and :ref:`_forward_3d_gui_input<class_EditorPlugin_private_method__forward_3d_gui_input>` these will be called too.
+Implement this function if your plugin edits a specific type of object (Resource or Node). If you return ``true``, then you will get the functions :ref:`_edit()<class_EditorPlugin_private_method__edit>` and :ref:`_make_visible()<class_EditorPlugin_private_method__make_visible>` called when the editor requests them. If you have declared the methods :ref:`_forward_canvas_gui_input()<class_EditorPlugin_private_method__forward_canvas_gui_input>` and :ref:`_forward_3d_gui_input()<class_EditorPlugin_private_method__forward_3d_gui_input>` these will be called too.
 
 \ **Note:** Each plugin should handle only one type of objects at a time. If a plugin handles more types of objects and they are edited at the same time, it will result in errors.
 
@@ -982,30 +1006,30 @@ Implement this function if your plugin edits a specific type of object (Resource
 
 :ref:`bool<class_bool>` **_has_main_screen**\ (\ ) |virtual| |const| :ref:`🔗<class_EditorPlugin_private_method__has_main_screen>`
 
-Returns ``true`` if this is a main screen editor plugin (it goes in the workspace selector together with **2D**, **3D**, **Script** and **AssetLib**).
+Returns ``true`` if this is a main screen editor plugin (it goes in the workspace selector together with **2D**, **3D**, **Script**, **Game**, and **AssetLib**).
 
-When the plugin's workspace is selected, other main screen plugins will be hidden, but your plugin will not appear automatically. It needs to be added as a child of :ref:`EditorInterface.get_editor_main_screen<class_EditorInterface_method_get_editor_main_screen>` and made visible inside :ref:`_make_visible<class_EditorPlugin_private_method__make_visible>`.
+When the plugin's workspace is selected, other main screen plugins will be hidden, but your plugin will not appear automatically. It needs to be added as a child of :ref:`EditorInterface.get_editor_main_screen()<class_EditorInterface_method_get_editor_main_screen>` and made visible inside :ref:`_make_visible()<class_EditorPlugin_private_method__make_visible>`.
 
-Use :ref:`_get_plugin_name<class_EditorPlugin_private_method__get_plugin_name>` and :ref:`_get_plugin_icon<class_EditorPlugin_private_method__get_plugin_icon>` to customize the plugin button's appearance.
+Use :ref:`_get_plugin_name()<class_EditorPlugin_private_method__get_plugin_name>` and :ref:`_get_plugin_icon()<class_EditorPlugin_private_method__get_plugin_icon>` to customize the plugin button's appearance.
 
 ::
 
     var plugin_control
-    
+
     func _enter_tree():
         plugin_control = preload("my_plugin_control.tscn").instantiate()
         EditorInterface.get_editor_main_screen().add_child(plugin_control)
         plugin_control.hide()
-    
+
     func _has_main_screen():
         return true
-    
+
     func _make_visible(visible):
         plugin_control.visible = visible
-    
+
     func _get_plugin_name():
         return "My Super Cool Plugin 3000"
-    
+
     func _get_plugin_icon():
         return EditorInterface.get_editor_theme().get_icon("Node", "EditorIcons")
 
@@ -1022,6 +1046,26 @@ Use :ref:`_get_plugin_name<class_EditorPlugin_private_method__get_plugin_name>` 
 This function will be called when the editor is requested to become visible. It is used for plugins that edit a specific object type.
 
 Remember that you have to manage the visibility of all your editor controls manually.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorPlugin_private_method__run_scene:
+
+.. rst-class:: classref-method
+
+:ref:`PackedStringArray<class_PackedStringArray>` **_run_scene**\ (\ scene\: :ref:`String<class_String>`, args\: :ref:`PackedStringArray<class_PackedStringArray>`\ ) |virtual| |const| :ref:`🔗<class_EditorPlugin_private_method__run_scene>`
+
+This function is called when an individual scene is about to be played in the editor. ``args`` is a list of command line arguments that will be passed to the new Godot instance, which will be replaced by the list returned by this function.
+
+::
+
+    func _run_scene(scene, args):
+        args.append("--an-extra-argument")
+        return args
+
+\ **Note:** Text that is printed in this method will not be visible in the editor's Output panel unless :ref:`EditorSettings.run/output/always_clear_output_on_play<class_EditorSettings_property_run/output/always_clear_output_on_play>` is ``false``.
 
 .. rst-class:: classref-item-separator
 
@@ -1045,9 +1089,9 @@ This method is called after the editor saves the project or when it's closed. It
 
 |void| **_set_state**\ (\ state\: :ref:`Dictionary<class_Dictionary>`\ ) |virtual| :ref:`🔗<class_EditorPlugin_private_method__set_state>`
 
-Restore the state saved by :ref:`_get_state<class_EditorPlugin_private_method__get_state>`. This method is called when the current scene tab is changed in the editor.
+Restore the state saved by :ref:`_get_state()<class_EditorPlugin_private_method__get_state>`. This method is called when the current scene tab is changed in the editor.
 
-\ **Note:** Your plugin must implement :ref:`_get_plugin_name<class_EditorPlugin_private_method__get_plugin_name>`, otherwise it will not be recognized and this method will not be called.
+\ **Note:** Your plugin must implement :ref:`_get_plugin_name()<class_EditorPlugin_private_method__get_plugin_name>`, otherwise it will not be recognized and this method will not be called.
 
 ::
 
@@ -1065,7 +1109,7 @@ Restore the state saved by :ref:`_get_state<class_EditorPlugin_private_method__g
 
 |void| **_set_window_layout**\ (\ configuration\: :ref:`ConfigFile<class_ConfigFile>`\ ) |virtual| :ref:`🔗<class_EditorPlugin_private_method__set_window_layout>`
 
-Restore the plugin GUI layout and data saved by :ref:`_get_window_layout<class_EditorPlugin_private_method__get_window_layout>`. This method is called for every plugin on editor startup. Use the provided ``configuration`` file to read your saved data.
+Restore the plugin GUI layout and data saved by :ref:`_get_window_layout()<class_EditorPlugin_private_method__get_window_layout>`. This method is called for every plugin on editor startup. Use the provided ``configuration`` file to read your saved data.
 
 ::
 
@@ -1089,15 +1133,33 @@ Adds a script at ``path`` to the Autoload list as ``name``.
 
 ----
 
+.. _class_EditorPlugin_method_add_context_menu_plugin:
+
+.. rst-class:: classref-method
+
+|void| **add_context_menu_plugin**\ (\ slot\: :ref:`ContextMenuSlot<enum_EditorContextMenuPlugin_ContextMenuSlot>`, plugin\: :ref:`EditorContextMenuPlugin<class_EditorContextMenuPlugin>`\ ) :ref:`🔗<class_EditorPlugin_method_add_context_menu_plugin>`
+
+Adds a plugin to the context menu. ``slot`` is the context menu where the plugin will be added.
+
+\ **Note:** A plugin instance can belong only to a single context menu slot.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_EditorPlugin_method_add_control_to_bottom_panel:
 
 .. rst-class:: classref-method
 
 :ref:`Button<class_Button>` **add_control_to_bottom_panel**\ (\ control\: :ref:`Control<class_Control>`, title\: :ref:`String<class_String>`, shortcut\: :ref:`Shortcut<class_Shortcut>` = null\ ) :ref:`🔗<class_EditorPlugin_method_add_control_to_bottom_panel>`
 
-Adds a control to the bottom panel (together with Output, Debug, Animation, etc). Returns a reference to the button added. It's up to you to hide/show the button when needed. When your plugin is deactivated, make sure to remove your custom control with :ref:`remove_control_from_bottom_panel<class_EditorPlugin_method_remove_control_from_bottom_panel>` and free it with :ref:`Node.queue_free<class_Node_method_queue_free>`.
+**Deprecated:** Use :ref:`add_dock()<class_EditorPlugin_method_add_dock>` instead, with :ref:`EditorDock.default_slot<class_EditorDock_property_default_slot>` set to :ref:`DOCK_SLOT_BOTTOM<class_EditorPlugin_constant_DOCK_SLOT_BOTTOM>`.
 
-Optionally, you can specify a shortcut parameter. When pressed, this shortcut will toggle the bottom panel's visibility. See the default editor bottom panel shortcuts in the Editor Settings for inspiration. Per convention, they all use :kbd:`Alt` modifier.
+Adds a control to the bottom panel (together with Output, Debug, Animation, etc.). Returns a reference to a button that is outside the scene tree. It's up to you to hide/show the button when needed. When your plugin is deactivated, make sure to remove your custom control with :ref:`remove_control_from_bottom_panel()<class_EditorPlugin_method_remove_control_from_bottom_panel>` and free it with :ref:`Node.queue_free()<class_Node_method_queue_free>`.
+
+\ ``shortcut`` is a shortcut that, when activated, will toggle the bottom panel's visibility. The shortcut object is only set when this control is added to the bottom panel.
+
+\ **Note** See the default editor bottom panel shortcuts in the Editor Settings for inspiration. By convention, they all use :kbd:`Alt` modifier.
 
 .. rst-class:: classref-item-separator
 
@@ -1109,11 +1171,11 @@ Optionally, you can specify a shortcut parameter. When pressed, this shortcut wi
 
 |void| **add_control_to_container**\ (\ container\: :ref:`CustomControlContainer<enum_EditorPlugin_CustomControlContainer>`, control\: :ref:`Control<class_Control>`\ ) :ref:`🔗<class_EditorPlugin_method_add_control_to_container>`
 
-Adds a custom control to a container (see :ref:`CustomControlContainer<enum_EditorPlugin_CustomControlContainer>`). There are many locations where custom controls can be added in the editor UI.
+Adds a custom control to a container in the editor UI.
 
 Please remember that you have to manage the visibility of your custom controls yourself (and likely hide it after adding it).
 
-When your plugin is deactivated, make sure to remove your custom control with :ref:`remove_control_from_container<class_EditorPlugin_method_remove_control_from_container>` and free it with :ref:`Node.queue_free<class_Node_method_queue_free>`.
+When your plugin is deactivated, make sure to remove your custom control with :ref:`remove_control_from_container()<class_EditorPlugin_method_remove_control_from_container>` and free it with :ref:`Node.queue_free()<class_Node_method_queue_free>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1125,13 +1187,15 @@ When your plugin is deactivated, make sure to remove your custom control with :r
 
 |void| **add_control_to_dock**\ (\ slot\: :ref:`DockSlot<enum_EditorPlugin_DockSlot>`, control\: :ref:`Control<class_Control>`, shortcut\: :ref:`Shortcut<class_Shortcut>` = null\ ) :ref:`🔗<class_EditorPlugin_method_add_control_to_dock>`
 
-Adds the control to a specific dock slot (see :ref:`DockSlot<enum_EditorPlugin_DockSlot>` for options).
+**Deprecated:** Use :ref:`add_dock()<class_EditorPlugin_method_add_dock>` instead.
+
+Adds the control to a specific dock slot.
 
 If the dock is repositioned and as long as the plugin is active, the editor will save the dock position on further sessions.
 
-When your plugin is deactivated, make sure to remove your custom control with :ref:`remove_control_from_docks<class_EditorPlugin_method_remove_control_from_docks>` and free it with :ref:`Node.queue_free<class_Node_method_queue_free>`.
+When your plugin is deactivated, make sure to remove your custom control with :ref:`remove_control_from_docks()<class_EditorPlugin_method_remove_control_from_docks>` and free it with :ref:`Node.queue_free()<class_Node_method_queue_free>`.
 
-Optionally, you can specify a shortcut parameter. When pressed, this shortcut will toggle the dock's visibility once it's moved to the bottom panel (this shortcut does not affect the dock otherwise). See the default editor bottom panel shortcuts in the Editor Settings for inspiration. Per convention, they all use :kbd:`Alt` modifier.
+Optionally, you can specify a shortcut parameter. When pressed, this shortcut will open and focus the dock.
 
 .. rst-class:: classref-item-separator
 
@@ -1143,13 +1207,13 @@ Optionally, you can specify a shortcut parameter. When pressed, this shortcut wi
 
 |void| **add_custom_type**\ (\ type\: :ref:`String<class_String>`, base\: :ref:`String<class_String>`, script\: :ref:`Script<class_Script>`, icon\: :ref:`Texture2D<class_Texture2D>`\ ) :ref:`🔗<class_EditorPlugin_method_add_custom_type>`
 
-Adds a custom type, which will appear in the list of nodes or resources. An icon can be optionally passed.
+Adds a custom type, which will appear in the list of nodes or resources.
 
 When a given node or resource is selected, the base type will be instantiated (e.g. "Node3D", "Control", "Resource"), then the script will be loaded and set to this object.
 
 \ **Note:** The base type is the base engine class which this type's class hierarchy inherits, not any custom type parent classes.
 
-You can use the virtual method :ref:`_handles<class_EditorPlugin_private_method__handles>` to check if your custom object is being edited by checking the script or using the ``is`` keyword.
+You can use the virtual method :ref:`_handles()<class_EditorPlugin_private_method__handles>` to check if your custom object is being edited by checking the script or using the ``is`` keyword.
 
 During run-time, this will be a simple object with a script so this function does not need to be called then.
 
@@ -1171,6 +1235,32 @@ Adds a :ref:`Script<class_Script>` as debugger plugin to the Debugger. The scrip
 
 ----
 
+.. _class_EditorPlugin_method_add_dock:
+
+.. rst-class:: classref-method
+
+|void| **add_dock**\ (\ dock\: :ref:`EditorDock<class_EditorDock>`\ ) :ref:`🔗<class_EditorPlugin_method_add_dock>`
+
+Adds a new dock.
+
+When your plugin is deactivated, make sure to remove your custom dock with :ref:`remove_dock()<class_EditorPlugin_method_remove_dock>` and free it with :ref:`Node.queue_free()<class_Node_method_queue_free>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorPlugin_method_add_export_platform:
+
+.. rst-class:: classref-method
+
+|void| **add_export_platform**\ (\ platform\: :ref:`EditorExportPlatform<class_EditorExportPlatform>`\ ) :ref:`🔗<class_EditorPlugin_method_add_export_platform>`
+
+Registers a new :ref:`EditorExportPlatform<class_EditorExportPlatform>`. Export platforms provides functionality of exporting to the specific platform.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_EditorPlugin_method_add_export_plugin:
 
 .. rst-class:: classref-method
@@ -1179,7 +1269,7 @@ Adds a :ref:`Script<class_Script>` as debugger plugin to the Debugger. The scrip
 
 Registers a new :ref:`EditorExportPlugin<class_EditorExportPlugin>`. Export plugins are used to perform tasks when the project is being exported.
 
-See :ref:`add_inspector_plugin<class_EditorPlugin_method_add_inspector_plugin>` for an example of how to register a plugin.
+See :ref:`add_inspector_plugin()<class_EditorPlugin_method_add_inspector_plugin>` for an example of how to register a plugin.
 
 .. rst-class:: classref-item-separator
 
@@ -1195,9 +1285,9 @@ Registers a new :ref:`EditorImportPlugin<class_EditorImportPlugin>`. Import plug
 
 If ``first_priority`` is ``true``, the new import plugin is inserted first in the list and takes precedence over pre-existing plugins.
 
-\ **Note:** If you want to import custom 3D asset formats use :ref:`add_scene_format_importer_plugin<class_EditorPlugin_method_add_scene_format_importer_plugin>` instead.
+\ **Note:** If you want to import custom 3D asset formats use :ref:`add_scene_format_importer_plugin()<class_EditorPlugin_method_add_scene_format_importer_plugin>` instead.
 
-See :ref:`add_inspector_plugin<class_EditorPlugin_method_add_inspector_plugin>` for an example of how to register a plugin.
+See :ref:`add_inspector_plugin()<class_EditorPlugin_method_add_inspector_plugin>` for an example of how to register a plugin.
 
 .. rst-class:: classref-item-separator
 
@@ -1211,7 +1301,7 @@ See :ref:`add_inspector_plugin<class_EditorPlugin_method_add_inspector_plugin>` 
 
 Registers a new :ref:`EditorInspectorPlugin<class_EditorInspectorPlugin>`. Inspector plugins are used to extend :ref:`EditorInspector<class_EditorInspector>` and provide custom configuration tools for your object's properties.
 
-\ **Note:** Always use :ref:`remove_inspector_plugin<class_EditorPlugin_method_remove_inspector_plugin>` to remove the registered :ref:`EditorInspectorPlugin<class_EditorInspectorPlugin>` when your **EditorPlugin** is disabled to prevent leaks and an unexpected behavior.
+\ **Note:** Always use :ref:`remove_inspector_plugin()<class_EditorPlugin_method_remove_inspector_plugin>` to remove the registered :ref:`EditorInspectorPlugin<class_EditorInspectorPlugin>` when your **EditorPlugin** is disabled to prevent leaks and an unexpected behavior.
 
 
 .. tabs::
@@ -1220,10 +1310,10 @@ Registers a new :ref:`EditorInspectorPlugin<class_EditorInspectorPlugin>`. Inspe
 
     const MyInspectorPlugin = preload("res://addons/your_addon/path/to/your/script.gd")
     var inspector_plugin = MyInspectorPlugin.new()
-    
+
     func _enter_tree():
         add_inspector_plugin(inspector_plugin)
-    
+
     func _exit_tree():
         remove_inspector_plugin(inspector_plugin)
 
@@ -1241,7 +1331,7 @@ Registers a new :ref:`EditorInspectorPlugin<class_EditorInspectorPlugin>`. Inspe
 
 Registers a new :ref:`EditorNode3DGizmoPlugin<class_EditorNode3DGizmoPlugin>`. Gizmo plugins are used to add custom gizmos to the 3D preview viewport for a :ref:`Node3D<class_Node3D>`.
 
-See :ref:`add_inspector_plugin<class_EditorPlugin_method_add_inspector_plugin>` for an example of how to register a plugin.
+See :ref:`add_inspector_plugin()<class_EditorPlugin_method_add_inspector_plugin>` for an example of how to register a plugin.
 
 .. rst-class:: classref-item-separator
 
@@ -1281,7 +1371,7 @@ If ``first_priority`` is ``true``, the new import plugin is inserted first in th
 
 |void| **add_scene_post_import_plugin**\ (\ scene_import_plugin\: :ref:`EditorScenePostImportPlugin<class_EditorScenePostImportPlugin>`, first_priority\: :ref:`bool<class_bool>` = false\ ) :ref:`🔗<class_EditorPlugin_method_add_scene_post_import_plugin>`
 
-Add a :ref:`EditorScenePostImportPlugin<class_EditorScenePostImportPlugin>`. These plugins allow customizing the import process of 3D assets by adding new options to the import dialogs.
+Add an :ref:`EditorScenePostImportPlugin<class_EditorScenePostImportPlugin>`. These plugins allow customizing the import process of 3D assets by adding new options to the import dialogs.
 
 If ``first_priority`` is ``true``, the new import plugin is inserted first in the list and takes precedence over pre-existing plugins.
 
@@ -1307,7 +1397,7 @@ Adds a custom menu item to **Project > Tools** named ``name``. When clicked, the
 
 |void| **add_tool_submenu_item**\ (\ name\: :ref:`String<class_String>`, submenu\: :ref:`PopupMenu<class_PopupMenu>`\ ) :ref:`🔗<class_EditorPlugin_method_add_tool_submenu_item>`
 
-Adds a custom :ref:`PopupMenu<class_PopupMenu>` submenu under **Project > Tools >** ``name``. Use :ref:`remove_tool_menu_item<class_EditorPlugin_method_remove_tool_menu_item>` on plugin clean up to remove the menu.
+Adds a custom :ref:`PopupMenu<class_PopupMenu>` submenu under **Project > Tools >** ``name``. Use :ref:`remove_tool_menu_item()<class_EditorPlugin_method_remove_tool_menu_item>` on plugin clean up to remove the menu.
 
 .. rst-class:: classref-item-separator
 
@@ -1453,13 +1543,27 @@ Removes an Autoload ``name`` from the list.
 
 ----
 
+.. _class_EditorPlugin_method_remove_context_menu_plugin:
+
+.. rst-class:: classref-method
+
+|void| **remove_context_menu_plugin**\ (\ plugin\: :ref:`EditorContextMenuPlugin<class_EditorContextMenuPlugin>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_context_menu_plugin>`
+
+Removes the specified context menu plugin.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_EditorPlugin_method_remove_control_from_bottom_panel:
 
 .. rst-class:: classref-method
 
 |void| **remove_control_from_bottom_panel**\ (\ control\: :ref:`Control<class_Control>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_control_from_bottom_panel>`
 
-Removes the control from the bottom panel. You have to manually :ref:`Node.queue_free<class_Node_method_queue_free>` the control.
+**Deprecated:** Use :ref:`remove_dock()<class_EditorPlugin_method_remove_dock>` instead.
+
+Removes the control from the bottom panel. You have to manually :ref:`Node.queue_free()<class_Node_method_queue_free>` the control.
 
 .. rst-class:: classref-item-separator
 
@@ -1471,7 +1575,7 @@ Removes the control from the bottom panel. You have to manually :ref:`Node.queue
 
 |void| **remove_control_from_container**\ (\ container\: :ref:`CustomControlContainer<enum_EditorPlugin_CustomControlContainer>`, control\: :ref:`Control<class_Control>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_control_from_container>`
 
-Removes the control from the specified container. You have to manually :ref:`Node.queue_free<class_Node_method_queue_free>` the control.
+Removes the control from the specified container. You have to manually :ref:`Node.queue_free()<class_Node_method_queue_free>` the control.
 
 .. rst-class:: classref-item-separator
 
@@ -1483,7 +1587,9 @@ Removes the control from the specified container. You have to manually :ref:`Nod
 
 |void| **remove_control_from_docks**\ (\ control\: :ref:`Control<class_Control>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_control_from_docks>`
 
-Removes the control from the dock. You have to manually :ref:`Node.queue_free<class_Node_method_queue_free>` the control.
+**Deprecated:** Use :ref:`remove_dock()<class_EditorPlugin_method_remove_dock>` instead.
+
+Removes the control from the dock. You have to manually :ref:`Node.queue_free()<class_Node_method_queue_free>` the control.
 
 .. rst-class:: classref-item-separator
 
@@ -1495,7 +1601,7 @@ Removes the control from the dock. You have to manually :ref:`Node.queue_free<cl
 
 |void| **remove_custom_type**\ (\ type\: :ref:`String<class_String>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_custom_type>`
 
-Removes a custom type added by :ref:`add_custom_type<class_EditorPlugin_method_add_custom_type>`.
+Removes a custom type added by :ref:`add_custom_type()<class_EditorPlugin_method_add_custom_type>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1513,13 +1619,37 @@ Removes the debugger plugin with given script from the Debugger.
 
 ----
 
+.. _class_EditorPlugin_method_remove_dock:
+
+.. rst-class:: classref-method
+
+|void| **remove_dock**\ (\ dock\: :ref:`EditorDock<class_EditorDock>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_dock>`
+
+Removes ``dock`` from the available docks. You should manually call :ref:`Node.queue_free()<class_Node_method_queue_free>` to free it.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorPlugin_method_remove_export_platform:
+
+.. rst-class:: classref-method
+
+|void| **remove_export_platform**\ (\ platform\: :ref:`EditorExportPlatform<class_EditorExportPlatform>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_export_platform>`
+
+Removes an export platform registered by :ref:`add_export_platform()<class_EditorPlugin_method_add_export_platform>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_EditorPlugin_method_remove_export_plugin:
 
 .. rst-class:: classref-method
 
 |void| **remove_export_plugin**\ (\ plugin\: :ref:`EditorExportPlugin<class_EditorExportPlugin>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_export_plugin>`
 
-Removes an export plugin registered by :ref:`add_export_plugin<class_EditorPlugin_method_add_export_plugin>`.
+Removes an export plugin registered by :ref:`add_export_plugin()<class_EditorPlugin_method_add_export_plugin>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1531,7 +1661,7 @@ Removes an export plugin registered by :ref:`add_export_plugin<class_EditorPlugi
 
 |void| **remove_import_plugin**\ (\ importer\: :ref:`EditorImportPlugin<class_EditorImportPlugin>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_import_plugin>`
 
-Removes an import plugin registered by :ref:`add_import_plugin<class_EditorPlugin_method_add_import_plugin>`.
+Removes an import plugin registered by :ref:`add_import_plugin()<class_EditorPlugin_method_add_import_plugin>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1543,7 +1673,7 @@ Removes an import plugin registered by :ref:`add_import_plugin<class_EditorPlugi
 
 |void| **remove_inspector_plugin**\ (\ plugin\: :ref:`EditorInspectorPlugin<class_EditorInspectorPlugin>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_inspector_plugin>`
 
-Removes an inspector plugin registered by :ref:`add_import_plugin<class_EditorPlugin_method_add_import_plugin>`
+Removes an inspector plugin registered by :ref:`add_inspector_plugin()<class_EditorPlugin_method_add_inspector_plugin>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1555,7 +1685,7 @@ Removes an inspector plugin registered by :ref:`add_import_plugin<class_EditorPl
 
 |void| **remove_node_3d_gizmo_plugin**\ (\ plugin\: :ref:`EditorNode3DGizmoPlugin<class_EditorNode3DGizmoPlugin>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_node_3d_gizmo_plugin>`
 
-Removes a gizmo plugin registered by :ref:`add_node_3d_gizmo_plugin<class_EditorPlugin_method_add_node_3d_gizmo_plugin>`.
+Removes a gizmo plugin registered by :ref:`add_node_3d_gizmo_plugin()<class_EditorPlugin_method_add_node_3d_gizmo_plugin>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1567,7 +1697,7 @@ Removes a gizmo plugin registered by :ref:`add_node_3d_gizmo_plugin<class_Editor
 
 |void| **remove_resource_conversion_plugin**\ (\ plugin\: :ref:`EditorResourceConversionPlugin<class_EditorResourceConversionPlugin>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_resource_conversion_plugin>`
 
-Removes a resource conversion plugin registered by :ref:`add_resource_conversion_plugin<class_EditorPlugin_method_add_resource_conversion_plugin>`.
+Removes a resource conversion plugin registered by :ref:`add_resource_conversion_plugin()<class_EditorPlugin_method_add_resource_conversion_plugin>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1579,7 +1709,7 @@ Removes a resource conversion plugin registered by :ref:`add_resource_conversion
 
 |void| **remove_scene_format_importer_plugin**\ (\ scene_format_importer\: :ref:`EditorSceneFormatImporter<class_EditorSceneFormatImporter>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_scene_format_importer_plugin>`
 
-Removes a scene format importer registered by :ref:`add_scene_format_importer_plugin<class_EditorPlugin_method_add_scene_format_importer_plugin>`.
+Removes a scene format importer registered by :ref:`add_scene_format_importer_plugin()<class_EditorPlugin_method_add_scene_format_importer_plugin>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1591,7 +1721,7 @@ Removes a scene format importer registered by :ref:`add_scene_format_importer_pl
 
 |void| **remove_scene_post_import_plugin**\ (\ scene_import_plugin\: :ref:`EditorScenePostImportPlugin<class_EditorScenePostImportPlugin>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_scene_post_import_plugin>`
 
-Remove the :ref:`EditorScenePostImportPlugin<class_EditorScenePostImportPlugin>`, added with :ref:`add_scene_post_import_plugin<class_EditorPlugin_method_add_scene_post_import_plugin>`.
+Remove the :ref:`EditorScenePostImportPlugin<class_EditorScenePostImportPlugin>`, added with :ref:`add_scene_post_import_plugin()<class_EditorPlugin_method_add_scene_post_import_plugin>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1615,7 +1745,7 @@ Removes a menu ``name`` from **Project > Tools**.
 
 |void| **remove_translation_parser_plugin**\ (\ parser\: :ref:`EditorTranslationParserPlugin<class_EditorTranslationParserPlugin>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_translation_parser_plugin>`
 
-Removes a custom translation parser plugin registered by :ref:`add_translation_parser_plugin<class_EditorPlugin_method_add_translation_parser_plugin>`.
+Removes a custom translation parser plugin registered by :ref:`add_translation_parser_plugin()<class_EditorPlugin_method_add_translation_parser_plugin>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1627,7 +1757,7 @@ Removes a custom translation parser plugin registered by :ref:`add_translation_p
 
 |void| **remove_undo_redo_inspector_hook_callback**\ (\ callable\: :ref:`Callable<class_Callable>`\ ) :ref:`🔗<class_EditorPlugin_method_remove_undo_redo_inspector_hook_callback>`
 
-Removes a callback previously added by :ref:`add_undo_redo_inspector_hook_callback<class_EditorPlugin_method_add_undo_redo_inspector_hook_callback>`.
+Removes a callback previously added by :ref:`add_undo_redo_inspector_hook_callback()<class_EditorPlugin_method_add_undo_redo_inspector_hook_callback>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1638,6 +1768,8 @@ Removes a callback previously added by :ref:`add_undo_redo_inspector_hook_callba
 .. rst-class:: classref-method
 
 |void| **set_dock_tab_icon**\ (\ control\: :ref:`Control<class_Control>`, icon\: :ref:`Texture2D<class_Texture2D>`\ ) :ref:`🔗<class_EditorPlugin_method_set_dock_tab_icon>`
+
+**Deprecated:** Use :ref:`EditorDock.dock_icon<class_EditorDock_property_dock_icon>` instead.
 
 Sets the tab icon for the given control in a dock slot. Setting to ``null`` removes the icon.
 
@@ -1651,7 +1783,7 @@ Sets the tab icon for the given control in a dock slot. Setting to ``null`` remo
 
 |void| **set_force_draw_over_forwarding_enabled**\ (\ ) :ref:`🔗<class_EditorPlugin_method_set_force_draw_over_forwarding_enabled>`
 
-Enables calling of :ref:`_forward_canvas_force_draw_over_viewport<class_EditorPlugin_private_method__forward_canvas_force_draw_over_viewport>` for the 2D editor and :ref:`_forward_3d_force_draw_over_viewport<class_EditorPlugin_private_method__forward_3d_force_draw_over_viewport>` for the 3D editor when their viewports are updated. You need to call this method only once and it will work permanently for this plugin.
+Enables calling of :ref:`_forward_canvas_force_draw_over_viewport()<class_EditorPlugin_private_method__forward_canvas_force_draw_over_viewport>` for the 2D editor and :ref:`_forward_3d_force_draw_over_viewport()<class_EditorPlugin_private_method__forward_3d_force_draw_over_viewport>` for the 3D editor when their viewports are updated. You need to call this method only once and it will work permanently for this plugin.
 
 .. rst-class:: classref-item-separator
 
@@ -1663,7 +1795,7 @@ Enables calling of :ref:`_forward_canvas_force_draw_over_viewport<class_EditorPl
 
 |void| **set_input_event_forwarding_always_enabled**\ (\ ) :ref:`🔗<class_EditorPlugin_method_set_input_event_forwarding_always_enabled>`
 
-Use this method if you always want to receive inputs from 3D view screen inside :ref:`_forward_3d_gui_input<class_EditorPlugin_private_method__forward_3d_gui_input>`. It might be especially usable if your plugin will want to use raycast in the scene.
+Use this method if you always want to receive inputs from 3D view screen inside :ref:`_forward_3d_gui_input()<class_EditorPlugin_private_method__forward_3d_gui_input>`. It might be especially usable if your plugin will want to use raycast in the scene.
 
 .. rst-class:: classref-item-separator
 
@@ -1675,9 +1807,10 @@ Use this method if you always want to receive inputs from 3D view screen inside 
 
 :ref:`int<class_int>` **update_overlays**\ (\ ) |const| :ref:`🔗<class_EditorPlugin_method_update_overlays>`
 
-Updates the overlays of the 2D and 3D editor viewport. Causes methods :ref:`_forward_canvas_draw_over_viewport<class_EditorPlugin_private_method__forward_canvas_draw_over_viewport>`, :ref:`_forward_canvas_force_draw_over_viewport<class_EditorPlugin_private_method__forward_canvas_force_draw_over_viewport>`, :ref:`_forward_3d_draw_over_viewport<class_EditorPlugin_private_method__forward_3d_draw_over_viewport>` and :ref:`_forward_3d_force_draw_over_viewport<class_EditorPlugin_private_method__forward_3d_force_draw_over_viewport>` to be called.
+Updates the overlays of the 2D and 3D editor viewport. Causes methods :ref:`_forward_canvas_draw_over_viewport()<class_EditorPlugin_private_method__forward_canvas_draw_over_viewport>`, :ref:`_forward_canvas_force_draw_over_viewport()<class_EditorPlugin_private_method__forward_canvas_force_draw_over_viewport>`, :ref:`_forward_3d_draw_over_viewport()<class_EditorPlugin_private_method__forward_3d_draw_over_viewport>` and :ref:`_forward_3d_force_draw_over_viewport()<class_EditorPlugin_private_method__forward_3d_force_draw_over_viewport>` to be called.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
