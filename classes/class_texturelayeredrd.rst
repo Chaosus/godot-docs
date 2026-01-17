@@ -23,6 +23,15 @@ Description
 
 Base class for :ref:`Texture2DArrayRD<class_Texture2DArrayRD>`, :ref:`TextureCubemapRD<class_TextureCubemapRD>` and :ref:`TextureCubemapArrayRD<class_TextureCubemapArrayRD>`. Cannot be used directly, but contains all the functions necessary for accessing the derived resource types.
 
+\ **Note:** **TextureLayeredRD** is intended for low-level usage with :ref:`RenderingDevice<class_RenderingDevice>`. For most use cases, use :ref:`TextureLayered<class_TextureLayered>` instead.
+
+.. rst-class:: classref-introduction-group
+
+Tutorials
+---------
+
+- `Compute Texture demo <https://godotengine.org/asset-library/asset/2764>`__
+
 .. rst-class:: classref-reftable-group
 
 Properties
@@ -58,6 +67,7 @@ Property Descriptions
 The RID of the texture object created on the :ref:`RenderingDevice<class_RenderingDevice>`.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
