@@ -21,14 +21,14 @@ Description
 
 The JavaScriptBridge singleton is implemented only in the Web export. It's used to access the browser's JavaScript context. This allows interaction with embedding pages or calling third-party JavaScript APIs.
 
-\ **Note:** This singleton can be disabled at build-time to improve security. By default, the JavaScriptBridge singleton is enabled. Official export templates also have the JavaScriptBridge singleton enabled. See :doc:`Compiling for the Web <../contributing/development/compiling/compiling_for_web>` in the documentation for more information.
+\ **Note:** This singleton can be disabled at build-time to improve security. By default, the JavaScriptBridge singleton is enabled. Official export templates also have the JavaScriptBridge singleton enabled. See :doc:`Compiling for the Web <../engine_details/development/compiling/compiling_for_web>` in the documentation for more information.
 
 .. rst-class:: classref-introduction-group
 
 Tutorials
 ---------
 
-- `Exporting for the Web: Calling JavaScript from script <../tutorials/export/exporting_for_web.html#calling-javascript-from-script>`__
+- :doc:`The JavaScriptBridge singleton <../tutorials/platform/web/javascript_bridge>`
 
 .. rst-class:: classref-reftable-group
 
@@ -51,6 +51,10 @@ Methods
    +-------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`JavaScriptObject<class_JavaScriptObject>` | :ref:`get_interface<class_JavaScriptBridge_method_get_interface>`\ (\ interface\: :ref:`String<class_String>`\ )                                                                                                                         |
    +-------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                         | :ref:`is_js_buffer<class_JavaScriptBridge_method_is_js_buffer>`\ (\ javascript_object\: :ref:`JavaScriptObject<class_JavaScriptObject>`\ )                                                                                               |
+   +-------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`PackedByteArray<class_PackedByteArray>`   | :ref:`js_buffer_to_packed_byte_array<class_JavaScriptBridge_method_js_buffer_to_packed_byte_array>`\ (\ javascript_buffer\: :ref:`JavaScriptObject<class_JavaScriptObject>`\ )                                                           |
+   +-------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                         | :ref:`pwa_needs_update<class_JavaScriptBridge_method_pwa_needs_update>`\ (\ ) |const|                                                                                                                                                    |
    +-------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Error<enum_@GlobalScope_Error>`           | :ref:`pwa_update<class_JavaScriptBridge_method_pwa_update>`\ (\ )                                                                                                                                                                        |
@@ -71,7 +75,7 @@ Signals
 
 **pwa_update_available**\ (\ ) :ref:`🔗<class_JavaScriptBridge_signal_pwa_update_available>`
 
-Emitted when an update for this progressive web app has been detected but is waiting to be activated because a previous version is active. See :ref:`pwa_update<class_JavaScriptBridge_method_pwa_update>` to force the update to take place immediately.
+Emitted when an update for this progressive web app has been detected but is waiting to be activated because a previous version is active. See :ref:`pwa_update()<class_JavaScriptBridge_method_pwa_update>` to force the update to take place immediately.
 
 .. rst-class:: classref-section-separator
 
@@ -89,6 +93,8 @@ Method Descriptions
 :ref:`JavaScriptObject<class_JavaScriptObject>` **create_callback**\ (\ callable\: :ref:`Callable<class_Callable>`\ ) :ref:`🔗<class_JavaScriptBridge_method_create_callback>`
 
 Creates a reference to a :ref:`Callable<class_Callable>` that can be used as a callback by JavaScript. The reference must be kept until the callback happens, or it won't be called at all. See :ref:`JavaScriptObject<class_JavaScriptObject>` for usage.
+
+\ **Note:** The callback function must take exactly one :ref:`Array<class_Array>` argument, which is going to be the JavaScript `arguments object <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments>`__ converted to an array.
 
 .. rst-class:: classref-item-separator
 
@@ -116,7 +122,7 @@ Prompts the user to download a file containing the specified ``buffer``. The fil
 
 \ **Note:** The browser may override the `MIME type <https://en.wikipedia.org/wiki/Media_type>`__ provided based on the file ``name``'s extension.
 
-\ **Note:** Browsers might block the download if :ref:`download_buffer<class_JavaScriptBridge_method_download_buffer>` is not being called from a user interaction (e.g. button click).
+\ **Note:** Browsers might block the download if :ref:`download_buffer()<class_JavaScriptBridge_method_download_buffer>` is not being called from a user interaction (e.g. button click).
 
 \ **Note:** Browsers might ask the user for permission or block the download if multiple download requests are made in a quick succession.
 
@@ -164,6 +170,30 @@ Returns an interface to a JavaScript object that can be used by scripts. The ``i
 
 ----
 
+.. _class_JavaScriptBridge_method_is_js_buffer:
+
+.. rst-class:: classref-method
+
+:ref:`bool<class_bool>` **is_js_buffer**\ (\ javascript_object\: :ref:`JavaScriptObject<class_JavaScriptObject>`\ ) :ref:`🔗<class_JavaScriptBridge_method_is_js_buffer>`
+
+Returns ``true`` if the given ``javascript_object`` is of type `[code]ArrayBuffer[/code] <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer>`__, `[code]DataView[/code] <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView>`__, or one of the many `typed array objects <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray>`__.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_JavaScriptBridge_method_js_buffer_to_packed_byte_array:
+
+.. rst-class:: classref-method
+
+:ref:`PackedByteArray<class_PackedByteArray>` **js_buffer_to_packed_byte_array**\ (\ javascript_buffer\: :ref:`JavaScriptObject<class_JavaScriptObject>`\ ) :ref:`🔗<class_JavaScriptBridge_method_js_buffer_to_packed_byte_array>`
+
+Returns a copy of ``javascript_buffer``'s contents as a :ref:`PackedByteArray<class_PackedByteArray>`. See also :ref:`is_js_buffer()<class_JavaScriptBridge_method_is_js_buffer>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_JavaScriptBridge_method_pwa_needs_update:
 
 .. rst-class:: classref-method
@@ -188,9 +218,10 @@ Performs the live update of the progressive web app. Forcing the new version to 
 
 \ **Note:** Your application will be **reloaded in all browser tabs**.
 
-\ **Note:** Only relevant when exported as a Progressive Web App and :ref:`pwa_needs_update<class_JavaScriptBridge_method_pwa_needs_update>` returns ``true``.
+\ **Note:** Only relevant when exported as a Progressive Web App and :ref:`pwa_needs_update()<class_JavaScriptBridge_method_pwa_needs_update>` returns ``true``.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
