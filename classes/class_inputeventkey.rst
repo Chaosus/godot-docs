@@ -19,7 +19,7 @@ Represents a key on a keyboard being pressed or released.
 Description
 -----------
 
-An input event for keys on a keyboard. Supports key presses, key releases and :ref:`echo<class_InputEventKey_property_echo>` events. It can also be received in :ref:`Node._unhandled_key_input<class_Node_private_method__unhandled_key_input>`.
+An input event for keys on a keyboard. Supports key presses, key releases and :ref:`echo<class_InputEventKey_property_echo>` events. It can also be received in :ref:`Node._unhandled_key_input()<class_Node_private_method__unhandled_key_input>`.
 
 \ **Note:** Events received from the keyboard usually have all properties set. Event mappings should have only one of the :ref:`keycode<class_InputEventKey_property_keycode>`, :ref:`physical_keycode<class_InputEventKey_property_physical_keycode>` or :ref:`unicode<class_InputEventKey_property_unicode>` set.
 
@@ -100,7 +100,9 @@ Property Descriptions
 - |void| **set_echo**\ (\ value\: :ref:`bool<class_bool>`\ )
 - :ref:`bool<class_bool>` **is_echo**\ (\ )
 
-If ``true``, the key was already pressed before this event. It means the user is holding the key down.
+If ``true``, the key was already pressed before this event. An echo event is a repeated key event sent when the user is holding down the key.
+
+\ **Note:** The rate at which echo events are sent is typically around 20 events per second (after holding down the key for roughly half a second). However, the key repeat delay/speed can be changed by the user or disabled entirely in the operating system settings. To ensure your project works correctly on all configurations, do not assume the user has a specific key repeat configuration in your project's behavior.
 
 .. rst-class:: classref-item-separator
 
@@ -117,7 +119,7 @@ If ``true``, the key was already pressed before this event. It means the user is
 - |void| **set_key_label**\ (\ value\: :ref:`Key<enum_@GlobalScope_Key>`\ )
 - :ref:`Key<enum_@GlobalScope_Key>` **get_key_label**\ (\ )
 
-Represents the localized label printed on the key in the current keyboard layout, which corresponds to one of the :ref:`Key<enum_@GlobalScope_Key>` constants or any valid Unicode character.
+Represents the localized label printed on the key in the current keyboard layout, which corresponds to one of the :ref:`Key<enum_@GlobalScope_Key>` constants or any valid Unicode character. Key labels are meant for key prompts.
 
 For keyboard layouts with a single label on the key, it is equivalent to :ref:`keycode<class_InputEventKey_property_keycode>`.
 
@@ -125,10 +127,10 @@ To get a human-readable representation of the **InputEventKey**, use ``OS.get_ke
 
 .. code:: text
 
-        +-----+ +-----+
-        | Q   | | Q   | - "Q" - keycode
-        |   Й | |  ض | - "Й" and "ض" - key_label
-        +-----+ +-----+
+    +-----+ +-----+
+    | Q   | | Q   | - "Q" - keycode
+    |   Й | |  ض | - "Й" and "ض" - key_label
+    +-----+ +-----+
 
 .. rst-class:: classref-item-separator
 
@@ -145,16 +147,16 @@ To get a human-readable representation of the **InputEventKey**, use ``OS.get_ke
 - |void| **set_keycode**\ (\ value\: :ref:`Key<enum_@GlobalScope_Key>`\ )
 - :ref:`Key<enum_@GlobalScope_Key>` **get_keycode**\ (\ )
 
-Latin label printed on the key in the current keyboard layout, which corresponds to one of the :ref:`Key<enum_@GlobalScope_Key>` constants.
+Latin label printed on the key in the current keyboard layout, which corresponds to one of the :ref:`Key<enum_@GlobalScope_Key>` constants. Key codes are meant for shortcuts expressed with a standard Latin keyboard, such as :kbd:`Ctrl + S` for a "Save" shortcut.
 
 To get a human-readable representation of the **InputEventKey**, use ``OS.get_keycode_string(event.keycode)`` where ``event`` is the **InputEventKey**.
 
 .. code:: text
 
-        +-----+ +-----+
-        | Q   | | Q   | - "Q" - keycode
-        |   Й | |  ض | - "Й" and "ض" - key_label
-        +-----+ +-----+
+    +-----+ +-----+
+    | Q   | | Q   | - "Q" - keycode
+    |   Й | |  ض | - "Й" and "ض" - key_label
+    +-----+ +-----+
 
 .. rst-class:: classref-item-separator
 
@@ -188,9 +190,9 @@ Represents the location of a key which has both left and right versions, such as
 - |void| **set_physical_keycode**\ (\ value\: :ref:`Key<enum_@GlobalScope_Key>`\ )
 - :ref:`Key<enum_@GlobalScope_Key>` **get_physical_keycode**\ (\ )
 
-Represents the physical location of a key on the 101/102-key US QWERTY keyboard, which corresponds to one of the :ref:`Key<enum_@GlobalScope_Key>` constants.
+Represents the physical location of a key on the 101/102-key US QWERTY keyboard, which corresponds to one of the :ref:`Key<enum_@GlobalScope_Key>` constants. Physical key codes meant for game input, such as WASD movement, where only the location of the keys is important.
 
-To get a human-readable representation of the **InputEventKey**, use :ref:`OS.get_keycode_string<class_OS_method_get_keycode_string>` in combination with :ref:`DisplayServer.keyboard_get_keycode_from_physical<class_DisplayServer_method_keyboard_get_keycode_from_physical>`:
+To get a human-readable representation of the **InputEventKey**, use :ref:`OS.get_keycode_string()<class_OS_method_get_keycode_string>` in combination with :ref:`DisplayServer.keyboard_get_keycode_from_physical()<class_DisplayServer_method_keyboard_get_keycode_from_physical>` or :ref:`DisplayServer.keyboard_get_label_from_physical()<class_DisplayServer_method_keyboard_get_label_from_physical>`:
 
 
 .. tabs::
@@ -200,7 +202,9 @@ To get a human-readable representation of the **InputEventKey**, use :ref:`OS.ge
     func _input(event):
         if event is InputEventKey:
             var keycode = DisplayServer.keyboard_get_keycode_from_physical(event.physical_keycode)
+            var label = DisplayServer.keyboard_get_label_from_physical(event.physical_keycode)
             print(OS.get_keycode_string(keycode))
+            print(OS.get_keycode_string(label))
 
  .. code-tab:: csharp
 
@@ -209,7 +213,9 @@ To get a human-readable representation of the **InputEventKey**, use :ref:`OS.ge
         if (@event is InputEventKey inputEventKey)
         {
             var keycode = DisplayServer.KeyboardGetKeycodeFromPhysical(inputEventKey.PhysicalKeycode);
+            var label = DisplayServer.KeyboardGetLabelFromPhysical(inputEventKey.PhysicalKeycode);
             GD.Print(OS.GetKeycodeString(keycode));
+            GD.Print(OS.GetKeycodeString(label));
         }
     }
 
@@ -247,7 +253,9 @@ If ``true``, the key's state is pressed. If ``false``, the key's state is releas
 - |void| **set_unicode**\ (\ value\: :ref:`int<class_int>`\ )
 - :ref:`int<class_int>` **get_unicode**\ (\ )
 
-The key Unicode character code (when relevant), shifted by modifier keys. Unicode character codes for composite characters and complex scripts may not be available unless IME input mode is active. See :ref:`Window.set_ime_active<class_Window_method_set_ime_active>` for more information.
+The key Unicode character code (when relevant), shifted by modifier keys. Unicode character codes for composite characters and complex scripts may not be available unless IME input mode is active. See :ref:`Window.set_ime_active()<class_Window_method_set_ime_active>` for more information. Unicode character codes are meant for text input.
+
+\ **Note:** This property is set by the engine only for a pressed event. If the event is sent by an IME or a virtual keyboard, no corresponding key released event is sent.
 
 .. rst-class:: classref-section-separator
 
@@ -345,6 +353,7 @@ Returns the physical keycode combined with modifier keys such as :kbd:`Shift` or
 To get a human-readable representation of the **InputEventKey** with modifiers, use ``OS.get_keycode_string(event.get_physical_keycode_with_modifiers())`` where ``event`` is the **InputEventKey**.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
