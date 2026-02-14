@@ -21,19 +21,7 @@ Description
 
 ImporterMesh is a type of :ref:`Resource<class_Resource>` analogous to :ref:`ArrayMesh<class_ArrayMesh>`. It contains vertex array-based geometry, divided in *surfaces*. Each surface contains a completely separate array and a material used to draw it. Design wise, a mesh with multiple surfaces is preferred to a single surface, because objects created in 3D editing software commonly contain multiple materials.
 
-Unlike its runtime counterpart, **ImporterMesh** contains mesh data before various import steps, such as lod and shadow mesh generation, have taken place. Modify surface data by calling :ref:`clear<class_ImporterMesh_method_clear>`, followed by :ref:`add_surface<class_ImporterMesh_method_add_surface>` for each surface.
-
-.. rst-class:: classref-reftable-group
-
-Properties
-----------
-
-.. table::
-   :widths: auto
-
-   +-------------------------------------+-------------------------------------------------+------------------------+
-   | :ref:`Dictionary<class_Dictionary>` | :ref:`_data<class_ImporterMesh_property__data>` | ``{ "surfaces": [] }`` |
-   +-------------------------------------+-------------------------------------------------+------------------------+
+Unlike its runtime counterpart, **ImporterMesh** contains mesh data before various import steps, such as LOD and shadow mesh generation, have taken place. Modify surface data by calling :ref:`clear()<class_ImporterMesh_method_clear>`, followed by :ref:`add_surface()<class_ImporterMesh_method_add_surface>` for each surface.
 
 .. rst-class:: classref-reftable-group
 
@@ -49,6 +37,8 @@ Methods
    | |void|                                          | :ref:`add_surface<class_ImporterMesh_method_add_surface>`\ (\ primitive\: :ref:`PrimitiveType<enum_Mesh_PrimitiveType>`, arrays\: :ref:`Array<class_Array>`, blend_shapes\: :ref:`Array<class_Array>`\[:ref:`Array<class_Array>`\] = [], lods\: :ref:`Dictionary<class_Dictionary>` = {}, material\: :ref:`Material<class_Material>` = null, name\: :ref:`String<class_String>` = "", flags\: :ref:`int<class_int>` = 0\ ) |
    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                          | :ref:`clear<class_ImporterMesh_method_clear>`\ (\ )                                                                                                                                                                                                                                                                                                                                                                        |
+   +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`ImporterMesh<class_ImporterMesh>`         | :ref:`from_mesh<class_ImporterMesh_method_from_mesh>`\ (\ mesh\: :ref:`Mesh<class_Mesh>`\ ) |static|                                                                                                                                                                                                                                                                                                                       |
    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                          | :ref:`generate_lods<class_ImporterMesh_method_generate_lods>`\ (\ normal_merge_angle\: :ref:`float<class_float>`, normal_split_angle\: :ref:`float<class_float>`, bone_transform_array\: :ref:`Array<class_Array>`\ )                                                                                                                                                                                                      |
    +-------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -97,25 +87,6 @@ Methods
 
 .. rst-class:: classref-descriptions-group
 
-Property Descriptions
----------------------
-
-.. _class_ImporterMesh_property__data:
-
-.. rst-class:: classref-property
-
-:ref:`Dictionary<class_Dictionary>` **_data** = ``{ "surfaces": [] }`` :ref:`🔗<class_ImporterMesh_property__data>`
-
-.. container:: contribute
-
-	There is currently no description for this property. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
-
-.. rst-class:: classref-section-separator
-
-----
-
-.. rst-class:: classref-descriptions-group
-
 Method Descriptions
 -------------------
 
@@ -125,7 +96,7 @@ Method Descriptions
 
 |void| **add_blend_shape**\ (\ name\: :ref:`String<class_String>`\ ) :ref:`🔗<class_ImporterMesh_method_add_blend_shape>`
 
-Adds name for a blend shape that will be added with :ref:`add_surface<class_ImporterMesh_method_add_surface>`. Must be called before surface is added.
+Adds name for a blend shape that will be added with :ref:`add_surface()<class_ImporterMesh_method_add_surface>`. Must be called before surface is added.
 
 .. rst-class:: classref-item-separator
 
@@ -137,7 +108,7 @@ Adds name for a blend shape that will be added with :ref:`add_surface<class_Impo
 
 |void| **add_surface**\ (\ primitive\: :ref:`PrimitiveType<enum_Mesh_PrimitiveType>`, arrays\: :ref:`Array<class_Array>`, blend_shapes\: :ref:`Array<class_Array>`\[:ref:`Array<class_Array>`\] = [], lods\: :ref:`Dictionary<class_Dictionary>` = {}, material\: :ref:`Material<class_Material>` = null, name\: :ref:`String<class_String>` = "", flags\: :ref:`int<class_int>` = 0\ ) :ref:`🔗<class_ImporterMesh_method_add_surface>`
 
-Creates a new surface. :ref:`Mesh.get_surface_count<class_Mesh_method_get_surface_count>` will become the ``surf_idx`` for this new surface.
+Creates a new surface. :ref:`Mesh.get_surface_count()<class_Mesh_method_get_surface_count>` will become the ``surf_idx`` for this new surface.
 
 Surfaces are created to be rendered using a ``primitive``, which may be any of the values defined in :ref:`PrimitiveType<enum_Mesh_PrimitiveType>`.
 
@@ -147,7 +118,7 @@ The ``blend_shapes`` argument is an array of vertex data for each blend shape. E
 
 The ``lods`` argument is a dictionary with :ref:`float<class_float>` keys and :ref:`PackedInt32Array<class_PackedInt32Array>` values. Each entry in the dictionary represents an LOD level of the surface, where the value is the :ref:`Mesh.ARRAY_INDEX<class_Mesh_constant_ARRAY_INDEX>` array to use for the LOD level and the key is roughly proportional to the distance at which the LOD stats being used. I.e., increasing the key of an LOD also increases the distance that the objects has to be from the camera before the LOD is used.
 
-The ``flags`` argument is the bitwise or of, as required: One value of :ref:`ArrayCustomFormat<enum_Mesh_ArrayCustomFormat>` left shifted by ``ARRAY_FORMAT_CUSTOMn_SHIFT`` for each custom channel in use, :ref:`Mesh.ARRAY_FLAG_USE_DYNAMIC_UPDATE<class_Mesh_constant_ARRAY_FLAG_USE_DYNAMIC_UPDATE>`, :ref:`Mesh.ARRAY_FLAG_USE_8_BONE_WEIGHTS<class_Mesh_constant_ARRAY_FLAG_USE_8_BONE_WEIGHTS>`, or :ref:`Mesh.ARRAY_FLAG_USES_EMPTY_VERTEX_ARRAY<class_Mesh_constant_ARRAY_FLAG_USES_EMPTY_VERTEX_ARRAY>`.
+The ``flags`` argument is the bitwise OR of, as required: One value of :ref:`ArrayCustomFormat<enum_Mesh_ArrayCustomFormat>` left shifted by ``ARRAY_FORMAT_CUSTOMn_SHIFT`` for each custom channel in use, :ref:`Mesh.ARRAY_FLAG_USE_DYNAMIC_UPDATE<class_Mesh_constant_ARRAY_FLAG_USE_DYNAMIC_UPDATE>`, :ref:`Mesh.ARRAY_FLAG_USE_8_BONE_WEIGHTS<class_Mesh_constant_ARRAY_FLAG_USE_8_BONE_WEIGHTS>`, or :ref:`Mesh.ARRAY_FLAG_USES_EMPTY_VERTEX_ARRAY<class_Mesh_constant_ARRAY_FLAG_USES_EMPTY_VERTEX_ARRAY>`.
 
 \ **Note:** When using indices, it is recommended to only use points, lines, or triangles.
 
@@ -167,6 +138,18 @@ Removes all surfaces and blend shapes from this **ImporterMesh**.
 
 ----
 
+.. _class_ImporterMesh_method_from_mesh:
+
+.. rst-class:: classref-method
+
+:ref:`ImporterMesh<class_ImporterMesh>` **from_mesh**\ (\ mesh\: :ref:`Mesh<class_Mesh>`\ ) |static| :ref:`🔗<class_ImporterMesh_method_from_mesh>`
+
+Converts the given :ref:`Mesh<class_Mesh>` into an **ImporterMesh** by copying all its surfaces, blend shapes, materials, and metadata into a new **ImporterMesh** object.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_ImporterMesh_method_generate_lods:
 
 .. rst-class:: classref-method
@@ -175,9 +158,11 @@ Removes all surfaces and blend shapes from this **ImporterMesh**.
 
 Generates all lods for this ImporterMesh.
 
-\ ``normal_merge_angle`` and ``normal_split_angle`` are in degrees and used in the same way as the importer settings in ``lods``. As a good default, use 25 and 60 respectively.
+\ ``normal_merge_angle`` is in degrees and used in the same way as the importer settings in ``lods``.
 
-The number of generated lods can be accessed using :ref:`get_surface_lod_count<class_ImporterMesh_method_get_surface_lod_count>`, and each LOD is available in :ref:`get_surface_lod_size<class_ImporterMesh_method_get_surface_lod_size>` and :ref:`get_surface_lod_indices<class_ImporterMesh_method_get_surface_lod_indices>`.
+\ ``normal_split_angle`` is not used and only remains for compatibility with older versions of the API.
+
+The number of generated lods can be accessed using :ref:`get_surface_lod_count()<class_ImporterMesh_method_get_surface_lod_count>`, and each LOD is available in :ref:`get_surface_lod_size()<class_ImporterMesh_method_get_surface_lod_size>` and :ref:`get_surface_lod_indices()<class_ImporterMesh_method_get_surface_lod_indices>`.
 
 \ ``bone_transform_array`` is an :ref:`Array<class_Array>` which can be either empty or contain :ref:`Transform3D<class_Transform3D>`\ s which, for each of the mesh's bone IDs, will apply mesh skinning when generating the LOD mesh variations. This is usually used to account for discrepancies in scale between the mesh itself and its skinning data.
 
@@ -241,7 +226,7 @@ Returns the size hint of this mesh for lightmap-unwrapping in UV-space.
 
 Returns the mesh data represented by this **ImporterMesh** as a usable :ref:`ArrayMesh<class_ArrayMesh>`.
 
-This method caches the returned mesh, and subsequent calls will return the cached data until :ref:`clear<class_ImporterMesh_method_clear>` is called.
+This method caches the returned mesh, and subsequent calls will return the cached data until :ref:`clear()<class_ImporterMesh_method_clear>` is called.
 
 If not yet cached and ``base_mesh`` is provided, ``base_mesh`` will be used and mutated.
 
@@ -255,7 +240,7 @@ If not yet cached and ``base_mesh`` is provided, ``base_mesh`` will be used and 
 
 :ref:`Array<class_Array>` **get_surface_arrays**\ (\ surface_idx\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_ImporterMesh_method_get_surface_arrays>`
 
-Returns the arrays for the vertices, normals, UVs, etc. that make up the requested surface. See :ref:`add_surface<class_ImporterMesh_method_add_surface>`.
+Returns the arrays for the vertices, normals, UVs, etc. that make up the requested surface. See :ref:`add_surface()<class_ImporterMesh_method_add_surface>`.
 
 .. rst-class:: classref-item-separator
 
@@ -363,7 +348,7 @@ Gets the name assigned to this surface.
 
 :ref:`PrimitiveType<enum_Mesh_PrimitiveType>` **get_surface_primitive_type**\ (\ surface_idx\: :ref:`int<class_int>`\ ) :ref:`🔗<class_ImporterMesh_method_get_surface_primitive_type>`
 
-Returns the primitive type of the requested surface (see :ref:`add_surface<class_ImporterMesh_method_add_surface>`).
+Returns the primitive type of the requested surface (see :ref:`add_surface()<class_ImporterMesh_method_add_surface>`).
 
 .. rst-class:: classref-item-separator
 
@@ -375,7 +360,7 @@ Returns the primitive type of the requested surface (see :ref:`add_surface<class
 
 |void| **set_blend_shape_mode**\ (\ mode\: :ref:`BlendShapeMode<enum_Mesh_BlendShapeMode>`\ ) :ref:`🔗<class_ImporterMesh_method_set_blend_shape_mode>`
 
-Sets the blend shape mode to one of :ref:`BlendShapeMode<enum_Mesh_BlendShapeMode>`.
+Sets the blend shape mode.
 
 .. rst-class:: classref-item-separator
 
@@ -414,6 +399,7 @@ Sets a :ref:`Material<class_Material>` for a given surface. Surface will be rend
 Sets a name for a given surface.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
