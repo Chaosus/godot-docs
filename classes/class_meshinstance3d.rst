@@ -21,7 +21,7 @@ Node that instances meshes into a scenario.
 Description
 -----------
 
-MeshInstance3D is a node that takes a :ref:`Mesh<class_Mesh>` resource and adds it to the current scenario by creating an instance of it. This is the class most often used render 3D geometry and can be used to instance a single :ref:`Mesh<class_Mesh>` in many places. This allows reusing geometry, which can save on resources. When a :ref:`Mesh<class_Mesh>` has to be instantiated more than thousands of times at close proximity, consider using a :ref:`MultiMesh<class_MultiMesh>` in a :ref:`MultiMeshInstance3D<class_MultiMeshInstance3D>` instead.
+MeshInstance3D is a node that takes a :ref:`Mesh<class_Mesh>` resource and adds it to the current scenario by creating an instance of it. This is the class most often used to render 3D geometry and can be used to instance a single :ref:`Mesh<class_Mesh>` in many places. This allows reusing geometry, which can save on resources. When a :ref:`Mesh<class_Mesh>` has to be instantiated more than thousands of times at close proximity, consider using a :ref:`MultiMesh<class_MultiMesh>` in a :ref:`MultiMeshInstance3D<class_MultiMeshInstance3D>` instead.
 
 .. rst-class:: classref-introduction-group
 
@@ -44,13 +44,13 @@ Properties
 .. table::
    :widths: auto
 
-   +---------------------------------+---------------------------------------------------------+--------------------+
-   | :ref:`Mesh<class_Mesh>`         | :ref:`mesh<class_MeshInstance3D_property_mesh>`         |                    |
-   +---------------------------------+---------------------------------------------------------+--------------------+
-   | :ref:`NodePath<class_NodePath>` | :ref:`skeleton<class_MeshInstance3D_property_skeleton>` | ``NodePath("..")`` |
-   +---------------------------------+---------------------------------------------------------+--------------------+
-   | :ref:`Skin<class_Skin>`         | :ref:`skin<class_MeshInstance3D_property_skin>`         |                    |
-   +---------------------------------+---------------------------------------------------------+--------------------+
+   +---------------------------------+---------------------------------------------------------+------------------+
+   | :ref:`Mesh<class_Mesh>`         | :ref:`mesh<class_MeshInstance3D_property_mesh>`         |                  |
+   +---------------------------------+---------------------------------------------------------+------------------+
+   | :ref:`NodePath<class_NodePath>` | :ref:`skeleton<class_MeshInstance3D_property_skeleton>` | ``NodePath("")`` |
+   +---------------------------------+---------------------------------------------------------+------------------+
+   | :ref:`Skin<class_Skin>`         | :ref:`skin<class_MeshInstance3D_property_skin>`         |                  |
+   +---------------------------------+---------------------------------------------------------+------------------+
 
 .. rst-class:: classref-reftable-group
 
@@ -62,6 +62,8 @@ Methods
 
    +-------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`ArrayMesh<class_ArrayMesh>`         | :ref:`bake_mesh_from_current_blend_shape_mix<class_MeshInstance3D_method_bake_mesh_from_current_blend_shape_mix>`\ (\ existing\: :ref:`ArrayMesh<class_ArrayMesh>` = null\ )                                   |
+   +-------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`ArrayMesh<class_ArrayMesh>`         | :ref:`bake_mesh_from_current_skeleton_pose<class_MeshInstance3D_method_bake_mesh_from_current_skeleton_pose>`\ (\ existing\: :ref:`ArrayMesh<class_ArrayMesh>` = null\ )                                       |
    +-------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                    | :ref:`create_convex_collision<class_MeshInstance3D_method_create_convex_collision>`\ (\ clean\: :ref:`bool<class_bool>` = true, simplify\: :ref:`bool<class_bool>` = false\ )                                  |
    +-------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -120,7 +122,7 @@ The :ref:`Mesh<class_Mesh>` resource for the instance.
 
 .. rst-class:: classref-property
 
-:ref:`NodePath<class_NodePath>` **skeleton** = ``NodePath("..")`` :ref:`🔗<class_MeshInstance3D_property_skeleton>`
+:ref:`NodePath<class_NodePath>` **skeleton** = ``NodePath("")`` :ref:`🔗<class_MeshInstance3D_property_skeleton>`
 
 .. rst-class:: classref-property-setget
 
@@ -128,6 +130,8 @@ The :ref:`Mesh<class_Mesh>` resource for the instance.
 - :ref:`NodePath<class_NodePath>` **get_skeleton_path**\ (\ )
 
 :ref:`NodePath<class_NodePath>` to the :ref:`Skeleton3D<class_Skeleton3D>` associated with the instance.
+
+\ **Note:** The default value of this property has changed in Godot 4.6. Enable :ref:`ProjectSettings.animation/compatibility/default_parent_skeleton_in_mesh_instance_3d<class_ProjectSettings_property_animation/compatibility/default_parent_skeleton_in_mesh_instance_3d>` if the old behavior is needed for compatibility.
 
 .. rst-class:: classref-item-separator
 
@@ -164,6 +168,20 @@ Method Descriptions
 Takes a snapshot from the current :ref:`ArrayMesh<class_ArrayMesh>` with all blend shapes applied according to their current weights and bakes it to the provided ``existing`` mesh. If no ``existing`` mesh is provided a new :ref:`ArrayMesh<class_ArrayMesh>` is created, baked and returned. Mesh surface materials are not copied.
 
 \ **Performance:** :ref:`Mesh<class_Mesh>` data needs to be received from the GPU, stalling the :ref:`RenderingServer<class_RenderingServer>` in the process.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_MeshInstance3D_method_bake_mesh_from_current_skeleton_pose:
+
+.. rst-class:: classref-method
+
+:ref:`ArrayMesh<class_ArrayMesh>` **bake_mesh_from_current_skeleton_pose**\ (\ existing\: :ref:`ArrayMesh<class_ArrayMesh>` = null\ ) :ref:`🔗<class_MeshInstance3D_method_bake_mesh_from_current_skeleton_pose>`
+
+Takes a snapshot of the current animated skeleton pose of the skinned mesh and bakes it to the provided ``existing`` mesh. If no ``existing`` mesh is provided a new :ref:`ArrayMesh<class_ArrayMesh>` is created, baked, and returned. Requires a skeleton with a registered skin to work. Blendshapes are ignored. Mesh surface materials are not copied.
+
+\ **Performance:** :ref:`Mesh<class_Mesh>` data needs to be retrieved from the GPU, stalling the :ref:`RenderingServer<class_RenderingServer>` in the process.
 
 .. rst-class:: classref-item-separator
 
@@ -277,7 +295,7 @@ Returns the value of the blend shape at the given ``blend_shape_idx``. Returns `
 
 :ref:`SkinReference<class_SkinReference>` **get_skin_reference**\ (\ ) |const| :ref:`🔗<class_MeshInstance3D_method_get_skin_reference>`
 
-Returns the internal :ref:`SkinReference<class_SkinReference>` containing the skeleton's :ref:`RID<class_RID>` attached to this RID. See also :ref:`Resource.get_rid<class_Resource_method_get_rid>`, :ref:`SkinReference.get_skeleton<class_SkinReference_method_get_skeleton>`, and :ref:`RenderingServer.instance_attach_skeleton<class_RenderingServer_method_instance_attach_skeleton>`.
+Returns the internal :ref:`SkinReference<class_SkinReference>` containing the skeleton's :ref:`RID<class_RID>` attached to this RID. See also :ref:`Resource.get_rid()<class_Resource_method_get_rid>`, :ref:`SkinReference.get_skeleton()<class_SkinReference_method_get_skeleton>`, and :ref:`RenderingServer.instance_attach_skeleton()<class_RenderingServer_method_instance_attach_skeleton>`.
 
 .. rst-class:: classref-item-separator
 
@@ -289,9 +307,9 @@ Returns the internal :ref:`SkinReference<class_SkinReference>` containing the sk
 
 :ref:`Material<class_Material>` **get_surface_override_material**\ (\ surface\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_MeshInstance3D_method_get_surface_override_material>`
 
-Returns the override :ref:`Material<class_Material>` for the specified ``surface`` of the :ref:`Mesh<class_Mesh>` resource. See also :ref:`get_surface_override_material_count<class_MeshInstance3D_method_get_surface_override_material_count>`.
+Returns the override :ref:`Material<class_Material>` for the specified ``surface`` of the :ref:`Mesh<class_Mesh>` resource. See also :ref:`get_surface_override_material_count()<class_MeshInstance3D_method_get_surface_override_material_count>`.
 
-\ **Note:** This returns the :ref:`Material<class_Material>` associated to the **MeshInstance3D**'s Surface Material Override properties, not the material within the :ref:`Mesh<class_Mesh>` resource. To get the material within the :ref:`Mesh<class_Mesh>` resource, use :ref:`Mesh.surface_get_material<class_Mesh_method_surface_get_material>` instead.
+\ **Note:** This returns the :ref:`Material<class_Material>` associated to the **MeshInstance3D**'s Surface Material Override properties, not the material within the :ref:`Mesh<class_Mesh>` resource. To get the material within the :ref:`Mesh<class_Mesh>` resource, use :ref:`Mesh.surface_get_material()<class_Mesh_method_surface_get_material>` instead.
 
 .. rst-class:: classref-item-separator
 
@@ -303,7 +321,7 @@ Returns the override :ref:`Material<class_Material>` for the specified ``surface
 
 :ref:`int<class_int>` **get_surface_override_material_count**\ (\ ) |const| :ref:`🔗<class_MeshInstance3D_method_get_surface_override_material_count>`
 
-Returns the number of surface override materials. This is equivalent to :ref:`Mesh.get_surface_count<class_Mesh_method_get_surface_count>`. See also :ref:`get_surface_override_material<class_MeshInstance3D_method_get_surface_override_material>`.
+Returns the number of surface override materials. This is equivalent to :ref:`Mesh.get_surface_count()<class_Mesh_method_get_surface_count>`. See also :ref:`get_surface_override_material()<class_MeshInstance3D_method_get_surface_override_material>`.
 
 .. rst-class:: classref-item-separator
 
@@ -329,9 +347,10 @@ Sets the value of the blend shape at ``blend_shape_idx`` to ``value``. Produces 
 
 Sets the override ``material`` for the specified ``surface`` of the :ref:`Mesh<class_Mesh>` resource. This material is associated with this **MeshInstance3D** rather than with :ref:`mesh<class_MeshInstance3D_property_mesh>`.
 
-\ **Note:** This assigns the :ref:`Material<class_Material>` associated to the **MeshInstance3D**'s Surface Material Override properties, not the material within the :ref:`Mesh<class_Mesh>` resource. To set the material within the :ref:`Mesh<class_Mesh>` resource, use :ref:`Mesh.surface_get_material<class_Mesh_method_surface_get_material>` instead.
+\ **Note:** This assigns the :ref:`Material<class_Material>` associated to the **MeshInstance3D**'s Surface Material Override properties, not the material within the :ref:`Mesh<class_Mesh>` resource. To set the material within the :ref:`Mesh<class_Mesh>` resource, use :ref:`Mesh.surface_set_material()<class_Mesh_method_surface_set_material>` instead.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
