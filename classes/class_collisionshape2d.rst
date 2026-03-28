@@ -19,7 +19,7 @@ A node that provides a :ref:`Shape2D<class_Shape2D>` to a :ref:`CollisionObject2
 Description
 -----------
 
-A node that provides a :ref:`Shape2D<class_Shape2D>` to a :ref:`CollisionObject2D<class_CollisionObject2D>` parent and allows to edit it. This can give a detection shape to an :ref:`Area2D<class_Area2D>` or turn a :ref:`PhysicsBody2D<class_PhysicsBody2D>` into a solid object.
+A node that provides a :ref:`Shape2D<class_Shape2D>` to a :ref:`CollisionObject2D<class_CollisionObject2D>` parent and allows it to be edited. This can give a detection shape to an :ref:`Area2D<class_Area2D>` or turn a :ref:`PhysicsBody2D<class_PhysicsBody2D>` into a solid object.
 
 .. rst-class:: classref-introduction-group
 
@@ -42,17 +42,19 @@ Properties
 .. table::
    :widths: auto
 
-   +-------------------------------+-------------------------------------------------------------------------------------------+-----------------------+
-   | :ref:`Color<class_Color>`     | :ref:`debug_color<class_CollisionShape2D_property_debug_color>`                           | ``Color(0, 0, 0, 1)`` |
-   +-------------------------------+-------------------------------------------------------------------------------------------+-----------------------+
-   | :ref:`bool<class_bool>`       | :ref:`disabled<class_CollisionShape2D_property_disabled>`                                 | ``false``             |
-   +-------------------------------+-------------------------------------------------------------------------------------------+-----------------------+
-   | :ref:`bool<class_bool>`       | :ref:`one_way_collision<class_CollisionShape2D_property_one_way_collision>`               | ``false``             |
-   +-------------------------------+-------------------------------------------------------------------------------------------+-----------------------+
-   | :ref:`float<class_float>`     | :ref:`one_way_collision_margin<class_CollisionShape2D_property_one_way_collision_margin>` | ``1.0``               |
-   +-------------------------------+-------------------------------------------------------------------------------------------+-----------------------+
-   | :ref:`Shape2D<class_Shape2D>` | :ref:`shape<class_CollisionShape2D_property_shape>`                                       |                       |
-   +-------------------------------+-------------------------------------------------------------------------------------------+-----------------------+
+   +-------------------------------+-------------------------------------------------------------------------------------------------+-----------------------+
+   | :ref:`Color<class_Color>`     | :ref:`debug_color<class_CollisionShape2D_property_debug_color>`                                 | ``Color(0, 0, 0, 0)`` |
+   +-------------------------------+-------------------------------------------------------------------------------------------------+-----------------------+
+   | :ref:`bool<class_bool>`       | :ref:`disabled<class_CollisionShape2D_property_disabled>`                                       | ``false``             |
+   +-------------------------------+-------------------------------------------------------------------------------------------------+-----------------------+
+   | :ref:`bool<class_bool>`       | :ref:`one_way_collision<class_CollisionShape2D_property_one_way_collision>`                     | ``false``             |
+   +-------------------------------+-------------------------------------------------------------------------------------------------+-----------------------+
+   | :ref:`Vector2<class_Vector2>` | :ref:`one_way_collision_direction<class_CollisionShape2D_property_one_way_collision_direction>` | ``Vector2(0, 1)``     |
+   +-------------------------------+-------------------------------------------------------------------------------------------------+-----------------------+
+   | :ref:`float<class_float>`     | :ref:`one_way_collision_margin<class_CollisionShape2D_property_one_way_collision_margin>`       | ``1.0``               |
+   +-------------------------------+-------------------------------------------------------------------------------------------------+-----------------------+
+   | :ref:`Shape2D<class_Shape2D>` | :ref:`shape<class_CollisionShape2D_property_shape>`                                             |                       |
+   +-------------------------------+-------------------------------------------------------------------------------------------------+-----------------------+
 
 .. rst-class:: classref-section-separator
 
@@ -67,16 +69,16 @@ Property Descriptions
 
 .. rst-class:: classref-property
 
-:ref:`Color<class_Color>` **debug_color** = ``Color(0, 0, 0, 1)`` :ref:`🔗<class_CollisionShape2D_property_debug_color>`
+:ref:`Color<class_Color>` **debug_color** = ``Color(0, 0, 0, 0)`` :ref:`🔗<class_CollisionShape2D_property_debug_color>`
 
 .. rst-class:: classref-property-setget
 
 - |void| **set_debug_color**\ (\ value\: :ref:`Color<class_Color>`\ )
 - :ref:`Color<class_Color>` **get_debug_color**\ (\ )
 
-The collision shape debug color.
+The collision shape color that is displayed in the editor, or in the running project if **Debug > Visible Collision Shapes** is checked at the top of the editor.
 
-\ **Note:** The default value is :ref:`ProjectSettings.debug/shapes/collision/shape_color<class_ProjectSettings_property_debug/shapes/collision/shape_color>`. The ``Color(0, 0, 0, 1)`` value documented here is a placeholder, and not the actual default debug color.
+\ **Note:** The default value is :ref:`ProjectSettings.debug/shapes/collision/shape_color<class_ProjectSettings_property_debug/shapes/collision/shape_color>`. The ``Color(0, 0, 0, 0)`` value documented here is a placeholder, and not the actual default debug color.
 
 .. rst-class:: classref-item-separator
 
@@ -93,7 +95,7 @@ The collision shape debug color.
 - |void| **set_disabled**\ (\ value\: :ref:`bool<class_bool>`\ )
 - :ref:`bool<class_bool>` **is_disabled**\ (\ )
 
-A disabled collision shape has no effect in the world. This property should be changed with :ref:`Object.set_deferred<class_Object_method_set_deferred>`.
+A disabled collision shape has no effect in the world. This property should be changed with :ref:`Object.set_deferred()<class_Object_method_set_deferred>`.
 
 .. rst-class:: classref-item-separator
 
@@ -113,6 +115,25 @@ A disabled collision shape has no effect in the world. This property should be c
 Sets whether this collision shape should only detect collision on one side (top or bottom).
 
 \ **Note:** This property has no effect if this **CollisionShape2D** is a child of an :ref:`Area2D<class_Area2D>` node.
+
+\ **Note:** The one way collision direction can be configured by setting :ref:`one_way_collision_direction<class_CollisionShape2D_property_one_way_collision_direction>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_CollisionShape2D_property_one_way_collision_direction:
+
+.. rst-class:: classref-property
+
+:ref:`Vector2<class_Vector2>` **one_way_collision_direction** = ``Vector2(0, 1)`` :ref:`🔗<class_CollisionShape2D_property_one_way_collision_direction>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_one_way_collision_direction**\ (\ value\: :ref:`Vector2<class_Vector2>`\ )
+- :ref:`Vector2<class_Vector2>` **get_one_way_collision_direction**\ (\ )
+
+The direction used for one-way collision.
 
 .. rst-class:: classref-item-separator
 
@@ -149,6 +170,7 @@ The margin used for one-way collision (in pixels). Higher values will make the s
 The actual shape owned by this collision shape.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
