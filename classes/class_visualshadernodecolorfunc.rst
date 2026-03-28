@@ -96,11 +96,51 @@ Applies sepia tone effect using the following formula:
     float b = (c.r * 0.272) + (c.g * 0.534) + (c.b * 0.131);
     return vec3(r, g, b);
 
+.. _class_VisualShaderNodeColorFunc_constant_FUNC_LINEAR_TO_SRGB:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`Function<enum_VisualShaderNodeColorFunc_Function>` **FUNC_LINEAR_TO_SRGB** = ``4``
+
+Converts color from linear encoding to nonlinear sRGB encoding using the following formula:
+
+::
+
+    const vec3 a = vec3(0.055f);
+    return mix((vec3(1.0f) + a) * pow(c.rgb, vec3(1.0f / 2.4f)) - a, 12.92f * c.rgb, lessThan(c.rgb, vec3(0.0031308f)));
+
+The Compatibility renderer uses a simpler formula that may produce undefined behavior with negative input values:
+
+::
+
+    vec3 c = input;
+    return max(vec3(1.055) * pow(c, vec3(0.416666667)) - vec3(0.055), vec3(0.0));
+
+.. _class_VisualShaderNodeColorFunc_constant_FUNC_SRGB_TO_LINEAR:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`Function<enum_VisualShaderNodeColorFunc_Function>` **FUNC_SRGB_TO_LINEAR** = ``5``
+
+Converts color from nonlinear sRGB encoding to linear encoding using the following formula:
+
+::
+
+    vec3 c = input;
+    return mix(pow((c.rgb + vec3(0.055)) * (1.0 / (1.0 + 0.055)), vec3(2.4)), c.rgb * (1.0 / 12.92), lessThan(c.rgb, vec3(0.04045)));
+
+The Compatibility renderer uses a simpler formula that behaves poorly with negative input values:
+
+::
+
+    vec3 c = input;
+    return c * (c * (c * 0.305306011 + 0.682171111) + 0.012522878);
+
 .. _class_VisualShaderNodeColorFunc_constant_FUNC_MAX:
 
 .. rst-class:: classref-enumeration-constant
 
-:ref:`Function<enum_VisualShaderNodeColorFunc_Function>` **FUNC_MAX** = ``4``
+:ref:`Function<enum_VisualShaderNodeColorFunc_Function>` **FUNC_MAX** = ``6``
 
 Represents the size of the :ref:`Function<enum_VisualShaderNodeColorFunc_Function>` enum.
 
@@ -124,9 +164,10 @@ Property Descriptions
 - |void| **set_function**\ (\ value\: :ref:`Function<enum_VisualShaderNodeColorFunc_Function>`\ )
 - :ref:`Function<enum_VisualShaderNodeColorFunc_Function>` **get_function**\ (\ )
 
-A function to be applied to the input color. See :ref:`Function<enum_VisualShaderNodeColorFunc_Function>` for options.
+A function to be applied to the input color.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
