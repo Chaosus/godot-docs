@@ -21,6 +21,13 @@ Description
 
 Picks a random AudioStream from the pool, depending on the playback mode, and applies random pitch shifting and volume shifting during playback.
 
+.. rst-class:: classref-introduction-group
+
+Tutorials
+---------
+
+- :doc:`Audio streams <../tutorials/audio/audio_streams>`
+
 .. rst-class:: classref-reftable-group
 
 Properties
@@ -34,7 +41,13 @@ Properties
    +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+---------+
    | :ref:`float<class_float>`                                    | :ref:`random_pitch<class_AudioStreamRandomizer_property_random_pitch>`                       | ``1.0`` |
    +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+---------+
+   | :ref:`float<class_float>`                                    | :ref:`random_pitch_semitones<class_AudioStreamRandomizer_property_random_pitch_semitones>`   | ``0.0`` |
+   +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+---------+
    | :ref:`float<class_float>`                                    | :ref:`random_volume_offset_db<class_AudioStreamRandomizer_property_random_volume_offset_db>` | ``0.0`` |
+   +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+---------+
+   | :ref:`AudioStream<class_AudioStream>`                        | :ref:`stream_{index}/stream<class_AudioStreamRandomizer_property_stream_{index}/stream>`     |         |
+   +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+---------+
+   | :ref:`float<class_float>`                                    | :ref:`stream_{index}/weight<class_AudioStreamRandomizer_property_stream_{index}/weight>`     | ``1.0`` |
    +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+---------+
    | :ref:`int<class_int>`                                        | :ref:`streams_count<class_AudioStreamRandomizer_property_streams_count>`                     | ``0``   |
    +--------------------------------------------------------------+----------------------------------------------------------------------------------------------+---------+
@@ -139,7 +152,28 @@ Controls how this AudioStreamRandomizer picks which AudioStream to play next.
 - |void| **set_random_pitch**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_random_pitch**\ (\ )
 
-The intensity of random pitch variation. A value of 1 means no variation.
+The largest possible frequency multiplier of the random pitch variation. Pitch will be randomly chosen within a range of ``1.0 / random_pitch`` and ``random_pitch``. A value of ``1.0`` means no variation. A value of ``2.0`` means pitch will be randomized between double and half.
+
+\ **Note:** Setting this property also sets :ref:`random_pitch_semitones<class_AudioStreamRandomizer_property_random_pitch_semitones>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_AudioStreamRandomizer_property_random_pitch_semitones:
+
+.. rst-class:: classref-property
+
+:ref:`float<class_float>` **random_pitch_semitones** = ``0.0`` :ref:`🔗<class_AudioStreamRandomizer_property_random_pitch_semitones>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_random_pitch_semitones**\ (\ value\: :ref:`float<class_float>`\ )
+- :ref:`float<class_float>` **get_random_pitch_semitones**\ (\ )
+
+The largest possible distance, in semitones, of the random pitch variation. A value of ``0.0`` means no variation.
+
+\ **Note:** Setting this property also sets :ref:`random_pitch<class_AudioStreamRandomizer_property_random_pitch>`.
 
 .. rst-class:: classref-item-separator
 
@@ -156,7 +190,35 @@ The intensity of random pitch variation. A value of 1 means no variation.
 - |void| **set_random_volume_offset_db**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_random_volume_offset_db**\ (\ )
 
-The intensity of random volume variation. A value of 0 means no variation.
+The intensity of random volume variation. Volume will be increased or decreased by a random value up to ``random_volume_offset_db``. A value of ``0.0`` means no variation. A value of ``3.0`` means volume will be randomized between ``-3.0 dB`` and ``+3.0 dB``.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_AudioStreamRandomizer_property_stream_{index}/stream:
+
+.. rst-class:: classref-property
+
+:ref:`AudioStream<class_AudioStream>` **stream_{index}/stream** :ref:`🔗<class_AudioStreamRandomizer_property_stream_{index}/stream>`
+
+The :ref:`AudioStream<class_AudioStream>` at ``index``.
+
+\ **Note:** ``index`` is a value in the ``0 .. streams_count - 1`` range.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_AudioStreamRandomizer_property_stream_{index}/weight:
+
+.. rst-class:: classref-property
+
+:ref:`float<class_float>` **stream_{index}/weight** = ``1.0`` :ref:`🔗<class_AudioStreamRandomizer_property_stream_{index}/weight>`
+
+The probability weight of the :ref:`AudioStream<class_AudioStream>` at ``index``.
+
+\ **Note:** ``index`` is a value in the ``0 .. streams_count - 1`` range.
 
 .. rst-class:: classref-item-separator
 
@@ -265,6 +327,7 @@ Set the AudioStream at the specified index.
 Set the probability weight of the stream at the specified index. The higher this value, the more likely that the randomizer will choose this stream during random playback modes.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
