@@ -23,12 +23,12 @@ Description
 
 \ **Note:** This is low-level API, consider using :ref:`MenuBar<class_MenuBar>` with :ref:`MenuBar.prefer_global_menu<class_MenuBar_property_prefer_global_menu>` set to ``true``, and :ref:`PopupMenu<class_PopupMenu>` with :ref:`PopupMenu.prefer_native_menu<class_PopupMenu_property_prefer_native_menu>` set to ``true``.
 
-To create a menu, use :ref:`create_menu<class_NativeMenu_method_create_menu>`, add menu items using ``add_*_item`` methods. To remove a menu, use :ref:`free_menu<class_NativeMenu_method_free_menu>`.
+To create a menu, use :ref:`create_menu()<class_NativeMenu_method_create_menu>`, add menu items using ``add_*_item`` methods. To remove a menu, use :ref:`free_menu()<class_NativeMenu_method_free_menu>`.
 
 ::
 
     var menu
-    
+
     func _menu_callback(item_id):
         if item_id == "ITEM_CUT":
             cut()
@@ -36,7 +36,7 @@ To create a menu, use :ref:`create_menu<class_NativeMenu_method_create_menu>`, a
             copy()
         elif item_id == "ITEM_PASTE":
             paste()
-    
+
     func _enter_tree():
         # Create new menu and add items:
         menu = NativeMenu.create_menu()
@@ -44,11 +44,11 @@ To create a menu, use :ref:`create_menu<class_NativeMenu_method_create_menu>`, a
         NativeMenu.add_item(menu, "Copy", _menu_callback, Callable(), "ITEM_COPY")
         NativeMenu.add_separator(menu)
         NativeMenu.add_item(menu, "Paste", _menu_callback, Callable(), "ITEM_PASTE")
-    
+
     func _on_button_pressed():
         # Show popup menu at mouse position:
         NativeMenu.popup(menu, DisplayServer.mouse_get_position())
-    
+
     func _exit_tree():
         # Remove menu when it's no longer needed:
         NativeMenu.free_menu(menu)
@@ -128,6 +128,8 @@ Methods
    +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`       | :ref:`get_system_menu_name<class_NativeMenu_method_get_system_menu_name>`\ (\ menu_id\: :ref:`SystemMenus<enum_NativeMenu_SystemMenus>`\ ) |const|                                                                                                                                                                                                                                                                                                                                    |
    +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`       | :ref:`get_system_menu_text<class_NativeMenu_method_get_system_menu_text>`\ (\ menu_id\: :ref:`SystemMenus<enum_NativeMenu_SystemMenus>`\ ) |const|                                                                                                                                                                                                                                                                                                                                    |
+   +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`           | :ref:`has_feature<class_NativeMenu_method_has_feature>`\ (\ feature\: :ref:`Feature<enum_NativeMenu_Feature>`\ ) |const|                                                                                                                                                                                                                                                                                                                                                              |
    +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`           | :ref:`has_menu<class_NativeMenu_method_has_menu>`\ (\ rid\: :ref:`RID<class_RID>`\ ) |const|                                                                                                                                                                                                                                                                                                                                                                                          |
@@ -172,6 +174,8 @@ Methods
    +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                            | :ref:`set_item_indentation_level<class_NativeMenu_method_set_item_indentation_level>`\ (\ rid\: :ref:`RID<class_RID>`, idx\: :ref:`int<class_int>`, level\: :ref:`int<class_int>`\ )                                                                                                                                                                                                                                                                                                  |
    +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`int<class_int>`             | :ref:`set_item_index<class_NativeMenu_method_set_item_index>`\ (\ rid\: :ref:`RID<class_RID>`, idx\: :ref:`int<class_int>`, target_idx\: :ref:`int<class_int>`\ )                                                                                                                                                                                                                                                                                                                     |
+   +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                            | :ref:`set_item_key_callback<class_NativeMenu_method_set_item_key_callback>`\ (\ rid\: :ref:`RID<class_RID>`, idx\: :ref:`int<class_int>`, key_callback\: :ref:`Callable<class_Callable>`\ )                                                                                                                                                                                                                                                                                           |
    +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                            | :ref:`set_item_max_states<class_NativeMenu_method_set_item_max_states>`\ (\ rid\: :ref:`RID<class_RID>`, idx\: :ref:`int<class_int>`, max_states\: :ref:`int<class_int>`\ )                                                                                                                                                                                                                                                                                                           |
@@ -193,6 +197,8 @@ Methods
    | |void|                            | :ref:`set_popup_close_callback<class_NativeMenu_method_set_popup_close_callback>`\ (\ rid\: :ref:`RID<class_RID>`, callback\: :ref:`Callable<class_Callable>`\ )                                                                                                                                                                                                                                                                                                                      |
    +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                            | :ref:`set_popup_open_callback<class_NativeMenu_method_set_popup_open_callback>`\ (\ rid\: :ref:`RID<class_RID>`, callback\: :ref:`Callable<class_Callable>`\ )                                                                                                                                                                                                                                                                                                                        |
+   +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                            | :ref:`set_system_menu_text<class_NativeMenu_method_set_system_menu_text>`\ (\ menu_id\: :ref:`SystemMenus<enum_NativeMenu_SystemMenus>`, name\: :ref:`String<class_String>`\ )                                                                                                                                                                                                                                                                                                        |
    +-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. rst-class:: classref-section-separator
@@ -395,7 +401,7 @@ Returns index of the inserted item, it's not guaranteed to be the same as ``inde
 
 An ``accelerator`` can optionally be defined, which is a keyboard shortcut that can be pressed to trigger the menu button even if it's not currently open. The ``accelerator`` is generally a combination of :ref:`KeyModifierMask<enum_@GlobalScope_KeyModifierMask>`\ s and :ref:`Key<enum_@GlobalScope_Key>`\ s using bitwise OR such as ``KEY_MASK_CTRL | KEY_A`` (:kbd:`Ctrl + A`).
 
-\ **Note:** Radio-checkable items just display a checkmark, but don't have any built-in checking behavior and must be checked/unchecked manually. See :ref:`set_item_checked<class_NativeMenu_method_set_item_checked>` for more info on how to control it.
+\ **Note:** Radio-checkable items just display a checkmark, but don't have any built-in checking behavior and must be checked/unchecked manually. See :ref:`set_item_checked()<class_NativeMenu_method_set_item_checked>` for more info on how to control it.
 
 \ **Note:** The ``callback`` and ``key_callback`` Callables need to accept exactly one Variant parameter, the parameter passed to the Callables will be the value passed to ``tag``.
 
@@ -467,7 +473,7 @@ Returns index of the inserted item, it's not guaranteed to be the same as ``inde
 
 An ``accelerator`` can optionally be defined, which is a keyboard shortcut that can be pressed to trigger the menu button even if it's not currently open. The ``accelerator`` is generally a combination of :ref:`KeyModifierMask<enum_@GlobalScope_KeyModifierMask>`\ s and :ref:`Key<enum_@GlobalScope_Key>`\ s using bitwise OR such as ``KEY_MASK_CTRL | KEY_A`` (:kbd:`Ctrl + A`).
 
-\ **Note:** Radio-checkable items just display a checkmark, but don't have any built-in checking behavior and must be checked/unchecked manually. See :ref:`set_item_checked<class_NativeMenu_method_set_item_checked>` for more info on how to control it.
+\ **Note:** Radio-checkable items just display a checkmark, but don't have any built-in checking behavior and must be checked/unchecked manually. See :ref:`set_item_checked()<class_NativeMenu_method_set_item_checked>` for more info on how to control it.
 
 \ **Note:** The ``callback`` and ``key_callback`` Callables need to accept exactly one Variant parameter, the parameter passed to the Callables will be the value passed to ``tag``.
 
@@ -545,7 +551,7 @@ Creates a new global menu object.
 
 :ref:`int<class_int>` **find_item_index_with_submenu**\ (\ rid\: :ref:`RID<class_RID>`, submenu_rid\: :ref:`RID<class_RID>`\ ) |const| :ref:`🔗<class_NativeMenu_method_find_item_index_with_submenu>`
 
-Returns the index of the item with the submenu specified by ``submenu_rid``. Indices are automatically assigned to each item by the engine, and cannot be set manually.
+Returns the index of the item with the submenu specified by ``submenu_rid``. Indices are automatically assigned to each item by the engine.
 
 \ **Note:** This method is implemented on macOS and Windows.
 
@@ -559,7 +565,7 @@ Returns the index of the item with the submenu specified by ``submenu_rid``. Ind
 
 :ref:`int<class_int>` **find_item_index_with_tag**\ (\ rid\: :ref:`RID<class_RID>`, tag\: :ref:`Variant<class_Variant>`\ ) |const| :ref:`🔗<class_NativeMenu_method_find_item_index_with_tag>`
 
-Returns the index of the item with the specified ``tag``. Indices are automatically assigned to each item by the engine, and cannot be set manually.
+Returns the index of the item with the specified ``tag``. Indices are automatically assigned to each item by the engine.
 
 \ **Note:** This method is implemented on macOS and Windows.
 
@@ -573,7 +579,7 @@ Returns the index of the item with the specified ``tag``. Indices are automatica
 
 :ref:`int<class_int>` **find_item_index_with_text**\ (\ rid\: :ref:`RID<class_RID>`, text\: :ref:`String<class_String>`\ ) |const| :ref:`🔗<class_NativeMenu_method_find_item_index_with_text>`
 
-Returns the index of the item with the specified ``text``. Indices are automatically assigned to each item by the engine, and cannot be set manually.
+Returns the index of the item with the specified ``text``. Indices are automatically assigned to each item by the engine.
 
 \ **Note:** This method is implemented on macOS and Windows.
 
@@ -685,7 +691,7 @@ Returns the callback of the item accelerator at index ``idx``.
 
 :ref:`int<class_int>` **get_item_max_states**\ (\ rid\: :ref:`RID<class_RID>`, idx\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_NativeMenu_method_get_item_max_states>`
 
-Returns number of states of a multistate item. See :ref:`add_multistate_item<class_NativeMenu_method_add_multistate_item>` for details.
+Returns number of states of a multistate item. See :ref:`add_multistate_item()<class_NativeMenu_method_add_multistate_item>` for details.
 
 \ **Note:** This method is implemented on macOS and Windows.
 
@@ -699,7 +705,7 @@ Returns number of states of a multistate item. See :ref:`add_multistate_item<cla
 
 :ref:`int<class_int>` **get_item_state**\ (\ rid\: :ref:`RID<class_RID>`, idx\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_NativeMenu_method_get_item_state>`
 
-Returns the state of a multistate item. See :ref:`add_multistate_item<class_NativeMenu_method_add_multistate_item>` for details.
+Returns the state of a multistate item. See :ref:`add_multistate_item()<class_NativeMenu_method_add_multistate_item>` for details.
 
 \ **Note:** This method is implemented on macOS and Windows.
 
@@ -713,7 +719,7 @@ Returns the state of a multistate item. See :ref:`add_multistate_item<class_Nati
 
 :ref:`RID<class_RID>` **get_item_submenu**\ (\ rid\: :ref:`RID<class_RID>`, idx\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_NativeMenu_method_get_item_submenu>`
 
-Returns the submenu ID of the item at index ``idx``. See :ref:`add_submenu_item<class_NativeMenu_method_add_submenu_item>` for more info on how to add a submenu.
+Returns the submenu ID of the item at index ``idx``. See :ref:`add_submenu_item()<class_NativeMenu_method_add_submenu_item>` for more info on how to add a submenu.
 
 \ **Note:** This method is implemented on macOS and Windows.
 
@@ -727,7 +733,7 @@ Returns the submenu ID of the item at index ``idx``. See :ref:`add_submenu_item<
 
 :ref:`Variant<class_Variant>` **get_item_tag**\ (\ rid\: :ref:`RID<class_RID>`, idx\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_NativeMenu_method_get_item_tag>`
 
-Returns the metadata of the specified item, which might be of any type. You can set it with :ref:`set_item_tag<class_NativeMenu_method_set_item_tag>`, which provides a simple way of assigning context data to items.
+Returns the metadata of the specified item, which might be of any type. You can set it with :ref:`set_item_tag()<class_NativeMenu_method_set_item_tag>`, which provides a simple way of assigning context data to items.
 
 \ **Note:** This method is implemented on macOS and Windows.
 
@@ -785,7 +791,7 @@ Returns global menu minimum width.
 
 Returns global menu close callback.
 
-b]Note:** This method is implemented only on macOS.
+\ **Note:** This method is implemented on macOS and Windows.
 
 .. rst-class:: classref-item-separator
 
@@ -799,7 +805,7 @@ b]Note:** This method is implemented only on macOS.
 
 Returns global menu open callback.
 
-b]Note:** This method is implemented only on macOS.
+\ **Note:** This method is implemented only on macOS.
 
 .. rst-class:: classref-item-separator
 
@@ -842,6 +848,20 @@ Returns RID of a special system menu.
 Returns readable name of a special system menu.
 
 \ **Note:** This method is implemented only on macOS.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_NativeMenu_method_get_system_menu_text:
+
+.. rst-class:: classref-method
+
+:ref:`String<class_String>` **get_system_menu_text**\ (\ menu_id\: :ref:`SystemMenus<enum_NativeMenu_SystemMenus>`\ ) |const| :ref:`🔗<class_NativeMenu_method_get_system_menu_text>`
+
+Returns the text of the system menu item.
+
+\ **Note:** This method is implemented on macOS.
 
 .. rst-class:: classref-item-separator
 
@@ -925,7 +945,7 @@ Returns ``true`` if the item at index ``idx`` is checked.
 
 Returns ``true`` if the item at index ``idx`` is disabled. When it is disabled it can't be selected, or its action invoked.
 
-See :ref:`set_item_disabled<class_NativeMenu_method_set_item_disabled>` for more info on how to disable an item.
+See :ref:`set_item_disabled()<class_NativeMenu_method_set_item_disabled>` for more info on how to disable an item.
 
 \ **Note:** This method is implemented on macOS and Windows.
 
@@ -941,7 +961,7 @@ See :ref:`set_item_disabled<class_NativeMenu_method_set_item_disabled>` for more
 
 Returns ``true`` if the item at index ``idx`` is hidden.
 
-See :ref:`set_item_hidden<class_NativeMenu_method_set_item_hidden>` for more info on how to hide an item.
+See :ref:`set_item_hidden()<class_NativeMenu_method_set_item_hidden>` for more info on how to hide an item.
 
 \ **Note:** This method is implemented only on macOS.
 
@@ -1169,6 +1189,24 @@ Sets the horizontal offset of the item at the given ``idx``.
 
 ----
 
+.. _class_NativeMenu_method_set_item_index:
+
+.. rst-class:: classref-method
+
+:ref:`int<class_int>` **set_item_index**\ (\ rid\: :ref:`RID<class_RID>`, idx\: :ref:`int<class_int>`, target_idx\: :ref:`int<class_int>`\ ) :ref:`🔗<class_NativeMenu_method_set_item_index>`
+
+Changes the index of the item at index ``idx`` to be at index ``target_idx``. This can be used to move an item above other items.
+
+Returns the new index of the moved item, it's not guaranteed to be the same as ``target_idx``.
+
+\ **Note:** The indices of any items between index ``idx`` and index ``target_idx`` will be shifted by one.
+
+\ **Note:** This method is implemented on macOS and Windows.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_NativeMenu_method_set_item_key_callback:
 
 .. rst-class:: classref-method
@@ -1191,7 +1229,7 @@ Sets the callback of the item at index ``idx``. Callback is emitted when its acc
 
 |void| **set_item_max_states**\ (\ rid\: :ref:`RID<class_RID>`, idx\: :ref:`int<class_int>`, max_states\: :ref:`int<class_int>`\ ) :ref:`🔗<class_NativeMenu_method_set_item_max_states>`
 
-Sets number of state of a multistate item. See :ref:`add_multistate_item<class_NativeMenu_method_add_multistate_item>` for details.
+Sets number of state of a multistate item. See :ref:`add_multistate_item()<class_NativeMenu_method_add_multistate_item>` for details.
 
 \ **Note:** This method is implemented on macOS and Windows.
 
@@ -1221,7 +1259,7 @@ Sets the type of the item at the specified index ``idx`` to radio button. If ``f
 
 |void| **set_item_state**\ (\ rid\: :ref:`RID<class_RID>`, idx\: :ref:`int<class_int>`, state\: :ref:`int<class_int>`\ ) :ref:`🔗<class_NativeMenu_method_set_item_state>`
 
-Sets the state of a multistate item. See :ref:`add_multistate_item<class_NativeMenu_method_add_multistate_item>` for details.
+Sets the state of a multistate item. See :ref:`add_multistate_item()<class_NativeMenu_method_add_multistate_item>` for details.
 
 \ **Note:** This method is implemented on macOS and Windows.
 
@@ -1249,7 +1287,7 @@ Sets the submenu RID of the item at index ``idx``. The submenu is a global menu 
 
 |void| **set_item_tag**\ (\ rid\: :ref:`RID<class_RID>`, idx\: :ref:`int<class_int>`, tag\: :ref:`Variant<class_Variant>`\ ) :ref:`🔗<class_NativeMenu_method_set_item_tag>`
 
-Sets the metadata of an item, which may be of any type. You can later get it with :ref:`get_item_tag<class_NativeMenu_method_get_item_tag>`, which provides a simple way of assigning context data to items.
+Sets the metadata of an item, which may be of any type. You can later get it with :ref:`get_item_tag()<class_NativeMenu_method_get_item_tag>`, which provides a simple way of assigning context data to items.
 
 \ **Note:** This method is implemented on macOS and Windows.
 
@@ -1307,9 +1345,9 @@ Sets the minimum width of the global menu.
 
 Registers callable to emit when the menu is about to show.
 
-\ **Note:** The OS can simulate menu opening to track menu item changes and global shortcuts, in which case the corresponding close callback is not triggered. Use :ref:`is_opened<class_NativeMenu_method_is_opened>` to check if the menu is currently opened.
+\ **Note:** The OS can simulate menu opening to track menu item changes and global shortcuts, in which case the corresponding close callback is not triggered. Use :ref:`is_opened()<class_NativeMenu_method_is_opened>` to check if the menu is currently opened.
 
-\ **Note:** This method is implemented only on macOS.
+\ **Note:** This method is implemented on macOS and Windows.
 
 .. rst-class:: classref-item-separator
 
@@ -1325,7 +1363,22 @@ Registers callable to emit after the menu is closed.
 
 \ **Note:** This method is implemented only on macOS.
 
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_NativeMenu_method_set_system_menu_text:
+
+.. rst-class:: classref-method
+
+|void| **set_system_menu_text**\ (\ menu_id\: :ref:`SystemMenus<enum_NativeMenu_SystemMenus>`, name\: :ref:`String<class_String>`\ ) :ref:`🔗<class_NativeMenu_method_set_system_menu_text>`
+
+Sets the text of the system menu item.
+
+\ **Note:** This method is implemented on macOS.
+
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
