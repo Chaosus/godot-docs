@@ -21,7 +21,7 @@ Description
 
 This object holds information of all resources in the filesystem, their types, etc.
 
-\ **Note:** This class shouldn't be instantiated directly. Instead, access the singleton using :ref:`EditorInterface.get_resource_filesystem<class_EditorInterface_method_get_resource_filesystem>`.
+\ **Note:** This class shouldn't be instantiated directly. Instead, access the singleton using :ref:`EditorInterface.get_resource_filesystem()<class_EditorInterface_method_get_resource_filesystem>`.
 
 .. rst-class:: classref-reftable-group
 
@@ -39,6 +39,8 @@ Methods
    | :ref:`EditorFileSystemDirectory<class_EditorFileSystemDirectory>` | :ref:`get_filesystem_path<class_EditorFileSystem_method_get_filesystem_path>`\ (\ path\: :ref:`String<class_String>`\ )              |
    +-------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`float<class_float>`                                         | :ref:`get_scanning_progress<class_EditorFileSystem_method_get_scanning_progress>`\ (\ ) |const|                                      |
+   +-------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                                           | :ref:`is_importing<class_EditorFileSystem_method_is_importing>`\ (\ ) |const|                                                        |
    +-------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                           | :ref:`is_scanning<class_EditorFileSystem_method_is_scanning>`\ (\ ) |const|                                                          |
    +-------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------+
@@ -79,6 +81,18 @@ Emitted if the filesystem changed.
 **resources_reimported**\ (\ resources\: :ref:`PackedStringArray<class_PackedStringArray>`\ ) :ref:`🔗<class_EditorFileSystem_signal_resources_reimported>`
 
 Emitted if a resource is reimported.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorFileSystem_signal_resources_reimporting:
+
+.. rst-class:: classref-signal
+
+**resources_reimporting**\ (\ resources\: :ref:`PackedStringArray<class_PackedStringArray>`\ ) :ref:`🔗<class_EditorFileSystem_signal_resources_reimporting>`
+
+Emitted before a resource is reimported.
 
 .. rst-class:: classref-item-separator
 
@@ -173,6 +187,18 @@ Returns the scan progress for 0 to 1 if the FS is being scanned.
 
 ----
 
+.. _class_EditorFileSystem_method_is_importing:
+
+.. rst-class:: classref-method
+
+:ref:`bool<class_bool>` **is_importing**\ (\ ) |const| :ref:`🔗<class_EditorFileSystem_method_is_importing>`
+
+Returns ``true`` if resources are currently being imported.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_EditorFileSystem_method_is_scanning:
 
 .. rst-class:: classref-method
@@ -193,9 +219,9 @@ Returns ``true`` if the filesystem is being scanned.
 
 Reimports a set of files. Call this if these files or their ``.import`` files were directly edited by script or an external program.
 
-If the file type changed or the file was newly created, use :ref:`update_file<class_EditorFileSystem_method_update_file>` or :ref:`scan<class_EditorFileSystem_method_scan>`.
+If the file type changed or the file was newly created, use :ref:`update_file()<class_EditorFileSystem_method_update_file>` or :ref:`scan()<class_EditorFileSystem_method_scan>`.
 
-\ **Note:** This function blocks until the import is finished. However, the main loop iteration, including timers and :ref:`Node._process<class_Node_private_method__process>`, will occur during the import process due to progress bar updates. Avoid calls to :ref:`reimport_files<class_EditorFileSystem_method_reimport_files>` or :ref:`scan<class_EditorFileSystem_method_scan>` while an import is in progress.
+\ **Note:** This function blocks until the import is finished. However, the main loop iteration, including timers and :ref:`Node._process()<class_Node_private_method__process>`, will occur during the import process due to progress bar updates. Avoid calls to :ref:`reimport_files()<class_EditorFileSystem_method_reimport_files>` or :ref:`scan()<class_EditorFileSystem_method_scan>` while an import is in progress.
 
 .. rst-class:: classref-item-separator
 
@@ -233,9 +259,10 @@ Check if the source of any imported resource changed.
 
 Add a file in an existing directory, or schedule file information to be updated on editor restart. Can be used to update text files saved by an external program.
 
-This will not import the file. To reimport, call :ref:`reimport_files<class_EditorFileSystem_method_reimport_files>` or :ref:`scan<class_EditorFileSystem_method_scan>` methods.
+This will not import the file. To reimport, call :ref:`reimport_files()<class_EditorFileSystem_method_reimport_files>` or :ref:`scan()<class_EditorFileSystem_method_scan>` methods.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
