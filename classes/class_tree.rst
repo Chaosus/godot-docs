@@ -52,7 +52,7 @@ Trees are built via code, using :ref:`TreeItem<class_TreeItem>` objects to creat
 
 
 
-To iterate over all the :ref:`TreeItem<class_TreeItem>` objects in a **Tree** object, use :ref:`TreeItem.get_next<class_TreeItem_method_get_next>` and :ref:`TreeItem.get_first_child<class_TreeItem_method_get_first_child>` after getting the root through :ref:`get_root<class_Tree_method_get_root>`. You can use :ref:`Object.free<class_Object_method_free>` on a :ref:`TreeItem<class_TreeItem>` to remove it from the **Tree**.
+To iterate over all the :ref:`TreeItem<class_TreeItem>` objects in a **Tree** object, use :ref:`TreeItem.get_next()<class_TreeItem_method_get_next>` and :ref:`TreeItem.get_first_child()<class_TreeItem_method_get_first_child>` after getting the root through :ref:`get_root()<class_Tree_method_get_root>`. You can use :ref:`Object.free()<class_Object_method_free>` on a :ref:`TreeItem<class_TreeItem>` to remove it from the **Tree**.
 
 \ **Incremental search:** Like :ref:`ItemList<class_ItemList>` and :ref:`PopupMenu<class_PopupMenu>`, **Tree** supports searching within the list while the control is focused. Press a key that matches the first letter of an item's name to select the first item starting with the given letter. After that point, there are two ways to perform incremental search: 1) Press the same key again before the timeout duration to select the next item starting with the same letter. 2) Press letter keys that match the rest of the word before the timeout duration to match to select the item in question directly. Both of these actions will be reset to the beginning of the list if the timeout duration has passed since the last keystroke was registered. You can adjust the timeout duration by changing :ref:`ProjectSettings.gui/timers/incremental_search_max_interval_msec<class_ProjectSettings_property_gui/timers/incremental_search_max_interval_msec>`.
 
@@ -64,35 +64,43 @@ Properties
 .. table::
    :widths: auto
 
-   +------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                  | :ref:`allow_reselect<class_Tree_property_allow_reselect>`                       | ``false``                                                                 |
-   +------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                  | :ref:`allow_rmb_select<class_Tree_property_allow_rmb_select>`                   | ``false``                                                                 |
-   +------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                  | :ref:`allow_search<class_Tree_property_allow_search>`                           | ``true``                                                                  |
-   +------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                  | clip_contents                                                                   | ``true`` (overrides :ref:`Control<class_Control_property_clip_contents>`) |
-   +------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                  | :ref:`column_titles_visible<class_Tree_property_column_titles_visible>`         | ``false``                                                                 |
-   +------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-   | :ref:`int<class_int>`                    | :ref:`columns<class_Tree_property_columns>`                                     | ``1``                                                                     |
-   +------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-   | :ref:`int<class_int>`                    | :ref:`drop_mode_flags<class_Tree_property_drop_mode_flags>`                     | ``0``                                                                     |
-   +------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                  | :ref:`enable_recursive_folding<class_Tree_property_enable_recursive_folding>`   | ``true``                                                                  |
-   +------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-   | :ref:`FocusMode<enum_Control_FocusMode>` | focus_mode                                                                      | ``2`` (overrides :ref:`Control<class_Control_property_focus_mode>`)       |
-   +------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                  | :ref:`hide_folding<class_Tree_property_hide_folding>`                           | ``false``                                                                 |
-   +------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                  | :ref:`hide_root<class_Tree_property_hide_root>`                                 | ``false``                                                                 |
-   +------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                  | :ref:`scroll_horizontal_enabled<class_Tree_property_scroll_horizontal_enabled>` | ``true``                                                                  |
-   +------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                  | :ref:`scroll_vertical_enabled<class_Tree_property_scroll_vertical_enabled>`     | ``true``                                                                  |
-   +------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-   | :ref:`SelectMode<enum_Tree_SelectMode>`  | :ref:`select_mode<class_Tree_property_select_mode>`                             | ``0``                                                                     |
-   +------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                         | :ref:`allow_reselect<class_Tree_property_allow_reselect>`                       | ``false``                                                                 |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                         | :ref:`allow_rmb_select<class_Tree_property_allow_rmb_select>`                   | ``false``                                                                 |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                         | :ref:`allow_search<class_Tree_property_allow_search>`                           | ``true``                                                                  |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                         | :ref:`auto_tooltip<class_Tree_property_auto_tooltip>`                           | ``true``                                                                  |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                         | clip_contents                                                                   | ``true`` (overrides :ref:`Control<class_Control_property_clip_contents>`) |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                         | :ref:`column_titles_visible<class_Tree_property_column_titles_visible>`         | ``false``                                                                 |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`int<class_int>`                           | :ref:`columns<class_Tree_property_columns>`                                     | ``1``                                                                     |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`int<class_int>`                           | :ref:`drop_mode_flags<class_Tree_property_drop_mode_flags>`                     | ``0``                                                                     |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                         | :ref:`enable_drag_unfolding<class_Tree_property_enable_drag_unfolding>`         | ``true``                                                                  |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                         | :ref:`enable_recursive_folding<class_Tree_property_enable_recursive_folding>`   | ``true``                                                                  |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`FocusMode<enum_Control_FocusMode>`        | focus_mode                                                                      | ``2`` (overrides :ref:`Control<class_Control_property_focus_mode>`)       |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                         | :ref:`hide_folding<class_Tree_property_hide_folding>`                           | ``false``                                                                 |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                         | :ref:`hide_root<class_Tree_property_hide_root>`                                 | ``false``                                                                 |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`ScrollHintMode<enum_Tree_ScrollHintMode>` | :ref:`scroll_hint_mode<class_Tree_property_scroll_hint_mode>`                   | ``0``                                                                     |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                         | :ref:`scroll_horizontal_enabled<class_Tree_property_scroll_horizontal_enabled>` | ``true``                                                                  |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                         | :ref:`scroll_vertical_enabled<class_Tree_property_scroll_vertical_enabled>`     | ``true``                                                                  |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`SelectMode<enum_Tree_SelectMode>`         | :ref:`select_mode<class_Tree_property_select_mode>`                             | ``0``                                                                     |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                         | :ref:`tile_scroll_hint<class_Tree_property_tile_scroll_hint>`                   | ``false``                                                                 |
+   +-------------------------------------------------+---------------------------------------------------------------------------------+---------------------------------------------------------------------------+
 
 .. rst-class:: classref-reftable-group
 
@@ -127,7 +135,11 @@ Methods
    +-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                                       | :ref:`get_column_title_language<class_Tree_method_get_column_title_language>`\ (\ column\: :ref:`int<class_int>`\ ) |const|                                                                                |
    +-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`                                       | :ref:`get_column_title_tooltip_text<class_Tree_method_get_column_title_tooltip_text>`\ (\ column\: :ref:`int<class_int>`\ ) |const|                                                                        |
+   +-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                                             | :ref:`get_column_width<class_Tree_method_get_column_width>`\ (\ column\: :ref:`int<class_int>`\ ) |const|                                                                                                  |
+   +-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`RID<class_RID>`                                             | :ref:`get_custom_drawing_canvas_item<class_Tree_method_get_custom_drawing_canvas_item>`\ (\ ) |const|                                                                                                      |
    +-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Rect2<class_Rect2>`                                         | :ref:`get_custom_popup_rect<class_Tree_method_get_custom_popup_rect>`\ (\ ) |const|                                                                                                                        |
    +-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -175,6 +187,8 @@ Methods
    +-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                            | :ref:`set_column_title_language<class_Tree_method_set_column_title_language>`\ (\ column\: :ref:`int<class_int>`, language\: :ref:`String<class_String>`\ )                                                |
    +-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                                                            | :ref:`set_column_title_tooltip_text<class_Tree_method_set_column_title_tooltip_text>`\ (\ column\: :ref:`int<class_int>`, tooltip_text\: :ref:`String<class_String>`\ )                                    |
+   +-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                            | :ref:`set_selected<class_Tree_method_set_selected>`\ (\ item\: :ref:`TreeItem<class_TreeItem>`, column\: :ref:`int<class_int>`\ )                                                                          |
    +-------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
@@ -191,11 +205,19 @@ Theme Properties
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`Color<class_Color>`         | :ref:`custom_button_font_highlight<class_Tree_theme_color_custom_button_font_highlight>` | ``Color(0.95, 0.95, 0.95, 1)``      |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Color<class_Color>`         | :ref:`drop_on_item_color<class_Tree_theme_color_drop_on_item_color>`                     | ``Color(1, 1, 1, 1)``               |
+   +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`Color<class_Color>`         | :ref:`drop_position_color<class_Tree_theme_color_drop_position_color>`                   | ``Color(1, 1, 1, 1)``               |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`Color<class_Color>`         | :ref:`font_color<class_Tree_theme_color_font_color>`                                     | ``Color(0.7, 0.7, 0.7, 1)``         |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`Color<class_Color>`         | :ref:`font_disabled_color<class_Tree_theme_color_font_disabled_color>`                   | ``Color(0.875, 0.875, 0.875, 0.5)`` |
+   +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Color<class_Color>`         | :ref:`font_hovered_color<class_Tree_theme_color_font_hovered_color>`                     | ``Color(0.95, 0.95, 0.95, 1)``      |
+   +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Color<class_Color>`         | :ref:`font_hovered_dimmed_color<class_Tree_theme_color_font_hovered_dimmed_color>`       | ``Color(0.875, 0.875, 0.875, 1)``   |
+   +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Color<class_Color>`         | :ref:`font_hovered_selected_color<class_Tree_theme_color_font_hovered_selected_color>`   | ``Color(1, 1, 1, 1)``               |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`Color<class_Color>`         | :ref:`font_outline_color<class_Tree_theme_color_font_outline_color>`                     | ``Color(0, 0, 0, 1)``               |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
@@ -207,17 +229,25 @@ Theme Properties
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`Color<class_Color>`         | :ref:`relationship_line_color<class_Tree_theme_color_relationship_line_color>`           | ``Color(0.27, 0.27, 0.27, 1)``      |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Color<class_Color>`         | :ref:`scroll_hint_color<class_Tree_theme_color_scroll_hint_color>`                       | ``Color(0, 0, 0, 1)``               |
+   +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`Color<class_Color>`         | :ref:`title_button_color<class_Tree_theme_color_title_button_color>`                     | ``Color(0.875, 0.875, 0.875, 1)``   |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`int<class_int>`             | :ref:`button_margin<class_Tree_theme_constant_button_margin>`                            | ``4``                               |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`int<class_int>`             | :ref:`check_h_separation<class_Tree_theme_constant_check_h_separation>`                  | ``4``                               |
+   +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`int<class_int>`             | :ref:`children_hl_line_width<class_Tree_theme_constant_children_hl_line_width>`          | ``1``                               |
+   +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`int<class_int>`             | :ref:`dragging_unfold_wait_msec<class_Tree_theme_constant_dragging_unfold_wait_msec>`    | ``500``                             |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`int<class_int>`             | :ref:`draw_guides<class_Tree_theme_constant_draw_guides>`                                | ``1``                               |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`int<class_int>`             | :ref:`draw_relationship_lines<class_Tree_theme_constant_draw_relationship_lines>`        | ``0``                               |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`int<class_int>`             | :ref:`h_separation<class_Tree_theme_constant_h_separation>`                              | ``4``                               |
+   +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`int<class_int>`             | :ref:`icon_h_separation<class_Tree_theme_constant_icon_h_separation>`                    | ``4``                               |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`int<class_int>`             | :ref:`icon_max_width<class_Tree_theme_constant_icon_max_width>`                          | ``0``                               |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
@@ -279,6 +309,8 @@ Theme Properties
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`Texture2D<class_Texture2D>` | :ref:`indeterminate_disabled<class_Tree_theme_icon_indeterminate_disabled>`              |                                     |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Texture2D<class_Texture2D>` | :ref:`scroll_hint<class_Tree_theme_icon_scroll_hint>`                                    |                                     |
+   +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`Texture2D<class_Texture2D>` | :ref:`select_arrow<class_Tree_theme_icon_select_arrow>`                                  |                                     |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`Texture2D<class_Texture2D>` | :ref:`unchecked<class_Tree_theme_icon_unchecked>`                                        |                                     |
@@ -286,6 +318,8 @@ Theme Properties
    | :ref:`Texture2D<class_Texture2D>` | :ref:`unchecked_disabled<class_Tree_theme_icon_unchecked_disabled>`                      |                                     |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`Texture2D<class_Texture2D>` | :ref:`updown<class_Tree_theme_icon_updown>`                                              |                                     |
+   +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`StyleBox<class_StyleBox>`   | :ref:`button_hover<class_Tree_theme_style_button_hover>`                                 |                                     |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`StyleBox<class_StyleBox>`   | :ref:`button_pressed<class_Tree_theme_style_button_pressed>`                             |                                     |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
@@ -300,6 +334,14 @@ Theme Properties
    | :ref:`StyleBox<class_StyleBox>`   | :ref:`custom_button_pressed<class_Tree_theme_style_custom_button_pressed>`               |                                     |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`StyleBox<class_StyleBox>`   | :ref:`focus<class_Tree_theme_style_focus>`                                               |                                     |
+   +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`StyleBox<class_StyleBox>`   | :ref:`hovered<class_Tree_theme_style_hovered>`                                           |                                     |
+   +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`StyleBox<class_StyleBox>`   | :ref:`hovered_dimmed<class_Tree_theme_style_hovered_dimmed>`                             |                                     |
+   +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`StyleBox<class_StyleBox>`   | :ref:`hovered_selected<class_Tree_theme_style_hovered_selected>`                         |                                     |
+   +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`StyleBox<class_StyleBox>`   | :ref:`hovered_selected_focus<class_Tree_theme_style_hovered_selected_focus>`             |                                     |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`StyleBox<class_StyleBox>`   | :ref:`panel<class_Tree_theme_style_panel>`                                               |                                     |
    +-----------------------------------+------------------------------------------------------------------------------------------+-------------------------------------+
@@ -329,7 +371,7 @@ Signals
 
 **button_clicked**\ (\ item\: :ref:`TreeItem<class_TreeItem>`, column\: :ref:`int<class_int>`, id\: :ref:`int<class_int>`, mouse_button_index\: :ref:`int<class_int>`\ ) :ref:`🔗<class_Tree_signal_button_clicked>`
 
-Emitted when a button on the tree was pressed (see :ref:`TreeItem.add_button<class_TreeItem_method_add_button>`).
+Emitted when a button on the tree was pressed (see :ref:`TreeItem.add_button()<class_TreeItem_method_add_button>`).
 
 .. rst-class:: classref-item-separator
 
@@ -353,7 +395,7 @@ Emitted when a cell is selected.
 
 **check_propagated_to_item**\ (\ item\: :ref:`TreeItem<class_TreeItem>`, column\: :ref:`int<class_int>`\ ) :ref:`🔗<class_Tree_signal_check_propagated_to_item>`
 
-Emitted when :ref:`TreeItem.propagate_check<class_TreeItem_method_propagate_check>` is called. Connect to this signal to process the items that are affected when :ref:`TreeItem.propagate_check<class_TreeItem_method_propagate_check>` is invoked. The order that the items affected will be processed is as follows: the item that invoked the method, children of that item, and finally parents of that item.
+Emitted when :ref:`TreeItem.propagate_check()<class_TreeItem_method_propagate_check>` is called. Connect to this signal to process the items that are affected when :ref:`TreeItem.propagate_check()<class_TreeItem_method_propagate_check>` is invoked. The order that the items affected will be processed is as follows: the item that invoked the method, children of that item, and finally parents of that item.
 
 .. rst-class:: classref-item-separator
 
@@ -425,7 +467,9 @@ Emitted when an item is double-clicked, or selected with a ``ui_accept`` input e
 
 **item_collapsed**\ (\ item\: :ref:`TreeItem<class_TreeItem>`\ ) :ref:`🔗<class_Tree_signal_item_collapsed>`
 
-Emitted when an item is collapsed by a click on the folding arrow.
+Emitted when an item is expanded or collapsed by clicking on the folding arrow or through code.
+
+\ **Note:** Despite its name, this signal is also emitted when an item is expanded.
 
 .. rst-class:: classref-item-separator
 
@@ -560,7 +604,7 @@ enum **DropModeFlags**: :ref:`🔗<enum_Tree_DropModeFlags>`
 
 :ref:`DropModeFlags<enum_Tree_DropModeFlags>` **DROP_MODE_DISABLED** = ``0``
 
-Disables all drop sections, but still allows to detect the "on item" drop section by :ref:`get_drop_section_at_position<class_Tree_method_get_drop_section_at_position>`.
+Disables all drop sections, but still allows to detect the "on item" drop section by :ref:`get_drop_section_at_position()<class_Tree_method_get_drop_section_at_position>`.
 
 \ **Note:** This is the default flag, it has no effect when combined with other flags.
 
@@ -583,6 +627,48 @@ When combined with :ref:`DROP_MODE_INBETWEEN<class_Tree_constant_DROP_MODE_INBET
 Enables "above item" and "below item" drop sections. The "above item" drop section covers the top half of the item, and the "below item" drop section covers the bottom half.
 
 When combined with :ref:`DROP_MODE_ON_ITEM<class_Tree_constant_DROP_MODE_ON_ITEM>`, these drop sections halves the height and stays on top / bottom accordingly.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _enum_Tree_ScrollHintMode:
+
+.. rst-class:: classref-enumeration
+
+enum **ScrollHintMode**: :ref:`🔗<enum_Tree_ScrollHintMode>`
+
+.. _class_Tree_constant_SCROLL_HINT_MODE_DISABLED:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`ScrollHintMode<enum_Tree_ScrollHintMode>` **SCROLL_HINT_MODE_DISABLED** = ``0``
+
+Scroll hints will never be shown.
+
+.. _class_Tree_constant_SCROLL_HINT_MODE_BOTH:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`ScrollHintMode<enum_Tree_ScrollHintMode>` **SCROLL_HINT_MODE_BOTH** = ``1``
+
+Scroll hints will be shown at the top and bottom.
+
+.. _class_Tree_constant_SCROLL_HINT_MODE_TOP:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`ScrollHintMode<enum_Tree_ScrollHintMode>` **SCROLL_HINT_MODE_TOP** = ``2``
+
+Only the top scroll hint will be shown.
+
+.. _class_Tree_constant_SCROLL_HINT_MODE_BOTTOM:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`ScrollHintMode<enum_Tree_ScrollHintMode>` **SCROLL_HINT_MODE_BOTTOM** = ``3``
+
+Only the bottom scroll hint will be shown.
 
 .. rst-class:: classref-section-separator
 
@@ -644,6 +730,23 @@ If ``true``, allows navigating the **Tree** with letter keys through incremental
 
 ----
 
+.. _class_Tree_property_auto_tooltip:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **auto_tooltip** = ``true`` :ref:`🔗<class_Tree_property_auto_tooltip>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_auto_tooltip**\ (\ value\: :ref:`bool<class_bool>`\ )
+- :ref:`bool<class_bool>` **is_auto_tooltip_enabled**\ (\ )
+
+If ``true``, tree items with no tooltip assigned display their text as their tooltip. See also :ref:`TreeItem.get_tooltip_text()<class_TreeItem_method_get_tooltip_text>` and :ref:`TreeItem.get_button_tooltip_text()<class_TreeItem_method_get_button_tooltip_text>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_Tree_property_column_titles_visible:
 
 .. rst-class:: classref-property
@@ -674,6 +777,8 @@ If ``true``, column titles are visible.
 
 The number of columns.
 
+Prints an error and does not allow setting the columns during mouse selection.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -689,9 +794,26 @@ The number of columns.
 - |void| **set_drop_mode_flags**\ (\ value\: :ref:`int<class_int>`\ )
 - :ref:`int<class_int>` **get_drop_mode_flags**\ (\ )
 
-The drop mode as an OR combination of flags. See :ref:`DropModeFlags<enum_Tree_DropModeFlags>` constants. Once dropping is done, reverts to :ref:`DROP_MODE_DISABLED<class_Tree_constant_DROP_MODE_DISABLED>`. Setting this during :ref:`Control._can_drop_data<class_Control_private_method__can_drop_data>` is recommended.
+The drop mode as an OR combination of flags. See :ref:`DropModeFlags<enum_Tree_DropModeFlags>` constants. Once dropping is done, reverts to :ref:`DROP_MODE_DISABLED<class_Tree_constant_DROP_MODE_DISABLED>`. Setting this during :ref:`Control._can_drop_data()<class_Control_private_method__can_drop_data>` is recommended.
 
 This controls the drop sections, i.e. the decision and drawing of possible drop locations based on the mouse position.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Tree_property_enable_drag_unfolding:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **enable_drag_unfolding** = ``true`` :ref:`🔗<class_Tree_property_enable_drag_unfolding>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_enable_drag_unfolding**\ (\ value\: :ref:`bool<class_bool>`\ )
+- :ref:`bool<class_bool>` **is_drag_unfolding_enabled**\ (\ )
+
+If ``true``, tree items will unfold when hovered over during a drag-and-drop. The delay for when this happens is dictated by :ref:`dragging_unfold_wait_msec<class_Tree_theme_constant_dragging_unfold_wait_msec>`.
 
 .. rst-class:: classref-item-separator
 
@@ -748,6 +870,23 @@ If ``true``, the tree's root is hidden.
 
 ----
 
+.. _class_Tree_property_scroll_hint_mode:
+
+.. rst-class:: classref-property
+
+:ref:`ScrollHintMode<enum_Tree_ScrollHintMode>` **scroll_hint_mode** = ``0`` :ref:`🔗<class_Tree_property_scroll_hint_mode>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_scroll_hint_mode**\ (\ value\: :ref:`ScrollHintMode<enum_Tree_ScrollHintMode>`\ )
+- :ref:`ScrollHintMode<enum_Tree_ScrollHintMode>` **get_scroll_hint_mode**\ (\ )
+
+The way which scroll hints (indicators that show that the content can still be scrolled in a certain direction) will be shown.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_Tree_property_scroll_horizontal_enabled:
 
 .. rst-class:: classref-property
@@ -795,6 +934,23 @@ If ``true``, enables vertical scrolling.
 
 Allows single or multiple selection. See the :ref:`SelectMode<enum_Tree_SelectMode>` constants.
 
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Tree_property_tile_scroll_hint:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **tile_scroll_hint** = ``false`` :ref:`🔗<class_Tree_property_tile_scroll_hint>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_tile_scroll_hint**\ (\ value\: :ref:`bool<class_bool>`\ )
+- :ref:`bool<class_bool>` **is_scroll_hint_tiled**\ (\ )
+
+If ``true``, the scroll hint texture will be tiled instead of stretched. See :ref:`scroll_hint_mode<class_Tree_property_scroll_hint_mode>`.
+
 .. rst-class:: classref-section-separator
 
 ----
@@ -812,6 +968,8 @@ Method Descriptions
 
 Clears the tree. This removes all items.
 
+Prints an error and does not allow clearing the tree if called during mouse selection.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -827,6 +985,8 @@ Creates an item in the tree and adds it as a child of ``parent``, which can be e
 If ``parent`` is ``null``, the root item will be the parent, or the new item will be the root itself if the tree is empty.
 
 The new item will be the ``index``-th child of parent, or it will be the last child if there are not enough siblings.
+
+Prints an error and returns ``null`` if called during mouse selection, or if the ``parent`` does not belong to this tree.
 
 .. rst-class:: classref-item-separator
 
@@ -852,7 +1012,7 @@ Deselects all tree items (rows and columns). In :ref:`SELECT_MULTI<class_Tree_co
 
 Edits the selected tree item as if it was clicked.
 
-Either the item must be set editable with :ref:`TreeItem.set_editable<class_TreeItem_method_set_editable>` or ``force_edit`` must be ``true``.
+Either the item must be set editable with :ref:`TreeItem.set_editable()<class_TreeItem_method_set_editable>` or ``force_edit`` must be ``true``.
 
 Returns ``true`` if the item could be edited. Fails if no item is selected.
 
@@ -960,6 +1120,18 @@ Returns column title language code.
 
 ----
 
+.. _class_Tree_method_get_column_title_tooltip_text:
+
+.. rst-class:: classref-method
+
+:ref:`String<class_String>` **get_column_title_tooltip_text**\ (\ column\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_Tree_method_get_column_title_tooltip_text>`
+
+Returns the column title's tooltip text.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_Tree_method_get_column_width:
 
 .. rst-class:: classref-method
@@ -972,13 +1144,27 @@ Returns the column's width in pixels.
 
 ----
 
+.. _class_Tree_method_get_custom_drawing_canvas_item:
+
+.. rst-class:: classref-method
+
+:ref:`RID<class_RID>` **get_custom_drawing_canvas_item**\ (\ ) |const| :ref:`🔗<class_Tree_method_get_custom_drawing_canvas_item>`
+
+Returns the internal canvas item designated for custom drawing. See :ref:`TreeItem.set_custom_draw_callback()<class_TreeItem_method_set_custom_draw_callback>`.
+
+\ **Note:** This canvas item clears automatically on each Tree draw call.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_Tree_method_get_custom_popup_rect:
 
 .. rst-class:: classref-method
 
 :ref:`Rect2<class_Rect2>` **get_custom_popup_rect**\ (\ ) |const| :ref:`🔗<class_Tree_method_get_custom_popup_rect>`
 
-Returns the rectangle for custom popups. Helper to create custom cell controls that display a popup. See :ref:`TreeItem.set_cell_mode<class_TreeItem_method_set_cell_mode>`.
+Returns the rectangle for custom popups. Helper to create custom cell controls that display a popup. See :ref:`TreeItem.set_cell_mode()<class_TreeItem_method_set_cell_mode>`.
 
 .. rst-class:: classref-item-separator
 
@@ -994,7 +1180,7 @@ Returns the drop section at ``position``, or -100 if no item is there.
 
 Values -1, 0, or 1 will be returned for the "above item", "on item", and "below item" drop sections, respectively. See :ref:`DropModeFlags<enum_Tree_DropModeFlags>` for a description of each drop section.
 
-To get the item which the returned drop section is relative to, use :ref:`get_item_at_position<class_Tree_method_get_item_at_position>`.
+To get the item which the returned drop section is relative to, use :ref:`get_item_at_position()<class_Tree_method_get_item_at_position>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1015,7 +1201,7 @@ Returns the currently edited item. Can be used with :ref:`item_edited<class_Tree
 
     func _ready():
         $Tree.item_edited.connect(on_Tree_item_edited)
-    
+
     func on_Tree_item_edited():
         print($Tree.get_edited()) # This item just got edited (e.g. checked).
 
@@ -1025,7 +1211,7 @@ Returns the currently edited item. Can be used with :ref:`item_edited<class_Tree
     {
         GetNode<Tree>("Tree").ItemEdited += OnTreeItemEdited;
     }
-    
+
     public void OnTreeItemEdited()
     {
         GD.Print(GetNode<Tree>("Tree").GetEdited()); // This item just got edited (e.g. checked).
@@ -1133,7 +1319,7 @@ Returns the currently focused item, or ``null`` if no item is focused.
 
 In :ref:`SELECT_ROW<class_Tree_constant_SELECT_ROW>` and :ref:`SELECT_SINGLE<class_Tree_constant_SELECT_SINGLE>` modes, the focused item is same as the selected item. In :ref:`SELECT_MULTI<class_Tree_constant_SELECT_MULTI>` mode, the focused item is the item under the focus cursor, not necessarily selected.
 
-To get the currently selected item(s), use :ref:`get_next_selected<class_Tree_method_get_next_selected>`.
+To get the currently selected item(s), use :ref:`get_next_selected()<class_Tree_method_get_next_selected>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1149,7 +1335,7 @@ Returns the currently focused column, or -1 if no column is focused.
 
 In :ref:`SELECT_SINGLE<class_Tree_constant_SELECT_SINGLE>` mode, the focused column is the selected column. In :ref:`SELECT_ROW<class_Tree_constant_SELECT_ROW>` mode, the focused column is always 0 if any item is selected. In :ref:`SELECT_MULTI<class_Tree_constant_SELECT_MULTI>` mode, the focused column is the column under the focus cursor, and there are not necessarily any column selected.
 
-To tell whether a column of an item is selected, use :ref:`TreeItem.is_selected<class_TreeItem_method_is_selected>`.
+To tell whether a column of an item is selected, use :ref:`TreeItem.is_selected()<class_TreeItem_method_is_selected>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1161,7 +1347,7 @@ To tell whether a column of an item is selected, use :ref:`TreeItem.is_selected<
 
 :ref:`bool<class_bool>` **is_column_clipping_content**\ (\ column\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_Tree_method_is_column_clipping_content>`
 
-Returns ``true`` if the column has enabled clipping (see :ref:`set_column_clip_content<class_Tree_method_set_column_clip_content>`).
+Returns ``true`` if the column has enabled clipping (see :ref:`set_column_clip_content()<class_Tree_method_set_column_clip_content>`).
 
 .. rst-class:: classref-item-separator
 
@@ -1173,7 +1359,7 @@ Returns ``true`` if the column has enabled clipping (see :ref:`set_column_clip_c
 
 :ref:`bool<class_bool>` **is_column_expanding**\ (\ column\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_Tree_method_is_column_expanding>`
 
-Returns ``true`` if the column has enabled expanding (see :ref:`set_column_expand<class_Tree_method_set_column_expand>`).
+Returns ``true`` if the column has enabled expanding (see :ref:`set_column_expand()<class_Tree_method_set_column_expand>`).
 
 .. rst-class:: classref-item-separator
 
@@ -1221,7 +1407,7 @@ Overrides the calculated minimum width of a column. It can be set to ``0`` to re
 
 |void| **set_column_expand**\ (\ column\: :ref:`int<class_int>`, expand\: :ref:`bool<class_bool>`\ ) :ref:`🔗<class_Tree_method_set_column_expand>`
 
-If ``true``, the column will have the "Expand" flag of :ref:`Control<class_Control>`. Columns that have the "Expand" flag will use their expand ratio in a similar fashion to :ref:`Control.size_flags_stretch_ratio<class_Control_property_size_flags_stretch_ratio>` (see :ref:`set_column_expand_ratio<class_Tree_method_set_column_expand_ratio>`).
+If ``true``, the column will have the "Expand" flag of :ref:`Control<class_Control>`. Columns that have the "Expand" flag will use their expand ratio in a similar fashion to :ref:`Control.size_flags_stretch_ratio<class_Control_property_size_flags_stretch_ratio>` (see :ref:`set_column_expand_ratio()<class_Tree_method_set_column_expand_ratio>`).
 
 .. rst-class:: classref-item-separator
 
@@ -1233,7 +1419,7 @@ If ``true``, the column will have the "Expand" flag of :ref:`Control<class_Contr
 
 |void| **set_column_expand_ratio**\ (\ column\: :ref:`int<class_int>`, ratio\: :ref:`int<class_int>`\ ) :ref:`🔗<class_Tree_method_set_column_expand_ratio>`
 
-Sets the relative expand ratio for a column. See :ref:`set_column_expand<class_Tree_method_set_column_expand>`.
+Sets the relative expand ratio for a column. See :ref:`set_column_expand()<class_Tree_method_set_column_expand>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1281,7 +1467,19 @@ Sets column title base writing direction.
 
 |void| **set_column_title_language**\ (\ column\: :ref:`int<class_int>`, language\: :ref:`String<class_String>`\ ) :ref:`🔗<class_Tree_method_set_column_title_language>`
 
-Sets language code of column title used for line-breaking and text shaping algorithms, if left empty current locale is used instead.
+Sets the language code of the given ``column``'s title to ``language``. This is used for line-breaking and text shaping algorithms. If ``language`` is empty, the current locale is used.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Tree_method_set_column_title_tooltip_text:
+
+.. rst-class:: classref-method
+
+|void| **set_column_title_tooltip_text**\ (\ column\: :ref:`int<class_int>`, tooltip_text\: :ref:`String<class_String>`\ ) :ref:`🔗<class_Tree_method_set_column_title_tooltip_text>`
+
+Sets the column title's tooltip text.
 
 .. rst-class:: classref-item-separator
 
@@ -1328,6 +1526,18 @@ Text :ref:`Color<class_Color>` for a :ref:`TreeItem.CELL_MODE_CUSTOM<class_TreeI
 
 ----
 
+.. _class_Tree_theme_color_drop_on_item_color:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`Color<class_Color>` **drop_on_item_color** = ``Color(1, 1, 1, 1)`` :ref:`🔗<class_Tree_theme_color_drop_on_item_color>`
+
+:ref:`Color<class_Color>` used to draw the highlight outline when dragging items that can only be dropped "on" other items.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_Tree_theme_color_drop_position_color:
 
 .. rst-class:: classref-themeproperty
@@ -1358,7 +1568,43 @@ Default text :ref:`Color<class_Color>` of the item.
 
 :ref:`Color<class_Color>` **font_disabled_color** = ``Color(0.875, 0.875, 0.875, 0.5)`` :ref:`🔗<class_Tree_theme_color_font_disabled_color>`
 
-Text :ref:`Color<class_Color>` for a :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem_constant_CELL_MODE_CHECK>` mode cell when it's non-editable (see :ref:`TreeItem.set_editable<class_TreeItem_method_set_editable>`).
+Text :ref:`Color<class_Color>` for a :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem_constant_CELL_MODE_CHECK>` mode cell when it's non-editable (see :ref:`TreeItem.set_editable()<class_TreeItem_method_set_editable>`).
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Tree_theme_color_font_hovered_color:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`Color<class_Color>` **font_hovered_color** = ``Color(0.95, 0.95, 0.95, 1)`` :ref:`🔗<class_Tree_theme_color_font_hovered_color>`
+
+Text :ref:`Color<class_Color>` used when the item is hovered and not selected yet.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Tree_theme_color_font_hovered_dimmed_color:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`Color<class_Color>` **font_hovered_dimmed_color** = ``Color(0.875, 0.875, 0.875, 1)`` :ref:`🔗<class_Tree_theme_color_font_hovered_dimmed_color>`
+
+Text :ref:`Color<class_Color>` used when the item is hovered, while a button of the same item is hovered as the same time.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Tree_theme_color_font_hovered_selected_color:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`Color<class_Color>` **font_hovered_selected_color** = ``Color(1, 1, 1, 1)`` :ref:`🔗<class_Tree_theme_color_font_hovered_selected_color>`
+
+Text :ref:`Color<class_Color>` used when the item is hovered and selected.
 
 .. rst-class:: classref-item-separator
 
@@ -1424,6 +1670,18 @@ The default :ref:`Color<class_Color>` of the relationship lines.
 
 ----
 
+.. _class_Tree_theme_color_scroll_hint_color:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`Color<class_Color>` **scroll_hint_color** = ``Color(0, 0, 0, 1)`` :ref:`🔗<class_Tree_theme_color_scroll_hint_color>`
+
+:ref:`Color<class_Color>` used to modulate the :ref:`scroll_hint<class_Tree_theme_icon_scroll_hint>` texture.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_Tree_theme_color_title_button_color:
 
 .. rst-class:: classref-themeproperty
@@ -1448,6 +1706,18 @@ The horizontal space between each button in a cell.
 
 ----
 
+.. _class_Tree_theme_constant_check_h_separation:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`int<class_int>` **check_h_separation** = ``4`` :ref:`🔗<class_Tree_theme_constant_check_h_separation>`
+
+The horizontal space between the checkbox and the text in a :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem_constant_CELL_MODE_CHECK>` mode cell.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_Tree_theme_constant_children_hl_line_width:
 
 .. rst-class:: classref-themeproperty
@@ -1455,6 +1725,18 @@ The horizontal space between each button in a cell.
 :ref:`int<class_int>` **children_hl_line_width** = ``1`` :ref:`🔗<class_Tree_theme_constant_children_hl_line_width>`
 
 The width of the relationship lines between the selected :ref:`TreeItem<class_TreeItem>` and its children.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Tree_theme_constant_dragging_unfold_wait_msec:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`int<class_int>` **dragging_unfold_wait_msec** = ``500`` :ref:`🔗<class_Tree_theme_constant_dragging_unfold_wait_msec>`
+
+During a drag-and-drop, this is how many milliseconds to wait over a section before the section unfolds.
 
 .. rst-class:: classref-item-separator
 
@@ -1496,13 +1778,25 @@ The horizontal space between item cells. This is also used as the margin at the 
 
 ----
 
+.. _class_Tree_theme_constant_icon_h_separation:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`int<class_int>` **icon_h_separation** = ``4`` :ref:`🔗<class_Tree_theme_constant_icon_h_separation>`
+
+The horizontal space between the icon and the text in item's cells.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_Tree_theme_constant_icon_max_width:
 
 .. rst-class:: classref-themeproperty
 
 :ref:`int<class_int>` **icon_max_width** = ``0`` :ref:`🔗<class_Tree_theme_constant_icon_max_width>`
 
-The maximum allowed width of the icon in item's cells. This limit is applied on top of the default size of the icon, but before the value set with :ref:`TreeItem.set_icon_max_width<class_TreeItem_method_set_icon_max_width>`. The height is adjusted according to the icon's ratio.
+The maximum allowed width of the icon in item's cells. This limit is applied on top of the default size of the icon, but before the value set with :ref:`TreeItem.set_icon_max_width()<class_TreeItem_method_set_icon_max_width>`. The height is adjusted according to the icon's ratio.
 
 .. rst-class:: classref-item-separator
 
@@ -1816,7 +2110,7 @@ The arrow icon used when a foldable item is collapsed (for right-to-left layouts
 
 :ref:`Texture2D<class_Texture2D>` **checked** :ref:`🔗<class_Tree_theme_icon_checked>`
 
-The check icon to display when the :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem_constant_CELL_MODE_CHECK>` mode cell is checked and editable (see :ref:`TreeItem.set_editable<class_TreeItem_method_set_editable>`).
+The check icon to display when the :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem_constant_CELL_MODE_CHECK>` mode cell is checked and editable (see :ref:`TreeItem.set_editable()<class_TreeItem_method_set_editable>`).
 
 .. rst-class:: classref-item-separator
 
@@ -1828,7 +2122,7 @@ The check icon to display when the :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem
 
 :ref:`Texture2D<class_Texture2D>` **checked_disabled** :ref:`🔗<class_Tree_theme_icon_checked_disabled>`
 
-The check icon to display when the :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem_constant_CELL_MODE_CHECK>` mode cell is checked and non-editable (see :ref:`TreeItem.set_editable<class_TreeItem_method_set_editable>`).
+The check icon to display when the :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem_constant_CELL_MODE_CHECK>` mode cell is checked and non-editable (see :ref:`TreeItem.set_editable()<class_TreeItem_method_set_editable>`).
 
 .. rst-class:: classref-item-separator
 
@@ -1840,7 +2134,7 @@ The check icon to display when the :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem
 
 :ref:`Texture2D<class_Texture2D>` **indeterminate** :ref:`🔗<class_Tree_theme_icon_indeterminate>`
 
-The check icon to display when the :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem_constant_CELL_MODE_CHECK>` mode cell is indeterminate and editable (see :ref:`TreeItem.set_editable<class_TreeItem_method_set_editable>`).
+The check icon to display when the :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem_constant_CELL_MODE_CHECK>` mode cell is indeterminate and editable (see :ref:`TreeItem.set_editable()<class_TreeItem_method_set_editable>`).
 
 .. rst-class:: classref-item-separator
 
@@ -1852,7 +2146,19 @@ The check icon to display when the :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem
 
 :ref:`Texture2D<class_Texture2D>` **indeterminate_disabled** :ref:`🔗<class_Tree_theme_icon_indeterminate_disabled>`
 
-The check icon to display when the :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem_constant_CELL_MODE_CHECK>` mode cell is indeterminate and non-editable (see :ref:`TreeItem.set_editable<class_TreeItem_method_set_editable>`).
+The check icon to display when the :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem_constant_CELL_MODE_CHECK>` mode cell is indeterminate and non-editable (see :ref:`TreeItem.set_editable()<class_TreeItem_method_set_editable>`).
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Tree_theme_icon_scroll_hint:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`Texture2D<class_Texture2D>` **scroll_hint** :ref:`🔗<class_Tree_theme_icon_scroll_hint>`
+
+The indicator that will be shown when the content can still be scrolled. See :ref:`scroll_hint_mode<class_Tree_property_scroll_hint_mode>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1876,7 +2182,7 @@ The arrow icon to display for the :ref:`TreeItem.CELL_MODE_RANGE<class_TreeItem_
 
 :ref:`Texture2D<class_Texture2D>` **unchecked** :ref:`🔗<class_Tree_theme_icon_unchecked>`
 
-The check icon to display when the :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem_constant_CELL_MODE_CHECK>` mode cell is unchecked and editable (see :ref:`TreeItem.set_editable<class_TreeItem_method_set_editable>`).
+The check icon to display when the :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem_constant_CELL_MODE_CHECK>` mode cell is unchecked and editable (see :ref:`TreeItem.set_editable()<class_TreeItem_method_set_editable>`).
 
 .. rst-class:: classref-item-separator
 
@@ -1888,7 +2194,7 @@ The check icon to display when the :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem
 
 :ref:`Texture2D<class_Texture2D>` **unchecked_disabled** :ref:`🔗<class_Tree_theme_icon_unchecked_disabled>`
 
-The check icon to display when the :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem_constant_CELL_MODE_CHECK>` mode cell is unchecked and non-editable (see :ref:`TreeItem.set_editable<class_TreeItem_method_set_editable>`).
+The check icon to display when the :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem_constant_CELL_MODE_CHECK>` mode cell is unchecked and non-editable (see :ref:`TreeItem.set_editable()<class_TreeItem_method_set_editable>`).
 
 .. rst-class:: classref-item-separator
 
@@ -1901,6 +2207,18 @@ The check icon to display when the :ref:`TreeItem.CELL_MODE_CHECK<class_TreeItem
 :ref:`Texture2D<class_Texture2D>` **updown** :ref:`🔗<class_Tree_theme_icon_updown>`
 
 The updown arrow icon to display for the :ref:`TreeItem.CELL_MODE_RANGE<class_TreeItem_constant_CELL_MODE_RANGE>` mode cell.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Tree_theme_style_button_hover:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`StyleBox<class_StyleBox>` **button_hover** :ref:`🔗<class_Tree_theme_style_button_hover>`
+
+:ref:`StyleBox<class_StyleBox>` used when a button in the tree is hovered.
 
 .. rst-class:: classref-item-separator
 
@@ -1948,7 +2266,7 @@ The updown arrow icon to display for the :ref:`TreeItem.CELL_MODE_RANGE<class_Tr
 
 :ref:`StyleBox<class_StyleBox>` **custom_button** :ref:`🔗<class_Tree_theme_style_custom_button>`
 
-Default :ref:`StyleBox<class_StyleBox>` for a :ref:`TreeItem.CELL_MODE_CUSTOM<class_TreeItem_constant_CELL_MODE_CUSTOM>` mode cell when button is enabled with :ref:`TreeItem.set_custom_as_button<class_TreeItem_method_set_custom_as_button>`.
+Default :ref:`StyleBox<class_StyleBox>` for a :ref:`TreeItem.CELL_MODE_CUSTOM<class_TreeItem_constant_CELL_MODE_CUSTOM>` mode cell when button is enabled with :ref:`TreeItem.set_custom_as_button()<class_TreeItem_method_set_custom_as_button>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1985,6 +2303,54 @@ Default :ref:`StyleBox<class_StyleBox>` for a :ref:`TreeItem.CELL_MODE_CUSTOM<cl
 :ref:`StyleBox<class_StyleBox>` **focus** :ref:`🔗<class_Tree_theme_style_focus>`
 
 The focused style for the **Tree**, drawn on top of everything.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Tree_theme_style_hovered:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`StyleBox<class_StyleBox>` **hovered** :ref:`🔗<class_Tree_theme_style_hovered>`
+
+:ref:`StyleBox<class_StyleBox>` for the item being hovered, but not selected.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Tree_theme_style_hovered_dimmed:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`StyleBox<class_StyleBox>` **hovered_dimmed** :ref:`🔗<class_Tree_theme_style_hovered_dimmed>`
+
+:ref:`StyleBox<class_StyleBox>` for the item being hovered, while a button of the same item is hovered as the same time.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Tree_theme_style_hovered_selected:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`StyleBox<class_StyleBox>` **hovered_selected** :ref:`🔗<class_Tree_theme_style_hovered_selected>`
+
+:ref:`StyleBox<class_StyleBox>` for the hovered and selected items, used when the **Tree** is not being focused.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Tree_theme_style_hovered_selected_focus:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`StyleBox<class_StyleBox>` **hovered_selected_focus** :ref:`🔗<class_Tree_theme_style_hovered_selected_focus>`
+
+:ref:`StyleBox<class_StyleBox>` for the hovered and selected items, used when the **Tree** is being focused.
 
 .. rst-class:: classref-item-separator
 
@@ -2059,6 +2425,7 @@ Default :ref:`StyleBox<class_StyleBox>` for the title button.
 :ref:`StyleBox<class_StyleBox>` used when the title button is being pressed.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
