@@ -14,14 +14,16 @@ AudioEffectPhaser
 
 Adds a phaser audio effect to an audio bus.
 
-Combines the original signal with a copy that is slightly out of phase with the original.
+Creates several notch and peak filters that sweep across the spectrum.
 
 .. rst-class:: classref-introduction-group
 
 Description
 -----------
 
-Combines phase-shifted signals with the original signal. The movement of the phase-shifted signals is controlled using a low-frequency oscillator.
+A "phaser" effect creates a copy of the original audio that phase-rotates differently across the entire frequency spectrum, with the use of a series of all-pass filter stages (6 in this effect). This copy modulates with a low-frequency oscillator and combines with the original audio, resulting in peaks and troughs that sweep across the spectrum.
+
+This effect can be used to create a "glassy" or "bubbly" sound.
 
 .. rst-class:: classref-introduction-group
 
@@ -29,6 +31,8 @@ Tutorials
 ---------
 
 - :doc:`Audio buses <../tutorials/audio/audio_buses>`
+
+- :doc:`Audio effects <../tutorials/audio/audio_effects>`
 
 .. rst-class:: classref-reftable-group
 
@@ -70,7 +74,7 @@ Property Descriptions
 - |void| **set_depth**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_depth**\ (\ )
 
-Governs how high the filter frequencies sweep. Low value will primarily affect bass frequencies. High value can sweep high into the treble. Value can range from 0.1 to 4.
+Intensity of the effect. Value can range from 0.1 to 4.0.
 
 .. rst-class:: classref-item-separator
 
@@ -87,7 +91,7 @@ Governs how high the filter frequencies sweep. Low value will primarily affect b
 - |void| **set_feedback**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_feedback**\ (\ )
 
-Output percent of modified sound. Value can range from 0.1 to 0.9.
+The volume ratio of the filtered audio that is fed back to the all-pass filters. The higher the value, the sharper and louder the peak filters created by the effect. Value can range from 0.1 to 0.9.
 
 .. rst-class:: classref-item-separator
 
@@ -104,7 +108,7 @@ Output percent of modified sound. Value can range from 0.1 to 0.9.
 - |void| **set_range_max_hz**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_range_max_hz**\ (\ )
 
-Determines the maximum frequency affected by the LFO modulations, in Hz. Value can range from 10 to 10000.
+Determines the maximum frequency affected by the low-frequency oscillator modulations, in Hz. Value can range from 10 to 10000.
 
 .. rst-class:: classref-item-separator
 
@@ -121,7 +125,7 @@ Determines the maximum frequency affected by the LFO modulations, in Hz. Value c
 - |void| **set_range_min_hz**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_range_min_hz**\ (\ )
 
-Determines the minimum frequency affected by the LFO modulations, in Hz. Value can range from 10 to 10000.
+Determines the minimum frequency affected by the low-frequency oscillator modulations, in Hz. Value can range from 10 to 10000.
 
 .. rst-class:: classref-item-separator
 
@@ -138,9 +142,10 @@ Determines the minimum frequency affected by the LFO modulations, in Hz. Value c
 - |void| **set_rate_hz**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_rate_hz**\ (\ )
 
-Adjusts the rate in Hz at which the effect sweeps up and down across the frequency range.
+Adjusts the rate in Hz at which the effect sweeps up and down across the frequency range. Value can range from 0.01 to 20.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
