@@ -51,7 +51,7 @@ Booleans can be combined with the logical operators ``and``, ``or``, ``not`` to 
 
     if bullets > 0 and not is_reloading():
         launch_bullet()
-    
+
     if bullets == 0 or is_reloading():
         play_clack_sound()
 
@@ -61,7 +61,7 @@ Booleans can be combined with the logical operators ``and``, ``or``, ``not`` to 
     {
         LaunchBullet();
     }
-    
+
     if (bullets == 0 || IsReloading())
     {
         PlayClackSound();
@@ -71,7 +71,7 @@ Booleans can be combined with the logical operators ``and``, ``or``, ``not`` to 
 
 \ **Note:** In modern programming languages, logical operators are evaluated in order. All remaining conditions are skipped if their result would have no effect on the final value. This concept is known as `short-circuit evaluation <https://en.wikipedia.org/wiki/Short-circuit_evaluation>`__ and can be useful to avoid evaluating expensive conditions in some performance-critical cases.
 
-\ **Note:** By convention, built-in methods and properties that return booleans are usually defined as yes-no questions, single adjectives, or similar (:ref:`String.is_empty<class_String_method_is_empty>`, :ref:`Node.can_process<class_Node_method_can_process>`, :ref:`Camera2D.enabled<class_Camera2D_property_enabled>`, etc.).
+\ **Note:** By convention, built-in methods and properties that return booleans are usually defined as yes-no questions, single adjectives, or similar (:ref:`String.is_empty()<class_String_method_is_empty>`, :ref:`Node.can_process()<class_Node_method_can_process>`, :ref:`Camera2D.enabled<class_Camera2D_property_enabled>`, etc.).
 
 .. rst-class:: classref-reftable-group
 
@@ -171,7 +171,7 @@ Operator Descriptions
 
 :ref:`bool<class_bool>` **operator !=**\ (\ right\: :ref:`bool<class_bool>`\ ) :ref:`🔗<class_bool_operator_neq_bool>`
 
-Returns ``true`` if the two booleans are not equal. That is, one is ``true`` and the other is ``false``. This operation can be seen as a logical XOR.
+Returns ``true`` if one operand is ``true`` and the other operand is ``false``. Equivalent to logical **XOR** (**NEQ**).
 
 .. rst-class:: classref-item-separator
 
@@ -195,7 +195,7 @@ Returns ``true`` if the left operand is ``false`` and the right operand is ``tru
 
 :ref:`bool<class_bool>` **operator ==**\ (\ right\: :ref:`bool<class_bool>`\ ) :ref:`🔗<class_bool_operator_eq_bool>`
 
-Returns ``true`` if the two booleans are equal. That is, both are ``true`` or both are ``false``. This operation can be seen as a logical EQ or XNOR.
+Returns ``true`` if both operands are ``true``, or if both operands are ``false``. Equivalent to logical **XNOR** (**EQ**).
 
 .. rst-class:: classref-item-separator
 
@@ -210,6 +210,7 @@ Returns ``true`` if the two booleans are equal. That is, both are ``true`` or bo
 Returns ``true`` if the left operand is ``true`` and the right operand is ``false``.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
