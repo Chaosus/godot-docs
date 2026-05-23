@@ -21,6 +21,13 @@ Description
 
 **SpringArm3D** casts a ray or a shape along its Z axis and moves all its direct children to the collision point, with an optional margin. This is useful for 3rd person cameras that move closer to the player when inside a tight space (you may need to exclude the player's collider from the **SpringArm3D**'s collision check).
 
+.. rst-class:: classref-introduction-group
+
+Tutorials
+---------
+
+- :doc:`Third-person camera with spring arm <../tutorials/3d/spring_arm>`
+
 .. rst-class:: classref-reftable-group
 
 Properties
@@ -77,7 +84,7 @@ Property Descriptions
 - |void| **set_collision_mask**\ (\ value\: :ref:`int<class_int>`\ )
 - :ref:`int<class_int>` **get_collision_mask**\ (\ )
 
-The layers against which the collision check shall be done. See `Collision layers and masks <../tutorials/physics/physics_introduction.html#collision-layers-and-masks>`__ in the documentation for more information.
+The layers against which the collision check will be done. See `Collision layers and masks <../tutorials/physics/physics_introduction.html#collision-layers-and-masks>`__ in the documentation for more information.
 
 .. rst-class:: classref-item-separator
 
@@ -192,6 +199,7 @@ Returns the spring arm's current length.
 Removes the given :ref:`RID<class_RID>` from the list of :ref:`PhysicsBody3D<class_PhysicsBody3D>` objects excluded from the collision check.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
