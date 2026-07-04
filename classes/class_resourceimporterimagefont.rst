@@ -12,14 +12,14 @@ ResourceImporterImageFont
 
 **Inherits:** :ref:`ResourceImporter<class_ResourceImporter>` **<** :ref:`RefCounted<class_RefCounted>` **<** :ref:`Object<class_Object>`
 
-Imports a fixed-width bitmap font where all glyphs have the same width and height.
+Imports a bitmap font where all glyphs have the same width and height.
 
 .. rst-class:: classref-introduction-group
 
 Description
 -----------
 
-This image-based workflow can be easier to use than :ref:`ResourceImporterBMFont<class_ResourceImporterBMFont>`, but it requires all glyphs to have the same width and height. This makes **ResourceImporterImageFont** most suited to fixed-width fonts.
+This image-based workflow can be easier to use than :ref:`ResourceImporterBMFont<class_ResourceImporterBMFont>`, but it requires all glyphs to have the same width and height, glyph advances and drawing offsets can be customized. This makes **ResourceImporterImageFont** most suited to fixed-width fonts.
 
 See also :ref:`ResourceImporterDynamicFont<class_ResourceImporterDynamicFont>`.
 
@@ -101,13 +101,13 @@ Margin applied around every imported glyph. If your font image contains guides (
 
 :ref:`PackedStringArray<class_PackedStringArray>` **character_ranges** = ``PackedStringArray()`` :ref:`🔗<class_ResourceImporterImageFont_property_character_ranges>`
 
-The character ranges to import from the font image. This is an array that maps each position on the image (in tile coordinates, not pixels). The font atlas is traversed from left to right and top to bottom. Characters can be specified with decimal numbers (127), hexadecimal numbers (``0x007f``, or ``U+007f``) or between single quotes (``'~'``). Ranges can be specified with a hyphen between characters.
+The character ranges to import from the font image. This is an array that maps each position on the image (in tile coordinates, not pixels). The font atlas is traversed from left to right and top to bottom. Characters can be specified with decimal numbers (126), hexadecimal numbers (``0x007e`` or ``U+007e``), or between single quotes (``'~'``). Ranges can be specified with a hyphen between characters.
 
-For example, ``0-127`` represents the full ASCII range. It can also be written as ``0x0000-0x007f`` (or ``U+0000-U+007f``). As another example, ``' '-'~'`` is equivalent to ``32-127`` and represents the range of printable (visible) ASCII characters.
+For example, ``0-127`` represents the full ASCII range. It can also be written as ``0x0000-0x007f`` (or ``U+0000-U+007f``). As another example, ``' '-'~'`` is equivalent to ``32-126`` and represents the range of printable (visible) ASCII characters.
 
 For any range, the character advance and offset can be customized by appending three space-separated integer values (additional advance, x offset, y offset) to the end. For example ``'a'-'b' 4 5 2`` sets the advance to ``char_width + 4`` and offset to ``Vector2(5, 2)`` for both `a` and `b` characters.
 
-Make sure :ref:`character_ranges<class_ResourceImporterImageFont_property_character_ranges>` doesn't exceed the number of :ref:`columns<class_ResourceImporterImageFont_property_columns>` \* :ref:`rows<class_ResourceImporterImageFont_property_rows>` defined. Otherwise, the font will fail to import.
+\ **Note:** The overall number of characters must not exceed the number of :ref:`columns<class_ResourceImporterImageFont_property_columns>` multiplied by :ref:`rows<class_ResourceImporterImageFont_property_rows>`. Otherwise, the font will fail to import.
 
 **Note:** The returned array is *copied* and any changes to it will not update the original property value. See :ref:`PackedStringArray<class_PackedStringArray>` for more details.
 
@@ -183,7 +183,7 @@ Margin to cut on the sides of the entire image. This can be used to cut parts of
 
 Kerning pairs for the font. Kerning pair adjust the spacing between two characters.
 
-Each string consist of three space separated values: "from" string, "to" string and integer offset. Each combination form the two string for a kerning pair, e.g, ``ab cd -3`` will create kerning pairs ``ac``, ``ad``, ``bc``, and ``bd`` with offset ``-3``.
+Each string consist of three space separated values: "from" string, "to" string and integer offset. Each combination form the two string for a kerning pair, e.g, ``ab cd -3`` will create kerning pairs ``ac``, ``ad``, ``bc``, and ``bd`` with offset ``-3``. ``\uXXXX`` escape sequences can be used to add Unicode characters.
 
 **Note:** The returned array is *copied* and any changes to it will not update the original property value. See :ref:`PackedStringArray<class_PackedStringArray>` for more details.
 
@@ -212,6 +212,7 @@ Number of rows in the font image. See also :ref:`columns<class_ResourceImporterI
 Font scaling mode.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
