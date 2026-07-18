@@ -23,6 +23,8 @@ For purely linear transformations (translation, rotation, and scale), it is reco
 
 Used internally as :ref:`Camera3D<class_Camera3D>`'s projection matrix.
 
+\ **Note:** In a boolean context, a projection will evaluate to ``false`` if it's equal to :ref:`IDENTITY<class_Projection_constant_IDENTITY>`. Otherwise, a projection will always evaluate to ``true``.
+
 .. note::
 
 	There are notable differences when using this API with C#. See :ref:`doc_c_sharp_differences` for more information.
@@ -151,56 +153,71 @@ Operators
 
 .. rst-class:: classref-descriptions-group
 
-Constants
----------
+Enumerations
+------------
+
+.. _enum_Projection_Planes:
+
+.. rst-class:: classref-enumeration
+
+enum **Planes**: :ref:`🔗<enum_Projection_Planes>`
 
 .. _class_Projection_constant_PLANE_NEAR:
 
-.. rst-class:: classref-constant
+.. rst-class:: classref-enumeration-constant
 
-**PLANE_NEAR** = ``0`` :ref:`🔗<class_Projection_constant_PLANE_NEAR>`
+:ref:`Planes<enum_Projection_Planes>` **PLANE_NEAR** = ``0``
 
 The index value of the projection's near clipping plane.
 
 .. _class_Projection_constant_PLANE_FAR:
 
-.. rst-class:: classref-constant
+.. rst-class:: classref-enumeration-constant
 
-**PLANE_FAR** = ``1`` :ref:`🔗<class_Projection_constant_PLANE_FAR>`
+:ref:`Planes<enum_Projection_Planes>` **PLANE_FAR** = ``1``
 
 The index value of the projection's far clipping plane.
 
 .. _class_Projection_constant_PLANE_LEFT:
 
-.. rst-class:: classref-constant
+.. rst-class:: classref-enumeration-constant
 
-**PLANE_LEFT** = ``2`` :ref:`🔗<class_Projection_constant_PLANE_LEFT>`
+:ref:`Planes<enum_Projection_Planes>` **PLANE_LEFT** = ``2``
 
 The index value of the projection's left clipping plane.
 
 .. _class_Projection_constant_PLANE_TOP:
 
-.. rst-class:: classref-constant
+.. rst-class:: classref-enumeration-constant
 
-**PLANE_TOP** = ``3`` :ref:`🔗<class_Projection_constant_PLANE_TOP>`
+:ref:`Planes<enum_Projection_Planes>` **PLANE_TOP** = ``3``
 
 The index value of the projection's top clipping plane.
 
 .. _class_Projection_constant_PLANE_RIGHT:
 
-.. rst-class:: classref-constant
+.. rst-class:: classref-enumeration-constant
 
-**PLANE_RIGHT** = ``4`` :ref:`🔗<class_Projection_constant_PLANE_RIGHT>`
+:ref:`Planes<enum_Projection_Planes>` **PLANE_RIGHT** = ``4``
 
 The index value of the projection's right clipping plane.
 
 .. _class_Projection_constant_PLANE_BOTTOM:
 
-.. rst-class:: classref-constant
+.. rst-class:: classref-enumeration-constant
 
-**PLANE_BOTTOM** = ``5`` :ref:`🔗<class_Projection_constant_PLANE_BOTTOM>`
+:ref:`Planes<enum_Projection_Planes>` **PLANE_BOTTOM** = ``5``
 
 The index value of the projection bottom clipping plane.
+
+.. rst-class:: classref-section-separator
+
+----
+
+.. rst-class:: classref-descriptions-group
+
+Constants
+---------
 
 .. _class_Projection_constant_IDENTITY:
 
@@ -286,7 +303,9 @@ Constructor Descriptions
 
 :ref:`Projection<class_Projection>` **Projection**\ (\ ) :ref:`🔗<class_Projection_constructor_Projection>`
 
-Constructs a default-initialized **Projection** set to :ref:`IDENTITY<class_Projection_constant_IDENTITY>`.
+Constructs a default-initialized **Projection** identical to :ref:`IDENTITY<class_Projection_constant_IDENTITY>`.
+
+\ **Note:** In C#, this constructs a **Projection** identical to :ref:`ZERO<class_Projection_constant_ZERO>`.
 
 .. rst-class:: classref-item-separator
 
@@ -529,6 +548,8 @@ Returns the horizontal field of view of the projection (in degrees).
 
 Returns the vertical field of view of the projection (in degrees) associated with the given horizontal field of view (in degrees) and aspect ratio.
 
+\ **Note:** Unlike most methods of **Projection**, ``aspect`` is expected to be 1 divided by the X:Y aspect ratio.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -551,7 +572,7 @@ Returns the factor by which the visible level of detail is scaled by this **Proj
 
 :ref:`int<class_int>` **get_pixels_per_meter**\ (\ for_pixel_width\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_Projection_method_get_pixels_per_meter>`
 
-Returns the number of pixels with the given pixel width displayed per meter, after this **Projection** is applied.
+Returns ``for_pixel_width`` divided by the viewport's width measured in meters on the near plane, after this **Projection** is applied.
 
 .. rst-class:: classref-item-separator
 
@@ -725,6 +746,7 @@ Returns the column of the **Projection** with the given index.
 Indices are in the following order: x, y, z, w.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
