@@ -232,24 +232,39 @@ Operators
 
 .. rst-class:: classref-descriptions-group
 
-Constants
----------
+Enumerations
+------------
+
+.. _enum_Vector2_Axis:
+
+.. rst-class:: classref-enumeration
+
+enum **Axis**: :ref:`🔗<enum_Vector2_Axis>`
 
 .. _class_Vector2_constant_AXIS_X:
 
-.. rst-class:: classref-constant
+.. rst-class:: classref-enumeration-constant
 
-**AXIS_X** = ``0`` :ref:`🔗<class_Vector2_constant_AXIS_X>`
+:ref:`Axis<enum_Vector2_Axis>` **AXIS_X** = ``0``
 
-Enumerated value for the X axis. Returned by :ref:`max_axis_index<class_Vector2_method_max_axis_index>` and :ref:`min_axis_index<class_Vector2_method_min_axis_index>`.
+Enumerated value for the X axis. Returned by :ref:`max_axis_index()<class_Vector2_method_max_axis_index>` and :ref:`min_axis_index()<class_Vector2_method_min_axis_index>`.
 
 .. _class_Vector2_constant_AXIS_Y:
 
-.. rst-class:: classref-constant
+.. rst-class:: classref-enumeration-constant
 
-**AXIS_Y** = ``1`` :ref:`🔗<class_Vector2_constant_AXIS_Y>`
+:ref:`Axis<enum_Vector2_Axis>` **AXIS_Y** = ``1``
 
-Enumerated value for the Y axis. Returned by :ref:`max_axis_index<class_Vector2_method_max_axis_index>` and :ref:`min_axis_index<class_Vector2_method_min_axis_index>`.
+Enumerated value for the Y axis. Returned by :ref:`max_axis_index()<class_Vector2_method_max_axis_index>` and :ref:`min_axis_index()<class_Vector2_method_min_axis_index>`.
+
+.. rst-class:: classref-section-separator
+
+----
+
+.. rst-class:: classref-descriptions-group
+
+Constants
+---------
 
 .. _class_Vector2_constant_ZERO:
 
@@ -414,9 +429,9 @@ Returns this vector's angle with respect to the positive X axis, or ``(1, 0)`` v
 
 For example, ``Vector2.RIGHT.angle()`` will return zero, ``Vector2.DOWN.angle()`` will return ``PI / 2`` (a quarter turn, or 90 degrees), and ``Vector2(1, -1).angle()`` will return ``-PI / 4`` (a negative eighth turn, or -45 degrees).
 
-\ `Illustration of the returned angle. <https://raw.githubusercontent.com/godotengine/godot-docs/master/img/vector2_angle.png>`__\ 
+This is equivalent to calling :ref:`@GlobalScope.atan2()<class_@GlobalScope_method_atan2>` with :ref:`y<class_Vector2_property_y>` and :ref:`x<class_Vector2_property_x>`.
 
-Equivalent to the result of :ref:`@GlobalScope.atan2<class_@GlobalScope_method_atan2>` when called with the vector's :ref:`y<class_Vector2_property_y>` and :ref:`x<class_Vector2_property_x>` as parameters: ``atan2(y, x)``.
+\ `Illustration of the returned angle. <https://raw.githubusercontent.com/godotengine/godot-docs/master/img/vector2_angle.png>`__
 
 .. rst-class:: classref-item-separator
 
@@ -428,7 +443,7 @@ Equivalent to the result of :ref:`@GlobalScope.atan2<class_@GlobalScope_method_a
 
 :ref:`float<class_float>` **angle_to**\ (\ to\: :ref:`Vector2<class_Vector2>`\ ) |const| :ref:`🔗<class_Vector2_method_angle_to>`
 
-Returns the angle to the given vector, in radians.
+Returns the signed angle to the given vector, in radians. The result ranges from ``-PI`` to ``PI`` (inclusive).
 
 \ `Illustration of the returned angle. <https://raw.githubusercontent.com/godotengine/godot-docs/master/img/vector2_angle_to.png>`__
 
@@ -442,9 +457,9 @@ Returns the angle to the given vector, in radians.
 
 :ref:`float<class_float>` **angle_to_point**\ (\ to\: :ref:`Vector2<class_Vector2>`\ ) |const| :ref:`🔗<class_Vector2_method_angle_to_point>`
 
-Returns the angle between the line connecting the two points and the X axis, in radians.
+Returns the signed angle between the X axis and the line from this vector to point ``to``, in radians. The result ranges from ``-PI`` to ``PI`` (inclusive).
 
-\ ``a.angle_to_point(b)`` is equivalent of doing ``(b - a).angle()``.
+\ ``a.angle_to_point(b)`` is equivalent to ``(b - a).angle()``. See also :ref:`angle()<class_Vector2_method_angle>`.
 
 \ `Illustration of the returned angle. <https://raw.githubusercontent.com/godotengine/godot-docs/master/img/vector2_angle_to_point.png>`__
 
@@ -458,7 +473,7 @@ Returns the angle between the line connecting the two points and the X axis, in 
 
 :ref:`float<class_float>` **aspect**\ (\ ) |const| :ref:`🔗<class_Vector2_method_aspect>`
 
-Returns the aspect ratio of this vector, the ratio of :ref:`x<class_Vector2_property_x>` to :ref:`y<class_Vector2_property_y>`.
+Returns this vector's aspect ratio, which is :ref:`x<class_Vector2_property_x>` divided by :ref:`y<class_Vector2_property_y>`.
 
 .. rst-class:: classref-item-separator
 
@@ -496,7 +511,7 @@ Returns the point at the given ``t`` on the `Bézier curve <https://en.wikipedia
 
 Returns the vector "bounced off" from a line defined by the given normal ``n`` perpendicular to the line.
 
-\ **Note:** :ref:`bounce<class_Vector2_method_bounce>` performs the operation that most engines and frameworks call ``reflect()``.
+\ **Note:** :ref:`bounce()<class_Vector2_method_bounce>` performs the operation that most engines and frameworks call ``reflect()``.
 
 .. rst-class:: classref-item-separator
 
@@ -520,7 +535,7 @@ Returns a new vector with all components rounded up (towards positive infinity).
 
 :ref:`Vector2<class_Vector2>` **clamp**\ (\ min\: :ref:`Vector2<class_Vector2>`, max\: :ref:`Vector2<class_Vector2>`\ ) |const| :ref:`🔗<class_Vector2_method_clamp>`
 
-Returns a new vector with all components clamped between the components of ``min`` and ``max``, by running :ref:`@GlobalScope.clamp<class_@GlobalScope_method_clamp>` on each component.
+Returns a new vector with all components clamped between the components of ``min`` and ``max``, by running :ref:`@GlobalScope.clamp()<class_@GlobalScope_method_clamp>` on each component.
 
 .. rst-class:: classref-item-separator
 
@@ -532,7 +547,7 @@ Returns a new vector with all components clamped between the components of ``min
 
 :ref:`Vector2<class_Vector2>` **clampf**\ (\ min\: :ref:`float<class_float>`, max\: :ref:`float<class_float>`\ ) |const| :ref:`🔗<class_Vector2_method_clampf>`
 
-Returns a new vector with all components clamped between ``min`` and ``max``, by running :ref:`@GlobalScope.clamp<class_@GlobalScope_method_clamp>` on each component.
+Returns a new vector with all components clamped between ``min`` and ``max``, by running :ref:`@GlobalScope.clamp()<class_@GlobalScope_method_clamp>` on each component.
 
 .. rst-class:: classref-item-separator
 
@@ -574,7 +589,7 @@ Performs a cubic interpolation between this vector and ``b`` using ``pre_a`` and
 
 Performs a cubic interpolation between this vector and ``b`` using ``pre_a`` and ``post_b`` as handles, and returns the result at position ``weight``. ``weight`` is on the range of 0.0 to 1.0, representing the amount of interpolation.
 
-It can perform smoother interpolation than :ref:`cubic_interpolate<class_Vector2_method_cubic_interpolate>` by the time values.
+It can perform smoother interpolation than :ref:`cubic_interpolate()<class_Vector2_method_cubic_interpolate>` by the time values.
 
 .. rst-class:: classref-item-separator
 
@@ -586,7 +601,9 @@ It can perform smoother interpolation than :ref:`cubic_interpolate<class_Vector2
 
 :ref:`Vector2<class_Vector2>` **direction_to**\ (\ to\: :ref:`Vector2<class_Vector2>`\ ) |const| :ref:`🔗<class_Vector2_method_direction_to>`
 
-Returns the normalized vector pointing from this vector to ``to``. This is equivalent to using ``(b - a).normalized()``.
+Returns the normalized vector pointing from this vector to ``to``.
+
+\ ``a.direction_to(b)`` is equivalent to ``(b - a).normalized()``. See also :ref:`normalized()<class_Vector2_method_normalized>`.
 
 .. rst-class:: classref-item-separator
 
@@ -598,9 +615,9 @@ Returns the normalized vector pointing from this vector to ``to``. This is equiv
 
 :ref:`float<class_float>` **distance_squared_to**\ (\ to\: :ref:`Vector2<class_Vector2>`\ ) |const| :ref:`🔗<class_Vector2_method_distance_squared_to>`
 
-Returns the squared distance between this vector and ``to``.
+Returns the squared `Euclidean distance <https://en.wikipedia.org/wiki/Euclidean_distance>`__ between this vector and ``to``.
 
-This method runs faster than :ref:`distance_to<class_Vector2_method_distance_to>`, so prefer it if you need to compare vectors or need the squared distance for some formula.
+This method runs faster than :ref:`distance_to()<class_Vector2_method_distance_to>`, so prefer it if you need to compare vectors or need the squared distance for some formula.
 
 .. rst-class:: classref-item-separator
 
@@ -612,7 +629,7 @@ This method runs faster than :ref:`distance_to<class_Vector2_method_distance_to>
 
 :ref:`float<class_float>` **distance_to**\ (\ to\: :ref:`Vector2<class_Vector2>`\ ) |const| :ref:`🔗<class_Vector2_method_distance_to>`
 
-Returns the distance between this vector and ``to``.
+Returns the `Euclidean distance <https://en.wikipedia.org/wiki/Euclidean_distance>`__ between this vector and ``to``.
 
 .. rst-class:: classref-item-separator
 
@@ -626,7 +643,7 @@ Returns the distance between this vector and ``to``.
 
 Returns the dot product of this vector and ``with``. This can be used to compare the angle between two vectors. For example, this can be used to determine whether an enemy is facing the player.
 
-The dot product will be ``0`` for a straight angle (90 degrees), greater than 0 for angles narrower than 90 degrees and lower than 0 for angles wider than 90 degrees.
+The dot product will be ``0`` for a right angle (90 degrees), greater than 0 for angles narrower than 90 degrees and lower than 0 for angles wider than 90 degrees.
 
 When using unit (normalized) vectors, the result will always be between ``-1.0`` (180 degree angle) when the vectors are facing opposite directions, and ``1.0`` (0 degree angle) when the vectors are aligned.
 
@@ -654,13 +671,15 @@ Returns a new vector with all components rounded down (towards negative infinity
 
 :ref:`Vector2<class_Vector2>` **from_angle**\ (\ angle\: :ref:`float<class_float>`\ ) |static| :ref:`🔗<class_Vector2_method_from_angle>`
 
-Creates a unit **Vector2** rotated to the given ``angle`` in radians. This is equivalent to doing ``Vector2(cos(angle), sin(angle))`` or ``Vector2.RIGHT.rotated(angle)``.
+Creates a **Vector2** rotated to the given ``angle`` in radians. This is equivalent to doing ``Vector2(cos(angle), sin(angle))`` or ``Vector2.RIGHT.rotated(angle)``.
 
 ::
 
-    print(Vector2.from_angle(0)) # Prints (1, 0).
-    print(Vector2(1, 0).angle()) # Prints 0, which is the angle used above.
-    print(Vector2.from_angle(PI / 2)) # Prints (0, 1).
+    print(Vector2.from_angle(0)) # Prints (1.0, 0.0)
+    print(Vector2(1, 0).angle()) # Prints 0.0, which is the angle used above.
+    print(Vector2.from_angle(PI / 2)) # Prints (0.0, 1.0)
+
+\ **Note:** The length of the returned **Vector2** is *approximately* ``1.0``, but is is not guaranteed to be exactly ``1.0`` due to floating-point precision issues. Call :ref:`normalized()<class_Vector2_method_normalized>` on the returned **Vector2** if you require a unit vector.
 
 .. rst-class:: classref-item-separator
 
@@ -672,7 +691,7 @@ Creates a unit **Vector2** rotated to the given ``angle`` in radians. This is eq
 
 :ref:`bool<class_bool>` **is_equal_approx**\ (\ to\: :ref:`Vector2<class_Vector2>`\ ) |const| :ref:`🔗<class_Vector2_method_is_equal_approx>`
 
-Returns ``true`` if this vector and ``to`` are approximately equal, by running :ref:`@GlobalScope.is_equal_approx<class_@GlobalScope_method_is_equal_approx>` on each component.
+Returns ``true`` if this vector and ``to`` are approximately equal, by running :ref:`@GlobalScope.is_equal_approx()<class_@GlobalScope_method_is_equal_approx>` on each component.
 
 .. rst-class:: classref-item-separator
 
@@ -684,7 +703,7 @@ Returns ``true`` if this vector and ``to`` are approximately equal, by running :
 
 :ref:`bool<class_bool>` **is_finite**\ (\ ) |const| :ref:`🔗<class_Vector2_method_is_finite>`
 
-Returns ``true`` if this vector is finite, by calling :ref:`@GlobalScope.is_finite<class_@GlobalScope_method_is_finite>` on each component.
+Returns ``true`` if this vector is finite, by calling :ref:`@GlobalScope.is_finite()<class_@GlobalScope_method_is_finite>` on each component.
 
 .. rst-class:: classref-item-separator
 
@@ -708,9 +727,9 @@ Returns ``true`` if the vector is normalized, i.e. its length is approximately e
 
 :ref:`bool<class_bool>` **is_zero_approx**\ (\ ) |const| :ref:`🔗<class_Vector2_method_is_zero_approx>`
 
-Returns ``true`` if this vector's values are approximately zero, by running :ref:`@GlobalScope.is_zero_approx<class_@GlobalScope_method_is_zero_approx>` on each component.
+Returns ``true`` if this vector's values are approximately zero, by running :ref:`@GlobalScope.is_zero_approx()<class_@GlobalScope_method_is_zero_approx>` on each component.
 
-This method is faster than using :ref:`is_equal_approx<class_Vector2_method_is_equal_approx>` with one value as a zero vector.
+This method is faster than using :ref:`is_equal_approx()<class_Vector2_method_is_equal_approx>` with one value as a zero vector.
 
 .. rst-class:: classref-item-separator
 
@@ -736,7 +755,7 @@ Returns the length (magnitude) of this vector.
 
 Returns the squared length (squared magnitude) of this vector.
 
-This method runs faster than :ref:`length<class_Vector2_method_length>`, so prefer it if you need to compare vectors or need the squared distance for some formula.
+This method runs faster than :ref:`length()<class_Vector2_method_length>`, so prefer it if you need to compare vectors or need the squared distance for some formula.
 
 .. rst-class:: classref-item-separator
 
@@ -760,7 +779,7 @@ Returns the result of the linear interpolation between this vector and ``to`` by
 
 :ref:`Vector2<class_Vector2>` **limit_length**\ (\ length\: :ref:`float<class_float>` = 1.0\ ) |const| :ref:`🔗<class_Vector2_method_limit_length>`
 
-Returns the vector with a maximum length by limiting its length to ``length``.
+Returns the vector with a maximum length by limiting its length to ``length``. If the vector is non-finite, the result is undefined.
 
 .. rst-class:: classref-item-separator
 
@@ -856,7 +875,7 @@ Returns a new vector moved toward ``to`` by the fixed ``delta`` amount. Will not
 
 :ref:`Vector2<class_Vector2>` **normalized**\ (\ ) |const| :ref:`🔗<class_Vector2_method_normalized>`
 
-Returns the result of scaling the vector to unit length. Equivalent to ``v / v.length()``. Returns ``(0, 0)`` if ``v.length() == 0``. See also :ref:`is_normalized<class_Vector2_method_is_normalized>`.
+Returns the result of scaling the vector to unit length. Equivalent to ``v / v.length()``. Returns ``(0, 0)`` if ``v.length() == 0``. See also :ref:`is_normalized()<class_Vector2_method_is_normalized>`.
 
 \ **Note:** This function may return incorrect values if the input vector length is near zero.
 
@@ -882,7 +901,7 @@ Returns a perpendicular vector rotated 90 degrees counter-clockwise compared to 
 
 :ref:`Vector2<class_Vector2>` **posmod**\ (\ mod\: :ref:`float<class_float>`\ ) |const| :ref:`🔗<class_Vector2_method_posmod>`
 
-Returns a vector composed of the :ref:`@GlobalScope.fposmod<class_@GlobalScope_method_fposmod>` of this vector's components and ``mod``.
+Returns a vector composed of the :ref:`@GlobalScope.fposmod()<class_@GlobalScope_method_fposmod>` of this vector's components and ``mod``.
 
 .. rst-class:: classref-item-separator
 
@@ -894,7 +913,7 @@ Returns a vector composed of the :ref:`@GlobalScope.fposmod<class_@GlobalScope_m
 
 :ref:`Vector2<class_Vector2>` **posmodv**\ (\ modv\: :ref:`Vector2<class_Vector2>`\ ) |const| :ref:`🔗<class_Vector2_method_posmodv>`
 
-Returns a vector composed of the :ref:`@GlobalScope.fposmod<class_@GlobalScope_method_fposmod>` of this vector's components and ``modv``'s components.
+Returns a vector composed of the :ref:`@GlobalScope.fposmod()<class_@GlobalScope_method_fposmod>` of this vector's components and ``modv``'s components.
 
 .. rst-class:: classref-item-separator
 
@@ -906,7 +925,7 @@ Returns a vector composed of the :ref:`@GlobalScope.fposmod<class_@GlobalScope_m
 
 :ref:`Vector2<class_Vector2>` **project**\ (\ b\: :ref:`Vector2<class_Vector2>`\ ) |const| :ref:`🔗<class_Vector2_method_project>`
 
-Returns a new vector resulting from projecting this vector onto the given vector ``b``. The resulting new vector is parallel to ``b``. See also :ref:`slide<class_Vector2_method_slide>`.
+Returns a new vector resulting from projecting this vector onto the given vector ``b``. The resulting new vector is parallel to ``b``. See also :ref:`slide()<class_Vector2_method_slide>`.
 
 \ **Note:** If the vector ``b`` is a zero vector, the components of the resulting new vector will be :ref:`@GDScript.NAN<class_@GDScript_constant_NAN>`.
 
@@ -922,7 +941,7 @@ Returns a new vector resulting from projecting this vector onto the given vector
 
 Returns the result of reflecting the vector from a line defined by the given direction vector ``line``.
 
-\ **Note:** :ref:`reflect<class_Vector2_method_reflect>` differs from what other engines and frameworks call ``reflect()``. In other engines, ``reflect()`` takes a normal direction which is a direction perpendicular to the line. In Godot, you specify the direction of the line directly. See also :ref:`bounce<class_Vector2_method_bounce>` which does what most engines call ``reflect()``.
+\ **Note:** :ref:`reflect()<class_Vector2_method_reflect>` differs from what other engines and frameworks call ``reflect()``. In other engines, ``reflect()`` takes a normal direction which is a direction perpendicular to the line. In Godot, you specify the direction of the line directly. See also :ref:`bounce()<class_Vector2_method_bounce>` which does what most engines call ``reflect()``.
 
 .. rst-class:: classref-item-separator
 
@@ -934,7 +953,7 @@ Returns the result of reflecting the vector from a line defined by the given dir
 
 :ref:`Vector2<class_Vector2>` **rotated**\ (\ angle\: :ref:`float<class_float>`\ ) |const| :ref:`🔗<class_Vector2_method_rotated>`
 
-Returns the result of rotating this vector by ``angle`` (in radians). See also :ref:`@GlobalScope.deg_to_rad<class_@GlobalScope_method_deg_to_rad>`.
+Returns the result of rotating this vector by ``angle`` (in radians). See also :ref:`@GlobalScope.deg_to_rad()<class_@GlobalScope_method_deg_to_rad>`.
 
 .. rst-class:: classref-item-separator
 
@@ -958,7 +977,7 @@ Returns a new vector with all components rounded to the nearest integer, with ha
 
 :ref:`Vector2<class_Vector2>` **sign**\ (\ ) |const| :ref:`🔗<class_Vector2_method_sign>`
 
-Returns a new vector with each component set to ``1.0`` if it's positive, ``-1.0`` if it's negative, and ``0.0`` if it's zero. The result is identical to calling :ref:`@GlobalScope.sign<class_@GlobalScope_method_sign>` on each component.
+Returns a new vector with each component set to ``1.0`` if it's positive, ``-1.0`` if it's negative, and ``0.0`` if it's zero. The result is identical to calling :ref:`@GlobalScope.sign()<class_@GlobalScope_method_sign>` on each component.
 
 .. rst-class:: classref-item-separator
 
@@ -972,7 +991,7 @@ Returns a new vector with each component set to ``1.0`` if it's positive, ``-1.0
 
 Returns the result of spherical linear interpolation between this vector and ``to``, by amount ``weight``. ``weight`` is on the range of 0.0 to 1.0, representing the amount of interpolation.
 
-This method also handles interpolating the lengths if the input vectors have different lengths. For the special case of one or both input vectors having zero length, this method behaves like :ref:`lerp<class_Vector2_method_lerp>`.
+This method also handles interpolating the lengths if the input vectors have different lengths. For the special case of one or both input vectors having zero length, this method behaves like :ref:`lerp()<class_Vector2_method_lerp>`.
 
 .. rst-class:: classref-item-separator
 
@@ -984,9 +1003,9 @@ This method also handles interpolating the lengths if the input vectors have dif
 
 :ref:`Vector2<class_Vector2>` **slide**\ (\ n\: :ref:`Vector2<class_Vector2>`\ ) |const| :ref:`🔗<class_Vector2_method_slide>`
 
-Returns a new vector resulting from sliding this vector along a line with normal ``n``. The resulting new vector is perpendicular to ``n``, and is equivalent to this vector minus its projection on ``n``. See also :ref:`project<class_Vector2_method_project>`.
+Returns a new vector resulting from sliding this vector along a line with normal ``n``. The resulting new vector is perpendicular to ``n``, and is equivalent to this vector minus its projection on ``n``. See also :ref:`project()<class_Vector2_method_project>`.
 
-\ **Note:** The vector ``n`` must be normalized. See also :ref:`normalized<class_Vector2_method_normalized>`.
+\ **Note:** The vector ``n`` must be normalized. See also :ref:`normalized()<class_Vector2_method_normalized>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1029,7 +1048,7 @@ Operator Descriptions
 
 Returns ``true`` if the vectors are not equal.
 
-\ **Note:** Due to floating-point precision errors, consider using :ref:`is_equal_approx<class_Vector2_method_is_equal_approx>` instead, which is more reliable.
+\ **Note:** Due to floating-point precision errors, consider using :ref:`is_equal_approx()<class_Vector2_method_is_equal_approx>` instead, which is more reliable.
 
 \ **Note:** Vectors with :ref:`@GDScript.NAN<class_@GDScript_constant_NAN>` elements don't behave the same as other vectors. Therefore, the results from this operator may not be accurate if NaNs are included.
 
@@ -1045,9 +1064,9 @@ Returns ``true`` if the vectors are not equal.
 
 Inversely transforms (multiplies) the **Vector2** by the given :ref:`Transform2D<class_Transform2D>` transformation matrix, under the assumption that the transformation basis is orthonormal (i.e. rotation/reflection is fine, scaling/skew is not).
 
-\ ``vector * transform`` is equivalent to ``transform.inverse() * vector``. See :ref:`Transform2D.inverse<class_Transform2D_method_inverse>`.
+\ ``vector * transform`` is equivalent to ``transform.inverse() * vector``. See :ref:`Transform2D.inverse()<class_Transform2D_method_inverse>`.
 
-For transforming by inverse of an affine transformation (e.g. with scaling) ``transform.affine_inverse() * vector`` can be used instead. See :ref:`Transform2D.affine_inverse<class_Transform2D_method_affine_inverse>`.
+For transforming by inverse of an affine transformation (e.g. with scaling) ``transform.affine_inverse() * vector`` can be used instead. See :ref:`Transform2D.affine_inverse()<class_Transform2D_method_affine_inverse>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1063,7 +1082,7 @@ Multiplies each component of the **Vector2** by the components of the given **Ve
 
 ::
 
-    print(Vector2(10, 20) * Vector2(3, 4)) # Prints "(30, 80)"
+    print(Vector2(10, 20) * Vector2(3, 4)) # Prints (30.0, 80.0)
 
 .. rst-class:: classref-item-separator
 
@@ -1103,7 +1122,7 @@ Adds each component of the **Vector2** by the components of the given **Vector2*
 
 ::
 
-    print(Vector2(10, 20) + Vector2(3, 4)) # Prints "(13, 24)"
+    print(Vector2(10, 20) + Vector2(3, 4)) # Prints (13.0, 24.0)
 
 .. rst-class:: classref-item-separator
 
@@ -1119,7 +1138,7 @@ Subtracts each component of the **Vector2** by the components of the given **Vec
 
 ::
 
-    print(Vector2(10, 20) - Vector2(3, 4)) # Prints "(7, 16)"
+    print(Vector2(10, 20) - Vector2(3, 4)) # Prints (7.0, 16.0)
 
 .. rst-class:: classref-item-separator
 
@@ -1135,7 +1154,7 @@ Divides each component of the **Vector2** by the components of the given **Vecto
 
 ::
 
-    print(Vector2(10, 20) / Vector2(2, 5)) # Prints "(5, 4)"
+    print(Vector2(10, 20) / Vector2(2, 5)) # Prints (5.0, 4.0)
 
 .. rst-class:: classref-item-separator
 
@@ -1201,7 +1220,7 @@ Compares two **Vector2** vectors by first checking if the X value of the left ve
 
 Returns ``true`` if the vectors are exactly equal.
 
-\ **Note:** Due to floating-point precision errors, consider using :ref:`is_equal_approx<class_Vector2_method_is_equal_approx>` instead, which is more reliable.
+\ **Note:** Due to floating-point precision errors, consider using :ref:`is_equal_approx()<class_Vector2_method_is_equal_approx>` instead, which is more reliable.
 
 \ **Note:** Vectors with :ref:`@GDScript.NAN<class_@GDScript_constant_NAN>` elements don't behave the same as other vectors. Therefore, the results from this operator may not be accurate if NaNs are included.
 
@@ -1270,6 +1289,7 @@ Returns the same value as if the ``+`` was not there. Unary ``+`` does nothing, 
 Returns the negative value of the **Vector2**. This is the same as writing ``Vector2(-v.x, -v.y)``. This operation flips the direction of the vector while keeping the same magnitude. With floats, the number zero can be either positive or negative.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
