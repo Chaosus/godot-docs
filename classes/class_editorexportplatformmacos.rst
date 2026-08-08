@@ -48,7 +48,11 @@ Properties
    +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`application/icon_interpolation<class_EditorExportPlatformMacOS_property_application/icon_interpolation>`                                                                         |
    +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`String<class_String>`                       | :ref:`application/min_macos_version<class_EditorExportPlatformMacOS_property_application/min_macos_version>`                                                                           |
+   | :ref:`String<class_String>`                       | :ref:`application/liquid_glass_icon<class_EditorExportPlatformMacOS_property_application/liquid_glass_icon>`                                                                           |
+   +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`                       | :ref:`application/min_macos_version_arm64<class_EditorExportPlatformMacOS_property_application/min_macos_version_arm64>`                                                               |
+   +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`                       | :ref:`application/min_macos_version_x86_64<class_EditorExportPlatformMacOS_property_application/min_macos_version_x86_64>`                                                             |
    +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                       | :ref:`application/short_version<class_EditorExportPlatformMacOS_property_application/short_version>`                                                                                   |
    +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -67,6 +71,8 @@ Properties
    | :ref:`int<class_int>`                             | :ref:`codesign/codesign<class_EditorExportPlatformMacOS_property_codesign/codesign>`                                                                                                   |
    +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`PackedStringArray<class_PackedStringArray>` | :ref:`codesign/custom_options<class_EditorExportPlatformMacOS_property_codesign/custom_options>`                                                                                       |
+   +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`                       | :ref:`codesign/entitlements/additional<class_EditorExportPlatformMacOS_property_codesign/entitlements/additional>`                                                                     |
    +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`codesign/entitlements/address_book<class_EditorExportPlatformMacOS_property_codesign/entitlements/address_book>`                                                                 |
    +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -412,13 +418,13 @@ Properties
    +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`privacy/collected_data/purchase_history/used_for_tracking<class_EditorExportPlatformMacOS_property_privacy/collected_data/purchase_history/used_for_tracking>`                   |
    +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                           | :ref:`privacy/collected_data/search_hhistory/collected<class_EditorExportPlatformMacOS_property_privacy/collected_data/search_hhistory/collected>`                                     |
+   | :ref:`bool<class_bool>`                           | :ref:`privacy/collected_data/search_history/collected<class_EditorExportPlatformMacOS_property_privacy/collected_data/search_history/collected>`                                       |
    +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`int<class_int>`                             | :ref:`privacy/collected_data/search_hhistory/collection_purposes<class_EditorExportPlatformMacOS_property_privacy/collected_data/search_hhistory/collection_purposes>`                 |
+   | :ref:`int<class_int>`                             | :ref:`privacy/collected_data/search_history/collection_purposes<class_EditorExportPlatformMacOS_property_privacy/collected_data/search_history/collection_purposes>`                   |
    +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                           | :ref:`privacy/collected_data/search_hhistory/linked_to_user<class_EditorExportPlatformMacOS_property_privacy/collected_data/search_hhistory/linked_to_user>`                           |
+   | :ref:`bool<class_bool>`                           | :ref:`privacy/collected_data/search_history/linked_to_user<class_EditorExportPlatformMacOS_property_privacy/collected_data/search_history/linked_to_user>`                             |
    +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                           | :ref:`privacy/collected_data/search_hhistory/used_for_tracking<class_EditorExportPlatformMacOS_property_privacy/collected_data/search_hhistory/used_for_tracking>`                     |
+   | :ref:`bool<class_bool>`                           | :ref:`privacy/collected_data/search_history/used_for_tracking<class_EditorExportPlatformMacOS_property_privacy/collected_data/search_history/used_for_tracking>`                       |
    +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`privacy/collected_data/sensitive_info/collected<class_EditorExportPlatformMacOS_property_privacy/collected_data/sensitive_info/collected>`                                       |
    +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -471,6 +477,8 @@ Properties
    | :ref:`PackedStringArray<class_PackedStringArray>` | :ref:`privacy/tracking_domains<class_EditorExportPlatformMacOS_property_privacy/tracking_domains>`                                                                                     |
    +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`privacy/tracking_enabled<class_EditorExportPlatformMacOS_property_privacy/tracking_enabled>`                                                                                     |
+   +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                           | :ref:`shader_baker/enabled<class_EditorExportPlatformMacOS_property_shader_baker/enabled>`                                                                                             |
    +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                       | :ref:`ssh_remote_deploy/cleanup_script<class_EditorExportPlatformMacOS_property_ssh_remote_deploy/cleanup_script>`                                                                     |
    +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -609,13 +617,41 @@ Interpolation method used to resize application icon.
 
 ----
 
-.. _class_EditorExportPlatformMacOS_property_application/min_macos_version:
+.. _class_EditorExportPlatformMacOS_property_application/liquid_glass_icon:
 
 .. rst-class:: classref-property
 
-:ref:`String<class_String>` **application/min_macos_version** :ref:`🔗<class_EditorExportPlatformMacOS_property_application/min_macos_version>`
+:ref:`String<class_String>` **application/liquid_glass_icon** :ref:`🔗<class_EditorExportPlatformMacOS_property_application/liquid_glass_icon>`
 
-Minimum version of macOS required for this application to run in the ``major.minor.patch`` or ``major.minor`` format, can only contain numeric characters (``0-9``) and periods (``.``).
+macOS 26 Liquid Glass icon source file. Use `Icon Composer <https://developer.apple.com/icon-composer/>`__ to create Liquid Glass icons.
+
+\ **Note:** Supported when exporting from macOS only, Xcode 26+ required.
+
+\ **Note:** Liquid Glass icons are supported on macOS 26 only, use :ref:`application/icon<class_EditorExportPlatformMacOS_property_application/icon>` to set the icon for older macOS versions.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorExportPlatformMacOS_property_application/min_macos_version_arm64:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **application/min_macos_version_arm64** :ref:`🔗<class_EditorExportPlatformMacOS_property_application/min_macos_version_arm64>`
+
+Minimum version of macOS required for this application to run on Apple Silicon Macs, in the ``major.minor.patch`` or ``major.minor`` format, can only contain numeric characters (``0-9``) and periods (``.``).
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorExportPlatformMacOS_property_application/min_macos_version_x86_64:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **application/min_macos_version_x86_64** :ref:`🔗<class_EditorExportPlatformMacOS_property_application/min_macos_version_x86_64>`
+
+Minimum version of macOS required for this application to run on Intel Macs, in the ``major.minor.patch`` or ``major.minor`` format, can only contain numeric characters (``0-9``) and periods (``.``).
 
 .. rst-class:: classref-item-separator
 
@@ -627,7 +663,9 @@ Minimum version of macOS required for this application to run in the ``major.min
 
 :ref:`String<class_String>` **application/short_version** :ref:`🔗<class_EditorExportPlatformMacOS_property_application/short_version>`
 
-Application version visible to the user, can only contain numeric characters (``0-9``) and periods (``.``). Falls back to :ref:`ProjectSettings.application/config/version<class_ProjectSettings_property_application/config/version>` if left empty.
+Application version visible to the user. Can only contain numeric characters (``0-9``) and periods (``.``). Falls back to :ref:`ProjectSettings.application/config/version<class_ProjectSettings_property_application/config/version>` if left empty.
+
+\ **Note:** This value is used for the *Identity > Version* value in the generated Xcode project.
 
 .. rst-class:: classref-item-separator
 
@@ -651,7 +689,9 @@ A four-character creator code that is specific to the bundle. Optional.
 
 :ref:`String<class_String>` **application/version** :ref:`🔗<class_EditorExportPlatformMacOS_property_application/version>`
 
-Machine-readable application version, in the ``major.minor.patch`` format, can only contain numeric characters (``0-9``) and periods (``.``). This must be incremented on every new release pushed to the App Store.
+Machine-readable application version in the ``major.minor.patch`` format. Can only contain numeric characters (``0-9``) and periods (``.``). This must be incremented with every new release pushed to the App Store. Falls back to :ref:`ProjectSettings.application/config/version<class_ProjectSettings_property_application/config/version>` if left empty.
+
+\ **Note:** This value is used for the *Identity > Build* value in the generated Xcode project.
 
 .. rst-class:: classref-item-separator
 
@@ -733,7 +773,28 @@ Tool to use for code signing.
 
 Array of the additional command line arguments passed to the code signing tool.
 
-**Note:** The returned array is *copied* and any changes to it will not update the original property value. See :ref:`PackedStringArray<class_PackedStringArray>` for more details.
+
+
+.. classref_note::
+
+    The returned array is *copied* and any changes to it will not update the original property value. See :ref:`PackedStringArray<class_PackedStringArray>` for more details.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorExportPlatformMacOS_property_codesign/entitlements/additional:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **codesign/entitlements/additional** :ref:`🔗<class_EditorExportPlatformMacOS_property_codesign/entitlements/additional>`
+
+Additional data added to the root ``<dict>`` section of the `.entitlements <https://developer.apple.com/documentation/bundleresources/entitlements>`__ file. The value should be an XML section with pairs of key-value elements, for example:
+
+.. code:: text
+
+    <key>key_name</key>
+    <string>value</string>
 
 .. rst-class:: classref-item-separator
 
@@ -1335,7 +1396,7 @@ Indicates whether your app uses advertising data for tracking.
 
 :ref:`bool<class_bool>` **privacy/collected_data/audio_data/collected** :ref:`🔗<class_EditorExportPlatformMacOS_property_privacy/collected_data/audio_data/collected>`
 
-Indicates whether your app collects audio data data.
+Indicates whether your app collects audio data.
 
 .. rst-class:: classref-item-separator
 
@@ -1359,7 +1420,7 @@ The reasons your app collects audio data. See `Describing data use in privacy ma
 
 :ref:`bool<class_bool>` **privacy/collected_data/audio_data/linked_to_user** :ref:`🔗<class_EditorExportPlatformMacOS_property_privacy/collected_data/audio_data/linked_to_user>`
 
-Indicates whether your app links audio data data to the user's identity.
+Indicates whether your app links audio data to the user's identity.
 
 .. rst-class:: classref-item-separator
 
@@ -1371,7 +1432,7 @@ Indicates whether your app links audio data data to the user's identity.
 
 :ref:`bool<class_bool>` **privacy/collected_data/audio_data/used_for_tracking** :ref:`🔗<class_EditorExportPlatformMacOS_property_privacy/collected_data/audio_data/used_for_tracking>`
 
-Indicates whether your app uses audio data data for tracking.
+Indicates whether your app uses audio data for tracking.
 
 .. rst-class:: classref-item-separator
 
@@ -2817,11 +2878,11 @@ Indicates whether your app uses purchase history for tracking.
 
 ----
 
-.. _class_EditorExportPlatformMacOS_property_privacy/collected_data/search_hhistory/collected:
+.. _class_EditorExportPlatformMacOS_property_privacy/collected_data/search_history/collected:
 
 .. rst-class:: classref-property
 
-:ref:`bool<class_bool>` **privacy/collected_data/search_hhistory/collected** :ref:`🔗<class_EditorExportPlatformMacOS_property_privacy/collected_data/search_hhistory/collected>`
+:ref:`bool<class_bool>` **privacy/collected_data/search_history/collected** :ref:`🔗<class_EditorExportPlatformMacOS_property_privacy/collected_data/search_history/collected>`
 
 Indicates whether your app collects search history.
 
@@ -2829,11 +2890,11 @@ Indicates whether your app collects search history.
 
 ----
 
-.. _class_EditorExportPlatformMacOS_property_privacy/collected_data/search_hhistory/collection_purposes:
+.. _class_EditorExportPlatformMacOS_property_privacy/collected_data/search_history/collection_purposes:
 
 .. rst-class:: classref-property
 
-:ref:`int<class_int>` **privacy/collected_data/search_hhistory/collection_purposes** :ref:`🔗<class_EditorExportPlatformMacOS_property_privacy/collected_data/search_hhistory/collection_purposes>`
+:ref:`int<class_int>` **privacy/collected_data/search_history/collection_purposes** :ref:`🔗<class_EditorExportPlatformMacOS_property_privacy/collected_data/search_history/collection_purposes>`
 
 The reasons your app collects search history. See `Describing data use in privacy manifests <https://developer.apple.com/documentation/bundleresources/privacy_manifest_files/describing_data_use_in_privacy_manifests>`__.
 
@@ -2841,11 +2902,11 @@ The reasons your app collects search history. See `Describing data use in privac
 
 ----
 
-.. _class_EditorExportPlatformMacOS_property_privacy/collected_data/search_hhistory/linked_to_user:
+.. _class_EditorExportPlatformMacOS_property_privacy/collected_data/search_history/linked_to_user:
 
 .. rst-class:: classref-property
 
-:ref:`bool<class_bool>` **privacy/collected_data/search_hhistory/linked_to_user** :ref:`🔗<class_EditorExportPlatformMacOS_property_privacy/collected_data/search_hhistory/linked_to_user>`
+:ref:`bool<class_bool>` **privacy/collected_data/search_history/linked_to_user** :ref:`🔗<class_EditorExportPlatformMacOS_property_privacy/collected_data/search_history/linked_to_user>`
 
 Indicates whether your app links search history to the user's identity.
 
@@ -2853,11 +2914,11 @@ Indicates whether your app links search history to the user's identity.
 
 ----
 
-.. _class_EditorExportPlatformMacOS_property_privacy/collected_data/search_hhistory/used_for_tracking:
+.. _class_EditorExportPlatformMacOS_property_privacy/collected_data/search_history/used_for_tracking:
 
 .. rst-class:: classref-property
 
-:ref:`bool<class_bool>` **privacy/collected_data/search_hhistory/used_for_tracking** :ref:`🔗<class_EditorExportPlatformMacOS_property_privacy/collected_data/search_hhistory/used_for_tracking>`
+:ref:`bool<class_bool>` **privacy/collected_data/search_history/used_for_tracking** :ref:`🔗<class_EditorExportPlatformMacOS_property_privacy/collected_data/search_history/used_for_tracking>`
 
 Indicates whether your app uses search history for tracking.
 
@@ -3161,7 +3222,11 @@ A message displayed when requesting access to the user's removable drives (local
 
 The list of internet domains your app connects to that engage in tracking. See `Privacy manifest files <https://developer.apple.com/documentation/bundleresources/privacy_manifest_files>`__.
 
-**Note:** The returned array is *copied* and any changes to it will not update the original property value. See :ref:`PackedStringArray<class_PackedStringArray>` for more details.
+
+
+.. classref_note::
+
+    The returned array is *copied* and any changes to it will not update the original property value. See :ref:`PackedStringArray<class_PackedStringArray>` for more details.
 
 .. rst-class:: classref-item-separator
 
@@ -3174,6 +3239,20 @@ The list of internet domains your app connects to that engage in tracking. See `
 :ref:`bool<class_bool>` **privacy/tracking_enabled** :ref:`🔗<class_EditorExportPlatformMacOS_property_privacy/tracking_enabled>`
 
 Indicates whether your app uses data for tracking. See `Privacy manifest files <https://developer.apple.com/documentation/bundleresources/privacy_manifest_files>`__.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorExportPlatformMacOS_property_shader_baker/enabled:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **shader_baker/enabled** :ref:`🔗<class_EditorExportPlatformMacOS_property_shader_baker/enabled>`
+
+If ``true``, shaders will be compiled and embedded in the application. This option is only supported when using the Forward+ or Mobile renderers.
+
+\ **Note:** When exporting as a dedicated server, the shader baker is always disabled since no rendering is performed.
 
 .. rst-class:: classref-item-separator
 
@@ -3352,6 +3431,7 @@ Xcode build number used to build application executable.
 Xcode version used to build application executable.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
