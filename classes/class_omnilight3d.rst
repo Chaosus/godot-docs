@@ -33,7 +33,7 @@ An Omnidirectional light is a type of :ref:`Light3D<class_Light3D>` that emits l
 Tutorials
 ---------
 
-- :doc:`3D lights and shadows <../tutorials/3d/lights_and_shadows>`
+- `3D lights and shadows <../tutorials/3d/lights_and_shadows.html#omni-light>`__
 
 - :doc:`Faking global illumination <../tutorials/3d/global_illumination/faking_global_illumination>`
 
@@ -45,6 +45,8 @@ Properties
 .. table::
    :widths: auto
 
+   +------------------------------------------------+----------------------------------------------------------------------+-------------------------------------------------------------------------------+
+   | :ref:`float<class_float>`                      | light_specular                                                       | ``0.5`` (overrides :ref:`Light3D<class_Light3D_property_light_specular>`)     |
    +------------------------------------------------+----------------------------------------------------------------------+-------------------------------------------------------------------------------+
    | :ref:`float<class_float>`                      | :ref:`omni_attenuation<class_OmniLight3D_property_omni_attenuation>` | ``1.0``                                                                       |
    +------------------------------------------------+----------------------------------------------------------------------+-------------------------------------------------------------------------------+
@@ -148,9 +150,12 @@ The light's radius. Note that the effectively lit area may appear to be smaller 
 - |void| **set_shadow_mode**\ (\ value\: :ref:`ShadowMode<enum_OmniLight3D_ShadowMode>`\ )
 - :ref:`ShadowMode<enum_OmniLight3D_ShadowMode>` **get_shadow_mode**\ (\ )
 
-See :ref:`ShadowMode<enum_OmniLight3D_ShadowMode>`.
+.. container:: contribute
+
+	There is currently no description for this property. Please help us by `contributing one <https://contributing.godotengine.org/en/latest/documentation/class_reference.html>`__!
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
