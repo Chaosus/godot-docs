@@ -14,7 +14,7 @@ StreamPeerExtension
 
 .. container:: contribute
 
-	There is currently no description for this class. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+	There is currently no description for this class. Please help us by `contributing one <https://contributing.godotengine.org/en/latest/documentation/class_reference.html>`__!
 
 .. rst-class:: classref-reftable-group
 
@@ -25,15 +25,15 @@ Methods
    :widths: auto
 
    +---------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`int<class_int>`                 | :ref:`_get_available_bytes<class_StreamPeerExtension_private_method__get_available_bytes>`\ (\ ) |virtual| |const|                                                                        |
+   | :ref:`int<class_int>`                 | :ref:`_get_available_bytes<class_StreamPeerExtension_private_method__get_available_bytes>`\ (\ ) |virtual| |required| |const|                                                             |
    +---------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Error<enum_@GlobalScope_Error>` | :ref:`_get_data<class_StreamPeerExtension_private_method__get_data>`\ (\ r_buffer\: ``uint8_t*``, r_bytes\: :ref:`int<class_int>`, r_received\: ``int32_t*``\ ) |virtual|                 |
    +---------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Error<enum_@GlobalScope_Error>` | :ref:`_get_partial_data<class_StreamPeerExtension_private_method__get_partial_data>`\ (\ r_buffer\: ``uint8_t*``, r_bytes\: :ref:`int<class_int>`, r_received\: ``int32_t*``\ ) |virtual| |
    +---------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`Error<enum_@GlobalScope_Error>` | :ref:`_put_data<class_StreamPeerExtension_private_method__put_data>`\ (\ p_data\: ``const uint8_t*``, p_bytes\: :ref:`int<class_int>`, r_sent\: ``int32_t*``\ ) |virtual|                 |
+   | :ref:`Error<enum_@GlobalScope_Error>` | :ref:`_put_data<class_StreamPeerExtension_private_method__put_data>`\ (\ data\: ``const uint8_t*``, bytes\: :ref:`int<class_int>`, r_sent\: ``int32_t*``\ ) |virtual|                     |
    +---------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`Error<enum_@GlobalScope_Error>` | :ref:`_put_partial_data<class_StreamPeerExtension_private_method__put_partial_data>`\ (\ p_data\: ``const uint8_t*``, p_bytes\: :ref:`int<class_int>`, r_sent\: ``int32_t*``\ ) |virtual| |
+   | :ref:`Error<enum_@GlobalScope_Error>` | :ref:`_put_partial_data<class_StreamPeerExtension_private_method__put_partial_data>`\ (\ data\: ``const uint8_t*``, bytes\: :ref:`int<class_int>`, r_sent\: ``int32_t*``\ ) |virtual|     |
    +---------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. rst-class:: classref-section-separator
@@ -49,11 +49,11 @@ Method Descriptions
 
 .. rst-class:: classref-method
 
-:ref:`int<class_int>` **_get_available_bytes**\ (\ ) |virtual| |const| :ref:`🔗<class_StreamPeerExtension_private_method__get_available_bytes>`
+:ref:`int<class_int>` **_get_available_bytes**\ (\ ) |virtual| |required| |const| :ref:`🔗<class_StreamPeerExtension_private_method__get_available_bytes>`
 
 .. container:: contribute
 
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+	There is currently no description for this method. Please help us by `contributing one <https://contributing.godotengine.org/en/latest/documentation/class_reference.html>`__!
 
 .. rst-class:: classref-item-separator
 
@@ -67,7 +67,7 @@ Method Descriptions
 
 .. container:: contribute
 
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+	There is currently no description for this method. Please help us by `contributing one <https://contributing.godotengine.org/en/latest/documentation/class_reference.html>`__!
 
 .. rst-class:: classref-item-separator
 
@@ -81,7 +81,7 @@ Method Descriptions
 
 .. container:: contribute
 
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+	There is currently no description for this method. Please help us by `contributing one <https://contributing.godotengine.org/en/latest/documentation/class_reference.html>`__!
 
 .. rst-class:: classref-item-separator
 
@@ -91,11 +91,11 @@ Method Descriptions
 
 .. rst-class:: classref-method
 
-:ref:`Error<enum_@GlobalScope_Error>` **_put_data**\ (\ p_data\: ``const uint8_t*``, p_bytes\: :ref:`int<class_int>`, r_sent\: ``int32_t*``\ ) |virtual| :ref:`🔗<class_StreamPeerExtension_private_method__put_data>`
+:ref:`Error<enum_@GlobalScope_Error>` **_put_data**\ (\ data\: ``const uint8_t*``, bytes\: :ref:`int<class_int>`, r_sent\: ``int32_t*``\ ) |virtual| :ref:`🔗<class_StreamPeerExtension_private_method__put_data>`
 
 .. container:: contribute
 
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+	There is currently no description for this method. Please help us by `contributing one <https://contributing.godotengine.org/en/latest/documentation/class_reference.html>`__!
 
 .. rst-class:: classref-item-separator
 
@@ -105,13 +105,14 @@ Method Descriptions
 
 .. rst-class:: classref-method
 
-:ref:`Error<enum_@GlobalScope_Error>` **_put_partial_data**\ (\ p_data\: ``const uint8_t*``, p_bytes\: :ref:`int<class_int>`, r_sent\: ``int32_t*``\ ) |virtual| :ref:`🔗<class_StreamPeerExtension_private_method__put_partial_data>`
+:ref:`Error<enum_@GlobalScope_Error>` **_put_partial_data**\ (\ data\: ``const uint8_t*``, bytes\: :ref:`int<class_int>`, r_sent\: ``int32_t*``\ ) |virtual| :ref:`🔗<class_StreamPeerExtension_private_method__put_partial_data>`
 
 .. container:: contribute
 
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+	There is currently no description for this method. Please help us by `contributing one <https://contributing.godotengine.org/en/latest/documentation/class_reference.html>`__!
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
