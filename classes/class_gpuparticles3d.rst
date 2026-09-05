@@ -42,63 +42,71 @@ Properties
 .. table::
    :widths: auto
 
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`int<class_int>`                                     | :ref:`amount<class_GPUParticles3D_property_amount>`                           | ``8``                         |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`float<class_float>`                                 | :ref:`amount_ratio<class_GPUParticles3D_property_amount_ratio>`               | ``1.0``                       |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`float<class_float>`                                 | :ref:`collision_base_size<class_GPUParticles3D_property_collision_base_size>` | ``0.01``                      |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`DrawOrder<enum_GPUParticles3D_DrawOrder>`           | :ref:`draw_order<class_GPUParticles3D_property_draw_order>`                   | ``0``                         |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`Mesh<class_Mesh>`                                   | :ref:`draw_pass_1<class_GPUParticles3D_property_draw_pass_1>`                 |                               |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`Mesh<class_Mesh>`                                   | :ref:`draw_pass_2<class_GPUParticles3D_property_draw_pass_2>`                 |                               |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`Mesh<class_Mesh>`                                   | :ref:`draw_pass_3<class_GPUParticles3D_property_draw_pass_3>`                 |                               |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`Mesh<class_Mesh>`                                   | :ref:`draw_pass_4<class_GPUParticles3D_property_draw_pass_4>`                 |                               |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`int<class_int>`                                     | :ref:`draw_passes<class_GPUParticles3D_property_draw_passes>`                 | ``1``                         |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`Skin<class_Skin>`                                   | :ref:`draw_skin<class_GPUParticles3D_property_draw_skin>`                     |                               |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`bool<class_bool>`                                   | :ref:`emitting<class_GPUParticles3D_property_emitting>`                       | ``true``                      |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`float<class_float>`                                 | :ref:`explosiveness<class_GPUParticles3D_property_explosiveness>`             | ``0.0``                       |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`int<class_int>`                                     | :ref:`fixed_fps<class_GPUParticles3D_property_fixed_fps>`                     | ``30``                        |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`bool<class_bool>`                                   | :ref:`fract_delta<class_GPUParticles3D_property_fract_delta>`                 | ``true``                      |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`float<class_float>`                                 | :ref:`interp_to_end<class_GPUParticles3D_property_interp_to_end>`             | ``0.0``                       |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`bool<class_bool>`                                   | :ref:`interpolate<class_GPUParticles3D_property_interpolate>`                 | ``true``                      |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`float<class_float>`                                 | :ref:`lifetime<class_GPUParticles3D_property_lifetime>`                       | ``1.0``                       |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`bool<class_bool>`                                   | :ref:`local_coords<class_GPUParticles3D_property_local_coords>`               | ``false``                     |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`bool<class_bool>`                                   | :ref:`one_shot<class_GPUParticles3D_property_one_shot>`                       | ``false``                     |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`float<class_float>`                                 | :ref:`preprocess<class_GPUParticles3D_property_preprocess>`                   | ``0.0``                       |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`Material<class_Material>`                           | :ref:`process_material<class_GPUParticles3D_property_process_material>`       |                               |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`float<class_float>`                                 | :ref:`randomness<class_GPUParticles3D_property_randomness>`                   | ``0.0``                       |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`float<class_float>`                                 | :ref:`speed_scale<class_GPUParticles3D_property_speed_scale>`                 | ``1.0``                       |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`NodePath<class_NodePath>`                           | :ref:`sub_emitter<class_GPUParticles3D_property_sub_emitter>`                 | ``NodePath("")``              |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`bool<class_bool>`                                   | :ref:`trail_enabled<class_GPUParticles3D_property_trail_enabled>`             | ``false``                     |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`float<class_float>`                                 | :ref:`trail_lifetime<class_GPUParticles3D_property_trail_lifetime>`           | ``0.3``                       |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`TransformAlign<enum_GPUParticles3D_TransformAlign>` | :ref:`transform_align<class_GPUParticles3D_property_transform_align>`         | ``0``                         |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
-   | :ref:`AABB<class_AABB>`                                   | :ref:`visibility_aabb<class_GPUParticles3D_property_visibility_aabb>`         | ``AABB(-4, -4, -4, 8, 8, 8)`` |
-   +-----------------------------------------------------------+-------------------------------------------------------------------------------+-------------------------------+
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`int<class_int>`                                                                          | :ref:`amount<class_GPUParticles3D_property_amount>`                                                 | ``8``                         |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`float<class_float>`                                                                      | :ref:`amount_ratio<class_GPUParticles3D_property_amount_ratio>`                                     | ``1.0``                       |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`float<class_float>`                                                                      | :ref:`collision_base_size<class_GPUParticles3D_property_collision_base_size>`                       | ``0.01``                      |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`DrawOrder<enum_GPUParticles3D_DrawOrder>`                                                | :ref:`draw_order<class_GPUParticles3D_property_draw_order>`                                         | ``0``                         |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`Mesh<class_Mesh>`                                                                        | :ref:`draw_pass_1<class_GPUParticles3D_property_draw_pass_1>`                                       |                               |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`Mesh<class_Mesh>`                                                                        | :ref:`draw_pass_2<class_GPUParticles3D_property_draw_pass_2>`                                       |                               |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`Mesh<class_Mesh>`                                                                        | :ref:`draw_pass_3<class_GPUParticles3D_property_draw_pass_3>`                                       |                               |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`Mesh<class_Mesh>`                                                                        | :ref:`draw_pass_4<class_GPUParticles3D_property_draw_pass_4>`                                       |                               |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`int<class_int>`                                                                          | :ref:`draw_passes<class_GPUParticles3D_property_draw_passes>`                                       | ``1``                         |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`Skin<class_Skin>`                                                                        | :ref:`draw_skin<class_GPUParticles3D_property_draw_skin>`                                           |                               |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`bool<class_bool>`                                                                        | :ref:`emitting<class_GPUParticles3D_property_emitting>`                                             | ``true``                      |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`float<class_float>`                                                                      | :ref:`explosiveness<class_GPUParticles3D_property_explosiveness>`                                   | ``0.0``                       |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`int<class_int>`                                                                          | :ref:`fixed_fps<class_GPUParticles3D_property_fixed_fps>`                                           | ``30``                        |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`bool<class_bool>`                                                                        | :ref:`fract_delta<class_GPUParticles3D_property_fract_delta>`                                       | ``true``                      |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`float<class_float>`                                                                      | :ref:`interp_to_end<class_GPUParticles3D_property_interp_to_end>`                                   | ``0.0``                       |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`bool<class_bool>`                                                                        | :ref:`interpolate<class_GPUParticles3D_property_interpolate>`                                       | ``true``                      |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`float<class_float>`                                                                      | :ref:`lifetime<class_GPUParticles3D_property_lifetime>`                                             | ``1.0``                       |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`bool<class_bool>`                                                                        | :ref:`local_coords<class_GPUParticles3D_property_local_coords>`                                     | ``false``                     |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`bool<class_bool>`                                                                        | :ref:`one_shot<class_GPUParticles3D_property_one_shot>`                                             | ``false``                     |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`float<class_float>`                                                                      | :ref:`preprocess<class_GPUParticles3D_property_preprocess>`                                         | ``0.0``                       |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`Material<class_Material>`                                                                | :ref:`process_material<class_GPUParticles3D_property_process_material>`                             |                               |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`float<class_float>`                                                                      | :ref:`randomness<class_GPUParticles3D_property_randomness>`                                         | ``0.0``                       |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`int<class_int>`                                                                          | :ref:`seed<class_GPUParticles3D_property_seed>`                                                     | ``0``                         |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`float<class_float>`                                                                      | :ref:`speed_scale<class_GPUParticles3D_property_speed_scale>`                                       | ``1.0``                       |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`NodePath<class_NodePath>`                                                                | :ref:`sub_emitter<class_GPUParticles3D_property_sub_emitter>`                                       | ``NodePath("")``              |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`bool<class_bool>`                                                                        | :ref:`trail_enabled<class_GPUParticles3D_property_trail_enabled>`                                   | ``false``                     |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`float<class_float>`                                                                      | :ref:`trail_lifetime<class_GPUParticles3D_property_trail_lifetime>`                                 | ``0.3``                       |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`TransformAlign<enum_GPUParticles3D_TransformAlign>`                                      | :ref:`transform_align<class_GPUParticles3D_property_transform_align>`                               | ``0``                         |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`ParticlesTransformAlignAxis<enum_RenderingServer_ParticlesTransformAlignAxis>`           | :ref:`transform_align_axis<class_GPUParticles3D_property_transform_align_axis>`                     |                               |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`ParticlesTransformAlignCustomSrc<enum_RenderingServer_ParticlesTransformAlignCustomSrc>` | :ref:`transform_align_channel_filter<class_GPUParticles3D_property_transform_align_channel_filter>` |                               |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`bool<class_bool>`                                                                        | :ref:`use_fixed_seed<class_GPUParticles3D_property_use_fixed_seed>`                                 | ``false``                     |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
+   | :ref:`AABB<class_AABB>`                                                                        | :ref:`visibility_aabb<class_GPUParticles3D_property_visibility_aabb>`                               | ``AABB(-4, -4, -4, 8, 8, 8)`` |
+   +------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------+
 
 .. rst-class:: classref-reftable-group
 
@@ -117,7 +125,9 @@ Methods
    +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Mesh<class_Mesh>` | :ref:`get_draw_pass_mesh<class_GPUParticles3D_method_get_draw_pass_mesh>`\ (\ pass\: :ref:`int<class_int>`\ ) |const|                                                                                                                                                |
    +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | |void|                  | :ref:`restart<class_GPUParticles3D_method_restart>`\ (\ )                                                                                                                                                                                                            |
+   | |void|                  | :ref:`request_particles_process<class_GPUParticles3D_method_request_particles_process>`\ (\ process_time\: :ref:`float<class_float>`, process_time_residual\: :ref:`float<class_float>` = 0.0\ )                                                                     |
+   +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                  | :ref:`restart<class_GPUParticles3D_method_restart>`\ (\ keep_seed\: :ref:`bool<class_bool>` = false\ )                                                                                                                                                               |
    +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                  | :ref:`set_draw_pass_mesh<class_GPUParticles3D_method_set_draw_pass_mesh>`\ (\ pass\: :ref:`int<class_int>`, mesh\: :ref:`Mesh<class_Mesh>`\ )                                                                                                                        |
    +-------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -137,11 +147,11 @@ Signals
 
 **finished**\ (\ ) :ref:`🔗<class_GPUParticles3D_signal_finished>`
 
-Emitted when all active particles have finished processing. To immediately emit new particles, call :ref:`restart<class_GPUParticles3D_method_restart>`.
+Emitted when all active particles have finished processing. To immediately restart the emission cycle, call :ref:`restart()<class_GPUParticles3D_method_restart>`.
 
-Never emitted when :ref:`one_shot<class_GPUParticles3D_property_one_shot>` is disabled, as particles will be emitted and processed continuously.
+This signal is never emitted when :ref:`one_shot<class_GPUParticles3D_property_one_shot>` is disabled, as particles will be emitted and processed continuously.
 
-\ **Note:** For :ref:`one_shot<class_GPUParticles3D_property_one_shot>` emitters, due to the particles being computed on the GPU, there may be a short period after receiving the signal during which setting :ref:`emitting<class_GPUParticles3D_property_emitting>` to ``true`` will not restart the emission cycle. This delay is avoided by instead calling :ref:`restart<class_GPUParticles3D_method_restart>`.
+\ **Note:** For :ref:`one_shot<class_GPUParticles3D_property_one_shot>` emitters, due to the particles being computed on the GPU, there may be a short period after receiving the signal during which setting :ref:`emitting<class_GPUParticles3D_property_emitting>` to ``true`` will not restart the emission cycle. This delay is avoided by instead calling :ref:`restart()<class_GPUParticles3D_method_restart>`.
 
 .. rst-class:: classref-section-separator
 
@@ -256,11 +266,7 @@ enum **TransformAlign**: :ref:`🔗<enum_GPUParticles3D_TransformAlign>`
 
 :ref:`TransformAlign<enum_GPUParticles3D_TransformAlign>` **TRANSFORM_ALIGN_DISABLED** = ``0``
 
-.. container:: contribute
-
-	There is currently no description for this enum. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
-
-
+Do not align particle transforms relative to the camera or velocity.
 
 .. _class_GPUParticles3D_constant_TRANSFORM_ALIGN_Z_BILLBOARD:
 
@@ -268,11 +274,7 @@ enum **TransformAlign**: :ref:`🔗<enum_GPUParticles3D_TransformAlign>`
 
 :ref:`TransformAlign<enum_GPUParticles3D_TransformAlign>` **TRANSFORM_ALIGN_Z_BILLBOARD** = ``1``
 
-.. container:: contribute
-
-	There is currently no description for this enum. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
-
-
+Align each particle's Z axis to face the camera.
 
 .. _class_GPUParticles3D_constant_TRANSFORM_ALIGN_Y_TO_VELOCITY:
 
@@ -280,11 +282,7 @@ enum **TransformAlign**: :ref:`🔗<enum_GPUParticles3D_TransformAlign>`
 
 :ref:`TransformAlign<enum_GPUParticles3D_TransformAlign>` **TRANSFORM_ALIGN_Y_TO_VELOCITY** = ``2``
 
-.. container:: contribute
-
-	There is currently no description for this enum. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
-
-
+Align each particle's Y axis to the velocity vector.
 
 .. _class_GPUParticles3D_constant_TRANSFORM_ALIGN_Z_BILLBOARD_Y_TO_VELOCITY:
 
@@ -292,11 +290,15 @@ enum **TransformAlign**: :ref:`🔗<enum_GPUParticles3D_TransformAlign>`
 
 :ref:`TransformAlign<enum_GPUParticles3D_TransformAlign>` **TRANSFORM_ALIGN_Z_BILLBOARD_Y_TO_VELOCITY** = ``3``
 
-.. container:: contribute
+Align each particle's Z axis to face the camera and Y axis to the velocity vector.
 
-	There is currently no description for this enum. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+.. _class_GPUParticles3D_constant_TRANSFORM_ALIGN_LOCAL_BILLBOARD:
 
+.. rst-class:: classref-enumeration-constant
 
+:ref:`TransformAlign<enum_GPUParticles3D_TransformAlign>` **TRANSFORM_ALIGN_LOCAL_BILLBOARD** = ``4``
+
+Align each particle's Z axis to face the camera, while preserving a given axis (X or Y).
 
 .. rst-class:: classref-section-separator
 
@@ -392,7 +394,7 @@ The base diameter for particle collision in meters. If particles appear to sink 
 - |void| **set_draw_order**\ (\ value\: :ref:`DrawOrder<enum_GPUParticles3D_DrawOrder>`\ )
 - :ref:`DrawOrder<enum_GPUParticles3D_DrawOrder>` **get_draw_order**\ (\ )
 
-Particle draw order. Uses :ref:`DrawOrder<enum_GPUParticles3D_DrawOrder>` values.
+Particle draw order.
 
 \ **Note:** :ref:`DRAW_ORDER_INDEX<class_GPUParticles3D_constant_DRAW_ORDER_INDEX>` is the only option that supports motion vectors for effects like TAA. It is suggested to use this draw order if the particles are opaque to fix ghosting artifacts.
 
@@ -498,7 +500,7 @@ The number of draw passes when rendering particles.
 
 .. container:: contribute
 
-	There is currently no description for this property. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+	There is currently no description for this property. Please help us by `contributing one <https://contributing.godotengine.org/en/latest/documentation/class_reference.html>`__!
 
 .. rst-class:: classref-item-separator
 
@@ -519,7 +521,7 @@ If ``true``, particles are being emitted. :ref:`emitting<class_GPUParticles3D_pr
 
 \ **Note:** For :ref:`one_shot<class_GPUParticles3D_property_one_shot>` emitters, due to the particles being computed on the GPU, there may be a short period after receiving the :ref:`finished<class_GPUParticles3D_signal_finished>` signal during which setting this to ``true`` will not restart the emission cycle.
 
-\ **Tip:** If your :ref:`one_shot<class_GPUParticles3D_property_one_shot>` emitter needs to immediately restart emitting particles once :ref:`finished<class_GPUParticles3D_signal_finished>` signal is received, consider calling :ref:`restart<class_GPUParticles3D_method_restart>` instead of setting :ref:`emitting<class_GPUParticles3D_property_emitting>`.
+\ **Tip:** If your :ref:`one_shot<class_GPUParticles3D_property_one_shot>` emitter needs to immediately restart emitting particles once :ref:`finished<class_GPUParticles3D_signal_finished>` signal is received, consider calling :ref:`restart()<class_GPUParticles3D_method_restart>` instead of setting :ref:`emitting<class_GPUParticles3D_property_emitting>`.
 
 .. rst-class:: classref-item-separator
 
@@ -676,6 +678,8 @@ If ``true``, only the number of particles equal to :ref:`amount<class_GPUParticl
 
 Amount of time to preprocess the particles before animation starts. Lets you start the animation some time after particles have started emitting.
 
+\ **Note:** This can be very expensive if set to a high number as it requires running the particle shader a number of times equal to the :ref:`fixed_fps<class_GPUParticles3D_property_fixed_fps>` (or 30, if :ref:`fixed_fps<class_GPUParticles3D_property_fixed_fps>` is 0) for every second. In extreme cases it can even lead to a GPU crash due to the volume of work done in a single frame.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -709,6 +713,23 @@ Amount of time to preprocess the particles before animation starts. Lets you sta
 - :ref:`float<class_float>` **get_randomness_ratio**\ (\ )
 
 Emission randomness ratio.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_GPUParticles3D_property_seed:
+
+.. rst-class:: classref-property
+
+:ref:`int<class_int>` **seed** = ``0`` :ref:`🔗<class_GPUParticles3D_property_seed>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_seed**\ (\ value\: :ref:`int<class_int>`\ )
+- :ref:`int<class_int>` **get_seed**\ (\ )
+
+Sets the random seed used by the particle system. Only effective if :ref:`use_fixed_seed<class_GPUParticles3D_property_use_fixed_seed>` is ``true``.
 
 .. rst-class:: classref-item-separator
 
@@ -799,9 +820,58 @@ The amount of time the particle's trail should represent (in seconds). Only effe
 - |void| **set_transform_align**\ (\ value\: :ref:`TransformAlign<enum_GPUParticles3D_TransformAlign>`\ )
 - :ref:`TransformAlign<enum_GPUParticles3D_TransformAlign>` **get_transform_align**\ (\ )
 
-.. container:: contribute
+The alignment of particles. Use this for billboarding and aligning to velocity.
 
-	There is currently no description for this property. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_GPUParticles3D_property_transform_align_axis:
+
+.. rst-class:: classref-property
+
+:ref:`ParticlesTransformAlignAxis<enum_RenderingServer_ParticlesTransformAlignAxis>` **transform_align_axis** :ref:`🔗<class_GPUParticles3D_property_transform_align_axis>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_transform_align_axis**\ (\ value\: :ref:`ParticlesTransformAlignAxis<enum_RenderingServer_ParticlesTransformAlignAxis>`\ )
+- :ref:`ParticlesTransformAlignAxis<enum_RenderingServer_ParticlesTransformAlignAxis>` **get_transform_align_axis**\ (\ )
+
+When using transform align local billboard, which axis to use for the billboarding. Supports only X or Y.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_GPUParticles3D_property_transform_align_channel_filter:
+
+.. rst-class:: classref-property
+
+:ref:`ParticlesTransformAlignCustomSrc<enum_RenderingServer_ParticlesTransformAlignCustomSrc>` **transform_align_channel_filter** :ref:`🔗<class_GPUParticles3D_property_transform_align_channel_filter>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_transform_align_channel_filter**\ (\ value\: :ref:`ParticlesTransformAlignCustomSrc<enum_RenderingServer_ParticlesTransformAlignCustomSrc>`\ )
+- :ref:`ParticlesTransformAlignCustomSrc<enum_RenderingServer_ParticlesTransformAlignCustomSrc>` **get_transform_align_channel_filter**\ (\ )
+
+In the case of billboarded particles, which custom channel to read from to calculate their angle.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_GPUParticles3D_property_use_fixed_seed:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **use_fixed_seed** = ``false`` :ref:`🔗<class_GPUParticles3D_property_use_fixed_seed>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_use_fixed_seed**\ (\ value\: :ref:`bool<class_bool>`\ )
+- :ref:`bool<class_bool>` **get_use_fixed_seed**\ (\ )
+
+If ``true``, particles will use the same seed for every simulation using the seed defined in :ref:`seed<class_GPUParticles3D_property_seed>`. This is useful for situations where the visual outcome should be consistent across replays, for example when using Movie Maker mode.
 
 .. rst-class:: classref-item-separator
 
@@ -865,7 +935,11 @@ Sets this node's properties to match a given :ref:`CPUParticles3D<class_CPUParti
 
 Emits a single particle. Whether ``xform``, ``velocity``, ``color`` and ``custom`` are applied depends on the value of ``flags``. See :ref:`EmitFlags<enum_GPUParticles3D_EmitFlags>`.
 
-The default ParticleProcessMaterial will overwrite ``color`` and use the contents of ``custom`` as ``(rotation, age, animation, lifetime)``.
+The default ParticleProcessMaterial needs to have :ref:`ParticleProcessMaterial.particle_flag_preserve_color<class_ParticleProcessMaterial_property_particle_flag_preserve_color>` set to ``true`` to correctly use the color given from this function.
+
+Additionally, it will use the contents of ``custom`` as ``(rotation, lifetime, animation, lifetime randomness)``.
+
+\ **Note:** :ref:`emit_particle()<class_GPUParticles3D_method_emit_particle>` is only supported on the Forward+ and Mobile rendering methods, not Compatibility.
 
 .. rst-class:: classref-item-separator
 
@@ -883,15 +957,31 @@ Returns the :ref:`Mesh<class_Mesh>` that is drawn at index ``pass``.
 
 ----
 
+.. _class_GPUParticles3D_method_request_particles_process:
+
+.. rst-class:: classref-method
+
+|void| **request_particles_process**\ (\ process_time\: :ref:`float<class_float>`, process_time_residual\: :ref:`float<class_float>` = 0.0\ ) :ref:`🔗<class_GPUParticles3D_method_request_particles_process>`
+
+Requests the particles to process for extra process time during a single frame.
+
+\ ``process_time`` defines the time that the particles will process while emitting is on. ``process_time_residual`` defines the time that particles will process with emitting turned off for the simulation. When combined with :ref:`speed_scale<class_GPUParticles3D_property_speed_scale>` set to ``0.0``, this is useful to be able to seek a particle system timeline.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_GPUParticles3D_method_restart:
 
 .. rst-class:: classref-method
 
-|void| **restart**\ (\ ) :ref:`🔗<class_GPUParticles3D_method_restart>`
+|void| **restart**\ (\ keep_seed\: :ref:`bool<class_bool>` = false\ ) :ref:`🔗<class_GPUParticles3D_method_restart>`
 
 Restarts the particle emission cycle, clearing existing particles. To avoid particles vanishing from the viewport, wait for the :ref:`finished<class_GPUParticles3D_signal_finished>` signal before calling.
 
 \ **Note:** The :ref:`finished<class_GPUParticles3D_signal_finished>` signal is only emitted by :ref:`one_shot<class_GPUParticles3D_property_one_shot>` emitters.
+
+If ``keep_seed`` is ``true``, the current random seed will be preserved. Useful for seeking and playback.
 
 .. rst-class:: classref-item-separator
 
@@ -906,6 +996,7 @@ Restarts the particle emission cycle, clearing existing particles. To avoid part
 Sets the :ref:`Mesh<class_Mesh>` that is drawn at index ``pass``.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
