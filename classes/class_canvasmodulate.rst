@@ -24,6 +24,13 @@ Description
 
 **CanvasModulate** applies a color tint to all nodes on a canvas. Only one can be used to tint a canvas, but :ref:`CanvasLayer<class_CanvasLayer>`\ s can be used to render things independently.
 
+.. rst-class:: classref-introduction-group
+
+Tutorials
+---------
+
+- :doc:`2D lights and shadows <../tutorials/2d/2d_lights_and_shadows>`
+
 .. rst-class:: classref-reftable-group
 
 Properties
@@ -59,6 +66,7 @@ Property Descriptions
 The tint color to apply.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

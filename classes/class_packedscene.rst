@@ -25,7 +25,7 @@ Can be used to save a node to a file. When saving, the node as well as all the n
 
 \ **Note:** The node doesn't need to own itself.
 
-\ **Example of loading a saved scene:**\ 
+\ **Example:** Load a saved scene:
 
 
 .. tabs::
@@ -46,7 +46,7 @@ Can be used to save a node to a file. When saving, the node as well as all the n
 
 
 
-\ **Example of saving a node with different owners:** The following example creates 3 objects: :ref:`Node2D<class_Node2D>` (``node``), :ref:`RigidBody2D<class_RigidBody2D>` (``body``) and :ref:`CollisionObject2D<class_CollisionObject2D>` (``collision``). ``collision`` is a child of ``body`` which is a child of ``node``. Only ``body`` is owned by ``node`` and :ref:`pack<class_PackedScene_method_pack>` will therefore only save those two nodes, but not ``collision``.
+\ **Example:** Save a node with different owners. The following example creates 3 objects: :ref:`Node2D<class_Node2D>` (\ ``node``), :ref:`RigidBody2D<class_RigidBody2D>` (\ ``body``) and :ref:`CollisionObject2D<class_CollisionObject2D>` (\ ``collision``). ``collision`` is a child of ``body`` which is a child of ``node``. Only ``body`` is owned by ``node`` and :ref:`pack()<class_PackedScene_method_pack>` will therefore only save those two nodes, but not ``collision``.
 
 
 .. tabs::
@@ -57,15 +57,15 @@ Can be used to save a node to a file. When saving, the node as well as all the n
     var node = Node2D.new()
     var body = RigidBody2D.new()
     var collision = CollisionShape2D.new()
-    
+
     # Create the object hierarchy.
     body.add_child(collision)
     node.add_child(body)
-    
+
     # Change owner of `body`, but not of `collision`.
     body.owner = node
     var scene = PackedScene.new()
-    
+
     # Only `node` and `body` are now packed.
     var result = scene.pack(node)
     if result == OK:
@@ -79,15 +79,15 @@ Can be used to save a node to a file. When saving, the node as well as all the n
     var node = new Node2D();
     var body = new RigidBody2D();
     var collision = new CollisionShape2D();
-    
+
     // Create the object hierarchy.
     body.AddChild(collision);
     node.AddChild(body);
-    
+
     // Change owner of `body`, but not of `collision`.
     body.Owner = node;
     var scene = new PackedScene();
-    
+
     // Only `node` and `body` are now packed.
     Error result = scene.Pack(node);
     if (result == Error.Ok)
@@ -107,18 +107,6 @@ Tutorials
 ---------
 
 - `2D Role Playing Game (RPG) Demo <https://godotengine.org/asset-library/asset/2729>`__
-
-.. rst-class:: classref-reftable-group
-
-Properties
-----------
-
-.. table::
-   :widths: auto
-
-   +-------------------------------------+------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`Dictionary<class_Dictionary>` | :ref:`_bundled<class_PackedScene_property__bundled>` | ``{ "conn_count": 0, "conns": PackedInt32Array(), "editable_instances": [], "names": PackedStringArray(), "node_count": 0, "node_paths": [], "nodes": PackedInt32Array(), "variants": [], "version": 3 }`` |
-   +-------------------------------------+------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. rst-class:: classref-reftable-group
 
@@ -159,7 +147,7 @@ enum **GenEditState**: :ref:`🔗<enum_PackedScene_GenEditState>`
 
 :ref:`GenEditState<enum_PackedScene_GenEditState>` **GEN_EDIT_STATE_DISABLED** = ``0``
 
-If passed to :ref:`instantiate<class_PackedScene_method_instantiate>`, blocks edits to the scene state.
+If passed to :ref:`instantiate()<class_PackedScene_method_instantiate>`, blocks edits to the scene state.
 
 .. _class_PackedScene_constant_GEN_EDIT_STATE_INSTANCE:
 
@@ -167,7 +155,7 @@ If passed to :ref:`instantiate<class_PackedScene_method_instantiate>`, blocks ed
 
 :ref:`GenEditState<enum_PackedScene_GenEditState>` **GEN_EDIT_STATE_INSTANCE** = ``1``
 
-If passed to :ref:`instantiate<class_PackedScene_method_instantiate>`, provides local scene resources to the local scene.
+If passed to :ref:`instantiate()<class_PackedScene_method_instantiate>`, provides local scene resources to the local scene.
 
 \ **Note:** Only available in editor builds.
 
@@ -177,7 +165,7 @@ If passed to :ref:`instantiate<class_PackedScene_method_instantiate>`, provides 
 
 :ref:`GenEditState<enum_PackedScene_GenEditState>` **GEN_EDIT_STATE_MAIN** = ``2``
 
-If passed to :ref:`instantiate<class_PackedScene_method_instantiate>`, provides local scene resources to the local scene. Only the main scene should receive the main edit state.
+If passed to :ref:`instantiate()<class_PackedScene_method_instantiate>`, provides local scene resources to the local scene. Only the main scene should receive the main edit state.
 
 \ **Note:** Only available in editor builds.
 
@@ -190,25 +178,6 @@ If passed to :ref:`instantiate<class_PackedScene_method_instantiate>`, provides 
 It's similar to :ref:`GEN_EDIT_STATE_MAIN<class_PackedScene_constant_GEN_EDIT_STATE_MAIN>`, but for the case where the scene is being instantiated to be the base of another one.
 
 \ **Note:** Only available in editor builds.
-
-.. rst-class:: classref-section-separator
-
-----
-
-.. rst-class:: classref-descriptions-group
-
-Property Descriptions
----------------------
-
-.. _class_PackedScene_property__bundled:
-
-.. rst-class:: classref-property
-
-:ref:`Dictionary<class_Dictionary>` **_bundled** = ``{ "conn_count": 0, "conns": PackedInt32Array(), "editable_instances": [], "names": PackedStringArray(), "node_count": 0, "node_paths": [], "nodes": PackedInt32Array(), "variants": [], "version": 3 }`` :ref:`🔗<class_PackedScene_property__bundled>`
-
-A dictionary representation of the scene contents.
-
-Available keys include "names" and "variants" for resources, "node_count", "nodes", "node_paths" for nodes, "editable_instances" for paths to overridden nodes, "conn_count" and "conns" for signal connections, and "version" for the format style of the PackedScene.
 
 .. rst-class:: classref-section-separator
 
@@ -264,6 +233,7 @@ Instantiates the scene's node hierarchy. Triggers child scene instantiation(s). 
 Packs the ``path`` node, and all owned sub-nodes, into this **PackedScene**. Any existing data will be cleared. See :ref:`Node.owner<class_Node_property_owner>`.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
