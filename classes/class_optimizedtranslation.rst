@@ -12,14 +12,16 @@ OptimizedTranslation
 
 **Inherits:** :ref:`Translation<class_Translation>` **<** :ref:`Resource<class_Resource>` **<** :ref:`RefCounted<class_RefCounted>` **<** :ref:`Object<class_Object>`
 
-An optimized translation, used by default for CSV Translations.
+An optimized translation.
 
 .. rst-class:: classref-introduction-group
 
 Description
 -----------
 
-An optimized translation, used by default for CSV Translations. Uses real-time compressed translations, which results in very small dictionaries.
+An optimized translation. Uses real-time compressed translations, which results in very small dictionaries.
+
+This class does not store the untranslated strings for optimization purposes. Therefore, :ref:`Translation.get_message_list()<class_Translation_method_get_message_list>` always returns an empty array, and :ref:`Translation.get_message_count()<class_Translation_method_get_message_count>` always returns ``0``.
 
 .. rst-class:: classref-reftable-group
 
@@ -29,9 +31,9 @@ Methods
 .. table::
    :widths: auto
 
-   +--------+-----------------------------------------------------------------------------------------------------------------+
-   | |void| | :ref:`generate<class_OptimizedTranslation_method_generate>`\ (\ from\: :ref:`Translation<class_Translation>`\ ) |
-   +--------+-----------------------------------------------------------------------------------------------------------------+
+   +-------------------------+-----------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>` | :ref:`generate<class_OptimizedTranslation_method_generate>`\ (\ from\: :ref:`Translation<class_Translation>`\ ) |
+   +-------------------------+-----------------------------------------------------------------------------------------------------------------+
 
 .. rst-class:: classref-section-separator
 
@@ -46,11 +48,16 @@ Method Descriptions
 
 .. rst-class:: classref-method
 
-|void| **generate**\ (\ from\: :ref:`Translation<class_Translation>`\ ) :ref:`🔗<class_OptimizedTranslation_method_generate>`
+:ref:`bool<class_bool>` **generate**\ (\ from\: :ref:`Translation<class_Translation>`\ ) :ref:`🔗<class_OptimizedTranslation_method_generate>`
 
-Generates and sets an optimized translation from the given :ref:`Translation<class_Translation>` resource.
+Generates and sets an optimized translation from the given :ref:`Translation<class_Translation>` resource. Returns ``true`` if successful.
+
+\ **Note:** Messages in ``from`` should not use context or plural forms.
+
+\ **Note:** This method is intended to be used in the editor. It does nothing when called from an exported project.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

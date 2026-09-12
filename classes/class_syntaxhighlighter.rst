@@ -78,7 +78,7 @@ Virtual method which can be overridden to clear any local caches.
 
 Virtual method which can be overridden to return syntax highlighting data.
 
-See :ref:`get_line_syntax_highlighting<class_SyntaxHighlighter_method_get_line_syntax_highlighting>` for more details.
+See :ref:`get_line_syntax_highlighting()<class_SyntaxHighlighter_method_get_line_syntax_highlighting>` for more details.
 
 .. rst-class:: classref-item-separator
 
@@ -104,7 +104,7 @@ Virtual method which can be overridden to update any local caches.
 
 Clears all cached syntax highlighting data.
 
-Then calls overridable method :ref:`_clear_highlighting_cache<class_SyntaxHighlighter_private_method__clear_highlighting_cache>`.
+Then calls overridable method :ref:`_clear_highlighting_cache()<class_SyntaxHighlighter_private_method__clear_highlighting_cache>`.
 
 .. rst-class:: classref-item-separator
 
@@ -116,15 +116,15 @@ Then calls overridable method :ref:`_clear_highlighting_cache<class_SyntaxHighli
 
 :ref:`Dictionary<class_Dictionary>` **get_line_syntax_highlighting**\ (\ line\: :ref:`int<class_int>`\ ) :ref:`🔗<class_SyntaxHighlighter_method_get_line_syntax_highlighting>`
 
-Returns syntax highlighting data for a single line. If the line is not cached, calls :ref:`_get_line_syntax_highlighting<class_SyntaxHighlighter_private_method__get_line_syntax_highlighting>` to calculate the data.
+Returns the syntax highlighting data for the line at index ``line``. If the line is not cached, calls :ref:`_get_line_syntax_highlighting()<class_SyntaxHighlighter_private_method__get_line_syntax_highlighting>` first to calculate the data.
 
-The return :ref:`Dictionary<class_Dictionary>` is column number to :ref:`Dictionary<class_Dictionary>`. The column number notes the start of a region, the region will end if another region is found, or at the end of the line. The nested :ref:`Dictionary<class_Dictionary>` contains the data for that region, currently only the key "color" is supported.
+Each entry is a column number containing a nested :ref:`Dictionary<class_Dictionary>`. The column number denotes the start of a region, the region will end if another region is found, or at the end of the line. The nested :ref:`Dictionary<class_Dictionary>` contains the data for that region. Currently only the key ``"color"`` is supported.
 
-\ **Example return:**\ 
+\ **Example:** Possible return value. This means columns ``0`` to ``4`` should be red, and columns ``5`` to the end of the line should be green:
 
 ::
 
-    var color_map = {
+    {
         0: {
             "color": Color(1, 0, 0)
         },
@@ -133,7 +133,60 @@ The return :ref:`Dictionary<class_Dictionary>` is column number to :ref:`Diction
         }
     }
 
-This will color columns 0-4 red, and columns 5-eol in green.
+\ **Example:** Sample implementation. Colors the word ``Godot`` blue.
+
+
+.. tabs::
+
+ .. code-tab:: gdscript
+
+    func _get_line_syntax_highlighting(line: int) -> Dictionary:
+        var pattern_text = "Godot"
+        var result = Dictionary()
+        var text_edit = get_text_edit()
+        var line_text = text_edit.get_line(line)
+
+        var pos = line_text.find(pattern_text)
+        while pos != -1:
+            result[pos] = { "color": Color(0.0, 0.0, 1.0) }
+            var end_pos = pos + pattern_text.length()
+            pos = line_text.find(pattern_text, end_pos)
+            if pos != end_pos:
+                result[end_pos] = { "color": Color(1.0, 1.0, 1.0) }
+
+        return result
+
+ .. code-tab:: csharp
+
+    public override Dictionary _GetLineSyntaxHighlighting(int line)
+    {
+        string patternText = "Godot";
+        Dictionary result = new Dictionary();
+        TextEdit textEdit = GetTextEdit();
+        string lineText = textEdit.GetLine(line);
+
+        var pos = lineText.Find(patternText);
+        while (pos != -1)
+        {
+            result[pos] = new Dictionary()
+            {
+                { "color", new Color(0.0f, 0.0f, 1.0f) }
+            };
+            var endPos = pos + patternText.Length;
+            pos = lineText.Find(patternText, endPos);
+            if (pos != endPos)
+            {
+                result[endPos] = new Dictionary()
+                {
+                    { "color", new Color(1.0f, 1.0f, 1.0f) }
+                };
+            }
+        }
+
+        return result;
+    }
+
+
 
 .. rst-class:: classref-item-separator
 
@@ -157,11 +210,12 @@ Returns the associated :ref:`TextEdit<class_TextEdit>` node.
 
 |void| **update_cache**\ (\ ) :ref:`🔗<class_SyntaxHighlighter_method_update_cache>`
 
-Clears then updates the **SyntaxHighlighter** caches. Override :ref:`_update_cache<class_SyntaxHighlighter_private_method__update_cache>` for a callback.
+Clears then updates the **SyntaxHighlighter** caches. Override :ref:`_update_cache()<class_SyntaxHighlighter_private_method__update_cache>` for a callback.
 
 \ **Note:** This is called automatically when the associated :ref:`TextEdit<class_TextEdit>` node, updates its own cache.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
