@@ -21,7 +21,7 @@ Description
 
 Base class for WebSocket server and client, allowing them to be used as multiplayer peer for the :ref:`MultiplayerAPI<class_MultiplayerAPI>`.
 
-\ **Note:** When exporting to Android, make sure to enable the ``INTERNET`` permission in the Android export preset before exporting the project or using one-click deploy. Otherwise, network communication of any kind will be blocked by Android.
+\ **Note:** When exporting to Android, make sure to enable the ``INTERNET`` permission in the Android export preset before exporting the project or using remote deploy. Otherwise, network communication of any kind will be blocked by Android.
 
 .. rst-class:: classref-reftable-group
 
@@ -38,7 +38,7 @@ Properties
    +---------------------------------------------------+-------------------------------------------------------------------------------------------+-------------------------+
    | :ref:`int<class_int>`                             | :ref:`inbound_buffer_size<class_WebSocketMultiplayerPeer_property_inbound_buffer_size>`   | ``65535``               |
    +---------------------------------------------------+-------------------------------------------------------------------------------------------+-------------------------+
-   | :ref:`int<class_int>`                             | :ref:`max_queued_packets<class_WebSocketMultiplayerPeer_property_max_queued_packets>`     | ``2048``                |
+   | :ref:`int<class_int>`                             | :ref:`max_queued_packets<class_WebSocketMultiplayerPeer_property_max_queued_packets>`     | ``4096``                |
    +---------------------------------------------------+-------------------------------------------------------------------------------------------+-------------------------+
    | :ref:`int<class_int>`                             | :ref:`outbound_buffer_size<class_WebSocketMultiplayerPeer_property_outbound_buffer_size>` | ``65535``               |
    +---------------------------------------------------+-------------------------------------------------------------------------------------------+-------------------------+
@@ -87,7 +87,11 @@ Property Descriptions
 
 The extra headers to use during handshake. See :ref:`WebSocketPeer.handshake_headers<class_WebSocketPeer_property_handshake_headers>` for more details.
 
-**Note:** The returned array is *copied* and any changes to it will not update the original property value. See :ref:`PackedStringArray<class_PackedStringArray>` for more details.
+
+
+.. classref_note::
+
+    The returned array is *copied* and any changes to it will not update the original property value. See :ref:`PackedStringArray<class_PackedStringArray>` for more details.
 
 .. rst-class:: classref-item-separator
 
@@ -131,7 +135,7 @@ The inbound buffer size for connected peers. See :ref:`WebSocketPeer.inbound_buf
 
 .. rst-class:: classref-property
 
-:ref:`int<class_int>` **max_queued_packets** = ``2048`` :ref:`🔗<class_WebSocketMultiplayerPeer_property_max_queued_packets>`
+:ref:`int<class_int>` **max_queued_packets** = ``4096`` :ref:`🔗<class_WebSocketMultiplayerPeer_property_max_queued_packets>`
 
 .. rst-class:: classref-property-setget
 
@@ -174,7 +178,11 @@ The outbound buffer size for connected peers. See :ref:`WebSocketPeer.outbound_b
 
 The supported WebSocket sub-protocols. See :ref:`WebSocketPeer.supported_protocols<class_WebSocketPeer_property_supported_protocols>` for more details.
 
-**Note:** The returned array is *copied* and any changes to it will not update the original property value. See :ref:`PackedStringArray<class_PackedStringArray>` for more details.
+
+
+.. classref_note::
+
+    The returned array is *copied* and any changes to it will not update the original property value. See :ref:`PackedStringArray<class_PackedStringArray>` for more details.
 
 .. rst-class:: classref-section-separator
 
@@ -191,7 +199,7 @@ Method Descriptions
 
 :ref:`Error<enum_@GlobalScope_Error>` **create_client**\ (\ url\: :ref:`String<class_String>`, tls_client_options\: :ref:`TLSOptions<class_TLSOptions>` = null\ ) :ref:`🔗<class_WebSocketMultiplayerPeer_method_create_client>`
 
-Starts a new multiplayer client connecting to the given ``url``. TLS certificates will be verified against the hostname when connecting using the ``wss://`` protocol. You can pass the optional ``tls_client_options`` parameter to customize the trusted certification authorities, or disable the common name verification. See :ref:`TLSOptions.client<class_TLSOptions_method_client>` and :ref:`TLSOptions.client_unsafe<class_TLSOptions_method_client_unsafe>`.
+Starts a new multiplayer client connecting to the given ``url``. TLS certificates will be verified against the hostname when connecting using the ``wss://`` protocol. You can pass the optional ``tls_client_options`` parameter to customize the trusted certification authorities, or disable the common name verification. See :ref:`TLSOptions.client()<class_TLSOptions_method_client>` and :ref:`TLSOptions.client_unsafe()<class_TLSOptions_method_client_unsafe>`.
 
 \ **Note:** It is recommended to specify the scheme part of the URL, i.e. the ``url`` should start with either ``ws://`` or ``wss://``.
 
@@ -205,7 +213,7 @@ Starts a new multiplayer client connecting to the given ``url``. TLS certificate
 
 :ref:`Error<enum_@GlobalScope_Error>` **create_server**\ (\ port\: :ref:`int<class_int>`, bind_address\: :ref:`String<class_String>` = "*", tls_server_options\: :ref:`TLSOptions<class_TLSOptions>` = null\ ) :ref:`🔗<class_WebSocketMultiplayerPeer_method_create_server>`
 
-Starts a new multiplayer server listening on the given ``port``. You can optionally specify a ``bind_address``, and provide valid ``tls_server_options`` to use TLS. See :ref:`TLSOptions.server<class_TLSOptions_method_server>`.
+Starts a new multiplayer server listening on the given ``port``. You can optionally specify a ``bind_address``, and provide valid ``tls_server_options`` to use TLS. See :ref:`TLSOptions.server()<class_TLSOptions_method_server>`.
 
 .. rst-class:: classref-item-separator
 
@@ -244,6 +252,7 @@ Returns the IP address of the given peer.
 Returns the remote port of the given peer.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
