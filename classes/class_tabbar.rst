@@ -32,6 +32,8 @@ Properties
    +-----------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                               | :ref:`clip_tabs<class_TabBar_property_clip_tabs>`                                 | ``true``                                                            |
    +-----------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                                               | :ref:`close_with_middle_mouse<class_TabBar_property_close_with_middle_mouse>`     | ``true``                                                            |
+   +-----------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------+
    | :ref:`int<class_int>`                                                 | :ref:`current_tab<class_TabBar_property_current_tab>`                             | ``-1``                                                              |
    +-----------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                               | :ref:`deselect_enabled<class_TabBar_property_deselect_enabled>`                   | ``false``                                                           |
@@ -48,11 +50,23 @@ Properties
    +-----------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                               | :ref:`select_with_rmb<class_TabBar_property_select_with_rmb>`                     | ``false``                                                           |
    +-----------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                                               | :ref:`switch_on_drag_hover<class_TabBar_property_switch_on_drag_hover>`           | ``true``                                                            |
+   +-----------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------+
    | :ref:`AlignmentMode<enum_TabBar_AlignmentMode>`                       | :ref:`tab_alignment<class_TabBar_property_tab_alignment>`                         | ``0``                                                               |
    +-----------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------+
    | :ref:`CloseButtonDisplayPolicy<enum_TabBar_CloseButtonDisplayPolicy>` | :ref:`tab_close_display_policy<class_TabBar_property_tab_close_display_policy>`   | ``0``                                                               |
    +-----------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------+
    | :ref:`int<class_int>`                                                 | :ref:`tab_count<class_TabBar_property_tab_count>`                                 | ``0``                                                               |
+   +-----------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------+
+   | :ref:`SizingMode<enum_TabBar_SizingMode>`                             | :ref:`tab_sizing<class_TabBar_property_tab_sizing>`                               | ``0``                                                               |
+   +-----------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                                               | :ref:`tab_{index}/disabled<class_TabBar_property_tab_{index}/disabled>`           | ``false``                                                           |
+   +-----------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------+
+   | :ref:`Texture2D<class_Texture2D>`                                     | :ref:`tab_{index}/icon<class_TabBar_property_tab_{index}/icon>`                   |                                                                     |
+   +-----------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------+
+   | :ref:`String<class_String>`                                           | :ref:`tab_{index}/title<class_TabBar_property_tab_{index}/title>`                 | ``""``                                                              |
+   +-----------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------+
+   | :ref:`String<class_String>`                                           | :ref:`tab_{index}/tooltip<class_TabBar_property_tab_{index}/tooltip>`             | ``""``                                                              |
    +-----------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------+
    | :ref:`int<class_int>`                                                 | :ref:`tabs_rearrange_group<class_TabBar_property_tabs_rearrange_group>`           | ``-1``                                                              |
    +-----------------------------------------------------------------------+-----------------------------------------------------------------------------------+---------------------------------------------------------------------+
@@ -139,55 +153,67 @@ Theme Properties
 .. table::
    :widths: auto
 
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`Color<class_Color>`         | :ref:`drop_mark_color<class_TabBar_theme_color_drop_mark_color>`             | ``Color(1, 1, 1, 1)``               |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`Color<class_Color>`         | :ref:`font_disabled_color<class_TabBar_theme_color_font_disabled_color>`     | ``Color(0.875, 0.875, 0.875, 0.5)`` |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`Color<class_Color>`         | :ref:`font_hovered_color<class_TabBar_theme_color_font_hovered_color>`       | ``Color(0.95, 0.95, 0.95, 1)``      |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`Color<class_Color>`         | :ref:`font_outline_color<class_TabBar_theme_color_font_outline_color>`       | ``Color(0, 0, 0, 1)``               |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`Color<class_Color>`         | :ref:`font_selected_color<class_TabBar_theme_color_font_selected_color>`     | ``Color(0.95, 0.95, 0.95, 1)``      |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`Color<class_Color>`         | :ref:`font_unselected_color<class_TabBar_theme_color_font_unselected_color>` | ``Color(0.7, 0.7, 0.7, 1)``         |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`int<class_int>`             | :ref:`h_separation<class_TabBar_theme_constant_h_separation>`                | ``4``                               |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`int<class_int>`             | :ref:`icon_max_width<class_TabBar_theme_constant_icon_max_width>`            | ``0``                               |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`int<class_int>`             | :ref:`outline_size<class_TabBar_theme_constant_outline_size>`                | ``0``                               |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`Font<class_Font>`           | :ref:`font<class_TabBar_theme_font_font>`                                    |                                     |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`int<class_int>`             | :ref:`font_size<class_TabBar_theme_font_size_font_size>`                     |                                     |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`Texture2D<class_Texture2D>` | :ref:`close<class_TabBar_theme_icon_close>`                                  |                                     |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`Texture2D<class_Texture2D>` | :ref:`decrement<class_TabBar_theme_icon_decrement>`                          |                                     |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`Texture2D<class_Texture2D>` | :ref:`decrement_highlight<class_TabBar_theme_icon_decrement_highlight>`      |                                     |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`Texture2D<class_Texture2D>` | :ref:`drop_mark<class_TabBar_theme_icon_drop_mark>`                          |                                     |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`Texture2D<class_Texture2D>` | :ref:`increment<class_TabBar_theme_icon_increment>`                          |                                     |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`Texture2D<class_Texture2D>` | :ref:`increment_highlight<class_TabBar_theme_icon_increment_highlight>`      |                                     |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`StyleBox<class_StyleBox>`   | :ref:`button_highlight<class_TabBar_theme_style_button_highlight>`           |                                     |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`StyleBox<class_StyleBox>`   | :ref:`button_pressed<class_TabBar_theme_style_button_pressed>`               |                                     |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`StyleBox<class_StyleBox>`   | :ref:`tab_disabled<class_TabBar_theme_style_tab_disabled>`                   |                                     |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`StyleBox<class_StyleBox>`   | :ref:`tab_focus<class_TabBar_theme_style_tab_focus>`                         |                                     |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`StyleBox<class_StyleBox>`   | :ref:`tab_hovered<class_TabBar_theme_style_tab_hovered>`                     |                                     |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`StyleBox<class_StyleBox>`   | :ref:`tab_selected<class_TabBar_theme_style_tab_selected>`                   |                                     |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`StyleBox<class_StyleBox>`   | :ref:`tab_unselected<class_TabBar_theme_style_tab_unselected>`               |                                     |
-   +-----------------------------------+------------------------------------------------------------------------------+-------------------------------------+
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Color<class_Color>`         | :ref:`drop_mark_color<class_TabBar_theme_color_drop_mark_color>`                  | ``Color(1, 1, 1, 1)``               |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Color<class_Color>`         | :ref:`font_disabled_color<class_TabBar_theme_color_font_disabled_color>`          | ``Color(0.875, 0.875, 0.875, 0.5)`` |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Color<class_Color>`         | :ref:`font_hovered_color<class_TabBar_theme_color_font_hovered_color>`            | ``Color(0.95, 0.95, 0.95, 1)``      |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Color<class_Color>`         | :ref:`font_outline_color<class_TabBar_theme_color_font_outline_color>`            | ``Color(0, 0, 0, 1)``               |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Color<class_Color>`         | :ref:`font_selected_color<class_TabBar_theme_color_font_selected_color>`          | ``Color(0.95, 0.95, 0.95, 1)``      |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Color<class_Color>`         | :ref:`font_unselected_color<class_TabBar_theme_color_font_unselected_color>`      | ``Color(0.7, 0.7, 0.7, 1)``         |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Color<class_Color>`         | :ref:`icon_disabled_color<class_TabBar_theme_color_icon_disabled_color>`          | ``Color(1, 1, 1, 1)``               |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Color<class_Color>`         | :ref:`icon_hovered_color<class_TabBar_theme_color_icon_hovered_color>`            | ``Color(1, 1, 1, 1)``               |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Color<class_Color>`         | :ref:`icon_selected_color<class_TabBar_theme_color_icon_selected_color>`          | ``Color(1, 1, 1, 1)``               |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Color<class_Color>`         | :ref:`icon_unselected_color<class_TabBar_theme_color_icon_unselected_color>`      | ``Color(1, 1, 1, 1)``               |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`int<class_int>`             | :ref:`h_separation<class_TabBar_theme_constant_h_separation>`                     | ``4``                               |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`int<class_int>`             | :ref:`hover_switch_wait_msec<class_TabBar_theme_constant_hover_switch_wait_msec>` | ``500``                             |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`int<class_int>`             | :ref:`icon_max_width<class_TabBar_theme_constant_icon_max_width>`                 | ``0``                               |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`int<class_int>`             | :ref:`outline_size<class_TabBar_theme_constant_outline_size>`                     | ``0``                               |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`int<class_int>`             | :ref:`tab_separation<class_TabBar_theme_constant_tab_separation>`                 | ``0``                               |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Font<class_Font>`           | :ref:`font<class_TabBar_theme_font_font>`                                         |                                     |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`int<class_int>`             | :ref:`font_size<class_TabBar_theme_font_size_font_size>`                          |                                     |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Texture2D<class_Texture2D>` | :ref:`close<class_TabBar_theme_icon_close>`                                       |                                     |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Texture2D<class_Texture2D>` | :ref:`decrement<class_TabBar_theme_icon_decrement>`                               |                                     |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Texture2D<class_Texture2D>` | :ref:`decrement_highlight<class_TabBar_theme_icon_decrement_highlight>`           |                                     |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Texture2D<class_Texture2D>` | :ref:`drop_mark<class_TabBar_theme_icon_drop_mark>`                               |                                     |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Texture2D<class_Texture2D>` | :ref:`increment<class_TabBar_theme_icon_increment>`                               |                                     |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`Texture2D<class_Texture2D>` | :ref:`increment_highlight<class_TabBar_theme_icon_increment_highlight>`           |                                     |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`StyleBox<class_StyleBox>`   | :ref:`button_highlight<class_TabBar_theme_style_button_highlight>`                |                                     |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`StyleBox<class_StyleBox>`   | :ref:`button_pressed<class_TabBar_theme_style_button_pressed>`                    |                                     |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`StyleBox<class_StyleBox>`   | :ref:`tab_disabled<class_TabBar_theme_style_tab_disabled>`                        |                                     |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`StyleBox<class_StyleBox>`   | :ref:`tab_focus<class_TabBar_theme_style_tab_focus>`                              |                                     |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`StyleBox<class_StyleBox>`   | :ref:`tab_hovered<class_TabBar_theme_style_tab_hovered>`                          |                                     |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`StyleBox<class_StyleBox>`   | :ref:`tab_selected<class_TabBar_theme_style_tab_selected>`                        |                                     |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`StyleBox<class_StyleBox>`   | :ref:`tab_unselected<class_TabBar_theme_style_tab_unselected>`                    |                                     |
+   +-----------------------------------+-----------------------------------------------------------------------------------+-------------------------------------+
 
 .. rst-class:: classref-section-separator
 
@@ -216,7 +242,7 @@ Emitted when the active tab is rearranged via mouse drag. See :ref:`drag_to_rear
 
 **tab_button_pressed**\ (\ tab\: :ref:`int<class_int>`\ ) :ref:`🔗<class_TabBar_signal_tab_button_pressed>`
 
-Emitted when a tab's right button is pressed. See :ref:`set_tab_button_icon<class_TabBar_method_set_tab_button_icon>`.
+Emitted when a tab's right button is pressed. See :ref:`set_tab_button_icon()<class_TabBar_method_set_tab_button_icon>`.
 
 .. rst-class:: classref-item-separator
 
@@ -252,9 +278,9 @@ Emitted when a tab is clicked, even if it is the current tab.
 
 **tab_close_pressed**\ (\ tab\: :ref:`int<class_int>`\ ) :ref:`🔗<class_TabBar_signal_tab_close_pressed>`
 
-Emitted when a tab's close button is pressed.
+Emitted when a tab's close button is pressed or, if :ref:`close_with_middle_mouse<class_TabBar_property_close_with_middle_mouse>` is ``true``, when middle-clicking on a tab.
 
-\ **Note:** Tabs are not removed automatically once the close button is pressed, this behavior needs to be programmed manually. For example:
+\ **Note:** Tabs are not removed automatically; this behavior needs to be coded manually. For example:
 
 
 .. tabs::
@@ -291,7 +317,7 @@ Emitted when a tab is hovered by the mouse.
 
 **tab_rmb_clicked**\ (\ tab\: :ref:`int<class_int>`\ ) :ref:`🔗<class_TabBar_signal_tab_rmb_clicked>`
 
-Emitted when a tab is right-clicked. :ref:`select_with_rmb<class_TabBar_property_select_with_rmb>` must be enabled.
+Emitted when a tab is right-clicked.
 
 .. rst-class:: classref-item-separator
 
@@ -326,7 +352,7 @@ enum **AlignmentMode**: :ref:`🔗<enum_TabBar_AlignmentMode>`
 
 :ref:`AlignmentMode<enum_TabBar_AlignmentMode>` **ALIGNMENT_LEFT** = ``0``
 
-Places tabs to the left.
+Aligns tabs to the left.
 
 .. _class_TabBar_constant_ALIGNMENT_CENTER:
 
@@ -334,7 +360,7 @@ Places tabs to the left.
 
 :ref:`AlignmentMode<enum_TabBar_AlignmentMode>` **ALIGNMENT_CENTER** = ``1``
 
-Places tabs in the middle.
+Aligns tabs in the middle.
 
 .. _class_TabBar_constant_ALIGNMENT_RIGHT:
 
@@ -342,7 +368,7 @@ Places tabs in the middle.
 
 :ref:`AlignmentMode<enum_TabBar_AlignmentMode>` **ALIGNMENT_RIGHT** = ``2``
 
-Places tabs to the right.
+Aligns tabs to the right.
 
 .. _class_TabBar_constant_ALIGNMENT_MAX:
 
@@ -351,6 +377,56 @@ Places tabs to the right.
 :ref:`AlignmentMode<enum_TabBar_AlignmentMode>` **ALIGNMENT_MAX** = ``3``
 
 Represents the size of the :ref:`AlignmentMode<enum_TabBar_AlignmentMode>` enum.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _enum_TabBar_SizingMode:
+
+.. rst-class:: classref-enumeration
+
+enum **SizingMode**: :ref:`🔗<enum_TabBar_SizingMode>`
+
+.. _class_TabBar_constant_TAB_SIZING_FIT_CONTENT:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`SizingMode<enum_TabBar_SizingMode>` **TAB_SIZING_FIT_CONTENT** = ``0``
+
+Size tabs individually according to the size of their content.
+
+.. _class_TabBar_constant_TAB_SIZING_UNIFORM:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`SizingMode<enum_TabBar_SizingMode>` **TAB_SIZING_UNIFORM** = ``1``
+
+Size tabs uniformly, with the widest tab determining the size of all tabs. This may trigger clipping sooner than other sizing modes due to increased tab sizes.
+
+.. _class_TabBar_constant_TAB_SIZING_JUSTIFY:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`SizingMode<enum_TabBar_SizingMode>` **TAB_SIZING_JUSTIFY** = ``2``
+
+Size tabs individually according to their content, expanding to the full width of the tab bar.
+
+.. _class_TabBar_constant_TAB_SIZING_EXPAND:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`SizingMode<enum_TabBar_SizingMode>` **TAB_SIZING_EXPAND** = ``3``
+
+Size tabs equally, expanding to the full width of the tab bar if there is room, otherwise fall back to :ref:`TAB_SIZING_FIT_CONTENT<class_TabBar_constant_TAB_SIZING_FIT_CONTENT>`.
+
+.. _class_TabBar_constant_TAB_SIZING_MAX:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`SizingMode<enum_TabBar_SizingMode>` **TAB_SIZING_MAX** = ``4``
+
+Represents the size of the :ref:`SizingMode<enum_TabBar_SizingMode>` enum.
 
 .. rst-class:: classref-item-separator
 
@@ -415,6 +491,23 @@ Property Descriptions
 - :ref:`bool<class_bool>` **get_clip_tabs**\ (\ )
 
 If ``true``, tabs overflowing this node's width will be hidden, displaying two navigation buttons instead. Otherwise, this node's minimum size is updated so that all tabs are visible.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TabBar_property_close_with_middle_mouse:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **close_with_middle_mouse** = ``true`` :ref:`🔗<class_TabBar_property_close_with_middle_mouse>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_close_with_middle_mouse**\ (\ value\: :ref:`bool<class_bool>`\ )
+- :ref:`bool<class_bool>` **get_close_with_middle_mouse**\ (\ )
+
+If ``true``, middle-clicking on a tab will emit the :ref:`tab_close_pressed<class_TabBar_signal_tab_close_pressed>` signal.
 
 .. rst-class:: classref-item-separator
 
@@ -539,6 +632,23 @@ If ``true``, enables selecting a tab with the right mouse button.
 
 ----
 
+.. _class_TabBar_property_switch_on_drag_hover:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **switch_on_drag_hover** = ``true`` :ref:`🔗<class_TabBar_property_switch_on_drag_hover>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_switch_on_drag_hover**\ (\ value\: :ref:`bool<class_bool>`\ )
+- :ref:`bool<class_bool>` **get_switch_on_drag_hover**\ (\ )
+
+If ``true``, hovering over a tab while dragging something will switch to that tab. Does not have effect when hovering another tab to rearrange. The delay for when this happens is dictated by :ref:`hover_switch_wait_msec<class_TabBar_theme_constant_hover_switch_wait_msec>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_TabBar_property_tab_alignment:
 
 .. rst-class:: classref-property
@@ -550,7 +660,7 @@ If ``true``, enables selecting a tab with the right mouse button.
 - |void| **set_tab_alignment**\ (\ value\: :ref:`AlignmentMode<enum_TabBar_AlignmentMode>`\ )
 - :ref:`AlignmentMode<enum_TabBar_AlignmentMode>` **get_tab_alignment**\ (\ )
 
-Sets the position at which tabs will be placed. See :ref:`AlignmentMode<enum_TabBar_AlignmentMode>` for details.
+The horizontal alignment of the tabs.
 
 .. rst-class:: classref-item-separator
 
@@ -567,7 +677,7 @@ Sets the position at which tabs will be placed. See :ref:`AlignmentMode<enum_Tab
 - |void| **set_tab_close_display_policy**\ (\ value\: :ref:`CloseButtonDisplayPolicy<enum_TabBar_CloseButtonDisplayPolicy>`\ )
 - :ref:`CloseButtonDisplayPolicy<enum_TabBar_CloseButtonDisplayPolicy>` **get_tab_close_display_policy**\ (\ )
 
-Sets when the close button will appear on the tabs. See :ref:`CloseButtonDisplayPolicy<enum_TabBar_CloseButtonDisplayPolicy>` for details.
+When the close button will appear on the tabs.
 
 .. rst-class:: classref-item-separator
 
@@ -585,6 +695,79 @@ Sets when the close button will appear on the tabs. See :ref:`CloseButtonDisplay
 - :ref:`int<class_int>` **get_tab_count**\ (\ )
 
 The number of tabs currently in the bar.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TabBar_property_tab_sizing:
+
+.. rst-class:: classref-property
+
+:ref:`SizingMode<enum_TabBar_SizingMode>` **tab_sizing** = ``0`` :ref:`🔗<class_TabBar_property_tab_sizing>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_tab_sizing**\ (\ value\: :ref:`SizingMode<enum_TabBar_SizingMode>`\ )
+- :ref:`SizingMode<enum_TabBar_SizingMode>` **get_tab_sizing**\ (\ )
+
+The sizing strategy used to determine tab widths.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TabBar_property_tab_{index}/disabled:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **tab_{index}/disabled** = ``false`` :ref:`🔗<class_TabBar_property_tab_{index}/disabled>`
+
+If ``true``, the tab at ``index`` is disabled.
+
+\ **Note:** ``index`` is a value in the ``0 .. tab_count - 1`` range.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TabBar_property_tab_{index}/icon:
+
+.. rst-class:: classref-property
+
+:ref:`Texture2D<class_Texture2D>` **tab_{index}/icon** :ref:`🔗<class_TabBar_property_tab_{index}/icon>`
+
+If ``true``, the tab at ``index`` is hidden.
+
+\ **Note:** ``index`` is a value in the ``0 .. tab_count - 1`` range.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TabBar_property_tab_{index}/title:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **tab_{index}/title** = ``""`` :ref:`🔗<class_TabBar_property_tab_{index}/title>`
+
+The title text of the tab at ``index``.
+
+\ **Note:** ``index`` is a value in the ``0 .. tab_count - 1`` range.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TabBar_property_tab_{index}/tooltip:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **tab_{index}/tooltip** = ``""`` :ref:`🔗<class_TabBar_property_tab_{index}/tooltip>`
+
+The tooltip text of the tab at ``index``.
+
+\ **Note:** ``index`` is a value in the ``0 .. tab_count - 1`` range.
 
 .. rst-class:: classref-item-separator
 
@@ -740,7 +923,7 @@ Returns tab title language code.
 
 :ref:`Variant<class_Variant>` **get_tab_metadata**\ (\ tab_idx\: :ref:`int<class_int>`\ ) |const| :ref:`🔗<class_TabBar_method_get_tab_metadata>`
 
-Returns the metadata value set to the tab at index ``tab_idx`` using :ref:`set_tab_metadata<class_TabBar_method_set_tab_metadata>`. If no metadata was previously set, returns ``null`` by default.
+Returns the metadata value set to the tab at index ``tab_idx`` using :ref:`set_tab_metadata()<class_TabBar_method_set_tab_metadata>`. If no metadata was previously set, returns ``null`` by default.
 
 .. rst-class:: classref-item-separator
 
@@ -944,7 +1127,7 @@ Sets the maximum allowed width of the icon for the tab at index ``tab_idx``. Thi
 
 |void| **set_tab_language**\ (\ tab_idx\: :ref:`int<class_int>`, language\: :ref:`String<class_String>`\ ) :ref:`🔗<class_TabBar_method_set_tab_language>`
 
-Sets language code of tab title used for line-breaking and text shaping algorithms, if left empty current locale is used instead.
+Sets the language code of the title for the tab at index ``tab_idx`` to ``language``. This is used for line-breaking and text shaping algorithms. If ``language`` is empty, the current locale is used.
 
 .. rst-class:: classref-item-separator
 
@@ -956,7 +1139,7 @@ Sets language code of tab title used for line-breaking and text shaping algorith
 
 |void| **set_tab_metadata**\ (\ tab_idx\: :ref:`int<class_int>`, metadata\: :ref:`Variant<class_Variant>`\ ) :ref:`🔗<class_TabBar_method_set_tab_metadata>`
 
-Sets the metadata value for the tab at index ``tab_idx``, which can be retrieved later using :ref:`get_tab_metadata<class_TabBar_method_get_tab_metadata>`.
+Sets the metadata value for the tab at index ``tab_idx``, which can be retrieved later using :ref:`get_tab_metadata()<class_TabBar_method_get_tab_metadata>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1077,6 +1260,54 @@ Font color of the other, unselected tabs.
 
 ----
 
+.. _class_TabBar_theme_color_icon_disabled_color:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`Color<class_Color>` **icon_disabled_color** = ``Color(1, 1, 1, 1)`` :ref:`🔗<class_TabBar_theme_color_icon_disabled_color>`
+
+Icon color of disabled tabs.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TabBar_theme_color_icon_hovered_color:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`Color<class_Color>` **icon_hovered_color** = ``Color(1, 1, 1, 1)`` :ref:`🔗<class_TabBar_theme_color_icon_hovered_color>`
+
+Icon color of the currently hovered tab. Does not apply to the selected tab.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TabBar_theme_color_icon_selected_color:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`Color<class_Color>` **icon_selected_color** = ``Color(1, 1, 1, 1)`` :ref:`🔗<class_TabBar_theme_color_icon_selected_color>`
+
+Icon color of the currently selected tab.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TabBar_theme_color_icon_unselected_color:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`Color<class_Color>` **icon_unselected_color** = ``Color(1, 1, 1, 1)`` :ref:`🔗<class_TabBar_theme_color_icon_unselected_color>`
+
+Icon color of the other, unselected tabs.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_TabBar_theme_constant_h_separation:
 
 .. rst-class:: classref-themeproperty
@@ -1089,13 +1320,25 @@ The horizontal separation between the elements inside tabs.
 
 ----
 
+.. _class_TabBar_theme_constant_hover_switch_wait_msec:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`int<class_int>` **hover_switch_wait_msec** = ``500`` :ref:`🔗<class_TabBar_theme_constant_hover_switch_wait_msec>`
+
+During a drag-and-drop, this is how many milliseconds to wait before switching the tab.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_TabBar_theme_constant_icon_max_width:
 
 .. rst-class:: classref-themeproperty
 
 :ref:`int<class_int>` **icon_max_width** = ``0`` :ref:`🔗<class_TabBar_theme_constant_icon_max_width>`
 
-The maximum allowed width of the tab's icon. This limit is applied on top of the default size of the icon, but before the value set with :ref:`set_tab_icon_max_width<class_TabBar_method_set_tab_icon_max_width>`. The height is adjusted according to the icon's ratio.
+The maximum allowed width of the tab's icon. This limit is applied on top of the default size of the icon, but before the value set with :ref:`set_tab_icon_max_width()<class_TabBar_method_set_tab_icon_max_width>`. The height is adjusted according to the icon's ratio.
 
 .. rst-class:: classref-item-separator
 
@@ -1110,6 +1353,18 @@ The maximum allowed width of the tab's icon. This limit is applied on top of the
 The size of the tab text outline.
 
 \ **Note:** If using a font with :ref:`FontFile.multichannel_signed_distance_field<class_FontFile_property_multichannel_signed_distance_field>` enabled, its :ref:`FontFile.msdf_pixel_range<class_FontFile_property_msdf_pixel_range>` must be set to at least *twice* the value of :ref:`outline_size<class_TabBar_theme_constant_outline_size>` for outline rendering to look correct. Otherwise, the outline may appear to be cut off earlier than intended.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TabBar_theme_constant_tab_separation:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`int<class_int>` **tab_separation** = ``0`` :ref:`🔗<class_TabBar_theme_constant_tab_separation>`
+
+The space between tabs in the tab bar.
 
 .. rst-class:: classref-item-separator
 
@@ -1181,7 +1436,7 @@ Icon for the left arrow button that appears when there are too many tabs to fit 
 
 :ref:`Texture2D<class_Texture2D>` **drop_mark** :ref:`🔗<class_TabBar_theme_icon_drop_mark>`
 
-Icon shown to indicate where a dragged tab is gonna be dropped (see :ref:`drag_to_rearrange_enabled<class_TabBar_property_drag_to_rearrange_enabled>`).
+Icon shown to indicate where a dragged tab will be dropped (see :ref:`drag_to_rearrange_enabled<class_TabBar_property_drag_to_rearrange_enabled>`).
 
 .. rst-class:: classref-item-separator
 
@@ -1294,6 +1549,7 @@ The style of the currently selected tab.
 The style of the other, unselected tabs.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
