@@ -117,11 +117,19 @@ The source of hand tracking data is unobstructed, meaning that an accurate metho
 
 The source of hand tracking data is a controller, meaning that joint positions are inferred from controller inputs.
 
+.. _class_XRHandTracker_constant_HAND_TRACKING_SOURCE_NOT_TRACKED:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`HandTrackingSource<enum_XRHandTracker_HandTrackingSource>` **HAND_TRACKING_SOURCE_NOT_TRACKED** = ``3``
+
+No hand tracking data is tracked, this either means the hand is obscured, the controller is turned off, or tracking is not supported for the current input type.
+
 .. _class_XRHandTracker_constant_HAND_TRACKING_SOURCE_MAX:
 
 .. rst-class:: classref-enumeration-constant
 
-:ref:`HandTrackingSource<enum_XRHandTracker_HandTrackingSource>` **HAND_TRACKING_SOURCE_MAX** = ``3``
+:ref:`HandTrackingSource<enum_XRHandTracker_HandTrackingSource>` **HAND_TRACKING_SOURCE_MAX** = ``4``
 
 Represents the size of the :ref:`HandTrackingSource<enum_XRHandTracker_HandTrackingSource>` enum.
 
@@ -475,7 +483,7 @@ Returns the angular velocity for the given hand joint.
 
 |bitfield|\[:ref:`HandJointFlags<enum_XRHandTracker_HandJointFlags>`\] **get_hand_joint_flags**\ (\ joint\: :ref:`HandJoint<enum_XRHandTracker_HandJoint>`\ ) |const| :ref:`🔗<class_XRHandTracker_method_get_hand_joint_flags>`
 
-Returns flags about the validity of the tracking data for the given hand joint (see :ref:`HandJointFlags<enum_XRHandTracker_HandJointFlags>`).
+Returns flags about the validity of the tracking data for the given hand joint.
 
 .. rst-class:: classref-item-separator
 
@@ -574,6 +582,7 @@ Sets the radius of the given hand joint.
 Sets the transform for the given hand joint.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
