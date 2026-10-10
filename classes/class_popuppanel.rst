@@ -23,6 +23,24 @@ A popup with a configurable panel background. Any child controls added to this n
 
 .. rst-class:: classref-reftable-group
 
+Properties
+----------
+
+.. table::
+   :widths: auto
+
+   +-------------------------------------------------------------------------------------+------------------------------------+-----------------------------------------------------------------------------------------------+
+   | :ref:`DefaultCanvasItemTextureFilter<enum_Viewport_DefaultCanvasItemTextureFilter>` | canvas_item_default_texture_filter | ``4`` (overrides :ref:`Viewport<class_Viewport_property_canvas_item_default_texture_filter>`) |
+   +-------------------------------------------------------------------------------------+------------------------------------+-----------------------------------------------------------------------------------------------+
+   | :ref:`DefaultCanvasItemTextureRepeat<enum_Viewport_DefaultCanvasItemTextureRepeat>` | canvas_item_default_texture_repeat | ``3`` (overrides :ref:`Viewport<class_Viewport_property_canvas_item_default_texture_repeat>`) |
+   +-------------------------------------------------------------------------------------+------------------------------------+-----------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                                                             | transparent                        | ``true`` (overrides :ref:`Window<class_Window_property_transparent>`)                         |
+   +-------------------------------------------------------------------------------------+------------------------------------+-----------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                                                             | transparent_bg                     | ``true`` (overrides :ref:`Viewport<class_Viewport_property_transparent_bg>`)                  |
+   +-------------------------------------------------------------------------------------+------------------------------------+-----------------------------------------------------------------------------------------------+
+
+.. rst-class:: classref-reftable-group
+
 Theme Properties
 ----------------
 
@@ -48,9 +66,10 @@ Theme Property Descriptions
 
 :ref:`StyleBox<class_StyleBox>` **panel** :ref:`🔗<class_PopupPanel_theme_style_panel>`
 
-:ref:`StyleBox<class_StyleBox>` for the the background panel.
+:ref:`StyleBox<class_StyleBox>` for the background panel.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
