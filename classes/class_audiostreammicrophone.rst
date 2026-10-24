@@ -28,11 +28,14 @@ When used directly in an :ref:`AudioStreamPlayer<class_AudioStreamPlayer>` node,
 Tutorials
 ---------
 
+- :doc:`Audio streams <../tutorials/audio/audio_streams>`
+
 - :doc:`Recording with microphone <../tutorials/audio/recording_with_microphone>`
 
 - `Audio Mic Record Demo <https://github.com/godotengine/godot-demo-projects/tree/master/audio/mic_record>`__
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
