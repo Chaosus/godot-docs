@@ -41,6 +41,8 @@ Properties
    :widths: auto
 
    +-------------------------------------------------------+---------------------------------------------------------------------------------------+-----------+
+   | :ref:`bool<class_bool>`                               | :ref:`advance_on_start<class_AnimationNodeAnimation_property_advance_on_start>`       | ``false`` |
+   +-------------------------------------------------------+---------------------------------------------------------------------------------------+-----------+
    | :ref:`StringName<class_StringName>`                   | :ref:`animation<class_AnimationNodeAnimation_property_animation>`                     | ``&""``   |
    +-------------------------------------------------------+---------------------------------------------------------------------------------------+-----------+
    | :ref:`LoopMode<enum_Animation_LoopMode>`              | :ref:`loop_mode<class_AnimationNodeAnimation_property_loop_mode>`                     |           |
@@ -96,6 +98,25 @@ Plays animation in backward direction.
 Property Descriptions
 ---------------------
 
+.. _class_AnimationNodeAnimation_property_advance_on_start:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **advance_on_start** = ``false`` :ref:`🔗<class_AnimationNodeAnimation_property_advance_on_start>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_advance_on_start**\ (\ value\: :ref:`bool<class_bool>`\ )
+- :ref:`bool<class_bool>` **is_advance_on_start**\ (\ )
+
+If ``true``, on receiving a request to play an animation from the start, the first frame is not drawn, but only processed, and playback starts from the next frame.
+
+See also the notes of :ref:`AnimationPlayer.play()<class_AnimationPlayer_method_play>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_AnimationNodeAnimation_property_animation:
 
 .. rst-class:: classref-property
@@ -125,6 +146,8 @@ Animation to use as an output. It is one of the animations provided by :ref:`Ani
 - :ref:`LoopMode<enum_Animation_LoopMode>` **get_loop_mode**\ (\ )
 
 If :ref:`use_custom_timeline<class_AnimationNodeAnimation_property_use_custom_timeline>` is ``true``, override the loop settings of the original :ref:`Animation<class_Animation>` resource with the value.
+
+\ **Note:** If the :ref:`Animation.loop_mode<class_Animation_property_loop_mode>` isn't set to looping, the :ref:`Animation.track_set_interpolation_loop_wrap()<class_Animation_method_track_set_interpolation_loop_wrap>` option will not be respected. If you cannot get the expected behavior, consider duplicating the :ref:`Animation<class_Animation>` resource and changing the loop settings.
 
 .. rst-class:: classref-item-separator
 
@@ -198,7 +221,9 @@ If ``false``, the original animation length is respected. If you set the loop to
 - |void| **set_timeline_length**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_timeline_length**\ (\ )
 
-If :ref:`use_custom_timeline<class_AnimationNodeAnimation_property_use_custom_timeline>` is ``true``, offset the start position of the animation.
+The length of the custom timeline.
+
+If :ref:`stretch_time_scale<class_AnimationNodeAnimation_property_stretch_time_scale>` is ``true``, scales the animation to this length.
 
 .. rst-class:: classref-item-separator
 
@@ -218,6 +243,7 @@ If :ref:`use_custom_timeline<class_AnimationNodeAnimation_property_use_custom_ti
 If ``true``, :ref:`AnimationNode<class_AnimationNode>` provides an animation based on the :ref:`Animation<class_Animation>` resource with some parameters adjusted.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

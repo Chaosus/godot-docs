@@ -12,7 +12,7 @@ XRPositionalTracker
 
 **Inherits:** :ref:`XRTracker<class_XRTracker>` **<** :ref:`RefCounted<class_RefCounted>` **<** :ref:`Object<class_Object>`
 
-**Inherited By:** :ref:`XRBodyTracker<class_XRBodyTracker>`, :ref:`XRControllerTracker<class_XRControllerTracker>`, :ref:`XRHandTracker<class_XRHandTracker>`
+**Inherited By:** :ref:`OpenXRSpatialEntityTracker<class_OpenXRSpatialEntityTracker>`, :ref:`XRBodyTracker<class_XRBodyTracker>`, :ref:`XRControllerTracker<class_XRControllerTracker>`, :ref:`XRHandTracker<class_XRHandTracker>`
 
 A tracked object.
 
@@ -83,7 +83,7 @@ Signals
 
 .. rst-class:: classref-signal
 
-**button_pressed**\ (\ name\: :ref:`String<class_String>`\ ) :ref:`🔗<class_XRPositionalTracker_signal_button_pressed>`
+**button_pressed**\ (\ action_name\: :ref:`String<class_String>`\ ) :ref:`🔗<class_XRPositionalTracker_signal_button_pressed>`
 
 Emitted when a button on this tracker is pressed. Note that many XR runtimes allow other inputs to be mapped to buttons.
 
@@ -95,7 +95,7 @@ Emitted when a button on this tracker is pressed. Note that many XR runtimes all
 
 .. rst-class:: classref-signal
 
-**button_released**\ (\ name\: :ref:`String<class_String>`\ ) :ref:`🔗<class_XRPositionalTracker_signal_button_released>`
+**button_released**\ (\ action_name\: :ref:`String<class_String>`\ ) :ref:`🔗<class_XRPositionalTracker_signal_button_released>`
 
 Emitted when a button on this tracker is released.
 
@@ -107,7 +107,7 @@ Emitted when a button on this tracker is released.
 
 .. rst-class:: classref-signal
 
-**input_float_changed**\ (\ name\: :ref:`String<class_String>`, value\: :ref:`float<class_float>`\ ) :ref:`🔗<class_XRPositionalTracker_signal_input_float_changed>`
+**input_float_changed**\ (\ action_name\: :ref:`String<class_String>`, value\: :ref:`float<class_float>`\ ) :ref:`🔗<class_XRPositionalTracker_signal_input_float_changed>`
 
 Emitted when a trigger or similar input on this tracker changes value.
 
@@ -119,7 +119,7 @@ Emitted when a trigger or similar input on this tracker changes value.
 
 .. rst-class:: classref-signal
 
-**input_vector2_changed**\ (\ name\: :ref:`String<class_String>`, vector\: :ref:`Vector2<class_Vector2>`\ ) :ref:`🔗<class_XRPositionalTracker_signal_input_vector2_changed>`
+**input_vector2_changed**\ (\ action_name\: :ref:`String<class_String>`, vector\: :ref:`Vector2<class_Vector2>`\ ) :ref:`🔗<class_XRPositionalTracker_signal_input_vector2_changed>`
 
 Emitted when a thumbstick or thumbpad on this tracker moves.
 
@@ -312,7 +312,7 @@ Marks this pose as invalid, we don't clear the last reported state but it allows
 
 **Deprecated:** Use through :ref:`XRControllerTracker<class_XRControllerTracker>`.
 
-Changes the value for the given input. This method is called by a :ref:`XRInterface<class_XRInterface>` implementation and should not be used directly.
+Changes the value for the given input. This method is called by an :ref:`XRInterface<class_XRInterface>` implementation and should not be used directly.
 
 .. rst-class:: classref-item-separator
 
@@ -324,9 +324,10 @@ Changes the value for the given input. This method is called by a :ref:`XRInterf
 
 |void| **set_pose**\ (\ name\: :ref:`StringName<class_StringName>`, transform\: :ref:`Transform3D<class_Transform3D>`, linear_velocity\: :ref:`Vector3<class_Vector3>`, angular_velocity\: :ref:`Vector3<class_Vector3>`, tracking_confidence\: :ref:`TrackingConfidence<enum_XRPose_TrackingConfidence>`\ ) :ref:`🔗<class_XRPositionalTracker_method_set_pose>`
 
-Sets the transform, linear velocity, angular velocity and tracking confidence for the given pose. This method is called by a :ref:`XRInterface<class_XRInterface>` implementation and should not be used directly.
+Sets the transform, linear velocity, angular velocity and tracking confidence for the given pose. This method is called by an :ref:`XRInterface<class_XRInterface>` implementation and should not be used directly.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

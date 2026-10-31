@@ -19,9 +19,9 @@ A node that provides a polygon shape to a :ref:`CollisionObject2D<class_Collisio
 Description
 -----------
 
-A node that provides a polygon shape to a :ref:`CollisionObject2D<class_CollisionObject2D>` parent and allows to edit it. The polygon can be concave or convex. This can give a detection shape to an :ref:`Area2D<class_Area2D>`, turn :ref:`PhysicsBody2D<class_PhysicsBody2D>` into a solid object, or give a hollow shape to a :ref:`StaticBody2D<class_StaticBody2D>`.
+A node that provides a polygon shape to a :ref:`CollisionObject2D<class_CollisionObject2D>` parent and allows it to be edited. The polygon can be concave or convex. This can give a detection shape to an :ref:`Area2D<class_Area2D>`, turn a :ref:`PhysicsBody2D<class_PhysicsBody2D>` into a solid object, or give a hollow shape to a :ref:`StaticBody2D<class_StaticBody2D>`.
 
-\ **Warning:** A non-uniformly scaled :ref:`CollisionShape2D<class_CollisionShape2D>` will likely not behave as expected. Make sure to keep its scale the same on all axes and adjust its shape resource instead.
+\ **Warning:** A non-uniformly scaled **CollisionPolygon2D** will likely not behave as expected. Make sure to keep its scale the same on all axes and adjust its polygon instead.
 
 .. rst-class:: classref-reftable-group
 
@@ -31,17 +31,19 @@ Properties
 .. table::
    :widths: auto
 
-   +-----------------------------------------------------+---------------------------------------------------------------------------------------------+--------------------------+
-   | :ref:`BuildMode<enum_CollisionPolygon2D_BuildMode>` | :ref:`build_mode<class_CollisionPolygon2D_property_build_mode>`                             | ``0``                    |
-   +-----------------------------------------------------+---------------------------------------------------------------------------------------------+--------------------------+
-   | :ref:`bool<class_bool>`                             | :ref:`disabled<class_CollisionPolygon2D_property_disabled>`                                 | ``false``                |
-   +-----------------------------------------------------+---------------------------------------------------------------------------------------------+--------------------------+
-   | :ref:`bool<class_bool>`                             | :ref:`one_way_collision<class_CollisionPolygon2D_property_one_way_collision>`               | ``false``                |
-   +-----------------------------------------------------+---------------------------------------------------------------------------------------------+--------------------------+
-   | :ref:`float<class_float>`                           | :ref:`one_way_collision_margin<class_CollisionPolygon2D_property_one_way_collision_margin>` | ``1.0``                  |
-   +-----------------------------------------------------+---------------------------------------------------------------------------------------------+--------------------------+
-   | :ref:`PackedVector2Array<class_PackedVector2Array>` | :ref:`polygon<class_CollisionPolygon2D_property_polygon>`                                   | ``PackedVector2Array()`` |
-   +-----------------------------------------------------+---------------------------------------------------------------------------------------------+--------------------------+
+   +-----------------------------------------------------+---------------------------------------------------------------------------------------------------+--------------------------+
+   | :ref:`BuildMode<enum_CollisionPolygon2D_BuildMode>` | :ref:`build_mode<class_CollisionPolygon2D_property_build_mode>`                                   | ``0``                    |
+   +-----------------------------------------------------+---------------------------------------------------------------------------------------------------+--------------------------+
+   | :ref:`bool<class_bool>`                             | :ref:`disabled<class_CollisionPolygon2D_property_disabled>`                                       | ``false``                |
+   +-----------------------------------------------------+---------------------------------------------------------------------------------------------------+--------------------------+
+   | :ref:`bool<class_bool>`                             | :ref:`one_way_collision<class_CollisionPolygon2D_property_one_way_collision>`                     | ``false``                |
+   +-----------------------------------------------------+---------------------------------------------------------------------------------------------------+--------------------------+
+   | :ref:`Vector2<class_Vector2>`                       | :ref:`one_way_collision_direction<class_CollisionPolygon2D_property_one_way_collision_direction>` | ``Vector2(0, 1)``        |
+   +-----------------------------------------------------+---------------------------------------------------------------------------------------------------+--------------------------+
+   | :ref:`float<class_float>`                           | :ref:`one_way_collision_margin<class_CollisionPolygon2D_property_one_way_collision_margin>`       | ``1.0``                  |
+   +-----------------------------------------------------+---------------------------------------------------------------------------------------------------+--------------------------+
+   | :ref:`PackedVector2Array<class_PackedVector2Array>` | :ref:`polygon<class_CollisionPolygon2D_property_polygon>`                                         | ``PackedVector2Array()`` |
+   +-----------------------------------------------------+---------------------------------------------------------------------------------------------------+--------------------------+
 
 .. rst-class:: classref-section-separator
 
@@ -94,7 +96,7 @@ Property Descriptions
 - |void| **set_build_mode**\ (\ value\: :ref:`BuildMode<enum_CollisionPolygon2D_BuildMode>`\ )
 - :ref:`BuildMode<enum_CollisionPolygon2D_BuildMode>` **get_build_mode**\ (\ )
 
-Collision build mode. Use one of the :ref:`BuildMode<enum_CollisionPolygon2D_BuildMode>` constants.
+Collision build mode.
 
 .. rst-class:: classref-item-separator
 
@@ -111,7 +113,7 @@ Collision build mode. Use one of the :ref:`BuildMode<enum_CollisionPolygon2D_Bui
 - |void| **set_disabled**\ (\ value\: :ref:`bool<class_bool>`\ )
 - :ref:`bool<class_bool>` **is_disabled**\ (\ )
 
-If ``true``, no collisions will be detected.
+If ``true``, no collisions will be detected. This property should be changed with :ref:`Object.set_deferred()<class_Object_method_set_deferred>`.
 
 .. rst-class:: classref-item-separator
 
@@ -131,6 +133,25 @@ If ``true``, no collisions will be detected.
 If ``true``, only edges that face up, relative to **CollisionPolygon2D**'s rotation, will collide with other objects.
 
 \ **Note:** This property has no effect if this **CollisionPolygon2D** is a child of an :ref:`Area2D<class_Area2D>` node.
+
+\ **Note:** The one way collision direction can be configured by setting :ref:`one_way_collision_direction<class_CollisionPolygon2D_property_one_way_collision_direction>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_CollisionPolygon2D_property_one_way_collision_direction:
+
+.. rst-class:: classref-property
+
+:ref:`Vector2<class_Vector2>` **one_way_collision_direction** = ``Vector2(0, 1)`` :ref:`🔗<class_CollisionPolygon2D_property_one_way_collision_direction>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_one_way_collision_direction**\ (\ value\: :ref:`Vector2<class_Vector2>`\ )
+- :ref:`Vector2<class_Vector2>` **get_one_way_collision_direction**\ (\ )
+
+The direction used for one-way collision.
 
 .. rst-class:: classref-item-separator
 
@@ -168,9 +189,14 @@ The polygon's list of vertices. Each point will be connected to the next, and th
 
 \ **Note:** The returned vertices are in the local coordinate space of the given **CollisionPolygon2D**.
 
-**Note:** The returned array is *copied* and any changes to it will not update the original property value. See :ref:`PackedVector2Array<class_PackedVector2Array>` for more details.
+
+
+.. classref_note::
+
+    The returned array is *copied* and any changes to it will not update the original property value. See :ref:`PackedVector2Array<class_PackedVector2Array>` for more details.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

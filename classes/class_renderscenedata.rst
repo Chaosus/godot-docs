@@ -21,9 +21,9 @@ Abstract render data object, holds scene data related to rendering a single fram
 Description
 -----------
 
-Abstract scene data object, exists for the duration of rendering a single viewport.
+Abstract scene data object, exists for the duration of rendering a single viewport. See also :ref:`RenderSceneDataRD<class_RenderSceneDataRD>`, :ref:`RenderData<class_RenderData>`, and :ref:`RenderDataRD<class_RenderDataRD>`.
 
-\ **Note:** This is an internal rendering server object, do not instantiate this from script.
+\ **Note:** This is an internal rendering server object. Do not instantiate this class from a script.
 
 .. rst-class:: classref-reftable-group
 
@@ -131,6 +131,7 @@ Returns the view projection per view used to render this frame.
 \ **Note:** If a single view is rendered, this returns the camera projection. If more than one view is rendered, this will return a projection for the given view including the eye offset.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
