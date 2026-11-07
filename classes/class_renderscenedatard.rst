@@ -19,11 +19,12 @@ Render scene data implementation for the RenderingDevice based renderers.
 Description
 -----------
 
-Object holds scene data related to rendering a single frame of a viewport.
+Object holds scene data related to rendering a single frame of a viewport. See also :ref:`RenderSceneData<class_RenderSceneData>`, :ref:`RenderData<class_RenderData>`, and :ref:`RenderDataRD<class_RenderDataRD>`.
 
-\ **Note:** This is an internal rendering server object, do not instantiate this from script.
+\ **Note:** This is an internal rendering server object. Do not instantiate this class from a script.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

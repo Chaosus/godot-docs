@@ -161,7 +161,7 @@ The edited resource value.
 - |void| **set_toggle_mode**\ (\ value\: :ref:`bool<class_bool>`\ )
 - :ref:`bool<class_bool>` **is_toggle_mode**\ (\ )
 
-If ``true``, the main button with the resource preview works in the toggle mode. Use :ref:`set_toggle_pressed<class_EditorResourcePicker_method_set_toggle_pressed>` to manually set the state.
+If ``true``, the main button with the resource preview works in the toggle mode. Use :ref:`set_toggle_pressed()<class_EditorResourcePicker_method_set_toggle_pressed>` to manually set the state.
 
 .. rst-class:: classref-section-separator
 
@@ -178,7 +178,7 @@ Method Descriptions
 
 :ref:`bool<class_bool>` **_handle_menu_selected**\ (\ id\: :ref:`int<class_int>`\ ) |virtual| :ref:`🔗<class_EditorResourcePicker_private_method__handle_menu_selected>`
 
-This virtual method can be implemented to handle context menu items not handled by default. See :ref:`_set_create_options<class_EditorResourcePicker_private_method__set_create_options>`.
+This virtual method can be implemented to handle context menu items not handled by default. See :ref:`_set_create_options()<class_EditorResourcePicker_private_method__set_create_options>`.
 
 .. rst-class:: classref-item-separator
 
@@ -190,9 +190,11 @@ This virtual method can be implemented to handle context menu items not handled 
 
 |void| **_set_create_options**\ (\ menu_node\: :ref:`Object<class_Object>`\ ) |virtual| :ref:`🔗<class_EditorResourcePicker_private_method__set_create_options>`
 
-This virtual method is called when updating the context menu of **EditorResourcePicker**. Implement this method to override the "New ..." items with your own options. ``menu_node`` is a reference to the :ref:`PopupMenu<class_PopupMenu>` node.
+This virtual method is called when updating the context menu of an :ref:`editable<class_EditorResourcePicker_property_editable>` **EditorResourcePicker**. Implement this method to override the "New" items section with your own options. ``menu_node`` is a reference to the :ref:`PopupMenu<class_PopupMenu>` node.
 
-\ **Note:** Implement :ref:`_handle_menu_selected<class_EditorResourcePicker_private_method__handle_menu_selected>` to handle these custom items.
+\ **Note:** Implement :ref:`_handle_menu_selected()<class_EditorResourcePicker_private_method__handle_menu_selected>` to handle these custom items.
+
+\ **Note:** Relevant built-in options ("Load", "Copy", "Paste", etc.) are automatically added to the ``menu_node`` afterwards, using their hard-coded IDs starting from ``0``. Custom options need to use non-colliding IDs to be handled properly. Using ``id = 100 + custom_option_index`` is safe (this is what the default items in the "New" section use).
 
 .. rst-class:: classref-item-separator
 
@@ -219,6 +221,7 @@ Returns a list of all allowed types and subtypes corresponding to the :ref:`base
 Sets the toggle mode state for the main button. Works only if :ref:`toggle_mode<class_EditorResourcePicker_property_toggle_mode>` is set to ``true``.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

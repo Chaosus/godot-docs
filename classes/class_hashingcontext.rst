@@ -29,7 +29,7 @@ The :ref:`HashType<enum_HashingContext_HashType>` enum shows the supported hashi
  .. code-tab:: gdscript
 
     const CHUNK_SIZE = 1024
-    
+
     func hash_file(path):
         # Check that file exists.
         if not FileAccess.file_exists(path):
@@ -40,8 +40,9 @@ The :ref:`HashType<enum_HashingContext_HashType>` enum shows the supported hashi
         # Open the file to hash.
         var file = FileAccess.open(path, FileAccess.READ)
         # Update the context after reading each chunk.
-        while not file.eof_reached():
-            ctx.update(file.get_buffer(CHUNK_SIZE))
+        while file.get_position() < file.get_length():
+            var remaining = file.get_length() - file.get_position()
+            ctx.update(file.get_buffer(min(remaining, CHUNK_SIZE)))
         # Get the computed hash.
         var res = ctx.finish()
         # Print the result as hex string and array.
@@ -50,7 +51,7 @@ The :ref:`HashType<enum_HashingContext_HashType>` enum shows the supported hashi
  .. code-tab:: csharp
 
     public const int ChunkSize = 1024;
-    
+
     public void HashFile(string path)
     {
         // Check that file exists.
@@ -64,9 +65,10 @@ The :ref:`HashType<enum_HashingContext_HashType>` enum shows the supported hashi
         // Open the file to hash.
         using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
         // Update the context after reading each chunk.
-        while (!file.EofReached())
+        while (file.GetPosition() < file.GetLength())
         {
-            ctx.Update(file.GetBuffer(ChunkSize));
+            int remaining = (int)(file.GetLength() - file.GetPosition());
+            ctx.Update(file.GetBuffer(Mathf.Min(remaining, ChunkSize)));
         }
         // Get the computed hash.
         byte[] res = ctx.Finish();
@@ -173,6 +175,7 @@ Starts a new hash computation of the given ``type`` (e.g. :ref:`HASH_SHA256<clas
 Updates the computation with the given ``chunk`` of data.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

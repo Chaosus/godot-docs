@@ -12,16 +12,18 @@ AudioEffectDelay
 
 **Inherits:** :ref:`AudioEffect<class_AudioEffect>` **<** :ref:`Resource<class_Resource>` **<** :ref:`RefCounted<class_RefCounted>` **<** :ref:`Object<class_Object>`
 
-Adds a delay audio effect to an audio bus. Plays input signal back after a period of time.
+Adds a delay audio effect to an audio bus.
 
-Two tap delay and feedback options.
+Emulates an echo by playing the input audio back after a period of time.
 
 .. rst-class:: classref-introduction-group
 
 Description
 -----------
 
-Plays input signal back after a period of time. The delayed signal may be played back multiple times to create the sound of a repeating, decaying echo. Delay effects range from a subtle echo effect to a pronounced blending of previous sounds with new sounds.
+A "delay" effect plays the input audio signal back after a period of time. Each repetition is called a "delay tap" or simply "tap". Delay taps may be played back multiple times to create the sound of a repeating, decaying echo. Delay effects range from a subtle echo to a pronounced blending of previous sounds with new sounds.
+
+See also :ref:`AudioEffectReverb<class_AudioEffectReverb>` for a blurry, continuous echo.
 
 .. rst-class:: classref-introduction-group
 
@@ -29,6 +31,8 @@ Tutorials
 ---------
 
 - :doc:`Audio buses <../tutorials/audio/audio_buses>`
+
+- :doc:`Audio effects <../tutorials/audio/audio_effects>`
 
 .. rst-class:: classref-reftable-group
 
@@ -86,7 +90,7 @@ Property Descriptions
 - |void| **set_dry**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_dry**\ (\ )
 
-Output percent of original sound. At 0, only delayed sounds are output. Value can range from 0 to 1.
+The volume ratio of the original audio. Value can range from 0 to 1.
 
 .. rst-class:: classref-item-separator
 
@@ -103,7 +107,7 @@ Output percent of original sound. At 0, only delayed sounds are output. Value ca
 - |void| **set_feedback_active**\ (\ value\: :ref:`bool<class_bool>`\ )
 - :ref:`bool<class_bool>` **is_feedback_active**\ (\ )
 
-If ``true``, feedback is enabled.
+If ``true``, feedback is enabled, repeating taps after they are played.
 
 .. rst-class:: classref-item-separator
 
@@ -120,7 +124,7 @@ If ``true``, feedback is enabled.
 - |void| **set_feedback_delay_ms**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_feedback_delay_ms**\ (\ )
 
-Feedback delay time in milliseconds.
+Feedback delay time in milliseconds. Value can range from 0 to 1500.
 
 .. rst-class:: classref-item-separator
 
@@ -137,7 +141,7 @@ Feedback delay time in milliseconds.
 - |void| **set_feedback_level_db**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_feedback_level_db**\ (\ )
 
-Sound level for feedback.
+Gain for feedback, in dB. Value can range from -60 to 0.
 
 .. rst-class:: classref-item-separator
 
@@ -154,7 +158,7 @@ Sound level for feedback.
 - |void| **set_feedback_lowpass**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_feedback_lowpass**\ (\ )
 
-Low-pass filter for feedback, in Hz. Frequencies below this value are filtered out of the source signal.
+Low-pass filter for feedback, in Hz. Frequencies above this value are filtered out. Value can range from 1 to 16000.
 
 .. rst-class:: classref-item-separator
 
@@ -188,7 +192,7 @@ If ``true``, the first tap will be enabled.
 - |void| **set_tap1_delay_ms**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_tap1_delay_ms**\ (\ )
 
-First tap delay time in milliseconds.
+First tap delay time in milliseconds, compared to the original audio. Value can range from 0 to 1500.
 
 .. rst-class:: classref-item-separator
 
@@ -205,7 +209,7 @@ First tap delay time in milliseconds.
 - |void| **set_tap1_level_db**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_tap1_level_db**\ (\ )
 
-Sound level for the first tap.
+Gain for the first tap, in dB. Value can range from -60 to 0.
 
 .. rst-class:: classref-item-separator
 
@@ -222,7 +226,7 @@ Sound level for the first tap.
 - |void| **set_tap1_pan**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_tap1_pan**\ (\ )
 
-Pan position for the first tap. Value can range from -1 (fully left) to 1 (fully right).
+Pan position for the first tap. Negative values pan the sound to the left, positive pan to the right. Value can range from -1 to 1.
 
 .. rst-class:: classref-item-separator
 
@@ -256,7 +260,7 @@ If ``true``, the second tap will be enabled.
 - |void| **set_tap2_delay_ms**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_tap2_delay_ms**\ (\ )
 
-Second tap delay time in milliseconds.
+Second tap delay time in milliseconds, compared to the original audio. Value can range from 0 to 1500.
 
 .. rst-class:: classref-item-separator
 
@@ -273,7 +277,7 @@ Second tap delay time in milliseconds.
 - |void| **set_tap2_level_db**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_tap2_level_db**\ (\ )
 
-Sound level for the second tap.
+Gain for the second tap, in dB. Value can range from -60 to 0.
 
 .. rst-class:: classref-item-separator
 
@@ -290,9 +294,10 @@ Sound level for the second tap.
 - |void| **set_tap2_pan**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_tap2_pan**\ (\ )
 
-Pan position for the second tap. Value can range from -1 (fully left) to 1 (fully right).
+Pan position for the second tap. Negative values pan the sound to the left, positive pan to the right. Value can range from -1 to 1.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

@@ -14,16 +14,18 @@ AudioEffectLimiter
 
 **Inherits:** :ref:`AudioEffect<class_AudioEffect>` **<** :ref:`Resource<class_Resource>` **<** :ref:`RefCounted<class_RefCounted>` **<** :ref:`Object<class_Object>`
 
-Adds a soft-clip limiter audio effect to an Audio bus.
+Adds a soft-clip limiter audio effect to an audio bus.
 
 .. rst-class:: classref-introduction-group
 
 Description
 -----------
 
-A limiter is similar to a compressor, but it's less flexible and designed to disallow sound going over a given dB threshold. Adding one in the Master bus is always recommended to reduce the effects of clipping.
+A "limiter" is an audio effect designed to stop audio signals from exceeding a specified volume threshold level, and usually works by decreasing the volume or soft-clipping the audio. Adding one in the Master bus is always recommended to prevent clipping when the volume goes above 0 dB.
 
-Soft clipping starts to reduce the peaks a little below the threshold level and progressively increases its effect as the input level increases such that the threshold is never exceeded.
+Soft clipping starts to decrease the peaks a little below the volume threshold level and progressively increases its effect as the input volume increases such that the threshold level is never exceeded.
+
+If hard clipping is desired, consider :ref:`AudioEffectDistortion.MODE_CLIP<class_AudioEffectDistortion_constant_MODE_CLIP>`.
 
 .. rst-class:: classref-introduction-group
 
@@ -31,6 +33,8 @@ Tutorials
 ---------
 
 - :doc:`Audio buses <../tutorials/audio/audio_buses>`
+
+- :doc:`Audio effects <../tutorials/audio/audio_effects>`
 
 .. rst-class:: classref-reftable-group
 
@@ -70,7 +74,7 @@ Property Descriptions
 - |void| **set_ceiling_db**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_ceiling_db**\ (\ )
 
-The waveform's maximum allowed value, in decibels. Value can range from -20 to -0.1.
+The waveform's maximum allowed value, in dB. Value can range from -20 to -0.1.
 
 .. rst-class:: classref-item-separator
 
@@ -87,7 +91,7 @@ The waveform's maximum allowed value, in decibels. Value can range from -20 to -
 - |void| **set_soft_clip_db**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_soft_clip_db**\ (\ )
 
-Applies a gain to the limited waves, in decibels. Value can range from 0 to 6.
+Modifies the volume of the limited waves, in dB. Value can range from 0 to 6.
 
 .. rst-class:: classref-item-separator
 
@@ -104,9 +108,7 @@ Applies a gain to the limited waves, in decibels. Value can range from 0 to 6.
 - |void| **set_soft_clip_ratio**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_soft_clip_ratio**\ (\ )
 
-.. container:: contribute
-
-	There is currently no description for this property. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+This property has no effect on the audio. Use :ref:`AudioEffectHardLimiter<class_AudioEffectHardLimiter>` instead, as this Limiter effect is deprecated.
 
 .. rst-class:: classref-item-separator
 
@@ -123,9 +125,10 @@ Applies a gain to the limited waves, in decibels. Value can range from 0 to 6.
 - |void| **set_threshold_db**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_threshold_db**\ (\ )
 
-Threshold from which the limiter begins to be active, in decibels. Value can range from -30 to 0.
+The volume threshold level from which the limiter begins to be active, in dB. Value can range from -30 to 0.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
