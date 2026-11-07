@@ -23,7 +23,7 @@ Description
 
 **MainLoop** is the abstract base class for a Godot project's game loop. It is inherited by :ref:`SceneTree<class_SceneTree>`, which is the default game loop implementation used in Godot projects, though it is also possible to write and use one's own **MainLoop** subclass instead of the scene tree.
 
-Upon the application start, a **MainLoop** implementation must be provided to the OS; otherwise, the application will exit. This happens automatically (and a :ref:`SceneTree<class_SceneTree>` is created) unless a **MainLoop** :ref:`Script<class_Script>` is provided from the command line (with e.g. ``godot -s my_loop.gd``) or the "Main Loop Type" project setting is overwritten.
+Upon the application start, a **MainLoop** implementation must be provided to the OS; otherwise, the application will exit. This happens automatically (and a :ref:`SceneTree<class_SceneTree>` is created) unless a **MainLoop** :ref:`Script<class_Script>` is provided from the command line (with e.g. ``godot -s my_loop.gd``) or the :ref:`ProjectSettings.application/run/main_loop_type<class_ProjectSettings_property_application/run/main_loop_type>` project setting is overwritten.
 
 Here is an example script implementing a simple **MainLoop**:
 
@@ -34,18 +34,18 @@ Here is an example script implementing a simple **MainLoop**:
 
     class_name CustomMainLoop
     extends MainLoop
-    
+
     var time_elapsed = 0
-    
+
     func _initialize():
         print("Initialized:")
         print("  Starting time: %s" % str(time_elapsed))
-    
+
     func _process(delta):
         time_elapsed += delta
         # Return true to end the main loop.
         return Input.get_mouse_button_mask() != 0 || Input.is_key_pressed(KEY_ESCAPE)
-    
+
     func _finalize():
         print("Finalized:")
         print("  End time: %s" % str(time_elapsed))
@@ -53,25 +53,25 @@ Here is an example script implementing a simple **MainLoop**:
  .. code-tab:: csharp
 
     using Godot;
-    
+
     [GlobalClass]
     public partial class CustomMainLoop : MainLoop
     {
         private double _timeElapsed = 0;
-    
+
         public override void _Initialize()
         {
             GD.Print("Initialized:");
             GD.Print($"  Starting Time: {_timeElapsed}");
         }
-    
+
         public override bool _Process(double delta)
         {
             _timeElapsed += delta;
             // Return true to end the main loop.
             return Input.GetMouseButtonMask() != 0 || Input.IsKeyPressed(Key.Escape);
         }
-    
+
         private void _Finalize()
         {
             GD.Print("Finalized:");
@@ -141,7 +141,7 @@ Specific to the iOS platform.
 
 **NOTIFICATION_TRANSLATION_CHANGED** = ``2010`` :ref:`🔗<class_MainLoop_constant_NOTIFICATION_TRANSLATION_CHANGED>`
 
-Notification received when translations may have changed. Can be triggered by the user changing the locale. Can be used to respond to language changes, for example to change the UI strings on the fly. Useful when working with the built-in translation support, like :ref:`Object.tr<class_Object_method_tr>`.
+Notification received when translations may have changed. Can be triggered by the user changing the locale. Can be used to respond to language changes, for example to change the UI strings on the fly. Useful when working with the built-in translation support, like :ref:`Object.tr()<class_Object_method_tr>`.
 
 .. _class_MainLoop_constant_NOTIFICATION_WM_ABOUT:
 
@@ -171,7 +171,7 @@ Implemented on desktop platforms if the crash handler is enabled.
 
 Notification received from the OS when an update of the Input Method Engine occurs (e.g. change of IME cursor position or composition string).
 
-Specific to the macOS platform.
+Implemented on desktop and web platforms.
 
 .. _class_MainLoop_constant_NOTIFICATION_APPLICATION_RESUMED:
 
@@ -223,6 +223,22 @@ Implemented on desktop and mobile platforms.
 
 Notification received when text server is changed.
 
+.. _class_MainLoop_constant_NOTIFICATION_APPLICATION_PIP_MODE_ENTERED:
+
+.. rst-class:: classref-constant
+
+**NOTIFICATION_APPLICATION_PIP_MODE_ENTERED** = ``2019`` :ref:`🔗<class_MainLoop_constant_NOTIFICATION_APPLICATION_PIP_MODE_ENTERED>`
+
+Notification received when the application enters picture-in-picture mode.
+
+.. _class_MainLoop_constant_NOTIFICATION_APPLICATION_PIP_MODE_EXITED:
+
+.. rst-class:: classref-constant
+
+**NOTIFICATION_APPLICATION_PIP_MODE_EXITED** = ``2020`` :ref:`🔗<class_MainLoop_constant_NOTIFICATION_APPLICATION_PIP_MODE_EXITED>`
+
+Notification received when the application exits picture-in-picture mode.
+
 .. rst-class:: classref-section-separator
 
 ----
@@ -262,9 +278,13 @@ Called once during initialization.
 
 :ref:`bool<class_bool>` **_physics_process**\ (\ delta\: :ref:`float<class_float>`\ ) |virtual| :ref:`🔗<class_MainLoop_private_method__physics_process>`
 
-Called each physics frame with the time since the last physics frame as argument (``delta``, in seconds). Equivalent to :ref:`Node._physics_process<class_Node_private_method__physics_process>`.
+Called each physics tick. ``delta`` is the logical time between physics ticks in seconds and is equal to :ref:`Engine.time_scale<class_Engine_property_time_scale>` / :ref:`Engine.physics_ticks_per_second<class_Engine_property_physics_ticks_per_second>`. Equivalent to :ref:`Node._physics_process()<class_Node_private_method__physics_process>`.
 
-If implemented, the method must return a boolean value. ``true`` ends the main loop, while ``false`` lets it proceed to the next frame.
+If implemented, the method must return a boolean value. ``true`` ends the main loop, while ``false`` lets it proceed to the next step.
+
+\ **Note:** :ref:`_physics_process()<class_MainLoop_private_method__physics_process>` may be called up to :ref:`Engine.max_physics_steps_per_frame<class_Engine_property_max_physics_steps_per_frame>` times per (idle) frame. This step limit may be reached when the engine is suffering performance issues.
+
+\ **Note:** Accumulated ``delta`` may diverge from real world seconds.
 
 .. rst-class:: classref-item-separator
 
@@ -276,11 +296,18 @@ If implemented, the method must return a boolean value. ``true`` ends the main l
 
 :ref:`bool<class_bool>` **_process**\ (\ delta\: :ref:`float<class_float>`\ ) |virtual| :ref:`🔗<class_MainLoop_private_method__process>`
 
-Called each process (idle) frame with the time since the last process frame as argument (in seconds). Equivalent to :ref:`Node._process<class_Node_private_method__process>`.
+Called on each idle frame, prior to rendering, and after physics ticks have been processed. ``delta`` is the time between frames in seconds. Equivalent to :ref:`Node._process()<class_Node_private_method__process>`.
 
 If implemented, the method must return a boolean value. ``true`` ends the main loop, while ``false`` lets it proceed to the next frame.
 
+\ **Note:** When the engine is struggling and the frame rate is lowered, ``delta`` will increase. When ``delta`` is increased, it's capped at a maximum of :ref:`Engine.time_scale<class_Engine_property_time_scale>` \* :ref:`Engine.max_physics_steps_per_frame<class_Engine_property_max_physics_steps_per_frame>` / :ref:`Engine.physics_ticks_per_second<class_Engine_property_physics_ticks_per_second>`. As a result, accumulated ``delta`` may not represent real world time.
+
+\ **Note:** When ``--fixed-fps`` is enabled or the engine is running in Movie Maker mode (see :ref:`MovieWriter<class_MovieWriter>`), process ``delta`` will always be the same for every frame, regardless of how much time the frame took to render.
+
+\ **Note:** Frame delta may be post-processed by :ref:`OS.delta_smoothing<class_OS_property_delta_smoothing>` if this is enabled for the project.
+
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

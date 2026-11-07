@@ -12,14 +12,16 @@ AudioEffectHighShelfFilter
 
 **Inherits:** :ref:`AudioEffectFilter<class_AudioEffectFilter>` **<** :ref:`AudioEffect<class_AudioEffect>` **<** :ref:`Resource<class_Resource>` **<** :ref:`RefCounted<class_RefCounted>` **<** :ref:`Object<class_Object>`
 
-Adds a high-shelf filter to the audio bus.
+Adds a high-shelf filter to an audio bus.
 
 .. rst-class:: classref-introduction-group
 
 Description
 -----------
 
-Reduces all frequencies above the :ref:`AudioEffectFilter.cutoff_hz<class_AudioEffectFilter_property_cutoff_hz>`.
+A "high-shelf" filter controls the gain of all frequencies above :ref:`AudioEffectFilter.cutoff_hz<class_AudioEffectFilter_property_cutoff_hz>`.
+
+This filter can be used to increase or decrease clarity of a sound.
 
 .. rst-class:: classref-introduction-group
 
@@ -28,7 +30,10 @@ Tutorials
 
 - :doc:`Audio buses <../tutorials/audio/audio_buses>`
 
+- :doc:`Audio effects <../tutorials/audio/audio_effects>`
+
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
