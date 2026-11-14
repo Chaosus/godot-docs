@@ -31,17 +31,19 @@ Properties
 .. table::
    :widths: auto
 
-   +-----------------------------------+------------------------------------------------------------------------+---------+
-   | :ref:`float<class_float>`         | :ref:`fallback_base_scale<class_ThemeDB_property_fallback_base_scale>` | ``1.0`` |
-   +-----------------------------------+------------------------------------------------------------------------+---------+
-   | :ref:`Font<class_Font>`           | :ref:`fallback_font<class_ThemeDB_property_fallback_font>`             |         |
-   +-----------------------------------+------------------------------------------------------------------------+---------+
-   | :ref:`int<class_int>`             | :ref:`fallback_font_size<class_ThemeDB_property_fallback_font_size>`   | ``16``  |
-   +-----------------------------------+------------------------------------------------------------------------+---------+
-   | :ref:`Texture2D<class_Texture2D>` | :ref:`fallback_icon<class_ThemeDB_property_fallback_icon>`             |         |
-   +-----------------------------------+------------------------------------------------------------------------+---------+
-   | :ref:`StyleBox<class_StyleBox>`   | :ref:`fallback_stylebox<class_ThemeDB_property_fallback_stylebox>`     |         |
-   +-----------------------------------+------------------------------------------------------------------------+---------+
+   +---------------------------------------+------------------------------------------------------------------------+---------+
+   | :ref:`float<class_float>`             | :ref:`fallback_base_scale<class_ThemeDB_property_fallback_base_scale>` | ``1.0`` |
+   +---------------------------------------+------------------------------------------------------------------------+---------+
+   | :ref:`Font<class_Font>`               | :ref:`fallback_font<class_ThemeDB_property_fallback_font>`             |         |
+   +---------------------------------------+------------------------------------------------------------------------+---------+
+   | :ref:`int<class_int>`                 | :ref:`fallback_font_size<class_ThemeDB_property_fallback_font_size>`   | ``16``  |
+   +---------------------------------------+------------------------------------------------------------------------+---------+
+   | :ref:`Texture2D<class_Texture2D>`     | :ref:`fallback_icon<class_ThemeDB_property_fallback_icon>`             |         |
+   +---------------------------------------+------------------------------------------------------------------------+---------+
+   | :ref:`AudioStream<class_AudioStream>` | :ref:`fallback_sound<class_ThemeDB_property_fallback_sound>`           |         |
+   +---------------------------------------+------------------------------------------------------------------------+---------+
+   | :ref:`StyleBox<class_StyleBox>`       | :ref:`fallback_stylebox<class_ThemeDB_property_fallback_stylebox>`     |         |
+   +---------------------------------------+------------------------------------------------------------------------+---------+
 
 .. rst-class:: classref-reftable-group
 
@@ -157,6 +159,23 @@ The fallback icon of every :ref:`Control<class_Control>` node and :ref:`Theme<cl
 
 ----
 
+.. _class_ThemeDB_property_fallback_sound:
+
+.. rst-class:: classref-property
+
+:ref:`AudioStream<class_AudioStream>` **fallback_sound** :ref:`🔗<class_ThemeDB_property_fallback_sound>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_fallback_sound**\ (\ value\: :ref:`AudioStream<class_AudioStream>`\ )
+- :ref:`AudioStream<class_AudioStream>` **get_fallback_sound**\ (\ )
+
+The fallback sound of every :ref:`Control<class_Control>` node and :ref:`Theme<class_Theme>` resource. Used when no other value is available to the control.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_ThemeDB_property_fallback_stylebox:
 
 .. rst-class:: classref-property
@@ -202,6 +221,7 @@ Returns a reference to the custom project :ref:`Theme<class_Theme>`. This theme 
 To set the project theme, see :ref:`ProjectSettings.gui/theme/custom<class_ProjectSettings_property_gui/theme/custom>`.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

@@ -10,7 +10,7 @@
 FileSystemDock
 ==============
 
-**Inherits:** :ref:`VBoxContainer<class_VBoxContainer>` **<** :ref:`BoxContainer<class_BoxContainer>` **<** :ref:`Container<class_Container>` **<** :ref:`Control<class_Control>` **<** :ref:`CanvasItem<class_CanvasItem>` **<** :ref:`Node<class_Node>` **<** :ref:`Object<class_Object>`
+**Inherits:** :ref:`EditorDock<class_EditorDock>` **<** :ref:`MarginContainer<class_MarginContainer>` **<** :ref:`Container<class_Container>` **<** :ref:`Control<class_Control>` **<** :ref:`CanvasItem<class_CanvasItem>` **<** :ref:`Node<class_Node>` **<** :ref:`Object<class_Object>`
 
 Godot editor's dock for managing files in the project.
 
@@ -19,7 +19,7 @@ Godot editor's dock for managing files in the project.
 Description
 -----------
 
-This class is available only in :ref:`EditorPlugin<class_EditorPlugin>`\ s and can't be instantiated. You can access it using :ref:`EditorInterface.get_file_system_dock<class_EditorInterface_method_get_file_system_dock>`.
+This class is available only in :ref:`EditorPlugin<class_EditorPlugin>`\ s and can't be instantiated. You can access it using :ref:`EditorInterface.get_file_system_dock()<class_EditorInterface_method_get_file_system_dock>`.
 
 While **FileSystemDock** doesn't expose any methods for file manipulation, it can listen for various file-related signals.
 
@@ -152,6 +152,18 @@ Emitted when the given scenes are being instantiated in the editor.
 
 Emitted when an external ``resource`` had its file removed.
 
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_FileSystemDock_signal_selection_changed:
+
+.. rst-class:: classref-signal
+
+**selection_changed**\ (\ ) :ref:`🔗<class_FileSystemDock_signal_selection_changed>`
+
+Emitted when the selection changes. Use :ref:`EditorInterface.get_selected_paths()<class_EditorInterface_method_get_selected_paths>` in the connected method to get the selected paths.
+
 .. rst-class:: classref-section-separator
 
 ----
@@ -194,6 +206,7 @@ Sets the given ``path`` as currently selected, ensuring that the selected file/d
 Removes an :ref:`EditorResourceTooltipPlugin<class_EditorResourceTooltipPlugin>`. Fails if the plugin wasn't previously added.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

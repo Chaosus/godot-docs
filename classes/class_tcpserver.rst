@@ -10,7 +10,7 @@
 TCPServer
 =========
 
-**Inherits:** :ref:`RefCounted<class_RefCounted>` **<** :ref:`Object<class_Object>`
+**Inherits:** :ref:`SocketServer<class_SocketServer>` **<** :ref:`RefCounted<class_RefCounted>` **<** :ref:`Object<class_Object>`
 
 A TCP server.
 
@@ -21,7 +21,7 @@ Description
 
 A TCP server. Listens to connections on a port and returns a :ref:`StreamPeerTCP<class_StreamPeerTCP>` when it gets an incoming connection.
 
-\ **Note:** When exporting to Android, make sure to enable the ``INTERNET`` permission in the Android export preset before exporting the project or using one-click deploy. Otherwise, network communication of any kind will be blocked by Android.
+\ **Note:** When exporting to Android, make sure to enable the ``INTERNET`` permission in the Android export preset before exporting the project or using remote deploy. Otherwise, network communication of any kind will be blocked by Android.
 
 .. rst-class:: classref-reftable-group
 
@@ -34,13 +34,7 @@ Methods
    +-------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                     | :ref:`get_local_port<class_TCPServer_method_get_local_port>`\ (\ ) |const|                                                         |
    +-------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                   | :ref:`is_connection_available<class_TCPServer_method_is_connection_available>`\ (\ ) |const|                                       |
-   +-------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`                   | :ref:`is_listening<class_TCPServer_method_is_listening>`\ (\ ) |const|                                                             |
-   +-------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Error<enum_@GlobalScope_Error>`     | :ref:`listen<class_TCPServer_method_listen>`\ (\ port\: :ref:`int<class_int>`, bind_address\: :ref:`String<class_String>` = "*"\ ) |
-   +-------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
-   | |void|                                    | :ref:`stop<class_TCPServer_method_stop>`\ (\ )                                                                                     |
    +-------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`StreamPeerTCP<class_StreamPeerTCP>` | :ref:`take_connection<class_TCPServer_method_take_connection>`\ (\ )                                                               |
    +-------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+
@@ -66,30 +60,6 @@ Returns the local port this server is listening to.
 
 ----
 
-.. _class_TCPServer_method_is_connection_available:
-
-.. rst-class:: classref-method
-
-:ref:`bool<class_bool>` **is_connection_available**\ (\ ) |const| :ref:`🔗<class_TCPServer_method_is_connection_available>`
-
-Returns ``true`` if a connection is available for taking.
-
-.. rst-class:: classref-item-separator
-
-----
-
-.. _class_TCPServer_method_is_listening:
-
-.. rst-class:: classref-method
-
-:ref:`bool<class_bool>` **is_listening**\ (\ ) |const| :ref:`🔗<class_TCPServer_method_is_listening>`
-
-Returns ``true`` if the server is currently listening for connections.
-
-.. rst-class:: classref-item-separator
-
-----
-
 .. _class_TCPServer_method_listen:
 
 .. rst-class:: classref-method
@@ -108,18 +78,6 @@ If ``bind_address`` is set to any valid address (e.g. ``"192.168.1.101"``, ``"::
 
 ----
 
-.. _class_TCPServer_method_stop:
-
-.. rst-class:: classref-method
-
-|void| **stop**\ (\ ) :ref:`🔗<class_TCPServer_method_stop>`
-
-Stops listening.
-
-.. rst-class:: classref-item-separator
-
-----
-
 .. _class_TCPServer_method_take_connection:
 
 .. rst-class:: classref-method
@@ -129,6 +87,7 @@ Stops listening.
 If a connection is available, returns a StreamPeerTCP with the connection.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
