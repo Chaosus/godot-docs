@@ -71,6 +71,8 @@ Property Descriptions
 
 If ``true``, enables the tonemapping auto exposure mode of the scene renderer. If ``true``, the renderer will automatically determine the exposure setting to adapt to the scene's illumination and the observed light.
 
+\ **Note:** Auto-exposure is only supported in the Forward+ rendering method, not Mobile or Compatibility.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -137,9 +139,14 @@ Multiplier for the exposure amount. A higher value results in a brighter image.
 - |void| **set_exposure_sensitivity**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_exposure_sensitivity**\ (\ )
 
-Sensitivity of camera sensors, measured in ISO. A higher sensitivity results in a brighter image. Only available when :ref:`ProjectSettings.rendering/lights_and_shadows/use_physical_light_units<class_ProjectSettings_property_rendering/lights_and_shadows/use_physical_light_units>` is enabled. When :ref:`auto_exposure_enabled<class_CameraAttributes_property_auto_exposure_enabled>` this can be used as a method of exposure compensation, doubling the value will increase the exposure value (measured in EV100) by 1 stop.
+Sensitivity of camera sensors, measured in ISO. A higher sensitivity results in a brighter image.
+
+If :ref:`auto_exposure_enabled<class_CameraAttributes_property_auto_exposure_enabled>` is ``true``, this can be used as a method of exposure compensation, doubling the value will increase the exposure value (measured in EV100) by 1 stop.
+
+\ **Note:** Only available when :ref:`ProjectSettings.rendering/lights_and_shadows/use_physical_light_units<class_ProjectSettings_property_rendering/lights_and_shadows/use_physical_light_units>` is enabled.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

@@ -21,7 +21,7 @@ Description
 
 A control used for playback of :ref:`VideoStream<class_VideoStream>` resources.
 
-Supported video formats are `Ogg Theora <https://www.theora.org/>`__ (``.ogv``, :ref:`VideoStreamTheora<class_VideoStreamTheora>`) and any format exposed via a GDExtension plugin.
+Supported video formats are `Ogg Theora <https://www.theora.org/>`__ (\ ``.ogv``, :ref:`VideoStreamTheora<class_VideoStreamTheora>`) and any format exposed via a GDExtension plugin.
 
 \ **Warning:** On Web, video playback *will* perform poorly due to missing architecture-specific assembly optimizations.
 
@@ -54,6 +54,8 @@ Properties
    | :ref:`bool<class_bool>`               | :ref:`loop<class_VideoStreamPlayer_property_loop>`                       | ``false``     |
    +---------------------------------------+--------------------------------------------------------------------------+---------------+
    | :ref:`bool<class_bool>`               | :ref:`paused<class_VideoStreamPlayer_property_paused>`                   | ``false``     |
+   +---------------------------------------+--------------------------------------------------------------------------+---------------+
+   | :ref:`float<class_float>`             | :ref:`speed_scale<class_VideoStreamPlayer_property_speed_scale>`         | ``1.0``       |
    +---------------------------------------+--------------------------------------------------------------------------+---------------+
    | :ref:`VideoStream<class_VideoStream>` | :ref:`stream<class_VideoStreamPlayer_property_stream>`                   |               |
    +---------------------------------------+--------------------------------------------------------------------------+---------------+
@@ -231,6 +233,23 @@ If ``true``, the video is paused.
 
 ----
 
+.. _class_VideoStreamPlayer_property_speed_scale:
+
+.. rst-class:: classref-property
+
+:ref:`float<class_float>` **speed_scale** = ``1.0`` :ref:`🔗<class_VideoStreamPlayer_property_speed_scale>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_speed_scale**\ (\ value\: :ref:`float<class_float>`\ )
+- :ref:`float<class_float>` **get_speed_scale**\ (\ )
+
+The stream's current speed scale. ``1.0`` is the normal speed, while ``2.0`` is double speed and ``0.5`` is half speed. A speed scale of ``0.0`` pauses the video, similar to setting :ref:`paused<class_VideoStreamPlayer_property_paused>` to ``true``.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_VideoStreamPlayer_property_stream:
 
 .. rst-class:: classref-property
@@ -260,8 +279,6 @@ The assigned video stream. See description for supported formats.
 - :ref:`float<class_float>` **get_stream_position**\ (\ )
 
 The current position of the stream, in seconds.
-
-\ **Note:** Changing this value won't have any effect as seeking is not implemented yet, except in video formats implemented by a GDExtension add-on.
 
 .. rst-class:: classref-item-separator
 
@@ -314,8 +331,6 @@ Method Descriptions
 
 The length of the current stream, in seconds.
 
-\ **Note:** For :ref:`VideoStreamTheora<class_VideoStreamTheora>` streams (the built-in format supported by Godot), this value will always be zero, as getting the stream length is not implemented yet. The feature may be supported by video formats implemented by a GDExtension add-on.
-
 .. rst-class:: classref-item-separator
 
 ----
@@ -338,7 +353,9 @@ Returns the video stream's name, or ``"<No Stream>"`` if no video stream is assi
 
 :ref:`Texture2D<class_Texture2D>` **get_video_texture**\ (\ ) |const| :ref:`🔗<class_VideoStreamPlayer_method_get_video_texture>`
 
-Returns the current frame as a :ref:`Texture2D<class_Texture2D>`.
+Returns the video playback texture.
+
+The texture will be continually updated as the video plays, so call :ref:`Texture2D.get_image()<class_Texture2D_method_get_image>` to get a still frame.
 
 .. rst-class:: classref-item-separator
 
@@ -364,7 +381,9 @@ Returns ``true`` if the video is playing.
 
 |void| **play**\ (\ ) :ref:`🔗<class_VideoStreamPlayer_method_play>`
 
-Starts the video playback from the beginning. If the video is paused, this will not unpause the video.
+Starts the video playback from the beginning, unless the video is already playing.
+
+\ **Note:** If the video is paused, this will not unpause the video.
 
 .. rst-class:: classref-item-separator
 
@@ -381,6 +400,7 @@ Stops the video playback and sets the stream position to 0.
 \ **Note:** Although the stream position will be set to 0, the first frame of the video stream won't become the current frame.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

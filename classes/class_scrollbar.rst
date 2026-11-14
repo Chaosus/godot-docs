@@ -31,11 +31,13 @@ Properties
 .. table::
    :widths: auto
 
-   +---------------------------+----------------------------------------------------------+-------------------------------------------------------------+
-   | :ref:`float<class_float>` | :ref:`custom_step<class_ScrollBar_property_custom_step>` | ``-1.0``                                                    |
-   +---------------------------+----------------------------------------------------------+-------------------------------------------------------------+
-   | :ref:`float<class_float>` | step                                                     | ``0.0`` (overrides :ref:`Range<class_Range_property_step>`) |
-   +---------------------------+----------------------------------------------------------+-------------------------------------------------------------+
+   +------------------------------------------+----------------------------------------------------------+---------------------------------------------------------------------+
+   | :ref:`float<class_float>`                | :ref:`custom_step<class_ScrollBar_property_custom_step>` | ``-1.0``                                                            |
+   +------------------------------------------+----------------------------------------------------------+---------------------------------------------------------------------+
+   | :ref:`FocusMode<enum_Control_FocusMode>` | focus_mode                                               | ``3`` (overrides :ref:`Control<class_Control_property_focus_mode>`) |
+   +------------------------------------------+----------------------------------------------------------+---------------------------------------------------------------------+
+   | :ref:`float<class_float>`                | step                                                     | ``0.0`` (overrides :ref:`Range<class_Range_property_step>`)         |
+   +------------------------------------------+----------------------------------------------------------+---------------------------------------------------------------------+
 
 .. rst-class:: classref-reftable-group
 
@@ -45,29 +47,39 @@ Theme Properties
 .. table::
    :widths: auto
 
-   +-----------------------------------+----------------------------------------------------------------------------+
-   | :ref:`Texture2D<class_Texture2D>` | :ref:`decrement<class_ScrollBar_theme_icon_decrement>`                     |
-   +-----------------------------------+----------------------------------------------------------------------------+
-   | :ref:`Texture2D<class_Texture2D>` | :ref:`decrement_highlight<class_ScrollBar_theme_icon_decrement_highlight>` |
-   +-----------------------------------+----------------------------------------------------------------------------+
-   | :ref:`Texture2D<class_Texture2D>` | :ref:`decrement_pressed<class_ScrollBar_theme_icon_decrement_pressed>`     |
-   +-----------------------------------+----------------------------------------------------------------------------+
-   | :ref:`Texture2D<class_Texture2D>` | :ref:`increment<class_ScrollBar_theme_icon_increment>`                     |
-   +-----------------------------------+----------------------------------------------------------------------------+
-   | :ref:`Texture2D<class_Texture2D>` | :ref:`increment_highlight<class_ScrollBar_theme_icon_increment_highlight>` |
-   +-----------------------------------+----------------------------------------------------------------------------+
-   | :ref:`Texture2D<class_Texture2D>` | :ref:`increment_pressed<class_ScrollBar_theme_icon_increment_pressed>`     |
-   +-----------------------------------+----------------------------------------------------------------------------+
-   | :ref:`StyleBox<class_StyleBox>`   | :ref:`grabber<class_ScrollBar_theme_style_grabber>`                        |
-   +-----------------------------------+----------------------------------------------------------------------------+
-   | :ref:`StyleBox<class_StyleBox>`   | :ref:`grabber_highlight<class_ScrollBar_theme_style_grabber_highlight>`    |
-   +-----------------------------------+----------------------------------------------------------------------------+
-   | :ref:`StyleBox<class_StyleBox>`   | :ref:`grabber_pressed<class_ScrollBar_theme_style_grabber_pressed>`        |
-   +-----------------------------------+----------------------------------------------------------------------------+
-   | :ref:`StyleBox<class_StyleBox>`   | :ref:`scroll<class_ScrollBar_theme_style_scroll>`                          |
-   +-----------------------------------+----------------------------------------------------------------------------+
-   | :ref:`StyleBox<class_StyleBox>`   | :ref:`scroll_focus<class_ScrollBar_theme_style_scroll_focus>`              |
-   +-----------------------------------+----------------------------------------------------------------------------+
+   +---------------------------------------+---------------------------------------------------------------------------------------------+-------+
+   | :ref:`int<class_int>`                 | :ref:`icon_max_size<class_ScrollBar_theme_constant_icon_max_size>`                          | ``0`` |
+   +---------------------------------------+---------------------------------------------------------------------------------------------+-------+
+   | :ref:`Texture2D<class_Texture2D>`     | :ref:`decrement<class_ScrollBar_theme_icon_decrement>`                                      |       |
+   +---------------------------------------+---------------------------------------------------------------------------------------------+-------+
+   | :ref:`Texture2D<class_Texture2D>`     | :ref:`decrement_highlight<class_ScrollBar_theme_icon_decrement_highlight>`                  |       |
+   +---------------------------------------+---------------------------------------------------------------------------------------------+-------+
+   | :ref:`Texture2D<class_Texture2D>`     | :ref:`decrement_pressed<class_ScrollBar_theme_icon_decrement_pressed>`                      |       |
+   +---------------------------------------+---------------------------------------------------------------------------------------------+-------+
+   | :ref:`Texture2D<class_Texture2D>`     | :ref:`increment<class_ScrollBar_theme_icon_increment>`                                      |       |
+   +---------------------------------------+---------------------------------------------------------------------------------------------+-------+
+   | :ref:`Texture2D<class_Texture2D>`     | :ref:`increment_highlight<class_ScrollBar_theme_icon_increment_highlight>`                  |       |
+   +---------------------------------------+---------------------------------------------------------------------------------------------+-------+
+   | :ref:`Texture2D<class_Texture2D>`     | :ref:`increment_pressed<class_ScrollBar_theme_icon_increment_pressed>`                      |       |
+   +---------------------------------------+---------------------------------------------------------------------------------------------+-------+
+   | :ref:`AudioStream<class_AudioStream>` | :ref:`drag_ended_sound<class_ScrollBar_theme_sound_drag_ended_sound>`                       |       |
+   +---------------------------------------+---------------------------------------------------------------------------------------------+-------+
+   | :ref:`AudioStream<class_AudioStream>` | :ref:`drag_started_sound<class_ScrollBar_theme_sound_drag_started_sound>`                   |       |
+   +---------------------------------------+---------------------------------------------------------------------------------------------+-------+
+   | :ref:`AudioStream<class_AudioStream>` | :ref:`value_change_rejected_sound<class_ScrollBar_theme_sound_value_change_rejected_sound>` |       |
+   +---------------------------------------+---------------------------------------------------------------------------------------------+-------+
+   | :ref:`AudioStream<class_AudioStream>` | :ref:`value_changed_sound<class_ScrollBar_theme_sound_value_changed_sound>`                 |       |
+   +---------------------------------------+---------------------------------------------------------------------------------------------+-------+
+   | :ref:`StyleBox<class_StyleBox>`       | :ref:`grabber<class_ScrollBar_theme_style_grabber>`                                         |       |
+   +---------------------------------------+---------------------------------------------------------------------------------------------+-------+
+   | :ref:`StyleBox<class_StyleBox>`       | :ref:`grabber_highlight<class_ScrollBar_theme_style_grabber_highlight>`                     |       |
+   +---------------------------------------+---------------------------------------------------------------------------------------------+-------+
+   | :ref:`StyleBox<class_StyleBox>`       | :ref:`grabber_pressed<class_ScrollBar_theme_style_grabber_pressed>`                         |       |
+   +---------------------------------------+---------------------------------------------------------------------------------------------+-------+
+   | :ref:`StyleBox<class_StyleBox>`       | :ref:`scroll<class_ScrollBar_theme_style_scroll>`                                           |       |
+   +---------------------------------------+---------------------------------------------------------------------------------------------+-------+
+   | :ref:`StyleBox<class_StyleBox>`       | :ref:`scroll_focus<class_ScrollBar_theme_style_scroll_focus>`                               |       |
+   +---------------------------------------+---------------------------------------------------------------------------------------------+-------+
 
 .. rst-class:: classref-section-separator
 
@@ -116,6 +128,18 @@ Overrides the step used when clicking increment and decrement buttons or when us
 
 Theme Property Descriptions
 ---------------------------
+
+.. _class_ScrollBar_theme_constant_icon_max_size:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`int<class_int>` **icon_max_size** = ``0`` :ref:`🔗<class_ScrollBar_theme_constant_icon_max_size>`
+
+The maximum allowed size of the **ScrollBar**'s increment and decrement icons. The texture is scaled down so its widest axis is :ref:`icon_max_size<class_ScrollBar_theme_constant_icon_max_size>` and the other axis is scaled keeping the original ratio.
+
+.. rst-class:: classref-item-separator
+
+----
 
 .. _class_ScrollBar_theme_icon_decrement:
 
@@ -189,6 +213,54 @@ Displayed when the increment button is being pressed.
 
 ----
 
+.. _class_ScrollBar_theme_sound_drag_ended_sound:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`AudioStream<class_AudioStream>` **drag_ended_sound** :ref:`🔗<class_ScrollBar_theme_sound_drag_ended_sound>`
+
+Played when mouse or touch drag ends.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_ScrollBar_theme_sound_drag_started_sound:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`AudioStream<class_AudioStream>` **drag_started_sound** :ref:`🔗<class_ScrollBar_theme_sound_drag_started_sound>`
+
+Played when mouse or touch drag begins.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_ScrollBar_theme_sound_value_change_rejected_sound:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`AudioStream<class_AudioStream>` **value_change_rejected_sound** :ref:`🔗<class_ScrollBar_theme_sound_value_change_rejected_sound>`
+
+Played when the value is attempted to be changed through keyboard or gamepad input, but the value is already at the minimum (or maximum).
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_ScrollBar_theme_sound_value_changed_sound:
+
+.. rst-class:: classref-themeproperty
+
+:ref:`AudioStream<class_AudioStream>` **value_changed_sound** :ref:`🔗<class_ScrollBar_theme_sound_value_changed_sound>`
+
+Played when the value is changed through keyboard or gamepad input. If the value is already at the minimum (or maximum), :ref:`value_change_rejected_sound<class_ScrollBar_theme_sound_value_change_rejected_sound>` is played instead.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_ScrollBar_theme_style_grabber:
 
 .. rst-class:: classref-themeproperty
@@ -246,6 +318,7 @@ Used as background of this **ScrollBar**.
 Used as background when the **ScrollBar** has the GUI focus.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
