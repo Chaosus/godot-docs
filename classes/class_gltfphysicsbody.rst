@@ -12,14 +12,14 @@ GLTFPhysicsBody
 
 **Inherits:** :ref:`Resource<class_Resource>` **<** :ref:`RefCounted<class_RefCounted>` **<** :ref:`Object<class_Object>`
 
-Represents a GLTF physics body.
+Represents a glTF physics body.
 
 .. rst-class:: classref-introduction-group
 
 Description
 -----------
 
-Represents a physics body as an intermediary between the ``OMI_physics_body`` GLTF data and Godot's nodes, and it's abstracted in a way that allows adding support for different GLTF physics extensions in the future.
+Represents a physics body as an intermediary between the ``OMI_physics_body`` glTF data and Godot's nodes, and it's abstracted in a way that allows adding support for different glTF physics extensions in the future.
 
 .. rst-class:: classref-introduction-group
 
@@ -28,7 +28,7 @@ Tutorials
 
 - :doc:`Runtime file loading and saving <../tutorials/io/runtime_file_loading_and_saving>`
 
-- `OMI_physics_body GLTF extension <https://github.com/omigroup/gltf-extensions/tree/main/extensions/2.0/OMI_physics_body>`__
+- `OMI_physics_body glTF extension <https://github.com/omigroup/gltf-extensions/tree/main/extensions/2.0/OMI_physics_body>`__
 
 .. rst-class:: classref-reftable-group
 
@@ -111,7 +111,11 @@ The angular velocity of the physics body, in radians per second. This is only us
 - |void| **set_body_type**\ (\ value\: :ref:`String<class_String>`\ )
 - :ref:`String<class_String>` **get_body_type**\ (\ )
 
-The type of the body. When importing, this controls what type of :ref:`CollisionObject3D<class_CollisionObject3D>` node Godot should generate. Valid values are "static", "animatable", "character", "rigid", "vehicle", and "trigger". When exporting, this will be squashed down to one of "static", "kinematic", or "dynamic" motion types, or the "trigger" property.
+The type of the body.
+
+When importing, this controls what type of :ref:`CollisionObject3D<class_CollisionObject3D>` node Godot should generate. Valid values are ``"static"``, ``"animatable"``, ``"character"``, ``"rigid"``, ``"vehicle"``, and ``"trigger"``.
+
+When exporting, this will be squashed down to one of ``"static"``, ``"kinematic"``, or ``"dynamic"`` motion types, or the ``"trigger"`` property.
 
 .. rst-class:: classref-item-separator
 
@@ -236,7 +240,7 @@ Method Descriptions
 
 :ref:`GLTFPhysicsBody<class_GLTFPhysicsBody>` **from_dictionary**\ (\ dictionary\: :ref:`Dictionary<class_Dictionary>`\ ) |static| :ref:`🔗<class_GLTFPhysicsBody_method_from_dictionary>`
 
-Creates a new GLTFPhysicsBody instance by parsing the given :ref:`Dictionary<class_Dictionary>` in the ``OMI_physics_body`` GLTF extension format.
+Creates a new GLTFPhysicsBody instance by parsing the given :ref:`Dictionary<class_Dictionary>` in the ``OMI_physics_body`` glTF extension format.
 
 .. rst-class:: classref-item-separator
 
@@ -260,7 +264,7 @@ Creates a new GLTFPhysicsBody instance from the given Godot :ref:`CollisionObjec
 
 :ref:`Dictionary<class_Dictionary>` **to_dictionary**\ (\ ) |const| :ref:`🔗<class_GLTFPhysicsBody_method_to_dictionary>`
 
-Serializes this GLTFPhysicsBody instance into a :ref:`Dictionary<class_Dictionary>`. It will be in the format expected by the ``OMI_physics_body`` GLTF extension.
+Serializes this GLTFPhysicsBody instance into a :ref:`Dictionary<class_Dictionary>`. It will be in the format expected by the ``OMI_physics_body`` glTF extension.
 
 .. rst-class:: classref-item-separator
 
@@ -275,6 +279,7 @@ Serializes this GLTFPhysicsBody instance into a :ref:`Dictionary<class_Dictionar
 Converts this GLTFPhysicsBody instance into a Godot :ref:`CollisionObject3D<class_CollisionObject3D>` node.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

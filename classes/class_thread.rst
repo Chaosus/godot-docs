@@ -21,15 +21,13 @@ Description
 
 A unit of execution in a process. Can run methods on :ref:`Object<class_Object>`\ s simultaneously. The use of synchronization via :ref:`Mutex<class_Mutex>` or :ref:`Semaphore<class_Semaphore>` is advised if working with shared objects.
 
-\ **Warning:**\ 
-
-To ensure proper cleanup without crashes or deadlocks, when a **Thread**'s reference count reaches zero and it is therefore destroyed, the following conditions must be met:
+\ **Warning:** To ensure proper cleanup without crashes or deadlocks, when a **Thread**'s reference count reaches zero and it is therefore destroyed, the following conditions must be met:
 
 - It must not have any :ref:`Mutex<class_Mutex>` objects locked.
 
 - It must not be waiting on any :ref:`Semaphore<class_Semaphore>` objects.
 
-- :ref:`wait_to_finish<class_Thread_method_wait_to_finish>` should have been called on it.
+- :ref:`wait_to_finish()<class_Thread_method_wait_to_finish>` should have been called on it.
 
 .. rst-class:: classref-introduction-group
 
@@ -54,6 +52,8 @@ Methods
    | :ref:`String<class_String>`           | :ref:`get_id<class_Thread_method_get_id>`\ (\ ) |const|                                                                                         |
    +---------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`               | :ref:`is_alive<class_Thread_method_is_alive>`\ (\ ) |const|                                                                                     |
+   +---------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`               | :ref:`is_main_thread<class_Thread_method_is_main_thread>`\ (\ ) |static|                                                                        |
    +---------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`               | :ref:`is_started<class_Thread_method_is_started>`\ (\ ) |const|                                                                                 |
    +---------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -118,7 +118,7 @@ Method Descriptions
 
 :ref:`String<class_String>` **get_id**\ (\ ) |const| :ref:`🔗<class_Thread_method_get_id>`
 
-Returns the current **Thread**'s ID, uniquely identifying it among all threads. If the **Thread** has not started running or if :ref:`wait_to_finish<class_Thread_method_wait_to_finish>` has been called, this returns an empty string.
+Returns the current **Thread**'s ID, uniquely identifying it among all threads. If the **Thread** has not started running or if :ref:`wait_to_finish()<class_Thread_method_wait_to_finish>` has been called, this returns an empty string.
 
 .. rst-class:: classref-item-separator
 
@@ -130,9 +130,23 @@ Returns the current **Thread**'s ID, uniquely identifying it among all threads. 
 
 :ref:`bool<class_bool>` **is_alive**\ (\ ) |const| :ref:`🔗<class_Thread_method_is_alive>`
 
-Returns ``true`` if this **Thread** is currently running the provided function. This is useful for determining if :ref:`wait_to_finish<class_Thread_method_wait_to_finish>` can be called without blocking the calling thread.
+Returns ``true`` if this **Thread** is currently running the provided function. This is useful for determining if :ref:`wait_to_finish()<class_Thread_method_wait_to_finish>` can be called without blocking the calling thread.
 
-To check if a **Thread** is joinable, use :ref:`is_started<class_Thread_method_is_started>`.
+To check if a **Thread** is joinable, use :ref:`is_started()<class_Thread_method_is_started>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Thread_method_is_main_thread:
+
+.. rst-class:: classref-method
+
+:ref:`bool<class_bool>` **is_main_thread**\ (\ ) |static| :ref:`🔗<class_Thread_method_is_main_thread>`
+
+Returns ``true`` if the thread this method was called from is the main thread.
+
+\ **Note:** This is a static method and isn't associated with a specific **Thread** object.
 
 .. rst-class:: classref-item-separator
 
@@ -144,7 +158,7 @@ To check if a **Thread** is joinable, use :ref:`is_started<class_Thread_method_i
 
 :ref:`bool<class_bool>` **is_started**\ (\ ) |const| :ref:`🔗<class_Thread_method_is_started>`
 
-Returns ``true`` if this **Thread** has been started. Once started, this will return ``true`` until it is joined using :ref:`wait_to_finish<class_Thread_method_wait_to_finish>`. For checking if a **Thread** is still executing its task, use :ref:`is_alive<class_Thread_method_is_alive>`.
+Returns ``true`` if this **Thread** has been started. Once started, this will return ``true`` until it is joined using :ref:`wait_to_finish()<class_Thread_method_wait_to_finish>`. For checking if a **Thread** is still executing its task, use :ref:`is_alive()<class_Thread_method_is_alive>`.
 
 .. rst-class:: classref-item-separator
 
@@ -182,7 +196,7 @@ Because of that, there may be cases where the user may want to disable them (``e
 
 Starts a new **Thread** that calls ``callable``.
 
-If the method takes some arguments, you can pass them using :ref:`Callable.bind<class_Callable_method_bind>`.
+If the method takes some arguments, you can pass them using :ref:`Callable.bind()<class_Callable_method_bind>`.
 
 The ``priority`` of the **Thread** can be changed by passing a value from the :ref:`Priority<enum_Thread_Priority>` enum.
 
@@ -198,13 +212,14 @@ Returns :ref:`@GlobalScope.OK<class_@GlobalScope_constant_OK>` on success, or :r
 
 :ref:`Variant<class_Variant>` **wait_to_finish**\ (\ ) :ref:`🔗<class_Thread_method_wait_to_finish>`
 
-Joins the **Thread** and waits for it to finish. Returns the output of the :ref:`Callable<class_Callable>` passed to :ref:`start<class_Thread_method_start>`.
+Joins the **Thread** and waits for it to finish. Returns the output of the :ref:`Callable<class_Callable>` passed to :ref:`start()<class_Thread_method_start>`.
 
 Should either be used when you want to retrieve the value returned from the method called by the **Thread** or before freeing the instance that contains the **Thread**.
 
-To determine if this can be called without blocking the calling thread, check if :ref:`is_alive<class_Thread_method_is_alive>` is ``false``.
+To determine if this can be called without blocking the calling thread, check if :ref:`is_alive()<class_Thread_method_is_alive>` is ``false``.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

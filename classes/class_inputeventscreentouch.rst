@@ -43,6 +43,8 @@ Properties
    +-------------------------------+--------------------------------------------------------------------+-------------------+
    | :ref:`int<class_int>`         | :ref:`index<class_InputEventScreenTouch_property_index>`           | ``0``             |
    +-------------------------------+--------------------------------------------------------------------+-------------------+
+   | :ref:`bool<class_bool>`       | :ref:`long_press<class_InputEventScreenTouch_property_long_press>` | ``false``         |
+   +-------------------------------+--------------------------------------------------------------------+-------------------+
    | :ref:`Vector2<class_Vector2>` | :ref:`position<class_InputEventScreenTouch_property_position>`     | ``Vector2(0, 0)`` |
    +-------------------------------+--------------------------------------------------------------------+-------------------+
    | :ref:`bool<class_bool>`       | :ref:`pressed<class_InputEventScreenTouch_property_pressed>`       | ``false``         |
@@ -108,6 +110,25 @@ The touch index in the case of a multi-touch event. One index = one finger.
 
 ----
 
+.. _class_InputEventScreenTouch_property_long_press:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **long_press** = ``false`` :ref:`🔗<class_InputEventScreenTouch_property_long_press>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_long_press**\ (\ value\: :ref:`bool<class_bool>`\ )
+- :ref:`bool<class_bool>` **is_long_press**\ (\ )
+
+If ``true``, the touch's state is a long press.
+
+\ **Note:** This is only supported on Android and iOS.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_InputEventScreenTouch_property_position:
 
 .. rst-class:: classref-property
@@ -139,6 +160,7 @@ The touch position in the viewport the node is in, using the coordinate system o
 If ``true``, the touch's state is pressed. If ``false``, the touch's state is released.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

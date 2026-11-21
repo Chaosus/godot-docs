@@ -43,6 +43,8 @@ Methods
    +------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Array<class_Array>`\[:ref:`StringName<class_StringName>`\] | :ref:`get_animation_list<class_AnimationLibrary_method_get_animation_list>`\ (\ ) |const|                                                                                |
    +------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`int<class_int>`                                            | :ref:`get_animation_list_size<class_AnimationLibrary_method_get_animation_list_size>`\ (\ ) |const|                                                                      |
+   +------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                          | :ref:`has_animation<class_AnimationLibrary_method_has_animation>`\ (\ name\: :ref:`StringName<class_StringName>`\ ) |const|                                              |
    +------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                                                           | :ref:`remove_animation<class_AnimationLibrary_method_remove_animation>`\ (\ name\: :ref:`StringName<class_StringName>`\ )                                                |
@@ -63,9 +65,9 @@ Signals
 
 .. rst-class:: classref-signal
 
-**animation_added**\ (\ name\: :ref:`StringName<class_StringName>`\ ) :ref:`🔗<class_AnimationLibrary_signal_animation_added>`
+**animation_added**\ (\ anim_name\: :ref:`StringName<class_StringName>`\ ) :ref:`🔗<class_AnimationLibrary_signal_animation_added>`
 
-Emitted when an :ref:`Animation<class_Animation>` is added, under the key ``name``.
+Emitted when an :ref:`Animation<class_Animation>` is added, under the key ``anim_name``.
 
 .. rst-class:: classref-item-separator
 
@@ -75,9 +77,9 @@ Emitted when an :ref:`Animation<class_Animation>` is added, under the key ``name
 
 .. rst-class:: classref-signal
 
-**animation_changed**\ (\ name\: :ref:`StringName<class_StringName>`\ ) :ref:`🔗<class_AnimationLibrary_signal_animation_changed>`
+**animation_changed**\ (\ anim_name\: :ref:`StringName<class_StringName>`\ ) :ref:`🔗<class_AnimationLibrary_signal_animation_changed>`
 
-Emitted when there's a change in one of the animations, e.g. tracks are added, moved or have changed paths. ``name`` is the key of the animation that was changed.
+Emitted when there's a change in one of the animations, e.g. tracks are added, moved or have changed paths. ``anim_name`` is the key of the animation that was changed.
 
 See also :ref:`Resource.changed<class_Resource_signal_changed>`, which this acts as a relay for.
 
@@ -89,9 +91,9 @@ See also :ref:`Resource.changed<class_Resource_signal_changed>`, which this acts
 
 .. rst-class:: classref-signal
 
-**animation_removed**\ (\ name\: :ref:`StringName<class_StringName>`\ ) :ref:`🔗<class_AnimationLibrary_signal_animation_removed>`
+**animation_removed**\ (\ anim_name\: :ref:`StringName<class_StringName>`\ ) :ref:`🔗<class_AnimationLibrary_signal_animation_removed>`
 
-Emitted when an :ref:`Animation<class_Animation>` stored with the key ``name`` is removed.
+Emitted when an :ref:`Animation<class_Animation>` stored with the key ``anim_name`` is removed.
 
 .. rst-class:: classref-item-separator
 
@@ -101,9 +103,9 @@ Emitted when an :ref:`Animation<class_Animation>` stored with the key ``name`` i
 
 .. rst-class:: classref-signal
 
-**animation_renamed**\ (\ name\: :ref:`StringName<class_StringName>`, to_name\: :ref:`StringName<class_StringName>`\ ) :ref:`🔗<class_AnimationLibrary_signal_animation_renamed>`
+**animation_renamed**\ (\ old_name\: :ref:`StringName<class_StringName>`, new_name\: :ref:`StringName<class_StringName>`\ ) :ref:`🔗<class_AnimationLibrary_signal_animation_renamed>`
 
-Emitted when the key for an :ref:`Animation<class_Animation>` is changed, from ``name`` to ``to_name``.
+Emitted when the key for an :ref:`Animation<class_Animation>` is changed, from ``old_name`` to ``new_name``.
 
 .. rst-class:: classref-section-separator
 
@@ -150,6 +152,18 @@ Returns the keys for the :ref:`Animation<class_Animation>`\ s stored in the libr
 
 ----
 
+.. _class_AnimationLibrary_method_get_animation_list_size:
+
+.. rst-class:: classref-method
+
+:ref:`int<class_int>` **get_animation_list_size**\ (\ ) |const| :ref:`🔗<class_AnimationLibrary_method_get_animation_list_size>`
+
+Returns the key count for the :ref:`Animation<class_Animation>`\ s stored in the library.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_AnimationLibrary_method_has_animation:
 
 .. rst-class:: classref-method
@@ -183,6 +197,7 @@ Removes the :ref:`Animation<class_Animation>` with the key ``name``.
 Changes the key of the :ref:`Animation<class_Animation>` associated with the key ``name`` to ``newname``.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
