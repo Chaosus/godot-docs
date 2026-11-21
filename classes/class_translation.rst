@@ -21,7 +21,9 @@ A language translation that maps a collection of strings to their individual tra
 Description
 -----------
 
-**Translation**\ s are resources that can be loaded and unloaded on demand. They map a collection of strings to their individual translations, and they also provide convenience methods for pluralization.
+**Translation** maps a collection of strings to their individual translations, and also provides convenience methods for pluralization.
+
+A **Translation** consists of messages. A message is identified by its context and untranslated string. Unlike `gettext <https://www.gnu.org/software/gettext/>`__, using an empty context string in Godot means not using any context.
 
 .. rst-class:: classref-introduction-group
 
@@ -29,6 +31,8 @@ Tutorials
 ---------
 
 - :doc:`Internationalizing games <../tutorials/i18n/internationalizing_games>`
+
+- :doc:`Localization using gettext <../tutorials/i18n/localization_using_gettext>`
 
 - :doc:`Locales <../tutorials/i18n/locales>`
 
@@ -40,9 +44,11 @@ Properties
 .. table::
    :widths: auto
 
-   +-----------------------------+--------------------------------------------------+----------+
-   | :ref:`String<class_String>` | :ref:`locale<class_Translation_property_locale>` | ``"en"`` |
-   +-----------------------------+--------------------------------------------------+----------+
+   +-----------------------------+--------------------------------------------------------------------------------+----------+
+   | :ref:`String<class_String>` | :ref:`locale<class_Translation_property_locale>`                               | ``"en"`` |
+   +-----------------------------+--------------------------------------------------------------------------------+----------+
+   | :ref:`String<class_String>` | :ref:`plural_rules_override<class_Translation_property_plural_rules_override>` | ``""``   |
+   +-----------------------------+--------------------------------------------------------------------------------+----------+
 
 .. rst-class:: classref-reftable-group
 
@@ -96,6 +102,25 @@ Property Descriptions
 
 The locale of the translation.
 
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Translation_property_plural_rules_override:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **plural_rules_override** = ``""`` :ref:`🔗<class_Translation_property_plural_rules_override>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_plural_rules_override**\ (\ value\: :ref:`String<class_String>`\ )
+- :ref:`String<class_String>` **get_plural_rules_override**\ (\ )
+
+The plural rules string to enforce. See `GNU gettext <https://www.gnu.org/software/gettext/manual/html_node/Plural-forms.html>`__ for examples and more info.
+
+If empty or invalid, default plural rules from :ref:`TranslationServer.get_plural_rules()<class_TranslationServer_method_get_plural_rules>` are used. The English plural rules are used as a fallback.
+
 .. rst-class:: classref-section-separator
 
 ----
@@ -111,7 +136,7 @@ Method Descriptions
 
 :ref:`StringName<class_StringName>` **_get_message**\ (\ src_message\: :ref:`StringName<class_StringName>`, context\: :ref:`StringName<class_StringName>`\ ) |virtual| |const| :ref:`🔗<class_Translation_private_method__get_message>`
 
-Virtual method to override :ref:`get_message<class_Translation_method_get_message>`.
+Virtual method to override :ref:`get_message()<class_Translation_method_get_message>`.
 
 .. rst-class:: classref-item-separator
 
@@ -123,7 +148,7 @@ Virtual method to override :ref:`get_message<class_Translation_method_get_messag
 
 :ref:`StringName<class_StringName>` **_get_plural_message**\ (\ src_message\: :ref:`StringName<class_StringName>`, src_plural_message\: :ref:`StringName<class_StringName>`, n\: :ref:`int<class_int>`, context\: :ref:`StringName<class_StringName>`\ ) |virtual| |const| :ref:`🔗<class_Translation_private_method__get_plural_message>`
 
-Virtual method to override :ref:`get_plural_message<class_Translation_method_get_plural_message>`.
+Virtual method to override :ref:`get_plural_message()<class_Translation_method_get_plural_message>`.
 
 .. rst-class:: classref-item-separator
 
@@ -199,7 +224,21 @@ Returns the number of existing messages.
 
 :ref:`PackedStringArray<class_PackedStringArray>` **get_message_list**\ (\ ) |const| :ref:`🔗<class_Translation_method_get_message_list>`
 
-Returns all the messages (keys).
+Returns the keys of all messages, that is, the context and untranslated strings of each message.
+
+\ **Note:** If a message does not use a context, the corresponding element is the untranslated string. Otherwise, the corresponding element is the context and untranslated string separated by the EOT character (\ ``U+0004``). This is done for compatibility purposes.
+
+::
+
+    for key in translation.get_message_list():
+        var p = key.find("\u0004")
+        if p == -1:
+            var untranslated = key
+            print("Message %s" % untranslated)
+        else:
+            var context = key.substr(0, p)
+            var untranslated = key.substr(p + 1)
+            print("Message %s with context %s" % [untranslated, context])
 
 .. rst-class:: classref-item-separator
 
@@ -215,6 +254,8 @@ Returns a message's translation involving plurals.
 
 The number ``n`` is the number or quantity of the plural object. It will be used to guide the translation system to fetch the correct plural form for the selected language.
 
+\ **Note:** Plurals are only supported in :doc:`gettext-based translations (PO) <../tutorials/i18n/localization_using_gettext>`, not CSV.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -225,9 +266,10 @@ The number ``n`` is the number or quantity of the plural object. It will be used
 
 :ref:`PackedStringArray<class_PackedStringArray>` **get_translated_message_list**\ (\ ) |const| :ref:`🔗<class_Translation_method_get_translated_message_list>`
 
-Returns all the messages (translated text).
+Returns all the translated strings.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

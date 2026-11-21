@@ -19,11 +19,11 @@ A WebSocket connection.
 Description
 -----------
 
-This class represents WebSocket connection, and can be used as a WebSocket client (RFC 6455-compliant) or as a remote peer of a WebSocket server.
+This class represents WebSocket connection, and can be used as a WebSocket client (`RFC 6455 <https://datatracker.ietf.org/doc/html/rfc6455>`__-compliant) or as a remote peer of a WebSocket server.
 
-You can send WebSocket binary frames using :ref:`PacketPeer.put_packet<class_PacketPeer_method_put_packet>`, and WebSocket text frames using :ref:`send<class_WebSocketPeer_method_send>` (prefer text frames when interacting with text-based API). You can check the frame type of the last packet via :ref:`was_string_packet<class_WebSocketPeer_method_was_string_packet>`.
+You can send WebSocket binary frames using :ref:`PacketPeer.put_packet()<class_PacketPeer_method_put_packet>`, and WebSocket text frames using :ref:`send()<class_WebSocketPeer_method_send>` (prefer text frames when interacting with text-based API). You can check the frame type of the last packet via :ref:`was_string_packet()<class_WebSocketPeer_method_was_string_packet>`.
 
-To start a WebSocket client, first call :ref:`connect_to_url<class_WebSocketPeer_method_connect_to_url>`, then regularly call :ref:`poll<class_WebSocketPeer_method_poll>` (e.g. during :ref:`Node<class_Node>` process). You can query the socket state via :ref:`get_ready_state<class_WebSocketPeer_method_get_ready_state>`, get the number of pending packets using :ref:`PacketPeer.get_available_packet_count<class_PacketPeer_method_get_available_packet_count>`, and retrieve them via :ref:`PacketPeer.get_packet<class_PacketPeer_method_get_packet>`.
+To start a WebSocket client, first call :ref:`connect_to_url()<class_WebSocketPeer_method_connect_to_url>`, then regularly call :ref:`poll()<class_WebSocketPeer_method_poll>` (e.g. during :ref:`Node<class_Node>` process). You can query the socket state via :ref:`get_ready_state()<class_WebSocketPeer_method_get_ready_state>`, get the number of pending packets using :ref:`PacketPeer.get_available_packet_count()<class_PacketPeer_method_get_available_packet_count>`, and retrieve them via :ref:`PacketPeer.get_packet()<class_PacketPeer_method_get_packet>`.
 
 
 .. tabs::
@@ -31,12 +31,12 @@ To start a WebSocket client, first call :ref:`connect_to_url<class_WebSocketPeer
  .. code-tab:: gdscript
 
     extends Node
-    
+
     var socket = WebSocketPeer.new()
-    
+
     func _ready():
         socket.connect_to_url("wss://example.com")
-    
+
     func _process(delta):
         socket.poll()
         var state = socket.get_ready_state()
@@ -54,7 +54,7 @@ To start a WebSocket client, first call :ref:`connect_to_url<class_WebSocketPeer
 
 
 
-To use the peer as part of a WebSocket server refer to :ref:`accept_stream<class_WebSocketPeer_method_accept_stream>` and the online tutorial.
+To use the peer as part of a WebSocket server refer to :ref:`accept_stream()<class_WebSocketPeer_method_accept_stream>` and the online tutorial.
 
 .. rst-class:: classref-reftable-group
 
@@ -67,9 +67,11 @@ Properties
    +---------------------------------------------------+--------------------------------------------------------------------------------+-------------------------+
    | :ref:`PackedStringArray<class_PackedStringArray>` | :ref:`handshake_headers<class_WebSocketPeer_property_handshake_headers>`       | ``PackedStringArray()`` |
    +---------------------------------------------------+--------------------------------------------------------------------------------+-------------------------+
+   | :ref:`float<class_float>`                         | :ref:`heartbeat_interval<class_WebSocketPeer_property_heartbeat_interval>`     | ``0.0``                 |
+   +---------------------------------------------------+--------------------------------------------------------------------------------+-------------------------+
    | :ref:`int<class_int>`                             | :ref:`inbound_buffer_size<class_WebSocketPeer_property_inbound_buffer_size>`   | ``65535``               |
    +---------------------------------------------------+--------------------------------------------------------------------------------+-------------------------+
-   | :ref:`int<class_int>`                             | :ref:`max_queued_packets<class_WebSocketPeer_property_max_queued_packets>`     | ``2048``                |
+   | :ref:`int<class_int>`                             | :ref:`max_queued_packets<class_WebSocketPeer_property_max_queued_packets>`     | ``4096``                |
    +---------------------------------------------------+--------------------------------------------------------------------------------+-------------------------+
    | :ref:`int<class_int>`                             | :ref:`outbound_buffer_size<class_WebSocketPeer_property_outbound_buffer_size>` | ``65535``               |
    +---------------------------------------------------+--------------------------------------------------------------------------------+-------------------------+
@@ -213,9 +215,32 @@ Property Descriptions
 
 The extra HTTP headers to be sent during the WebSocket handshake.
 
-\ **Note:** Not supported in Web exports due to browsers' restrictions.
+\ **Note:** Not supported in Web exports due to browser restrictions.
 
-**Note:** The returned array is *copied* and any changes to it will not update the original property value. See :ref:`PackedStringArray<class_PackedStringArray>` for more details.
+
+
+.. classref_note::
+
+    The returned array is *copied* and any changes to it will not update the original property value. See :ref:`PackedStringArray<class_PackedStringArray>` for more details.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_WebSocketPeer_property_heartbeat_interval:
+
+.. rst-class:: classref-property
+
+:ref:`float<class_float>` **heartbeat_interval** = ``0.0`` :ref:`🔗<class_WebSocketPeer_property_heartbeat_interval>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_heartbeat_interval**\ (\ value\: :ref:`float<class_float>`\ )
+- :ref:`float<class_float>` **get_heartbeat_interval**\ (\ )
+
+The interval (in seconds) at which the peer will automatically send WebSocket "ping" control frames. When set to ``0``, no "ping" control frames will be sent.
+
+\ **Note:** Has no effect in Web exports due to browser restrictions.
 
 .. rst-class:: classref-item-separator
 
@@ -242,7 +267,7 @@ The size of the input buffer in bytes (roughly the maximum amount of memory that
 
 .. rst-class:: classref-property
 
-:ref:`int<class_int>` **max_queued_packets** = ``2048`` :ref:`🔗<class_WebSocketPeer_property_max_queued_packets>`
+:ref:`int<class_int>` **max_queued_packets** = ``4096`` :ref:`🔗<class_WebSocketPeer_property_max_queued_packets>`
 
 .. rst-class:: classref-property-setget
 
@@ -285,7 +310,11 @@ The size of the input buffer in bytes (roughly the maximum amount of memory that
 
 The WebSocket sub-protocols allowed during the WebSocket handshake.
 
-**Note:** The returned array is *copied* and any changes to it will not update the original property value. See :ref:`PackedStringArray<class_PackedStringArray>` for more details.
+
+
+.. classref_note::
+
+    The returned array is *copied* and any changes to it will not update the original property value. See :ref:`PackedStringArray<class_PackedStringArray>` for more details.
 
 .. rst-class:: classref-section-separator
 
@@ -302,9 +331,9 @@ Method Descriptions
 
 :ref:`Error<enum_@GlobalScope_Error>` **accept_stream**\ (\ stream\: :ref:`StreamPeer<class_StreamPeer>`\ ) :ref:`🔗<class_WebSocketPeer_method_accept_stream>`
 
-Accepts a peer connection performing the HTTP handshake as a WebSocket server. The ``stream`` must be a valid TCP stream retrieved via :ref:`TCPServer.take_connection<class_TCPServer_method_take_connection>`, or a TLS stream accepted via :ref:`StreamPeerTLS.accept_stream<class_StreamPeerTLS_method_accept_stream>`.
+Accepts a peer connection performing the HTTP handshake as a WebSocket server. The ``stream`` must be a valid TCP stream retrieved via :ref:`TCPServer.take_connection()<class_TCPServer_method_take_connection>`, or a TLS stream accepted via :ref:`StreamPeerTLS.accept_stream()<class_StreamPeerTLS_method_accept_stream>`.
 
-\ **Note:** Not supported in Web exports due to browsers' restrictions.
+\ **Note:** Not supported in Web exports due to browser restrictions.
 
 .. rst-class:: classref-item-separator
 
@@ -316,9 +345,13 @@ Accepts a peer connection performing the HTTP handshake as a WebSocket server. T
 
 |void| **close**\ (\ code\: :ref:`int<class_int>` = 1000, reason\: :ref:`String<class_String>` = ""\ ) :ref:`🔗<class_WebSocketPeer_method_close>`
 
-Closes this WebSocket connection. ``code`` is the status code for the closure (see RFC 6455 section 7.4 for a list of valid status codes). ``reason`` is the human readable reason for closing the connection (can be any UTF-8 string that's smaller than 123 bytes). If ``code`` is negative, the connection will be closed immediately without notifying the remote peer.
+Closes this WebSocket connection.
 
-\ **Note:** To achieve a clean close, you will need to keep polling until :ref:`STATE_CLOSED<class_WebSocketPeer_constant_STATE_CLOSED>` is reached.
+\ ``code`` is the status code for the closure (see `RFC 6455 section 7.4 <https://datatracker.ietf.org/doc/html/rfc6455#section-7.4.1>`__ for a list of valid status codes). If ``code`` is negative, the connection will be closed immediately without notifying the remote peer.
+
+\ ``reason`` is the human-readable reason for closing the connection. It can be any UTF-8 string that's smaller than 123 bytes.
+
+\ **Note:** To achieve a clean closure, you will need to keep polling until :ref:`STATE_CLOSED<class_WebSocketPeer_constant_STATE_CLOSED>` is reached.
 
 \ **Note:** The Web export might not support all status codes. Please refer to browser-specific documentation for more details.
 
@@ -332,7 +365,9 @@ Closes this WebSocket connection. ``code`` is the status code for the closure (s
 
 :ref:`Error<enum_@GlobalScope_Error>` **connect_to_url**\ (\ url\: :ref:`String<class_String>`, tls_client_options\: :ref:`TLSOptions<class_TLSOptions>` = null\ ) :ref:`🔗<class_WebSocketPeer_method_connect_to_url>`
 
-Connects to the given URL. TLS certificates will be verified against the hostname when connecting using the ``wss://`` protocol. You can pass the optional ``tls_client_options`` parameter to customize the trusted certification authorities, or disable the common name verification. See :ref:`TLSOptions.client<class_TLSOptions_method_client>` and :ref:`TLSOptions.client_unsafe<class_TLSOptions_method_client_unsafe>`.
+Connects to the given URL. TLS certificates will be verified against the hostname when connecting using the ``wss://`` protocol. You can pass the optional ``tls_client_options`` parameter to customize the trusted certification authorities, or disable the common name verification. See :ref:`TLSOptions.client()<class_TLSOptions_method_client>` and :ref:`TLSOptions.client_unsafe()<class_TLSOptions_method_client_unsafe>`.
+
+\ **Note:** This method is non-blocking, and will return :ref:`@GlobalScope.OK<class_@GlobalScope_constant_OK>` before the connection is established as long as the provided parameters are valid and the peer is not in an invalid state (e.g. already connected). Regularly call :ref:`poll()<class_WebSocketPeer_method_poll>` (e.g. during :ref:`Node<class_Node>` process) and check the result of :ref:`get_ready_state()<class_WebSocketPeer_method_get_ready_state>` to know whether the connection succeeds or fails.
 
 \ **Note:** To avoid mixed content warnings or errors in Web, you may have to use a ``url`` that starts with ``wss://`` (secure) instead of ``ws://``. When doing so, make sure to use the fully qualified domain name that matches the one defined in the server's TLS certificate. Do not connect directly via the IP address for ``wss://`` connections, as it won't match with the TLS certificate.
 
@@ -346,7 +381,7 @@ Connects to the given URL. TLS certificates will be verified against the hostnam
 
 :ref:`int<class_int>` **get_close_code**\ (\ ) |const| :ref:`🔗<class_WebSocketPeer_method_get_close_code>`
 
-Returns the received WebSocket close frame status code, or ``-1`` when the connection was not cleanly closed. Only call this method when :ref:`get_ready_state<class_WebSocketPeer_method_get_ready_state>` returns :ref:`STATE_CLOSED<class_WebSocketPeer_constant_STATE_CLOSED>`.
+Returns the received WebSocket close frame status code, or ``-1`` when the connection was not cleanly closed. Only call this method when :ref:`get_ready_state()<class_WebSocketPeer_method_get_ready_state>` returns :ref:`STATE_CLOSED<class_WebSocketPeer_constant_STATE_CLOSED>`.
 
 .. rst-class:: classref-item-separator
 
@@ -358,7 +393,7 @@ Returns the received WebSocket close frame status code, or ``-1`` when the conne
 
 :ref:`String<class_String>` **get_close_reason**\ (\ ) |const| :ref:`🔗<class_WebSocketPeer_method_get_close_reason>`
 
-Returns the received WebSocket close frame status reason string. Only call this method when :ref:`get_ready_state<class_WebSocketPeer_method_get_ready_state>` returns :ref:`STATE_CLOSED<class_WebSocketPeer_constant_STATE_CLOSED>`.
+Returns the received WebSocket close frame status reason string. Only call this method when :ref:`get_ready_state()<class_WebSocketPeer_method_get_ready_state>` returns :ref:`STATE_CLOSED<class_WebSocketPeer_constant_STATE_CLOSED>`.
 
 .. rst-class:: classref-item-separator
 
@@ -410,7 +445,7 @@ Returns the current amount of data in the outbound websocket buffer. **Note:** W
 
 :ref:`State<enum_WebSocketPeer_State>` **get_ready_state**\ (\ ) |const| :ref:`🔗<class_WebSocketPeer_method_get_ready_state>`
 
-Returns the ready state of the connection. See :ref:`State<enum_WebSocketPeer_State>`.
+Returns the ready state of the connection.
 
 .. rst-class:: classref-item-separator
 
@@ -422,7 +457,7 @@ Returns the ready state of the connection. See :ref:`State<enum_WebSocketPeer_St
 
 :ref:`String<class_String>` **get_requested_url**\ (\ ) |const| :ref:`🔗<class_WebSocketPeer_method_get_requested_url>`
 
-Returns the URL requested by this peer. The URL is derived from the ``url`` passed to :ref:`connect_to_url<class_WebSocketPeer_method_connect_to_url>` or from the HTTP headers when acting as server (i.e. when using :ref:`accept_stream<class_WebSocketPeer_method_accept_stream>`).
+Returns the URL requested by this peer. The URL is derived from the ``url`` passed to :ref:`connect_to_url()<class_WebSocketPeer_method_connect_to_url>` or from the HTTP headers when acting as server (i.e. when using :ref:`accept_stream()<class_WebSocketPeer_method_accept_stream>`).
 
 .. rst-class:: classref-item-separator
 
@@ -458,7 +493,7 @@ Updates the connection state and receive incoming packets. Call this function re
 
 :ref:`Error<enum_@GlobalScope_Error>` **send**\ (\ message\: :ref:`PackedByteArray<class_PackedByteArray>`, write_mode\: :ref:`WriteMode<enum_WebSocketPeer_WriteMode>` = 1\ ) :ref:`🔗<class_WebSocketPeer_method_send>`
 
-Sends the given ``message`` using the desired ``write_mode``. When sending a :ref:`String<class_String>`, prefer using :ref:`send_text<class_WebSocketPeer_method_send_text>`.
+Sends the given ``message`` using the desired ``write_mode``. When sending a :ref:`String<class_String>`, prefer using :ref:`send_text()<class_WebSocketPeer_method_send_text>`.
 
 .. rst-class:: classref-item-separator
 
@@ -470,7 +505,7 @@ Sends the given ``message`` using the desired ``write_mode``. When sending a :re
 
 :ref:`Error<enum_@GlobalScope_Error>` **send_text**\ (\ message\: :ref:`String<class_String>`\ ) :ref:`🔗<class_WebSocketPeer_method_send_text>`
 
-Sends the given ``message`` using WebSocket text mode. Prefer this method over :ref:`PacketPeer.put_packet<class_PacketPeer_method_put_packet>` when interacting with third-party text-based API (e.g. when using :ref:`JSON<class_JSON>` formatted messages).
+Sends the given ``message`` using WebSocket text mode. Prefer this method over :ref:`PacketPeer.put_packet()<class_PacketPeer_method_put_packet>` when interacting with third-party text-based API (e.g. when using :ref:`JSON<class_JSON>` formatted messages).
 
 .. rst-class:: classref-item-separator
 
@@ -482,7 +517,7 @@ Sends the given ``message`` using WebSocket text mode. Prefer this method over :
 
 |void| **set_no_delay**\ (\ enabled\: :ref:`bool<class_bool>`\ ) :ref:`🔗<class_WebSocketPeer_method_set_no_delay>`
 
-Disable Nagle's algorithm on the underling TCP socket (default). See :ref:`StreamPeerTCP.set_no_delay<class_StreamPeerTCP_method_set_no_delay>` for more information.
+Disable Nagle's algorithm on the underlying TCP socket (default). See :ref:`StreamPeerTCP.set_no_delay()<class_StreamPeerTCP_method_set_no_delay>` for more information.
 
 \ **Note:** Not available in the Web export.
 
@@ -499,6 +534,7 @@ Disable Nagle's algorithm on the underling TCP socket (default). See :ref:`Strea
 Returns ``true`` if the last received packet was sent as a text payload. See :ref:`WriteMode<enum_WebSocketPeer_WriteMode>`.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

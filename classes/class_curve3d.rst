@@ -31,13 +31,23 @@ Properties
 .. table::
    :widths: auto
 
-   +---------------------------+--------------------------------------------------------------------+----------+
-   | :ref:`float<class_float>` | :ref:`bake_interval<class_Curve3D_property_bake_interval>`         | ``0.2``  |
-   +---------------------------+--------------------------------------------------------------------+----------+
-   | :ref:`int<class_int>`     | :ref:`point_count<class_Curve3D_property_point_count>`             | ``0``    |
-   +---------------------------+--------------------------------------------------------------------+----------+
-   | :ref:`bool<class_bool>`   | :ref:`up_vector_enabled<class_Curve3D_property_up_vector_enabled>` | ``true`` |
-   +---------------------------+--------------------------------------------------------------------+----------+
+   +-------------------------------+------------------------------------------------------------------------------+----------------------+
+   | :ref:`float<class_float>`     | :ref:`bake_interval<class_Curve3D_property_bake_interval>`                   | ``0.2``              |
+   +-------------------------------+------------------------------------------------------------------------------+----------------------+
+   | :ref:`bool<class_bool>`       | :ref:`closed<class_Curve3D_property_closed>`                                 | ``false``            |
+   +-------------------------------+------------------------------------------------------------------------------+----------------------+
+   | :ref:`int<class_int>`         | :ref:`point_count<class_Curve3D_property_point_count>`                       | ``0``                |
+   +-------------------------------+------------------------------------------------------------------------------+----------------------+
+   | :ref:`Vector3<class_Vector3>` | :ref:`point_{index}/in<class_Curve3D_property_point_{index}/in>`             | ``Vector3(0, 0, 0)`` |
+   +-------------------------------+------------------------------------------------------------------------------+----------------------+
+   | :ref:`Vector3<class_Vector3>` | :ref:`point_{index}/out<class_Curve3D_property_point_{index}/out>`           | ``Vector3(0, 0, 0)`` |
+   +-------------------------------+------------------------------------------------------------------------------+----------------------+
+   | :ref:`Vector3<class_Vector3>` | :ref:`point_{index}/position<class_Curve3D_property_point_{index}/position>` | ``Vector3(0, 0, 0)`` |
+   +-------------------------------+------------------------------------------------------------------------------+----------------------+
+   | :ref:`float<class_float>`     | :ref:`point_{index}/tilt<class_Curve3D_property_point_{index}/tilt>`         | ``0.0``              |
+   +-------------------------------+------------------------------------------------------------------------------+----------------------+
+   | :ref:`bool<class_bool>`       | :ref:`up_vector_enabled<class_Curve3D_property_up_vector_enabled>`           | ``true``             |
+   +-------------------------------+------------------------------------------------------------------------------+----------------------+
 
 .. rst-class:: classref-reftable-group
 
@@ -117,7 +127,24 @@ Property Descriptions
 - |void| **set_bake_interval**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_bake_interval**\ (\ )
 
-The distance in meters between two adjacent cached points. Changing it forces the cache to be recomputed the next time the :ref:`get_baked_points<class_Curve3D_method_get_baked_points>` or :ref:`get_baked_length<class_Curve3D_method_get_baked_length>` function is called. The smaller the distance, the more points in the cache and the more memory it will consume, so use with care.
+The distance in meters between two adjacent cached points. Changing it forces the cache to be recomputed the next time the :ref:`get_baked_points()<class_Curve3D_method_get_baked_points>` or :ref:`get_baked_length()<class_Curve3D_method_get_baked_length>` function is called. The smaller the distance, the more points in the cache and the more memory it will consume, so use with care.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Curve3D_property_closed:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **closed** = ``false`` :ref:`🔗<class_Curve3D_property_closed>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_closed**\ (\ value\: :ref:`bool<class_bool>`\ )
+- :ref:`bool<class_bool>` **is_closed**\ (\ )
+
+If ``true``, and the curve has more than 2 control points, the last point and the first one will be connected in a loop.
 
 .. rst-class:: classref-item-separator
 
@@ -135,6 +162,62 @@ The distance in meters between two adjacent cached points. Changing it forces th
 - :ref:`int<class_int>` **get_point_count**\ (\ )
 
 The number of points describing the curve.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Curve3D_property_point_{index}/in:
+
+.. rst-class:: classref-property
+
+:ref:`Vector3<class_Vector3>` **point_{index}/in** = ``Vector3(0, 0, 0)`` :ref:`🔗<class_Curve3D_property_point_{index}/in>`
+
+The position of the control point leading to the vertex at ``index``.
+
+\ **Note:** ``index`` is a value in the ``0 .. point_count - 1`` range.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Curve3D_property_point_{index}/out:
+
+.. rst-class:: classref-property
+
+:ref:`Vector3<class_Vector3>` **point_{index}/out** = ``Vector3(0, 0, 0)`` :ref:`🔗<class_Curve3D_property_point_{index}/out>`
+
+The position of the control point leading out of the vertex at ``index``.
+
+\ **Note:** ``index`` is a value in the ``0 .. point_count - 1`` range.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Curve3D_property_point_{index}/position:
+
+.. rst-class:: classref-property
+
+:ref:`Vector3<class_Vector3>` **point_{index}/position** = ``Vector3(0, 0, 0)`` :ref:`🔗<class_Curve3D_property_point_{index}/position>`
+
+The position of for the vertex at ``index``.
+
+\ **Note:** ``index`` is a value in the ``0 .. point_count - 1`` range.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Curve3D_property_point_{index}/tilt:
+
+.. rst-class:: classref-property
+
+:ref:`float<class_float>` **point_{index}/tilt** = ``0.0`` :ref:`🔗<class_Curve3D_property_point_{index}/tilt>`
+
+The tilt angle in radians for the point at ``index``.
+
+\ **Note:** ``index`` is a value in the ``0 .. point_count - 1`` range.
 
 .. rst-class:: classref-item-separator
 
@@ -244,7 +327,7 @@ If :ref:`up_vector_enabled<class_Curve3D_property_up_vector_enabled>` is ``false
 
 :ref:`float<class_float>` **get_closest_offset**\ (\ to_point\: :ref:`Vector3<class_Vector3>`\ ) |const| :ref:`🔗<class_Curve3D_method_get_closest_offset>`
 
-Returns the closest offset to ``to_point``. This offset is meant to be used in :ref:`sample_baked<class_Curve3D_method_sample_baked>` or :ref:`sample_baked_up_vector<class_Curve3D_method_sample_baked_up_vector>`.
+Returns the closest offset to ``to_point``. This offset is meant to be used in :ref:`sample_baked()<class_Curve3D_method_sample_baked>` or :ref:`sample_baked_up_vector()<class_Curve3D_method_sample_baked_up_vector>`.
 
 \ ``to_point`` must be in this curve's local space.
 
@@ -332,7 +415,7 @@ Deletes the point ``idx`` from the curve. Sends an error to the console if ``idx
 
 :ref:`Vector3<class_Vector3>` **sample**\ (\ idx\: :ref:`int<class_int>`, t\: :ref:`float<class_float>`\ ) |const| :ref:`🔗<class_Curve3D_method_sample>`
 
-Returns the position between the vertex ``idx`` and the vertex ``idx + 1``, where ``t`` controls if the point is the first vertex (``t = 0.0``), the last vertex (``t = 1.0``), or in between. Values of ``t`` outside the range (``0.0 >= t <=1``) give strange, but predictable results.
+Returns the position between the vertex ``idx`` and the vertex ``idx + 1``, where ``t`` controls if the point is the first vertex (\ ``t = 0.0``), the last vertex (\ ``t = 1.0``), or in between. Values of ``t`` outside the range (\ ``0.0 >= t <=1``) give strange, but predictable results.
 
 If ``idx`` is out of bounds it is truncated to the first or last vertex, and ``t`` is ignored. If the curve has no points, the function sends an error to the console, and returns ``(0, 0, 0)``.
 
@@ -374,7 +457,7 @@ If the curve has no up vectors, the function sends an error to the console, and 
 
 :ref:`Transform3D<class_Transform3D>` **sample_baked_with_rotation**\ (\ offset\: :ref:`float<class_float>` = 0.0, cubic\: :ref:`bool<class_bool>` = false, apply_tilt\: :ref:`bool<class_bool>` = false\ ) |const| :ref:`🔗<class_Curve3D_method_sample_baked_with_rotation>`
 
-Returns a :ref:`Transform3D<class_Transform3D>` with ``origin`` as point position, ``basis.x`` as sideway vector, ``basis.y`` as up vector, ``basis.z`` as forward vector. When the curve length is 0, there is no reasonable way to calculate the rotation, all vectors aligned with global space axes. See also :ref:`sample_baked<class_Curve3D_method_sample_baked>`.
+Returns a :ref:`Transform3D<class_Transform3D>` with ``origin`` as point position, ``basis.x`` as sideway vector, ``basis.y`` as up vector, ``basis.z`` as forward vector. When the curve length is 0, there is no reasonable way to calculate the rotation, all vectors aligned with global space axes. See also :ref:`sample_baked()<class_Curve3D_method_sample_baked>`.
 
 .. rst-class:: classref-item-separator
 
@@ -386,7 +469,7 @@ Returns a :ref:`Transform3D<class_Transform3D>` with ``origin`` as point positio
 
 :ref:`Vector3<class_Vector3>` **samplef**\ (\ fofs\: :ref:`float<class_float>`\ ) |const| :ref:`🔗<class_Curve3D_method_samplef>`
 
-Returns the position at the vertex ``fofs``. It calls :ref:`sample<class_Curve3D_method_sample>` using the integer part of ``fofs`` as ``idx``, and its fractional part as ``t``.
+Returns the position at the vertex ``fofs``. It calls :ref:`sample()<class_Curve3D_method_sample>` using the integer part of ``fofs`` as ``idx``, and its fractional part as ``t``.
 
 .. rst-class:: classref-item-separator
 
@@ -471,6 +554,7 @@ Returns a list of points along the curve, with almost uniform density. ``max_sta
 \ ``tolerance_length`` controls the maximal distance between two neighboring points, before the segment has to be subdivided.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

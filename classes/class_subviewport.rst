@@ -12,6 +12,8 @@ SubViewport
 
 **Inherits:** :ref:`Viewport<class_Viewport>` **<** :ref:`Node<class_Node>` **<** :ref:`Object<class_Object>`
 
+**Inherited By:** :ref:`OpenXRFoveatedInsetViewport<class_OpenXRFoveatedInsetViewport>`
+
 An interface to a game world that doesn't create a window or draw to the screen directly.
 
 .. rst-class:: classref-introduction-group
@@ -22,6 +24,8 @@ Description
 **SubViewport** Isolates a rectangular region of a scene to be displayed independently. This can be used, for example, to display UI in 3D space.
 
 \ **Note:** **SubViewport** is a :ref:`Viewport<class_Viewport>` that isn't a :ref:`Window<class_Window>`, i.e. it doesn't draw anything by itself. To display anything, **SubViewport** must have a non-zero size and be either put inside a :ref:`SubViewportContainer<class_SubViewportContainer>` or assigned to a :ref:`ViewportTexture<class_ViewportTexture>`.
+
+\ **Note:** :ref:`InputEvent<class_InputEvent>`\ s are not passed to a standalone **SubViewport** by default. To ensure :ref:`InputEvent<class_InputEvent>` propagation, a **SubViewport** can be placed inside of a :ref:`SubViewportContainer<class_SubViewportContainer>`.
 
 .. rst-class:: classref-introduction-group
 
@@ -62,6 +66,8 @@ Properties
    | :ref:`Vector2i<class_Vector2i>`                | :ref:`size_2d_override<class_SubViewport_property_size_2d_override>`                   | ``Vector2i(0, 0)``     |
    +------------------------------------------------+----------------------------------------------------------------------------------------+------------------------+
    | :ref:`bool<class_bool>`                        | :ref:`size_2d_override_stretch<class_SubViewport_property_size_2d_override_stretch>`   | ``false``              |
+   +------------------------------------------------+----------------------------------------------------------------------------------------+------------------------+
+   | :ref:`int<class_int>`                          | :ref:`view_count<class_SubViewport_property_view_count>`                               | ``1``                  |
    +------------------------------------------------+----------------------------------------------------------------------------------------+------------------------+
 
 .. rst-class:: classref-section-separator
@@ -247,7 +253,25 @@ The 2D size override of the sub-viewport. If either the width or height is ``0``
 
 If ``true``, the 2D size override affects stretch as well.
 
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_SubViewport_property_view_count:
+
+.. rst-class:: classref-property
+
+:ref:`int<class_int>` **view_count** = ``1`` :ref:`🔗<class_SubViewport_property_view_count>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_view_count**\ (\ value\: :ref:`int<class_int>`\ )
+- :ref:`int<class_int>` **get_view_count**\ (\ )
+
+The number of view layers we are rendering to. Set this to ``2`` to enable stereo rendering.
+
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

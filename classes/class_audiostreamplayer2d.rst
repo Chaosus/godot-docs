@@ -24,7 +24,7 @@ Description
 
 Plays audio that is attenuated with distance to the listener.
 
-By default, audio is heard from the screen center. This can be changed by adding an :ref:`AudioListener2D<class_AudioListener2D>` node to the scene and enabling it by calling :ref:`AudioListener2D.make_current<class_AudioListener2D_method_make_current>` on it.
+By default, audio is heard from the screen center. This can be changed by adding an :ref:`AudioListener2D<class_AudioListener2D>` node to the scene and enabling it by calling :ref:`AudioListener2D.make_current()<class_AudioListener2D_method_make_current>` on it.
 
 See also :ref:`AudioStreamPlayer<class_AudioStreamPlayer>` to play a sound non-positionally.
 
@@ -45,31 +45,35 @@ Properties
 .. table::
    :widths: auto
 
-   +---------------------------------------+------------------------------------------------------------------------------+---------------+
-   | :ref:`int<class_int>`                 | :ref:`area_mask<class_AudioStreamPlayer2D_property_area_mask>`               | ``1``         |
-   +---------------------------------------+------------------------------------------------------------------------------+---------------+
-   | :ref:`float<class_float>`             | :ref:`attenuation<class_AudioStreamPlayer2D_property_attenuation>`           | ``1.0``       |
-   +---------------------------------------+------------------------------------------------------------------------------+---------------+
-   | :ref:`bool<class_bool>`               | :ref:`autoplay<class_AudioStreamPlayer2D_property_autoplay>`                 | ``false``     |
-   +---------------------------------------+------------------------------------------------------------------------------+---------------+
-   | :ref:`StringName<class_StringName>`   | :ref:`bus<class_AudioStreamPlayer2D_property_bus>`                           | ``&"Master"`` |
-   +---------------------------------------+------------------------------------------------------------------------------+---------------+
-   | :ref:`float<class_float>`             | :ref:`max_distance<class_AudioStreamPlayer2D_property_max_distance>`         | ``2000.0``    |
-   +---------------------------------------+------------------------------------------------------------------------------+---------------+
-   | :ref:`int<class_int>`                 | :ref:`max_polyphony<class_AudioStreamPlayer2D_property_max_polyphony>`       | ``1``         |
-   +---------------------------------------+------------------------------------------------------------------------------+---------------+
-   | :ref:`float<class_float>`             | :ref:`panning_strength<class_AudioStreamPlayer2D_property_panning_strength>` | ``1.0``       |
-   +---------------------------------------+------------------------------------------------------------------------------+---------------+
-   | :ref:`float<class_float>`             | :ref:`pitch_scale<class_AudioStreamPlayer2D_property_pitch_scale>`           | ``1.0``       |
-   +---------------------------------------+------------------------------------------------------------------------------+---------------+
-   | :ref:`bool<class_bool>`               | :ref:`playing<class_AudioStreamPlayer2D_property_playing>`                   | ``false``     |
-   +---------------------------------------+------------------------------------------------------------------------------+---------------+
-   | :ref:`AudioStream<class_AudioStream>` | :ref:`stream<class_AudioStreamPlayer2D_property_stream>`                     |               |
-   +---------------------------------------+------------------------------------------------------------------------------+---------------+
-   | :ref:`bool<class_bool>`               | :ref:`stream_paused<class_AudioStreamPlayer2D_property_stream_paused>`       | ``false``     |
-   +---------------------------------------+------------------------------------------------------------------------------+---------------+
-   | :ref:`float<class_float>`             | :ref:`volume_db<class_AudioStreamPlayer2D_property_volume_db>`               | ``0.0``       |
-   +---------------------------------------+------------------------------------------------------------------------------+---------------+
+   +----------------------------------------------------+------------------------------------------------------------------------------+---------------+
+   | :ref:`int<class_int>`                              | :ref:`area_mask<class_AudioStreamPlayer2D_property_area_mask>`               | ``0``         |
+   +----------------------------------------------------+------------------------------------------------------------------------------+---------------+
+   | :ref:`float<class_float>`                          | :ref:`attenuation<class_AudioStreamPlayer2D_property_attenuation>`           | ``1.0``       |
+   +----------------------------------------------------+------------------------------------------------------------------------------+---------------+
+   | :ref:`bool<class_bool>`                            | :ref:`autoplay<class_AudioStreamPlayer2D_property_autoplay>`                 | ``false``     |
+   +----------------------------------------------------+------------------------------------------------------------------------------+---------------+
+   | :ref:`StringName<class_StringName>`                | :ref:`bus<class_AudioStreamPlayer2D_property_bus>`                           | ``&"Master"`` |
+   +----------------------------------------------------+------------------------------------------------------------------------------+---------------+
+   | :ref:`float<class_float>`                          | :ref:`max_distance<class_AudioStreamPlayer2D_property_max_distance>`         | ``2000.0``    |
+   +----------------------------------------------------+------------------------------------------------------------------------------+---------------+
+   | :ref:`int<class_int>`                              | :ref:`max_polyphony<class_AudioStreamPlayer2D_property_max_polyphony>`       | ``1``         |
+   +----------------------------------------------------+------------------------------------------------------------------------------+---------------+
+   | :ref:`float<class_float>`                          | :ref:`panning_strength<class_AudioStreamPlayer2D_property_panning_strength>` | ``1.0``       |
+   +----------------------------------------------------+------------------------------------------------------------------------------+---------------+
+   | :ref:`float<class_float>`                          | :ref:`pitch_scale<class_AudioStreamPlayer2D_property_pitch_scale>`           | ``1.0``       |
+   +----------------------------------------------------+------------------------------------------------------------------------------+---------------+
+   | :ref:`PlaybackType<enum_AudioServer_PlaybackType>` | :ref:`playback_type<class_AudioStreamPlayer2D_property_playback_type>`       | ``0``         |
+   +----------------------------------------------------+------------------------------------------------------------------------------+---------------+
+   | :ref:`bool<class_bool>`                            | :ref:`playing<class_AudioStreamPlayer2D_property_playing>`                   | ``false``     |
+   +----------------------------------------------------+------------------------------------------------------------------------------+---------------+
+   | :ref:`AudioStream<class_AudioStream>`              | :ref:`stream<class_AudioStreamPlayer2D_property_stream>`                     |               |
+   +----------------------------------------------------+------------------------------------------------------------------------------+---------------+
+   | :ref:`bool<class_bool>`                            | :ref:`stream_paused<class_AudioStreamPlayer2D_property_stream_paused>`       | ``false``     |
+   +----------------------------------------------------+------------------------------------------------------------------------------+---------------+
+   | :ref:`float<class_float>`                          | :ref:`volume_db<class_AudioStreamPlayer2D_property_volume_db>`               | ``0.0``       |
+   +----------------------------------------------------+------------------------------------------------------------------------------+---------------+
+   | :ref:`float<class_float>`                          | :ref:`volume_linear<class_AudioStreamPlayer2D_property_volume_linear>`       |               |
+   +----------------------------------------------------+------------------------------------------------------------------------------+---------------+
 
 .. rst-class:: classref-reftable-group
 
@@ -123,7 +127,7 @@ Property Descriptions
 
 .. rst-class:: classref-property
 
-:ref:`int<class_int>` **area_mask** = ``1`` :ref:`🔗<class_AudioStreamPlayer2D_property_area_mask>`
+:ref:`int<class_int>` **area_mask** = ``0`` :ref:`🔗<class_AudioStreamPlayer2D_property_area_mask>`
 
 .. rst-class:: classref-property-setget
 
@@ -257,6 +261,25 @@ The pitch and the tempo of the audio, as a multiplier of the audio sample's samp
 
 ----
 
+.. _class_AudioStreamPlayer2D_property_playback_type:
+
+.. rst-class:: classref-property
+
+:ref:`PlaybackType<enum_AudioServer_PlaybackType>` **playback_type** = ``0`` :ref:`🔗<class_AudioStreamPlayer2D_property_playback_type>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_playback_type**\ (\ value\: :ref:`PlaybackType<enum_AudioServer_PlaybackType>`\ )
+- :ref:`PlaybackType<enum_AudioServer_PlaybackType>` **get_playback_type**\ (\ )
+
+**Experimental:** This property may be changed or removed in future versions.
+
+The playback type of the stream player. If set other than to the default value, it will force that playback type.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_AudioStreamPlayer2D_property_playing:
 
 .. rst-class:: classref-property
@@ -265,9 +288,10 @@ The pitch and the tempo of the audio, as a multiplier of the audio sample's samp
 
 .. rst-class:: classref-property-setget
 
+- |void| **set_playing**\ (\ value\: :ref:`bool<class_bool>`\ )
 - :ref:`bool<class_bool>` **is_playing**\ (\ )
 
-If ``true``, audio is playing or is queued to be played (see :ref:`play<class_AudioStreamPlayer2D_method_play>`).
+If ``true``, audio is playing or is queued to be played (see :ref:`play()<class_AudioStreamPlayer2D_method_play>`).
 
 .. rst-class:: classref-item-separator
 
@@ -318,7 +342,26 @@ If ``true``, the playback is paused. You can resume it by setting :ref:`stream_p
 - |void| **set_volume_db**\ (\ value\: :ref:`float<class_float>`\ )
 - :ref:`float<class_float>` **get_volume_db**\ (\ )
 
-Base volume before attenuation.
+Base volume before attenuation, in decibels.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_AudioStreamPlayer2D_property_volume_linear:
+
+.. rst-class:: classref-property
+
+:ref:`float<class_float>` **volume_linear** :ref:`🔗<class_AudioStreamPlayer2D_property_volume_linear>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_volume_linear**\ (\ value\: :ref:`float<class_float>`\ )
+- :ref:`float<class_float>` **get_volume_linear**\ (\ )
+
+Base volume before attenuation, as a linear value.
+
+\ **Note:** This member modifies :ref:`volume_db<class_AudioStreamPlayer2D_property_volume_db>` for convenience. The returned value is equivalent to the result of :ref:`@GlobalScope.db_to_linear()<class_@GlobalScope_method_db_to_linear>` on :ref:`volume_db<class_AudioStreamPlayer2D_property_volume_db>`. Setting this member is equivalent to setting :ref:`volume_db<class_AudioStreamPlayer2D_property_volume_db>` to the result of :ref:`@GlobalScope.linear_to_db()<class_@GlobalScope_method_linear_to_db>` on a value.
 
 .. rst-class:: classref-section-separator
 
@@ -398,6 +441,7 @@ Sets the position from which audio will be played, in seconds.
 Stops the audio.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
