@@ -28,9 +28,9 @@ A 2D rectangle shape, intended for use in physics. Usually used to provide a sha
 Tutorials
 ---------
 
-- `2D Pong Demo <https://godotengine.org/asset-library/asset/2728>`__
+- `2D Pong Demo <https://store.godotengine.org/asset/godot-foundation/pong-with-gdscript-demo/>`__
 
-- `2D Kinematic Character Demo <https://godotengine.org/asset-library/asset/2719>`__
+- `2D Kinematic Character Demo <https://store.godotengine.org/asset/godot-foundation/kinematic-character-2d-demo/>`__
 
 .. rst-class:: classref-reftable-group
 
@@ -67,6 +67,7 @@ Property Descriptions
 The rectangle's width and height.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

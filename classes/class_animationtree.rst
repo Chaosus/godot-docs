@@ -30,7 +30,7 @@ Tutorials
 
 - :doc:`Using AnimationTree <../tutorials/animation/animation_tree>`
 
-- `Third Person Shooter (TPS) Demo <https://godotengine.org/asset-library/asset/2710>`__
+- `Third Person Shooter (TPS) Demo <https://store.godotengine.org/asset/godot-foundation/third-person-shooter-demo/>`__
 
 .. rst-class:: classref-reftable-group
 
@@ -218,6 +218,7 @@ Returns the process notification in which to update animations.
 Sets the process notification in which to update animations.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

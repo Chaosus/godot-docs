@@ -26,9 +26,9 @@ Class representing a square :ref:`PrimitiveMesh<class_PrimitiveMesh>`. This flat
 Tutorials
 ---------
 
-- `GUI in 3D Viewport Demo <https://godotengine.org/asset-library/asset/2807>`__
+- `GUI in 3D Viewport Demo <https://store.godotengine.org/asset/godot-foundation/gui-in-3d-demo/>`__
 
-- `2D in 3D Viewport Demo <https://godotengine.org/asset-library/asset/2803>`__
+- `2D in 3D Viewport Demo <https://store.godotengine.org/asset/godot-foundation/viewport-2d-in-3d-demo/>`__
 
 .. rst-class:: classref-reftable-group
 
@@ -45,6 +45,7 @@ Properties
    +------------------------------------------------+-------------+-------------------------------------------------------------------------------+
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

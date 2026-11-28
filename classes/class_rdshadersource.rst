@@ -34,9 +34,19 @@ Properties
    +------------------------------------------------------------+---------------------------------------------------------------------------------------------------+--------+
    | :ref:`ShaderLanguage<enum_RenderingDevice_ShaderLanguage>` | :ref:`language<class_RDShaderSource_property_language>`                                           | ``0``  |
    +------------------------------------------------------------+---------------------------------------------------------------------------------------------------+--------+
+   | :ref:`String<class_String>`                                | :ref:`source_any_hit<class_RDShaderSource_property_source_any_hit>`                               | ``""`` |
+   +------------------------------------------------------------+---------------------------------------------------------------------------------------------------+--------+
+   | :ref:`String<class_String>`                                | :ref:`source_closest_hit<class_RDShaderSource_property_source_closest_hit>`                       | ``""`` |
+   +------------------------------------------------------------+---------------------------------------------------------------------------------------------------+--------+
    | :ref:`String<class_String>`                                | :ref:`source_compute<class_RDShaderSource_property_source_compute>`                               | ``""`` |
    +------------------------------------------------------------+---------------------------------------------------------------------------------------------------+--------+
    | :ref:`String<class_String>`                                | :ref:`source_fragment<class_RDShaderSource_property_source_fragment>`                             | ``""`` |
+   +------------------------------------------------------------+---------------------------------------------------------------------------------------------------+--------+
+   | :ref:`String<class_String>`                                | :ref:`source_intersection<class_RDShaderSource_property_source_intersection>`                     | ``""`` |
+   +------------------------------------------------------------+---------------------------------------------------------------------------------------------------+--------+
+   | :ref:`String<class_String>`                                | :ref:`source_miss<class_RDShaderSource_property_source_miss>`                                     | ``""`` |
+   +------------------------------------------------------------+---------------------------------------------------------------------------------------------------+--------+
+   | :ref:`String<class_String>`                                | :ref:`source_raygen<class_RDShaderSource_property_source_raygen>`                                 | ``""`` |
    +------------------------------------------------------------+---------------------------------------------------------------------------------------------------+--------+
    | :ref:`String<class_String>`                                | :ref:`source_tesselation_control<class_RDShaderSource_property_source_tesselation_control>`       | ``""`` |
    +------------------------------------------------------------+---------------------------------------------------------------------------------------------------+--------+
@@ -85,6 +95,40 @@ The language the shader is written in.
 
 ----
 
+.. _class_RDShaderSource_property_source_any_hit:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **source_any_hit** = ``""`` :ref:`🔗<class_RDShaderSource_property_source_any_hit>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_stage_source**\ (\ stage\: :ref:`ShaderStage<enum_RenderingDevice_ShaderStage>`, source\: :ref:`String<class_String>`\ )
+- :ref:`String<class_String>` **get_stage_source**\ (\ stage\: :ref:`ShaderStage<enum_RenderingDevice_ShaderStage>`\ ) |const|
+
+Source code for the shader's any hit stage.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_RDShaderSource_property_source_closest_hit:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **source_closest_hit** = ``""`` :ref:`🔗<class_RDShaderSource_property_source_closest_hit>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_stage_source**\ (\ stage\: :ref:`ShaderStage<enum_RenderingDevice_ShaderStage>`, source\: :ref:`String<class_String>`\ )
+- :ref:`String<class_String>` **get_stage_source**\ (\ stage\: :ref:`ShaderStage<enum_RenderingDevice_ShaderStage>`\ ) |const|
+
+Source code for the shader's closest hit stage.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_RDShaderSource_property_source_compute:
 
 .. rst-class:: classref-property
@@ -114,6 +158,57 @@ Source code for the shader's compute stage.
 - :ref:`String<class_String>` **get_stage_source**\ (\ stage\: :ref:`ShaderStage<enum_RenderingDevice_ShaderStage>`\ ) |const|
 
 Source code for the shader's fragment stage.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_RDShaderSource_property_source_intersection:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **source_intersection** = ``""`` :ref:`🔗<class_RDShaderSource_property_source_intersection>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_stage_source**\ (\ stage\: :ref:`ShaderStage<enum_RenderingDevice_ShaderStage>`, source\: :ref:`String<class_String>`\ )
+- :ref:`String<class_String>` **get_stage_source**\ (\ stage\: :ref:`ShaderStage<enum_RenderingDevice_ShaderStage>`\ ) |const|
+
+Source code for the shader's intersection stage.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_RDShaderSource_property_source_miss:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **source_miss** = ``""`` :ref:`🔗<class_RDShaderSource_property_source_miss>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_stage_source**\ (\ stage\: :ref:`ShaderStage<enum_RenderingDevice_ShaderStage>`, source\: :ref:`String<class_String>`\ )
+- :ref:`String<class_String>` **get_stage_source**\ (\ stage\: :ref:`ShaderStage<enum_RenderingDevice_ShaderStage>`\ ) |const|
+
+Source code for the shader's miss stage.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_RDShaderSource_property_source_raygen:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **source_raygen** = ``""`` :ref:`🔗<class_RDShaderSource_property_source_raygen>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_stage_source**\ (\ stage\: :ref:`ShaderStage<enum_RenderingDevice_ShaderStage>`, source\: :ref:`String<class_String>`\ )
+- :ref:`String<class_String>` **get_stage_source**\ (\ stage\: :ref:`ShaderStage<enum_RenderingDevice_ShaderStage>`\ ) |const|
+
+Source code for the shader's ray generation stage.
 
 .. rst-class:: classref-item-separator
 
@@ -195,7 +290,10 @@ Returns source code for the specified shader ``stage``. Equivalent to getting on
 
 Sets ``source`` code for the specified shader ``stage``. Equivalent to setting one of :ref:`source_compute<class_RDShaderSource_property_source_compute>`, :ref:`source_fragment<class_RDShaderSource_property_source_fragment>`, :ref:`source_tesselation_control<class_RDShaderSource_property_source_tesselation_control>`, :ref:`source_tesselation_evaluation<class_RDShaderSource_property_source_tesselation_evaluation>` or :ref:`source_vertex<class_RDShaderSource_property_source_vertex>`.
 
+\ **Note:** If you set the compute shader source code using this method directly, remember to remove the Godot-specific hint ``#[compute]``.
+
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
