@@ -28,11 +28,11 @@ A 3D box shape, intended for use in physics. Usually used to provide a shape for
 Tutorials
 ---------
 
-- `3D Physics Tests Demo <https://godotengine.org/asset-library/asset/2747>`__
+- `3D Physics Tests Demo <https://store.godotengine.org/asset/godot-foundation/physics-tests-3d-demo/>`__
 
-- `3D Kinematic Character Demo <https://godotengine.org/asset-library/asset/2739>`__
+- `3D Kinematic Character Demo <https://store.godotengine.org/asset/godot-foundation/kinematic-character-3d-demo/>`__
 
-- `3D Platformer Demo <https://godotengine.org/asset-library/asset/2748>`__
+- `3D Platformer Demo <https://store.godotengine.org/asset/godot-foundation/platformer-3d-demo/>`__
 
 .. rst-class:: classref-reftable-group
 
@@ -69,6 +69,7 @@ Property Descriptions
 The box's width, height and depth.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

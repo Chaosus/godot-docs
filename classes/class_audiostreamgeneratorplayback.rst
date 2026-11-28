@@ -26,7 +26,7 @@ This class is meant to be used with :ref:`AudioStreamGenerator<class_AudioStream
 Tutorials
 ---------
 
-- `Audio Generator Demo <https://godotengine.org/asset-library/asset/2759>`__
+- `Audio Generator Demo <https://store.godotengine.org/asset/godot-foundation/audio-generator-demo/>`__
 
 - `Godot 3.2 will get new audio features <https://godotengine.org/article/godot-32-will-get-new-audio-features>`__
 
@@ -115,7 +115,7 @@ Returns the number of times the playback skipped due to a buffer underrun in the
 
 :ref:`bool<class_bool>` **push_buffer**\ (\ frames\: :ref:`PackedVector2Array<class_PackedVector2Array>`\ ) :ref:`🔗<class_AudioStreamGeneratorPlayback_method_push_buffer>`
 
-Pushes several audio data frames to the buffer. This is usually more efficient than :ref:`push_frame<class_AudioStreamGeneratorPlayback_method_push_frame>` in C# and compiled languages via GDExtension, but :ref:`push_buffer<class_AudioStreamGeneratorPlayback_method_push_buffer>` may be *less* efficient in GDScript.
+Pushes several audio data frames to the buffer. This is usually more efficient than :ref:`push_frame()<class_AudioStreamGeneratorPlayback_method_push_frame>` in C# and compiled languages via GDExtension, but :ref:`push_buffer()<class_AudioStreamGeneratorPlayback_method_push_buffer>` may be *less* efficient in GDScript.
 
 .. rst-class:: classref-item-separator
 
@@ -127,9 +127,10 @@ Pushes several audio data frames to the buffer. This is usually more efficient t
 
 :ref:`bool<class_bool>` **push_frame**\ (\ frame\: :ref:`Vector2<class_Vector2>`\ ) :ref:`🔗<class_AudioStreamGeneratorPlayback_method_push_frame>`
 
-Pushes a single audio data frame to the buffer. This is usually less efficient than :ref:`push_buffer<class_AudioStreamGeneratorPlayback_method_push_buffer>` in C# and compiled languages via GDExtension, but :ref:`push_frame<class_AudioStreamGeneratorPlayback_method_push_frame>` may be *more* efficient in GDScript.
+Pushes a single audio data frame to the buffer. This is usually less efficient than :ref:`push_buffer()<class_AudioStreamGeneratorPlayback_method_push_buffer>` in C# and compiled languages via GDExtension, but :ref:`push_frame()<class_AudioStreamGeneratorPlayback_method_push_frame>` may be *more* efficient in GDScript.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

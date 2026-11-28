@@ -174,15 +174,15 @@ The linear velocity of this pose.
 - |void| **set_name**\ (\ value\: :ref:`StringName<class_StringName>`\ )
 - :ref:`StringName<class_StringName>` **get_name**\ (\ )
 
-The name of this pose. Pose names are often driven by an action map setup by the user. Godot does suggest a number of pose names that it expects :ref:`XRInterface<class_XRInterface>`\ s to implement:
+The name of this pose. Usually, this name is derived from an action map set up by the user. Godot also suggests some pose names that :ref:`XRInterface<class_XRInterface>` objects are expected to implement:
 
-- ``root`` defines a root location, often used for tracked objects that do not have further nodes.
+- ``root`` is the root location, often used for tracked objects that do not have further nodes.
 
-- ``aim`` defines the tip of a controller with the orientation pointing outwards, for example: add your raycasts to this.
+- ``aim`` is the tip of a controller with its orientation pointing outwards, often used for raycasts.
 
-- ``grip`` defines the location where the user grips the controller
+- ``grip`` is the location where the user grips the controller.
 
-- ``skeleton`` defines the root location a hand mesh should be placed when using hand tracking and the animated skeleton supplied by the XR runtime.
+- ``skeleton`` is the root location for a hand mesh, when using hand tracking and an animated skeleton is supplied by the XR runtime.
 
 .. rst-class:: classref-item-separator
 
@@ -236,6 +236,7 @@ Method Descriptions
 Returns the :ref:`transform<class_XRPose_property_transform>` with world scale and our reference frame applied. This is the transform used to position :ref:`XRNode3D<class_XRNode3D>` objects.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

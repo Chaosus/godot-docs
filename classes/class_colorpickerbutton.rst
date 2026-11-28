@@ -30,9 +30,9 @@ See also :ref:`BaseButton<class_BaseButton>` which contains common properties an
 Tutorials
 ---------
 
-- `2D GD Paint Demo <https://godotengine.org/asset-library/asset/2768>`__
+- `2D GD Paint Demo <https://store.godotengine.org/asset/godot-foundation/gd-paint-demo/>`__
 
-- `GUI Drag And Drop Demo <https://godotengine.org/asset-library/asset/2767>`__
+- `GUI Drag And Drop Demo <https://store.godotengine.org/asset/godot-foundation/drag-and-drop-gui-demo/>`__
 
 .. rst-class:: classref-reftable-group
 
@@ -42,13 +42,15 @@ Properties
 .. table::
    :widths: auto
 
-   +---------------------------+----------------------------------------------------------------+-------------------------------------------------------------------------------+
-   | :ref:`Color<class_Color>` | :ref:`color<class_ColorPickerButton_property_color>`           | ``Color(0, 0, 0, 1)``                                                         |
-   +---------------------------+----------------------------------------------------------------+-------------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`   | :ref:`edit_alpha<class_ColorPickerButton_property_edit_alpha>` | ``true``                                                                      |
-   +---------------------------+----------------------------------------------------------------+-------------------------------------------------------------------------------+
-   | :ref:`bool<class_bool>`   | toggle_mode                                                    | ``true`` (overrides :ref:`BaseButton<class_BaseButton_property_toggle_mode>`) |
-   +---------------------------+----------------------------------------------------------------+-------------------------------------------------------------------------------+
+   +---------------------------+------------------------------------------------------------------------+-------------------------------------------------------------------------------+
+   | :ref:`Color<class_Color>` | :ref:`color<class_ColorPickerButton_property_color>`                   | ``Color(0, 0, 0, 1)``                                                         |
+   +---------------------------+------------------------------------------------------------------------+-------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`   | :ref:`edit_alpha<class_ColorPickerButton_property_edit_alpha>`         | ``true``                                                                      |
+   +---------------------------+------------------------------------------------------------------------+-------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`   | :ref:`edit_intensity<class_ColorPickerButton_property_edit_intensity>` | ``true``                                                                      |
+   +---------------------------+------------------------------------------------------------------------+-------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`   | toggle_mode                                                            | ``true`` (overrides :ref:`BaseButton<class_BaseButton_property_toggle_mode>`) |
+   +---------------------------+------------------------------------------------------------------------+-------------------------------------------------------------------------------+
 
 .. rst-class:: classref-reftable-group
 
@@ -156,6 +158,23 @@ The currently selected color.
 
 If ``true``, the alpha channel in the displayed :ref:`ColorPicker<class_ColorPicker>` will be visible.
 
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_ColorPickerButton_property_edit_intensity:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **edit_intensity** = ``true`` :ref:`🔗<class_ColorPickerButton_property_edit_intensity>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_edit_intensity**\ (\ value\: :ref:`bool<class_bool>`\ )
+- :ref:`bool<class_bool>` **is_editing_intensity**\ (\ )
+
+If ``true``, the intensity slider in the displayed :ref:`ColorPicker<class_ColorPicker>` will be visible.
+
 .. rst-class:: classref-section-separator
 
 ----
@@ -207,6 +226,7 @@ Theme Property Descriptions
 The background of the color preview rect on the button.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

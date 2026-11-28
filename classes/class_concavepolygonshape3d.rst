@@ -34,7 +34,7 @@ Being just a collection of interconnected triangles, **ConcavePolygonShape3D** i
 Tutorials
 ---------
 
-- `3D Physics Tests Demo <https://godotengine.org/asset-library/asset/2747>`__
+- `3D Physics Tests Demo <https://store.godotengine.org/asset/godot-foundation/physics-tests-3d-demo/>`__
 
 .. rst-class:: classref-reftable-group
 
@@ -114,6 +114,7 @@ Returns the faces of the trimesh shape as an array of vertices. The array (of le
 Sets the faces of the trimesh shape from an array of vertices. The ``faces`` array should be composed of triples such that each triple of vertices defines a triangle.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

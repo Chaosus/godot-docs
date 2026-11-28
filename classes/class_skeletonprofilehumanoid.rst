@@ -21,7 +21,7 @@ Description
 
 A :ref:`SkeletonProfile<class_SkeletonProfile>` as a preset that is optimized for the human form. This exists for standardization, so all parameters are read-only.
 
-A humanoid skeleton profile contains 54 bones divided in 4 groups: ``"Body"``, ``"Face"``, ``"LeftHand"``, and ``"RightHand"``. It is structured as follows:
+A humanoid skeleton profile contains 56 bones divided into 4 groups: ``"Body"``, ``"Face"``, ``"LeftHand"``, and ``"RightHand"``. It is structured as follows:
 
 .. code:: text
 
@@ -49,6 +49,7 @@ A humanoid skeleton profile contains 54 bones divided in 4 groups: ``"Body"``, `
                     │        └─ LeftHand
                     │           ├─ LeftThumbMetacarpal
                     │           │  └─ LeftThumbProximal
+                    │           │    └─ LeftThumbDistal
                     │           ├─ LeftIndexProximal
                     │           │  └─ LeftIndexIntermediate
                     │           │    └─ LeftIndexDistal
@@ -67,6 +68,7 @@ A humanoid skeleton profile contains 54 bones divided in 4 groups: ``"Body"``, `
                              └─ RightHand
                                 ├─ RightThumbMetacarpal
                                 │  └─ RightThumbProximal
+                                │     └─ RightThumbDistal
                                 ├─ RightIndexProximal
                                 │  └─ RightIndexIntermediate
                                 │     └─ RightIndexDistal
@@ -106,6 +108,7 @@ Properties
    +-------------------------------------+-----------------+------------------------------------------------------------------------------------------------+
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

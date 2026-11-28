@@ -30,11 +30,11 @@ A 3D cylinder shape, intended for use in physics. Usually used to provide a shap
 Tutorials
 ---------
 
-- `Third Person Shooter (TPS) Demo <https://godotengine.org/asset-library/asset/2710>`__
+- `Third Person Shooter (TPS) Demo <https://store.godotengine.org/asset/godot-foundation/third-person-shooter-demo/>`__
 
-- `3D Physics Tests Demo <https://godotengine.org/asset-library/asset/2747>`__
+- `3D Physics Tests Demo <https://store.godotengine.org/asset/godot-foundation/physics-tests-3d-demo/>`__
 
-- `3D Voxel Demo <https://godotengine.org/asset-library/asset/2755>`__
+- `Voxel Game Demo <https://store.godotengine.org/asset/godot-foundation/voxel-game-demo/>`__
 
 .. rst-class:: classref-reftable-group
 
@@ -90,6 +90,7 @@ The cylinder's height.
 The cylinder's radius.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`

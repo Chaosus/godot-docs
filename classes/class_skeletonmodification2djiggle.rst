@@ -80,6 +80,8 @@ Methods
    +---------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`         | :ref:`get_use_colliders<class_SkeletonModification2DJiggle_method_get_use_colliders>`\ (\ ) |const|                                                                                                 |
    +---------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | |void|                          | :ref:`reset<class_SkeletonModification2DJiggle_method_reset>`\ (\ )                                                                                                                                 |
+   +---------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                          | :ref:`set_collision_mask<class_SkeletonModification2DJiggle_method_set_collision_mask>`\ (\ collision_mask\: :ref:`int<class_int>`\ )                                                               |
    +---------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | |void|                          | :ref:`set_jiggle_joint_bone2d_node<class_SkeletonModification2DJiggle_method_set_jiggle_joint_bone2d_node>`\ (\ joint_idx\: :ref:`int<class_int>`, bone2d_node\: :ref:`NodePath<class_NodePath>`\ ) |
@@ -354,6 +356,18 @@ Returns whether the jiggle modifier is taking physics colliders into account whe
 
 ----
 
+.. _class_SkeletonModification2DJiggle_method_reset:
+
+.. rst-class:: classref-method
+
+|void| **reset**\ (\ ) :ref:`🔗<class_SkeletonModification2DJiggle_method_reset>`
+
+Resets the internal jiggle simulation state to the current bone positions, clearing velocity, acceleration, and accumulated forces.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_SkeletonModification2DJiggle_method_set_collision_mask:
 
 .. rst-class:: classref-method
@@ -471,6 +485,7 @@ Sets whether the Jiggle joint at ``joint_idx`` should use gravity.
 If ``true``, the Jiggle modifier will take colliders into account, keeping them from entering into these collision objects.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
+.. |required| replace:: :abbr:`required (This method is required to be overridden when extending its base class.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
 .. |vararg| replace:: :abbr:`vararg (This method accepts any number of arguments after the ones described here.)`
 .. |constructor| replace:: :abbr:`constructor (This method is used to construct a type.)`
